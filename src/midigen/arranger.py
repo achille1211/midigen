@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 import random
+import re
 from dataclasses import dataclass, field
 
 from . import spec as specmod
 from .core import ChordSpan, Ctx, Note, clamp, stable_seed
 from .generators import DRUM_MAP, get_generator
+from .melody import restate
 from .theory import Chord, parse_chord, scale_pcs
 
 
@@ -94,6 +96,21 @@ def _genre(spec: dict):
         return None
 
 
+NO_RESTATE = {"solo", "solos", "improv", "intro", "outro"}
+
+
+def section_family(name: str) -> str:
+    """Sections that are instances of one another: chorus1/chorus2/final_chorus -> chorus, verse2 -> verse,
+    head_a1 -> head_a, drop_2 -> drop. Pre-/post-choruses keep their own family."""
+    base = re.sub(r"[\d_]+$", "", name.lower()) or name.lower()
+    if base.startswith(("pre", "post")):
+        return base
+    for k in ("chorus", "hook", "drop"):
+        if k in base:
+            return k
+    return base
+
+
 def render(spec: dict) -> Performance:
     spec = specmod.check(spec)
     bb = specmod.bar_beats(spec)
@@ -106,6 +123,7 @@ def render(spec: dict) -> Performance:
     sections, harmony = [], []
     t0 = 0.0
     seen: dict[str, int] = {}
+    lead_memory: dict = {}   # (track, section family, style) -> the lead first played there, restated later
     # drums first so the bass can interlock with the kick
     track_order = sorted(range(len(spec["tracks"])), key=lambda i: 0 if spec["tracks"][i]["generator"]["type"] == "drums" else 1)
     for idx, name in enumerate(order):
@@ -134,6 +152,19 @@ def render(spec: dict) -> Performance:
                       energy=sec.get("energy", 0.5), prev_energy=prev_e, next_energy=next_e, next_section=nxt,
                       occurrence=occ, rng=random.Random(seed), kick_onsets=list(kicks), genre=genre)
             notes = get_generator(params["type"])(ctx)
+            if params["type"] == "lead" and params.get("restate", True):
+                fam = section_family(name)
+                key = (ti, fam, params.get("style"))
+                if key in lead_memory and fam not in NO_RESTATE:
+                    mem, mem_bars, mem_e = lead_memory[key]
+                    notes = restate(ctx, mem, mem_bars, mem_e, notes)
+                elif notes:
+                    mem = []
+                    for n in notes:
+                        m = Note(n.start, n.dur, n.pitch, n.vel)
+                        m.pcs = tuple(ctx.chord_at(n.start).chord.pcs)   # harmony it was written over
+                        mem.append(m)
+                    lead_memory[key] = (mem, sec["bars"], sec.get("energy", 0.5))
             if params["type"] == "drums" and not kicks:
                 kicks = sorted({round(n.start, 4) for n in notes if n.pitch in (35, 36)})
             notes = _groove(notes, spec, params, random.Random(seed ^ 0x5EED), length, tr["channel"] == 9)
@@ -160,7 +191,90 @@ def render(spec: dict) -> Performance:
             last[n.pitch] = n
             kept.append(n)
         t.notes = sorted(kept, key=lambda n: (n.start, n.pitch))
+    if spec.get("declash", True):
+        _declash(tracks, spec, harmony)
     return Performance(spec, tracks, sections, harmony, t0, bb)
+
+
+CLASH_PRIORITY = {"lead": 3, "bass": 2}   # everything else (chords, pad, arp ...) is 1; clips are never touched
+
+
+def _declash(tracks: list, spec: dict, harmony: list) -> int:
+    """Strong-beat semitone / b9 rubs between parts. A note starting on a beat that sits a semitone (or b9)
+    from a note another part is sounding is re-voiced, as an arranger would: a non-chord tone (passing tone
+    landing on the beat) moves to the nearest chord tone; when both are chord tones (maj7 against the root, an
+    extension against the melody) the lower-priority part (pad/comp below bass below lead) gives way and takes
+    the nearest chord tone that sounds clean against everything around it. Returns the number of notes moved."""
+    import bisect
+    gtypes = [t["generator"]["type"] for t in spec["tracks"]]
+    hstarts = [h.start for h in harmony]
+
+    def chord_at(t):
+        i = bisect.bisect_right(hstarts, t + 1e-6) - 1
+        return harmony[max(0, i)].chord if harmony else None
+
+    pitched = [i for i, t in enumerate(tracks) if not t.is_drums and gtypes[i] != "clip" and t.notes]
+    allnotes = sorted(((n, i) for i in pitched for n in tracks[i].notes), key=lambda x: x[0].start)
+    starts = [n.start for n, _ in allnotes]
+
+    def sounding(t0, t1, ti):
+        """notes of other tracks overlapping [t0, t1)"""
+        lo = bisect.bisect_left(starts, t0 - 16.0)
+        hi = bisect.bisect_left(starts, t1)
+        return [m for m, j in allnotes[lo:hi] if j != ti and m.start < t1 and m.start + m.dur > t0]
+
+    def rubs(p, others):
+        return any(abs(p - m.pitch) % 12 == 1 for m in others)
+
+    moved = 0
+    for n, ti in allnotes:
+        if abs(n.start - round(n.start)) > 0.03:
+            continue
+        at = [m for m in sounding(n.start + 0.01, n.start + 0.011, ti)]
+        foe = next((m for m in at if abs(n.pitch - m.pitch) % 12 == 1), None)
+        if foe is None:
+            continue
+        ch = chord_at(n.start)
+        if ch is None:
+            continue
+        pcs = set(ch.pcs)
+        fj = next(j for m, j in allnotes[bisect.bisect_left(starts, foe.start):] if m is foe)
+        if gtypes[fj] == "clip":
+            fj_pri = 9
+        else:
+            fj_pri = CLASH_PRIORITY.get(gtypes[fj], 1)
+        mine_ct, foe_ct = n.pitch % 12 in pcs, foe.pitch % 12 in pcs
+        # who gives way: a non-chord tone first, else the lower-priority part (ties: the later onset, i.e. n)
+        if mine_ct and not foe_ct and fj_pri < 9 and abs(foe.start - n.start) < 0.03:
+            target, tj = foe, fj
+        elif mine_ct and foe_ct and CLASH_PRIORITY.get(gtypes[ti], 1) > fj_pri and abs(foe.start - n.start) < 0.03:
+            target, tj = foe, fj
+        else:
+            target, tj = n, ti
+        if gtypes[tj] == "bass" and target.pitch % 12 == ch.bass and target is not n:
+            target, tj = n, ti            # never move the bass off the chord's bass note
+        around = sounding(target.start + 0.01, target.start + max(0.02, min(target.dur, 1.0)), tj)
+        own = {m.pitch for m in tracks[tj].notes if m is not target and abs(m.start - target.start) < 0.03}
+        core = {(ch.root + i) % 12 for i in ch.intervals[:3]}
+        best = None
+        for d in sorted(range(-5, 6), key=lambda d: (abs(d), d > 0)):
+            p = target.pitch + d
+            if d == 0 or not 0 <= p <= 127 or p in own or p % 12 not in pcs or rubs(p, around):
+                continue
+            if best is None or (p % 12 in core and best % 12 not in core and abs(d) <= abs(best - target.pitch)):
+                best = p
+            if best is not None:
+                break
+        if best is None and gtypes[tj] not in ("lead", "bass") and own:
+            target.vel = 0                 # a doubled voicing note with nowhere clean to go: leave it out
+            moved += 1
+            continue
+        if best is not None:
+            target.pitch = best
+            moved += 1
+    for i in pitched:
+        tracks[i].notes = [n for n in tracks[i].notes if n.vel > 0]
+    return moved
 
 
 def _anticipate(notes: list[Note], harmony: list) -> None:

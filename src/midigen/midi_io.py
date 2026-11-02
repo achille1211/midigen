@@ -8,6 +8,7 @@ import mido
 
 from . import spec as specmod
 from .arranger import Performance, render
+from .expression import track_expression
 from .spec import INSTRUMENTS, check, make_track
 from .theory import MODES, NOTE_NAMES, midi_note_name, note_to_pc
 
@@ -27,8 +28,11 @@ def _key_sig(key: str, mode: str) -> str | None:
     return _SHARP_KEYS[NOTE_NAMES[rel]]
 
 
-def performance_to_midi(perf: Performance) -> mido.MidiFile:
+def performance_to_midi(perf: Performance, expression: bool = True) -> mido.MidiFile:
+    """Type-1 file. With ``expression`` (default) keyboard parts get CC64 sustain pedaling and bass/lead parts
+    pitch-bend glides/scoops from their generator params (see expression.py); the notes are identical either way."""
     spec = perf.spec
+    bpm = specmod.quarter_bpm(spec)
     mid = mido.MidiFile(type=1, ticks_per_beat=TPB)
     beat_ticks = TPB  # spec/performance beats are quarter notes in every meter (bar = num*4/den quarters)
     to_t = lambda b: int(round(b * beat_ticks))
@@ -50,7 +54,7 @@ def performance_to_midi(perf: Performance) -> mido.MidiFile:
         last = t
     conductor.append(mido.MetaMessage("end_of_track", time=max(0, to_t(perf.total_beats) - last)))
     mid.tracks.append(conductor)
-    for tr in perf.tracks:
+    for ti, tr in enumerate(perf.tracks):
         mt = mido.MidiTrack()
         ch = tr.channel
         mt.append(mido.MetaMessage("track_name", name=tr.name, time=0))
@@ -73,24 +77,34 @@ def performance_to_midi(perf: Performance) -> mido.MidiFile:
                     off = on + 1
                     if i + 1 < len(ns) and off > to_t(ns[i + 1].start):
                         continue
-                events.append((on, 1, p, n.vel))
-                events.append((off, 0, p, 0))
+                events.append((on, 2, p, ("note_on", {"note": p, "velocity": n.vel})))
+                events.append((off, 0, p, ("note_off", {"note": p, "velocity": 0})))
+        if expression:
+            ex = track_expression(perf, ti, bpm)
+            if ex["bend_range"]:
+                # RPN 0 (pitch-bend sensitivity) so the bend values mean the same on every GM synth
+                for c, v in ((101, 0), (100, 0), (6, ex["bend_range"]), (38, 0), (101, 127), (100, 127)):
+                    mt.append(mido.Message("control_change", channel=ch, control=c, value=v, time=0))
+                mt.append(mido.Message("pitchwheel", channel=ch, pitch=0, time=0))
+            for i, (b, c, v) in enumerate(ex["cc"]):
+                events.append((max(0, to_t(b)), 1, i, ("control_change", {"control": c, "value": v})))
+            for i, (b, v) in enumerate(ex["bend"]):
+                events.append((max(0, to_t(b)), 1, 1000 + i, ("pitchwheel", {"pitch": v})))
         events.sort(key=lambda e: (e[0], e[1], e[2]))
         now = 0
-        for t, kind, p, v in events:
-            msg = "note_on" if kind else "note_off"
-            mt.append(mido.Message(msg, channel=ch, note=p, velocity=v, time=t - now))
+        for t, _prio, _k, (msg, kw) in events:
+            mt.append(mido.Message(msg, channel=ch, time=t - now, **kw))
             now = t
         mt.append(mido.MetaMessage("end_of_track", time=max(0, to_t(perf.total_beats) - now)))
         mid.tracks.append(mt)
     return mid
 
 
-def export_midi(spec_or_perf, path: str | Path) -> Performance:
+def export_midi(spec_or_perf, path: str | Path, expression: bool = True) -> Performance:
     perf = spec_or_perf if isinstance(spec_or_perf, Performance) else render(spec_or_perf)
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    performance_to_midi(perf).save(str(path))
+    performance_to_midi(perf, expression=expression).save(str(path))
     return perf
 
 

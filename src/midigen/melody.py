@@ -343,3 +343,39 @@ def _fix_chromatic_clash(p: int, pcs: list[int], scale: list[int]) -> int:
         if q in pcs and q not in scale:
             return p + d
     return p
+
+
+def restate(ctx: Ctx, memory: list[Note], mem_bars: int, mem_energy: float, fresh: list[Note]) -> list[Note]:
+    """Bring back an earlier lead (the first chorus/hook/drop of the song) in a later instance of the same section:
+    the remembered bars are reused bar for bar (tiled if this section is longer), the last bar takes the freshly
+    generated notes as a varied tail, and every reused note is re-fitted to this section's chords (a non-chord tone
+    on a beat, or an out-of-scale note, moves to the nearest chord tone). Velocity follows the energy difference."""
+    lo, hi = _range(ctx, "lead")
+    bb = ctx.bar_beats
+    tail_start = (ctx.bars - 1) * bb if ctx.bars >= 4 else ctx.length
+    dv = int(round((ctx.energy - mem_energy) * 20))
+    out: list[Note] = []
+    for off in range(0, ctx.bars, max(1, mem_bars)):
+        for n in memory:
+            t = n.start + off * bb
+            if t >= tail_start - 1e-6:
+                continue
+            p = n.pitch
+            span = ctx.chord_at(t)
+            pcs = span.chord.pcs
+            on_beat = abs(t - round(t)) < 1e-6
+            same_chord = set(getattr(n, "pcs", ())) == set(pcs)   # unchanged harmony: keep the original line
+            if not same_chord and p % 12 not in pcs and (on_beat or abs(t - span.start) < 1e-6 or p % 12 not in ctx.scale):
+                p = _nearest_chord_tone(p, pcs, lo, hi)
+            out.append(Note(t, min(n.dur, tail_start - t - 0.02), p, max(1, min(127, n.vel + dv))))
+    out += [Note(n.start, n.dur, n.pitch, n.vel) for n in fresh if n.start >= tail_start - 1e-6]
+    out.sort(key=lambda n: n.start)
+    for n in out:  # a reused note held into a chord it does not belong to stops at the change
+        for span in ctx.chords:
+            if n.start < span.start < n.start + n.dur - 0.05 and n.pitch % 12 not in span.chord.pcs:
+                n.dur = span.start - n.start - 0.02
+                break
+    for a, b in zip(out, out[1:]):
+        if a.start + a.dur > b.start:
+            a.dur = max(0.05, b.start - a.start - 0.02)
+    return [n for n in out if n.dur > 0.03]

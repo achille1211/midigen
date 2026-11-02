@@ -467,6 +467,10 @@ def convert(raw: dict, path: Path | str = "?") -> tuple[dict, dict, list[str]]:
                              tokens=toks[:128], gate=float(_clamp(float(bassd.get("gate", 0.9)), 0.05, 1.0)), density=0.6)
                 else:
                     g.update(style="root_fifth", density=0.5)
+            gl = bassd.get("glide") or {}
+            if primary and gl.get("enabled") and float(gl.get("probability", 0) or 0) > 0:
+                g["glide"] = {"probability": round(float(_clamp(float(gl["probability"]), 0, 1)), 3),
+                              "time_ms": float(_clamp(float(gl.get("timeMs", 60) or 60), 0, 1000))}
             reg = _reg(bassd.get("octaveRange"), reg) if primary else reg
         elif role in ("chords", "pad"):
             r = inst.get("rhythm")
@@ -501,6 +505,9 @@ def convert(raw: dict, path: Path | str = "?") -> tuple[dict, dict, list[str]]:
                 g["max_leap"] = int(_clamp(int(mel["maxLeapSemitones"]), 1, 24))
             if primary and mel.get("register"):
                 reg = _reg(mel["register"], reg)
+            orn = " ".join(str(o).lower() for o in (mel.get("ornaments") or []))
+            if primary and any(w in orn for w in ("slide", "scoop", "bend")):
+                g["bend"] = 0.2
         if role != "drums":
             g["range"] = _slot(role, reg)
             g["humanize"] = dict(humanize)
