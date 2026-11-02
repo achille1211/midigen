@@ -41,7 +41,7 @@ The installer has been tested on Linux only so far; macOS and Windows should wor
 cd midigen
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e ".[preview,mcp,dev]"      # core needs only mido + jsonschema
-pytest -q                                # tests incl. integrations (audio tests need numpy, scipy and soundfile) (pack tests skip if the pack folders are absent)
+pytest -q                                # 321 tests incl. integrations (audio tests need numpy, scipy and soundfile) (pack tests skip if the pack folders are absent)
 python demo/make_demo.py                 # offline demo songs in demo/
 ```
 
