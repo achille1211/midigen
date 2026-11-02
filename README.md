@@ -18,6 +18,39 @@ prompt / instruction ──► LLM or offline parser ──► spec JSON or edit
 
 ## Quick start (no setup needed)
 
+### Delivery products
+
+`midigen deliver` turns a saved song into a portable product folder and matching ZIP:
+
+```sh
+midigen new "calm piano for a podcast intro" --offline --seed 23 --bars 16 -o cue
+midigen deliver cue.json --product creator --out creator-pack
+midigen deliver cue.json --product producer --out producer-kit
+midigen deliver cue.json --product rehearsal --out rehearsal-pack
+```
+
+- **Creator Cue Pack:** full MIDI cue plus 15/30/60-second cutdowns when the source is long enough.
+- **Producer MIDI Kit:** full MIDI arrangement and isolated MIDI for every active instrument.
+- **Rehearsal Pack:** full MIDI arrangement, isolated parts and a practice take at 80% tempo.
+
+Every pack includes the editable song JSON, a piano-roll PNG, a critic report, and a manifest
+with tempo, duration, track names and SHA-256 file checksums. Existing output folders and ZIPs
+are protected from overwriting. Add `--audio --backend numpy` for WAV copies after installing
+`pip install -e ".[audio]"`; FluidSynth is also supported through `--backend fluidsynth`.
+
+Cutdowns truncate the cue; they do not compose an ending or guarantee seamless loops.
+Rehearsal packs contain MIDI rather than notation and need player review. Solo brass, winds and
+vocal lines now receive conservative range, monophony and breathing constraints. Ensemble patches
+and idiomatic instrument technique still need human arrangement. See [PRODUCTS.md](PRODUCTS.md)
+for the product scope and next development candidates.
+
+The web UI now accepts plain-language edits such as “make it sadder” and “busier bass” in
+**Edit current take**. Each successful edit creates a new take; the original remains available.
+Unlock sections first, and choose a take with an exact song spec if section regeneration merged
+different performances. PNG previews are included in the standard installation.
+
+### Install and generate
+
 1. Download midigen (on GitHub: green **Code** button, then **Download ZIP**) and unzip it.
 2. You need Python 3.10 or newer. Check with `python3 --version` (Windows: `py --version`); if it's missing or older,
    get it from [python.org/downloads](https://www.python.org/downloads/) (Windows: tick "Add python.exe to PATH").

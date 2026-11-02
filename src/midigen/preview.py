@@ -1,4 +1,4 @@
-"""Piano-roll PNG preview (optional, needs matplotlib)."""
+"""Piano-roll PNG preview using the bundled matplotlib dependency."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -17,7 +17,7 @@ def piano_roll(spec_or_perf, path: str | Path, title: str | None = None) -> Path
 
     perf = spec_or_perf if isinstance(spec_or_perf, Performance) else render(spec_or_perf)
     tracks = [t for t in perf.tracks if t.notes]
-    fig, axes = plt.subplots(len(tracks), 1, figsize=(14, 1.6 * len(tracks) + 1), sharex=True, squeeze=False)
+    fig, axes = plt.subplots(max(1, len(tracks)), 1, figsize=(14, 1.6 * len(tracks) + 1), sharex=True, squeeze=False)
     bb = perf.bar_beats
     for ax, t in zip(axes[:, 0], tracks):
         col = COLORS.get(t.role, COLORS["other"])

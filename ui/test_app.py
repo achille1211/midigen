@@ -474,6 +474,34 @@ def test_fallback_is_reported_honestly():
     assert "(darker / sadder)" in d["interpreted"]["line"] or "(" in d["interpreted"]["line"]
 
 
+def test_plain_language_edit_creates_take_and_preserves_parent():
+    st, original = j("/api/generate", {"genre": "pop", "mode": "major", "bars": 4, "seed": 41})
+    assert st == 200
+    base = f"/api/sessions/{original['session_id']}/takes/{original['take_id']}"
+    st, edited = j(base + "/edit", {"instruction": "make it sadder"})
+    assert st == 200, edited
+    assert edited["mode"] == "minor" and edited["parent_id"] == original["take_id"]
+    assert edited["session"]["take_count"] == 2
+    st, parent = j(base)
+    assert parent["mode"] == "major"
+    st, error = j(base + "/edit", {"instruction": ""})
+    assert st == 400
+    st, error = j(base + "/edit", {"instruction": "asdf qwerty"})
+    assert st == 422
+    j(base + "/locks", {"locked": [0]})
+    st, error = j(base + "/edit", {"instruction": "faster"})
+    assert st == 409
+
+
+def test_parser_preset_and_solo_styles_do_not_show_false_fallback():
+    from midigen.nl import interpret
+    for prompt in ("sad piano", "violin solo", "chil coffee shop", "peaceful meditation"):
+        _, info = interpret(prompt)
+        genre, _ = app.recognised_genre(prompt)
+        if info["genre_reason"] != "default" or info["moods"]:
+            assert genre == info["genre"]
+
+
 def test_prompt_session_new_take_and_regenerate():
     st, d = j("/api/generate", {"preset": "coffee_shop", "seed": 9})
     st, t2 = j(f"/api/sessions/{d['session_id']}/takes", {})

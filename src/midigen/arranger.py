@@ -166,6 +166,8 @@ def render(spec: dict) -> Performance:
                       energy=sec.get("energy", 0.5), prev_energy=prev_e, next_energy=next_e, next_section=nxt,
                       occurrence=occ, rng=random.Random(seed), kick_onsets=list(kicks), genre=genre)
             notes = get_generator(params["type"])(ctx)
+            if tr["role"] in ("bass", "chords") and params.get("rhythm_scale", 1) != 1:
+                notes = _scale_rhythm(notes, params["rhythm_scale"])
             if params["type"] == "lead" and params.get("restate", True):
                 fam = section_family(name)
                 key = (ti, fam, params.get("style"))
@@ -225,7 +227,34 @@ def render(spec: dict) -> Performance:
         t.notes = sorted(kept, key=lambda n: (n.start, n.pitch))
     _lift_peaks(tracks, spec, sections)
     _declash(tracks, spec, harmony)
+    from .playability import constrain
+    constrain([t for t, source in zip(tracks, spec["tracks"]) if source["generator"]["type"] != "clip"],
+              specmod.quarter_bpm(spec))
     return Performance(spec, tracks, sections, harmony, t0, bb)
+
+
+def _scale_rhythm(notes, scale):
+    """Thin or subdivide onset groups, keeping chord voices together."""
+    groups = []
+    for note in sorted(notes, key=lambda n: n.start):
+        if not groups or note.start - groups[-1][0].start > .06:
+            groups.append([])
+        groups[-1].append(note)
+    if scale < 1:
+        return [n for i, group in enumerate(groups) if i == 0 or int(i * scale) > int((i - 1) * scale)
+                for n in group]
+    result = []
+    carry = 0.0
+    for group in groups:
+        carry += scale - 1
+        extra = int(carry + 1e-9)
+        carry -= extra
+        for note in group:
+            # Avoid unreasonably fast subdivisions of already short notes.
+            count = min(1 + extra, max(1, int(note.dur / .125)))
+            result.extend(Note(note.start + j * note.dur / count, note.dur / count,
+                               note.pitch, max(1, note.vel - (8 if j else 0))) for j in range(count))
+    return result
 
 
 def _lift_peaks(tracks: list, spec: dict, sections: list) -> int:

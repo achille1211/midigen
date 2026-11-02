@@ -43,6 +43,8 @@ _PARAMS = {
                           "description": "lead probability of a chord tone on strong beats (default 0.9)"},
     "max_leap": {"type": "integer", "minimum": 1, "maximum": 24},
     "density": {"type": "number", "minimum": 0, "maximum": 1},
+    "rhythm_scale": {"type": "number", "minimum": 0.25, "maximum": 4,
+                     "description": "bass/chords: onset density multiplier applied by density edits to fixed-style rhythms"},
     "octave": {"type": "integer", "minimum": 0, "maximum": 8},
     "velocity": {"type": "integer", "minimum": 1, "maximum": 127},
     "seed": {"type": "integer"},

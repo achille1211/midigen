@@ -60,6 +60,10 @@ kbd { background: var(--panel2); border: 1px solid var(--line); border-radius: 4
 #findings li .sug { display: block; color: var(--muted); margin-top: 2px; }
 .stage { display: flex; flex-direction: column; overflow: hidden; }
 .transport { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+#editForm label { color: var(--muted); font-size: 13px; }
+#editInstruction { flex: 1; min-width: 180px; border: 1px solid var(--line); border-radius: 8px;
+  padding: 9px 10px; background: var(--panel2); color: var(--text); font: inherit; }
+#editInstruction:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .tbtn { width: 40px; height: 36px; font-size: 15px; }
 .loop, .vol { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; cursor: pointer; }
 .vol input { width: 90px; }
