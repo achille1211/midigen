@@ -1,0 +1,200 @@
+{
+  "name": "techno",
+  "display": "Techno",
+  "aliases": [
+    "minimal techno",
+    "industrial",
+    "warehouse"
+  ],
+  "description": "Driving 4/4 kick at 125-140 BPM, rolling 16th basslines that avoid the kick, hypnotic one- or two-chord vamps in minor/phrygian, repetitive riffs evolving by filter and density over 16/32 bars.",
+  "tempo": {
+    "min": 125,
+    "max": 140,
+    "default": 132
+  },
+  "swing": 0.0,
+  "swing_unit": "1/16",
+  "modes": [
+    "minor",
+    "phrygian"
+  ],
+  "keys": [
+    "A",
+    "F",
+    "G",
+    "D"
+  ],
+  "harmony": {
+    "extensions": "triads",
+    "secondary_dominants": 0.0,
+    "borrowed": 0.0,
+    "beats_per_chord": 8,
+    "progressions": {
+      "minor": {
+        "main": [
+          "i",
+          "i"
+        ],
+        "peak": [
+          "i",
+          "bVI",
+          "i",
+          "bVII"
+        ]
+      },
+      "phrygian": {
+        "main": [
+          "i",
+          "bII"
+        ],
+        "peak": [
+          "i",
+          "bII",
+          "i",
+          "bVII"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "techno",
+        "density": 0.6,
+        "fill": true
+      }
+    },
+    "bass": {
+      "instrument": "synth_bass",
+      "generator": {
+        "type": "bass",
+        "style": "rolling",
+        "density": 0.7,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "polysynth",
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.35,
+        "octave": 4
+      }
+    },
+    "arp": {
+      "instrument": "square_lead",
+      "generator": {
+        "type": "arp",
+        "style": "pinned",
+        "rate": "1/16",
+        "octave": 4,
+        "gate": 0.4
+      }
+    },
+    "lead": {
+      "instrument": "saw_lead",
+      "generator": {
+        "type": "lead",
+        "style": "riff",
+        "density": 0.4,
+        "range": [
+          62,
+          82
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.3,
+    "bass": 0.45,
+    "chords": 0.55,
+    "arp": 0.7,
+    "lead": 0.85
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 16,
+      "energy": 0.35,
+      "progression": "main"
+    },
+    {
+      "name": "groove",
+      "bars": 16,
+      "energy": 0.6,
+      "progression": "main"
+    },
+    {
+      "name": "break",
+      "bars": 8,
+      "energy": 0.3,
+      "progression": "main"
+    },
+    {
+      "name": "peak",
+      "bars": 16,
+      "energy": 0.95,
+      "progression": "peak"
+    },
+    {
+      "name": "outro",
+      "bars": 8,
+      "energy": 0.4,
+      "progression": "main"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.4,
+      "progression": "main"
+    },
+    {
+      "name": "groove",
+      "bars": 4,
+      "energy": 0.65,
+      "progression": "main"
+    },
+    {
+      "name": "peak",
+      "bars": 8,
+      "energy": 0.95,
+      "progression": "peak"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      1,
+      8
+    ],
+    "drums": [
+      12,
+      40
+    ],
+    "bass": [
+      6,
+      16
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      48
+    ],
+    "chords": [
+      50,
+      67
+    ],
+    "arp": [
+      70,
+      90
+    ],
+    "lead": [
+      58,
+      76
+    ]
+  }
+}

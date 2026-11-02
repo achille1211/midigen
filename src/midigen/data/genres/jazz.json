@@ -1,0 +1,211 @@
+{
+  "name": "jazz",
+  "display": "Jazz (swing)",
+  "aliases": [
+    "swing",
+    "bebop",
+    "jazz standard",
+    "big band",
+    "jazzy"
+  ],
+  "description": "Swung 8ths, ride-cymbal time with hi-hat on 2 and 4, walking bass with chromatic approach notes, ii-V-I progressions with 7ths/9ths, drop-2 piano comping, secondary dominants, AABA/32-bar form.",
+  "tempo": {
+    "min": 90,
+    "max": 220,
+    "default": 140
+  },
+  "swing": 0.99,
+  "swing_unit": "1/8",
+  "modes": [
+    "major",
+    "minor"
+  ],
+  "keys": [
+    "F",
+    "Bb",
+    "Eb",
+    "C"
+  ],
+  "harmony": {
+    "extensions": "7ths",
+    "secondary_dominants": 0.4,
+    "borrowed": 0.1,
+    "beats_per_chord": 4,
+    "progressions": {
+      "major": {
+        "a": [
+          "Imaj7",
+          "vi7",
+          "ii7",
+          "V7"
+        ],
+        "b": [
+          "iii7",
+          "V7/ii",
+          "ii7",
+          "V7"
+        ],
+        "turn": [
+          "ii7",
+          "V7",
+          "Imaj7",
+          "V7/ii"
+        ]
+      },
+      "minor": {
+        "a": [
+          "ii\u00f87",
+          "V7",
+          "i7",
+          "i7"
+        ],
+        "b": [
+          "iv7",
+          "bVII7",
+          "bIIImaj7",
+          "bVImaj7"
+        ],
+        "turn": [
+          "ii\u00f87",
+          "V7",
+          "i7",
+          "V7"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "jazz",
+        "density": 0.45,
+        "fill": false,
+        "humanize": {
+          "timing": 0.015,
+          "velocity": 10
+        }
+      }
+    },
+    "bass": {
+      "instrument": "acoustic_bass",
+      "generator": {
+        "type": "bass",
+        "style": "walking",
+        "density": 0.6,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "piano",
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.45,
+        "octave": 4
+      }
+    },
+    "lead": {
+      "instrument": "sax",
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.55,
+        "range": [
+          60,
+          84
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.0,
+    "bass": 0.0,
+    "chords": 0.0,
+    "lead": 0.0
+  },
+  "form": [
+    {
+      "name": "a",
+      "bars": 8,
+      "energy": 0.55,
+      "progression": "a",
+      "cadence": "authentic"
+    },
+    {
+      "name": "a2",
+      "bars": 8,
+      "energy": 0.6,
+      "progression": "a",
+      "cadence": "authentic"
+    },
+    {
+      "name": "b",
+      "bars": 8,
+      "energy": 0.7,
+      "progression": "b",
+      "cadence": "half"
+    },
+    {
+      "name": "a3",
+      "bars": 8,
+      "energy": 0.65,
+      "progression": "turn",
+      "cadence": "authentic"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "a",
+      "bars": 4,
+      "energy": 0.55,
+      "progression": "a"
+    },
+    {
+      "name": "a2",
+      "bars": 4,
+      "energy": 0.6,
+      "progression": "a"
+    },
+    {
+      "name": "b",
+      "bars": 4,
+      "energy": 0.7,
+      "progression": "b"
+    },
+    {
+      "name": "a3",
+      "bars": 4,
+      "energy": 0.6,
+      "progression": "turn"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      2,
+      10
+    ],
+    "drums": [
+      4,
+      20
+    ],
+    "bass": [
+      3,
+      6
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      55
+    ],
+    "chords": [
+      50,
+      72
+    ],
+    "lead": [
+      60,
+      86
+    ]
+  }
+}

@@ -1,0 +1,541 @@
+{
+  "version": 1,
+  "title": "Funk sketch",
+  "genre": "funk",
+  "tempo": 104.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "D",
+  "mode": "dorian",
+  "seed": 2,
+  "swing": 0.067,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "chords": [
+        "i7",
+        "IV9"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "groove_a",
+      "bars": 8,
+      "chords": [
+        "i7"
+      ],
+      "energy": 0.65,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0
+      ]
+    },
+    {
+      "name": "groove_a2",
+      "bars": 8,
+      "chords": [
+        "i7"
+      ],
+      "energy": 0.7,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0
+      ]
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "chords": [
+        "i7",
+        "bVII",
+        "IV7",
+        "i7"
+      ],
+      "energy": 0.8,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "plagal"
+    },
+    {
+      "name": "breakdown",
+      "bars": 8,
+      "chords": [
+        "i7"
+      ],
+      "energy": 0.4,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0
+      ]
+    },
+    {
+      "name": "groove_b",
+      "bars": 8,
+      "chords": [
+        "i7"
+      ],
+      "energy": 0.7,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0
+      ]
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "chords": [
+        "i7",
+        "bVII",
+        "IV7",
+        "i7"
+      ],
+      "energy": 0.85,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "plagal"
+    },
+    {
+      "name": "vamp_out",
+      "bars": 8,
+      "chords": [
+        "i7",
+        "bVII",
+        "IV7",
+        "i7"
+      ],
+      "energy": 0.75,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "plagal"
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "groove_a",
+    "groove_a2",
+    "chorus",
+    "breakdown",
+    "groove_b",
+    "chorus2",
+    "vamp_out"
+  ],
+  "tracks": [
+    {
+      "name": "Funk kit",
+      "role": "drums",
+      "program": 0,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "drums",
+        "pattern": "funk.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "funk.fill",
+        "fill_every": 8,
+        "laid_back": 0.0,
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 15
+        }
+      },
+      "overrides": {
+        "chorus": {
+          "pattern": "funk.chorus"
+        },
+        "breakdown": {
+          "pattern": "funk.breakdown"
+        },
+        "groove_b": {
+          "pattern": "funk.break_b"
+        },
+        "chorus2": {
+          "pattern": "funk.chorus"
+        }
+      }
+    },
+    {
+      "name": "Slap / finger bass",
+      "role": "bass",
+      "program": 36,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "groove_a",
+        "groove_a2",
+        "chorus",
+        "breakdown",
+        "groove_b",
+        "chorus2",
+        "vamp_out"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          120.0,
+          0.0,
+          0.0,
+          80.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          80.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          80.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          null,
+          "octave",
+          null,
+          null,
+          "root",
+          null,
+          null,
+          "seventh",
+          "octave",
+          null,
+          "root",
+          null,
+          "fifth",
+          "approach"
+        ],
+        "gate": 0.35,
+        "density": 0.6,
+        "range": [
+          30,
+          52
+        ],
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 15
+        }
+      },
+      "overrides": {
+        "chorus": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            "octave",
+            null,
+            "seventh",
+            "root",
+            null,
+            "root",
+            null,
+            null,
+            "fifth",
+            null,
+            "octave",
+            null,
+            "approach"
+          ]
+        },
+        "chorus2": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            "octave",
+            null,
+            "seventh",
+            "root",
+            null,
+            "root",
+            null,
+            null,
+            "fifth",
+            null,
+            "octave",
+            null,
+            "approach"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Muted 'chicken-scratch' guitar",
+      "role": "chords",
+      "program": 28,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "groove_a",
+        "groove_a2",
+        "chorus",
+        "groove_b",
+        "chorus2",
+        "vamp_out"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          100.0,
+          0.0,
+          100.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          100.0,
+          0.0,
+          100.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 15
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Clavinet",
+      "role": "chords",
+      "program": 7,
+      "channel": 2,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "groove_a",
+        "groove_a2",
+        "chorus",
+        "groove_b",
+        "chorus2",
+        "vamp_out"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 15
+        },
+        "seed": 384
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Horn section stabs",
+      "role": "chords",
+      "program": 61,
+      "channel": 3,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "groove_a2",
+        "chorus",
+        "chorus2",
+        "vamp_out"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.5,
+        "rhythm": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 15
+        },
+        "seed": 786
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Tenor sax lead",
+      "role": "lead",
+      "program": 66,
+      "channel": 4,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "chorus",
+        "groove_b",
+        "chorus2"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "riff",
+        "density": 0.55,
+        "cells": [
+          [
+            1.0,
+            -1.0,
+            2.0,
+            -2.0,
+            1.0,
+            1.0,
+            -2.0,
+            2.0,
+            -4.0
+          ],
+          [
+            -2.0,
+            1.0,
+            1.0,
+            -2.0,
+            2.0,
+            -8.0
+          ],
+          [
+            3.0,
+            -1.0,
+            2.0,
+            -2.0,
+            3.0,
+            -1.0,
+            2.0,
+            -2.0
+          ]
+        ],
+        "stepwise": 0.55,
+        "chord_tone_strong": 0.6,
+        "max_leap": 7,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 15
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

@@ -1,0 +1,586 @@
+{
+  "version": 1,
+  "title": "Rock sketch",
+  "genre": "rock",
+  "tempo": 120.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "G",
+  "mode": "major",
+  "seed": 3,
+  "swing": 0.0,
+  "swing_unit": "1/8",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 8,
+      "chords": [
+        "I",
+        "IV",
+        "V",
+        "IV"
+      ],
+      "energy": 0.6,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "verse",
+      "bars": 16,
+      "chords": [
+        "vi",
+        "IV",
+        "I",
+        "V"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "chords": [
+        "I",
+        "IV",
+        "V",
+        "IV"
+      ],
+      "energy": 0.85,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "verse2",
+      "bars": 16,
+      "chords": [
+        "vi",
+        "IV",
+        "I",
+        "V"
+      ],
+      "energy": 0.6,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "chords": [
+        "I",
+        "IV",
+        "V",
+        "IV"
+      ],
+      "energy": 0.9,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "solo",
+      "bars": 16,
+      "chords": [
+        "I",
+        "IV",
+        "V",
+        "IV"
+      ],
+      "energy": 0.85,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "bridge",
+      "bars": 8,
+      "chords": [
+        "vi",
+        "IV",
+        "I",
+        "V"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "final_chorus",
+      "bars": 16,
+      "chords": [
+        "I",
+        "IV",
+        "V",
+        "IV"
+      ],
+      "energy": 0.95,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "chords": [
+        "I",
+        "IV",
+        "V",
+        "IV"
+      ],
+      "energy": 0.7,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse2",
+    "chorus2",
+    "solo",
+    "bridge",
+    "final_chorus",
+    "outro"
+  ],
+  "tracks": [
+    {
+      "name": "Rock kit",
+      "role": "drums",
+      "program": 0,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "drums",
+        "pattern": "rock.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "rock.fill",
+        "fill_every": 8,
+        "laid_back": 0.0,
+        "humanize": {
+          "timing": 0.016,
+          "velocity": 12
+        }
+      },
+      "overrides": {
+        "verse": {
+          "pattern": "rock.verse_tight"
+        },
+        "chorus": {
+          "pattern": "rock.chorus"
+        },
+        "verse2": {
+          "pattern": "rock.verse_tight"
+        },
+        "chorus2": {
+          "pattern": "rock.chorus"
+        },
+        "bridge": {
+          "pattern": "rock.half_time_bridge"
+        },
+        "final_chorus": {
+          "pattern": "rock.chorus"
+        }
+      }
+    },
+    {
+      "name": "Picked electric bass",
+      "role": "bass",
+      "program": 34,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          80.0,
+          0.0,
+          100.0,
+          0.0,
+          80.0,
+          0.0,
+          100.0,
+          0.0,
+          80.0,
+          0.0,
+          100.0,
+          0.0,
+          80.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          "root",
+          null,
+          "root",
+          null,
+          "root",
+          null,
+          "root",
+          null,
+          "root",
+          null,
+          "root",
+          null,
+          "approach",
+          null
+        ],
+        "gate": 0.7,
+        "density": 0.6,
+        "range": [
+          30,
+          52
+        ],
+        "humanize": {
+          "timing": 0.016,
+          "velocity": 12
+        }
+      },
+      "overrides": {
+        "chorus": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            80.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "root",
+            "root",
+            null,
+            "fifth",
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "chorus2": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            80.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "root",
+            "root",
+            null,
+            "fifth",
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "solo": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            80.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "root",
+            "root",
+            null,
+            "fifth",
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "final_chorus": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            80.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "root",
+            "root",
+            null,
+            "fifth",
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "Distorted rhythm guitar",
+      "role": "chords",
+      "program": 30,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "chords",
+        "style": "power",
+        "density": 0.6,
+        "rhythm": [
+          100.0,
+          0.0,
+          80.0,
+          0.0,
+          100.0,
+          0.0,
+          80.0,
+          0.0,
+          100.0,
+          0.0,
+          80.0,
+          0.0,
+          100.0,
+          0.0,
+          80.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.016,
+          "velocity": 12
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Rock organ",
+      "role": "chords",
+      "program": 18,
+      "channel": 2,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "chorus",
+        "verse2",
+        "chorus2",
+        "solo",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "block",
+        "density": 0.5,
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.016,
+          "velocity": 12
+        },
+        "seed": 442
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Lead guitar",
+      "role": "lead",
+      "program": 29,
+      "channel": 3,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "chorus",
+        "chorus2",
+        "solo",
+        "final_chorus",
+        "outro"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.5,
+        "cells": [
+          [
+            4.0,
+            4.0,
+            4.0,
+            4.0
+          ],
+          [
+            2.0,
+            2.0,
+            4.0,
+            -8.0
+          ],
+          [
+            6.0,
+            2.0,
+            -4.0,
+            4.0
+          ],
+          [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            8.0
+          ]
+        ],
+        "stepwise": 0.6,
+        "chord_tone_strong": 0.7,
+        "max_leap": 7,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.016,
+          "velocity": 12
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

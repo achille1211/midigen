@@ -1,0 +1,210 @@
+{
+  "name": "drum_and_bass",
+  "display": "Drum and bass",
+  "aliases": [
+    "dnb",
+    "d&b",
+    "jungle",
+    "liquid",
+    "neurofunk"
+  ],
+  "description": "Fast breakbeats at 170-176 BPM with a two-step kick/snare, long sub or reese bass notes at half-time, lush minor 7th pads (liquid) or aggressive stabs (neuro).",
+  "tempo": {
+    "min": 168,
+    "max": 178,
+    "default": 174
+  },
+  "swing": 0.0,
+  "swing_unit": "1/16",
+  "modes": [
+    "minor",
+    "dorian"
+  ],
+  "keys": [
+    "F",
+    "D",
+    "E",
+    "G"
+  ],
+  "harmony": {
+    "extensions": "7ths",
+    "secondary_dominants": 0.0,
+    "borrowed": 0.15,
+    "beats_per_chord": 8,
+    "progressions": {
+      "minor": {
+        "main": [
+          "i7",
+          "bVImaj7",
+          "bIIImaj7",
+          "bVII"
+        ],
+        "drop": [
+          "i7",
+          "iv7",
+          "bVImaj7",
+          "v7"
+        ]
+      },
+      "dorian": {
+        "main": [
+          "i7",
+          "IV7",
+          "bVIImaj7",
+          "i7"
+        ],
+        "drop": [
+          "i7",
+          "IV7"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "dnb",
+        "density": 0.6,
+        "fill": true
+      }
+    },
+    "bass": {
+      "instrument": "synth_bass",
+      "name": "Reese",
+      "generator": {
+        "type": "bass",
+        "style": "sustained",
+        "density": 0.5,
+        "octave": 2
+      }
+    },
+    "pad": {
+      "instrument": "warm_pad",
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.2,
+        "octave": 4
+      }
+    },
+    "chords": {
+      "instrument": "electric_piano",
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.35,
+        "octave": 4
+      }
+    },
+    "lead": {
+      "instrument": "saw_lead",
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.4,
+        "range": [
+          67,
+          88
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.45,
+    "bass": 0.45,
+    "pad": 0.0,
+    "chords": 0.6,
+    "lead": 0.7
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 16,
+      "energy": 0.3,
+      "progression": "main"
+    },
+    {
+      "name": "build",
+      "bars": 8,
+      "energy": 0.55,
+      "progression": "main"
+    },
+    {
+      "name": "drop",
+      "bars": 16,
+      "energy": 0.95,
+      "progression": "drop"
+    },
+    {
+      "name": "breakdown",
+      "bars": 8,
+      "energy": 0.35,
+      "progression": "main"
+    },
+    {
+      "name": "drop2",
+      "bars": 16,
+      "energy": 0.95,
+      "progression": "drop"
+    },
+    {
+      "name": "outro",
+      "bars": 8,
+      "energy": 0.35,
+      "progression": "main"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.35,
+      "progression": "main"
+    },
+    {
+      "name": "build",
+      "bars": 4,
+      "energy": 0.6,
+      "progression": "main"
+    },
+    {
+      "name": "drop",
+      "bars": 8,
+      "energy": 0.95,
+      "progression": "drop"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      1,
+      8
+    ],
+    "drums": [
+      8,
+      32
+    ],
+    "bass": [
+      1,
+      4
+    ]
+  },
+  "register": {
+    "bass": [
+      26,
+      48
+    ],
+    "pad": [
+      50,
+      74
+    ],
+    "chords": [
+      55,
+      76
+    ],
+    "lead": [
+      67,
+      90
+    ]
+  }
+}

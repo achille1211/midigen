@@ -1,0 +1,246 @@
+{
+  "name": "lofi_hiphop",
+  "display": "Lo-fi hip hop",
+  "aliases": [
+    "lofi",
+    "lo-fi",
+    "chillhop",
+    "lo fi",
+    "study beats",
+    "lofi hip hop",
+    "lofi hiphop",
+    "chill beats"
+  ],
+  "description": "Dusty, laid-back boom-bap at slow tempos; swung 16ths, jazzy 7th/9th chords on electric piano, soft melodic fragments, vinyl-warm and sparse.",
+  "tempo": {
+    "min": 70,
+    "max": 92,
+    "default": 82
+  },
+  "swing": 0.6,
+  "swing_unit": "1/16",
+  "modes": [
+    "major",
+    "dorian",
+    "minor"
+  ],
+  "keys": [
+    "F",
+    "C",
+    "Eb",
+    "D"
+  ],
+  "harmony": {
+    "extensions": "9ths",
+    "secondary_dominants": 0.2,
+    "borrowed": 0.15,
+    "beats_per_chord": 4,
+    "progressions": {
+      "major": {
+        "main": [
+          "IVmaj7",
+          "iii7",
+          "ii7",
+          "Imaj7"
+        ],
+        "b": [
+          "ii9",
+          "V9",
+          "Imaj9",
+          "vi9"
+        ]
+      },
+      "dorian": {
+        "main": [
+          "i9",
+          "IV9",
+          "i9",
+          "IV9"
+        ],
+        "b": [
+          "bIIImaj7",
+          "ii7",
+          "i9",
+          "i9"
+        ]
+      },
+      "minor": {
+        "main": [
+          "i9",
+          "iv9",
+          "bVIImaj7",
+          "bIIImaj7"
+        ],
+        "b": [
+          "bVImaj7",
+          "v7",
+          "i9",
+          "i9"
+        ]
+      }
+    }
+  },
+  "drums": {
+    "pattern": "boom_bap",
+    "density": 0.45,
+    "fill": false,
+    "humanize": {
+      "timing": 0.02,
+      "velocity": 12
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "boom_bap",
+        "density": 0.45,
+        "fill": false,
+        "humanize": {
+          "timing": 0.02,
+          "velocity": 12
+        }
+      }
+    },
+    "bass": {
+      "instrument": "finger_bass",
+      "generator": {
+        "type": "bass",
+        "style": "kick_lock",
+        "density": 0.4,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "electric_piano",
+      "generator": {
+        "type": "chords",
+        "style": "block",
+        "density": 0.4,
+        "octave": 4,
+        "humanize": {
+          "timing": 0.03,
+          "velocity": 10
+        }
+      }
+    },
+    "lead": {
+      "instrument": "vibraphone",
+      "generator": {
+        "type": "lead",
+        "style": "sparse",
+        "density": 0.35,
+        "range": [
+          67,
+          86
+        ]
+      }
+    },
+    "pad": {
+      "instrument": "warm_pad",
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.2,
+        "octave": 4
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.3,
+    "bass": 0.3,
+    "chords": 0.0,
+    "lead": 0.5,
+    "pad": 0.6
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.25,
+      "progression": "main"
+    },
+    {
+      "name": "a",
+      "bars": 8,
+      "energy": 0.55,
+      "progression": "main"
+    },
+    {
+      "name": "b",
+      "bars": 8,
+      "energy": 0.7,
+      "progression": "b"
+    },
+    {
+      "name": "a2",
+      "bars": 8,
+      "energy": 0.6,
+      "progression": "main"
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "energy": 0.25,
+      "progression": "main"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.25,
+      "progression": "main"
+    },
+    {
+      "name": "a",
+      "bars": 4,
+      "energy": 0.55,
+      "progression": "main"
+    },
+    {
+      "name": "b",
+      "bars": 4,
+      "energy": 0.7,
+      "progression": "b"
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "energy": 0.35,
+      "progression": "main"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      1,
+      6
+    ],
+    "drums": [
+      6,
+      20
+    ],
+    "bass": [
+      1,
+      6
+    ]
+  },
+  "register": {
+    "bass": [
+      31,
+      52
+    ],
+    "chords": [
+      52,
+      74
+    ],
+    "lead": [
+      65,
+      88
+    ],
+    "pad": [
+      48,
+      72
+    ]
+  }
+}

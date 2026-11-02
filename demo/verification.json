@@ -1,0 +1,103 @@
+{
+  "demo": {
+    "genre": "pop",
+    "key": "C major",
+    "tempo": 110,
+    "bars": 16.0,
+    "tracks": {
+      "Pop kit / electronic": 257,
+      "Finger / synth bass": 96,
+      "Piano": 189,
+      "Synth pad": 63,
+      "Synth hook (post-chorus)": 20,
+      "Vocal stand-in": 69
+    },
+    "total_notes": 694,
+    "drum_channel": [],
+    "sections": [
+      "intro(4): IVmaj7 V7 iii7 vi",
+      "pre_chorus(12): Imaj7 V7 vi7 IVmaj7"
+    ],
+    "critic_score": 100,
+    "edits": [
+      "jazzier chords in the chorus"
+    ]
+  },
+  "lofi_hiphop": {
+    "genre": "lofi_hiphop",
+    "key": "D minor",
+    "tempo": 82,
+    "bars": 16.0,
+    "tracks": {
+      "Dusty drum kit": 151,
+      "Upright / finger bass": 32,
+      "Electric piano (Rhodes)": 128,
+      "Warm pad": 16,
+      "Vibraphone / flute / muted lead": 12
+    },
+    "total_notes": 339,
+    "drum_channel": [],
+    "sections": [
+      "intro(4): i7 iv7 V7 i7",
+      "loop_a(4): i7 bIIImaj7 V7 i7",
+      "loop_b(4): i7 iv7 V7 i7",
+      "breakdown(4): i7 bVImaj7 V7 i7"
+    ],
+    "critic_score": 91,
+    "edits": []
+  },
+  "techno": {
+    "genre": "techno",
+    "key": "A minor",
+    "tempo": 130.0,
+    "bars": 32.0,
+    "tracks": {
+      "Drum machine (909-style)": 565,
+      "Synth bass": 232,
+      "Synth stab": 96,
+      "Atmospheric pad": 8,
+      "Acid / saw lead": 24,
+      "Arp": 512
+    },
+    "total_notes": 1437,
+    "drum_channel": [
+      10
+    ],
+    "sections": [
+      "intro(4): i7",
+      "build_in(4): i9 bVImaj9",
+      "main_a(4): i7",
+      "breakdown(4): i7",
+      "build(4): i7",
+      "peak(4): i7",
+      "outro(8): i9 bVImaj9"
+    ],
+    "critic_score": 99,
+    "edits": [
+      "add an arp"
+    ]
+  },
+  "jazz": {
+    "genre": "jazz",
+    "key": "Bb major",
+    "tempo": 140.0,
+    "bars": 16.0,
+    "tracks": {
+      "Jazz kit / brushes": 195,
+      "Upright bass": 64,
+      "Acoustic piano": 224,
+      "Trumpet": 192,
+      "Tenor / alto sax": 56
+    },
+    "total_notes": 731,
+    "drum_channel": [],
+    "sections": [
+      "intro(4): ii7 V7 Imaj7",
+      "head_b(12): I6 vi7 ii7 V7 iii7 VI7 ii7 V7"
+    ],
+    "critic_score": 90,
+    "edits": [
+      "more swing"
+    ]
+  }
+}

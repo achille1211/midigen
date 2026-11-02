@@ -1,0 +1,404 @@
+{
+  "version": 1,
+  "title": "Ambient sketch",
+  "genre": "ambient",
+  "tempo": 70.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "E",
+  "mode": "major",
+  "seed": 1,
+  "swing": 0.0,
+  "swing_unit": "1/8",
+  "sections": [
+    {
+      "name": "emergence",
+      "bars": 16,
+      "chords": [
+        "Imaj7",
+        "IVmaj7"
+      ],
+      "energy": 0.15,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "name": "drift",
+      "bars": 32,
+      "chords": [
+        "Imaj7",
+        "IVmaj7"
+      ],
+      "energy": 0.3,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "name": "bloom",
+      "bars": 32,
+      "chords": [
+        "Isus2",
+        "Vsus4",
+        "vi9",
+        "IVmaj9"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "name": "stillness",
+      "bars": 16,
+      "chords": [
+        "Isus2",
+        "Vsus4",
+        "vi9",
+        "IVmaj9"
+      ],
+      "energy": 0.2,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "name": "bloom2",
+      "bars": 32,
+      "chords": [
+        "Isus2",
+        "Vsus4",
+        "vi9",
+        "IVmaj9"
+      ],
+      "energy": 0.45,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "name": "dissolve",
+      "bars": 16,
+      "chords": [
+        "Imaj7",
+        "IVmaj7"
+      ],
+      "energy": 0.1,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0,
+        16.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "emergence",
+    "drift",
+    "bloom",
+    "stillness",
+    "bloom2",
+    "dissolve"
+  ],
+  "tracks": [
+    {
+      "name": "Soft percussion",
+      "role": "drums",
+      "program": 48,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "bloom",
+        "bloom2"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "ambient.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "ambient.swell",
+        "fill_every": 16,
+        "laid_back": 0.0,
+        "humanize": {
+          "timing": 0.0292,
+          "velocity": 20
+        }
+      },
+      "overrides": {
+        "bloom2": {
+          "pattern": "ambient.heartbeat"
+        }
+      }
+    },
+    {
+      "name": "Cello / sub drone",
+      "role": "bass",
+      "program": 42,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "drift",
+        "bloom",
+        "bloom2"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "gate": 1.0,
+        "density": 0.6,
+        "range": [
+          25,
+          47
+        ],
+        "humanize": {
+          "timing": 0.0292,
+          "velocity": 20
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Warm / new age pad",
+      "role": "pad",
+      "program": 88,
+      "channel": 1,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "emergence",
+        "drift",
+        "bloom",
+        "bloom2",
+        "dissolve"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0292,
+          "velocity": 20
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Halo / atmosphere pad",
+      "role": "pad",
+      "program": 94,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "drift",
+        "bloom",
+        "stillness",
+        "bloom2"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0292,
+          "velocity": 20
+        },
+        "seed": 502
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Slow strings",
+      "role": "pad",
+      "program": 49,
+      "channel": 3,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "bloom",
+        "bloom2"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0292,
+          "velocity": 20
+        },
+        "seed": 101
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Celesta / music box / tubular bells",
+      "role": "lead",
+      "program": 8,
+      "channel": 4,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "bloom",
+        "stillness"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.12,
+        "cells": [
+          [
+            16.0
+          ],
+          [
+            8.0,
+            -8.0
+          ],
+          [
+            -4.0,
+            12.0
+          ],
+          [
+            4.0,
+            4.0,
+            -8.0
+          ]
+        ],
+        "stepwise": 0.55,
+        "chord_tone_strong": 0.8,
+        "max_leap": 12,
+        "range": [
+          72,
+          96
+        ],
+        "humanize": {
+          "timing": 0.0292,
+          "velocity": 20
+        },
+        "seed": 784
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Soft piano",
+      "role": "lead",
+      "program": 0,
+      "channel": 5,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "drift",
+        "bloom"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "sparse",
+        "density": 0.12,
+        "cells": [
+          [
+            16.0
+          ],
+          [
+            8.0,
+            -8.0
+          ],
+          [
+            -4.0,
+            12.0
+          ],
+          [
+            4.0,
+            4.0,
+            -8.0
+          ]
+        ],
+        "stepwise": 0.55,
+        "chord_tone_strong": 0.8,
+        "max_leap": 12,
+        "range": [
+          66,
+          90
+        ],
+        "humanize": {
+          "timing": 0.0292,
+          "velocity": 20
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

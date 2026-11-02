@@ -1,0 +1,259 @@
+{
+  "name": "synthwave",
+  "display": "Synthwave / retrowave",
+  "aliases": [
+    "retrowave",
+    "outrun",
+    "80s",
+    "eighties",
+    "darksynth",
+    "chillwave"
+  ],
+  "description": "80s-inspired: gated snare on 2 and 4, driving 8th-note synth bass, lush polysynth pads, 16th arpeggios, saw lead melodies, minor-key i-bVI-bIII-bVII progressions.",
+  "tempo": {
+    "min": 80,
+    "max": 118,
+    "default": 100
+  },
+  "swing": 0.0,
+  "swing_unit": "1/16",
+  "modes": [
+    "minor",
+    "dorian",
+    "major"
+  ],
+  "keys": [
+    "A",
+    "E",
+    "F#",
+    "D"
+  ],
+  "harmony": {
+    "extensions": "triads",
+    "secondary_dominants": 0.0,
+    "borrowed": 0.1,
+    "beats_per_chord": 4,
+    "progressions": {
+      "minor": {
+        "verse": [
+          "i",
+          "bVI",
+          "bIII",
+          "bVII"
+        ],
+        "chorus": [
+          "bVI",
+          "bVII",
+          "i",
+          "i"
+        ],
+        "bridge": [
+          "iv",
+          "bVI",
+          "bVII",
+          "V"
+        ]
+      },
+      "dorian": {
+        "verse": [
+          "i",
+          "IV",
+          "bVII",
+          "i"
+        ],
+        "chorus": [
+          "bVI",
+          "bVII",
+          "i",
+          "IV"
+        ],
+        "bridge": [
+          "IV",
+          "bVII",
+          "bIII",
+          "IV"
+        ]
+      },
+      "major": {
+        "verse": [
+          "I",
+          "iii",
+          "vi",
+          "IV"
+        ],
+        "chorus": [
+          "vi",
+          "IV",
+          "I",
+          "V"
+        ],
+        "bridge": [
+          "IV",
+          "V",
+          "iii",
+          "vi"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "synthwave",
+        "density": 0.5,
+        "fill": true
+      }
+    },
+    "bass": {
+      "instrument": "synth_bass",
+      "generator": {
+        "type": "bass",
+        "style": "pulse",
+        "density": 0.55,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "polysynth",
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "octave": 4
+      }
+    },
+    "arp": {
+      "instrument": "square_lead",
+      "generator": {
+        "type": "arp",
+        "style": "up",
+        "rate": "1/16",
+        "octave": 5,
+        "gate": 0.5
+      }
+    },
+    "lead": {
+      "instrument": "saw_lead",
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.5,
+        "range": [
+          64,
+          86
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.4,
+    "bass": 0.35,
+    "chords": 0.0,
+    "arp": 0.55,
+    "lead": 0.6
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 8,
+      "energy": 0.35,
+      "progression": "verse"
+    },
+    {
+      "name": "verse",
+      "bars": 8,
+      "energy": 0.55,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.85,
+      "progression": "chorus"
+    },
+    {
+      "name": "verse2",
+      "bars": 8,
+      "energy": 0.6,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "chorus"
+    },
+    {
+      "name": "bridge",
+      "bars": 8,
+      "energy": 0.65,
+      "progression": "bridge",
+      "cadence": "half"
+    },
+    {
+      "name": "chorus3",
+      "bars": 8,
+      "energy": 0.95,
+      "progression": "chorus"
+    },
+    {
+      "name": "outro",
+      "bars": 8,
+      "energy": 0.35,
+      "progression": "verse"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.35,
+      "progression": "verse"
+    },
+    {
+      "name": "verse",
+      "bars": 4,
+      "energy": 0.6,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "chorus"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      2,
+      10
+    ],
+    "drums": [
+      8,
+      24
+    ],
+    "bass": [
+      4,
+      12
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      52
+    ],
+    "chords": [
+      52,
+      76
+    ],
+    "arp": [
+      70,
+      92
+    ],
+    "lead": [
+      62,
+      82
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+wrote bossa_nova_s1.json and bossa_nova_s1.mid — 92 bars @ 132.0 BPM, C major, tracks [Brush kit:1262, Acoustic bass:264, Nylon guitar (batida):2208, Strings:104, Piano:96, Tenor sax (Getz-style):640, Flute:232]
+critic score: 89/100
+  [warning] out_of_key: Acoustic bass: 16 note(s) (6%) are outside the key and the current chord. (Acoustic bass bars 7,8,15,16,23,27) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] out_of_key: Nylon guitar (batida): 9 note(s) (0%) are outside the key and the current chord. (Nylon guitar (batida) bars 6,9,31,35,53,57) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] out_of_key: Strings: 5 note(s) (5%) are outside the key and the current chord. (Strings bars 23,27,31,78,86) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] out_of_key: Tenor sax (Getz-style): 1 note(s) (0%) are outside the key and the current chord. (Tenor sax (Getz-style) bars 49) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.

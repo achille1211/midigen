@@ -1,0 +1,263 @@
+{
+  "name": "cinematic",
+  "display": "Cinematic / orchestral",
+  "aliases": [
+    "film score",
+    "epic",
+    "orchestral",
+    "trailer",
+    "soundtrack",
+    "score"
+  ],
+  "description": "String ostinatos and sustained chords, epic minor progressions (i-bVI-bIII-bVII, i-iv-V with harmonic minor), taiko/tom percussion, brass melody, long build to a climax then resolution.",
+  "tempo": {
+    "min": 60,
+    "max": 140,
+    "default": 90
+  },
+  "swing": 0.0,
+  "swing_unit": "1/8",
+  "modes": [
+    "minor",
+    "harmonic_minor",
+    "major"
+  ],
+  "keys": [
+    "D",
+    "C",
+    "E",
+    "A"
+  ],
+  "harmony": {
+    "extensions": "triads",
+    "secondary_dominants": 0.1,
+    "borrowed": 0.3,
+    "beats_per_chord": 4,
+    "progressions": {
+      "minor": {
+        "intro": [
+          "i",
+          "bVI",
+          "i",
+          "bVI"
+        ],
+        "build": [
+          "i",
+          "bVI",
+          "bIII",
+          "bVII"
+        ],
+        "climax": [
+          "bVI",
+          "bVII",
+          "i",
+          "V"
+        ]
+      },
+      "harmonic_minor": {
+        "intro": [
+          "i",
+          "iv",
+          "i",
+          "V"
+        ],
+        "build": [
+          "i",
+          "bVI",
+          "iv",
+          "V"
+        ],
+        "climax": [
+          "bVI",
+          "iv",
+          "V",
+          "i"
+        ]
+      },
+      "major": {
+        "intro": [
+          "I",
+          "vi",
+          "IV",
+          "V"
+        ],
+        "build": [
+          "vi",
+          "IV",
+          "I",
+          "V"
+        ],
+        "climax": [
+          "IV",
+          "V",
+          "vi",
+          "I"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "pad": {
+      "instrument": "strings",
+      "name": "Strings",
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.25,
+        "octave": 4
+      }
+    },
+    "arp": {
+      "instrument": "strings",
+      "name": "Ostinato",
+      "generator": {
+        "type": "arp",
+        "style": "pinned",
+        "rate": "1/8",
+        "octave": 4,
+        "gate": 0.7
+      }
+    },
+    "bass": {
+      "instrument": "string_ensemble",
+      "name": "Low strings",
+      "generator": {
+        "type": "bass",
+        "style": "sustained",
+        "density": 0.3,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "brass",
+      "name": "Brass",
+      "generator": {
+        "type": "chords",
+        "style": "block",
+        "density": 0.3,
+        "octave": 3
+      }
+    },
+    "lead": {
+      "instrument": "french_horn",
+      "name": "Horn melody",
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.35,
+        "range": [
+          53,
+          77
+        ]
+      }
+    },
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "cinematic",
+        "density": 0.5,
+        "fill": true
+      }
+    }
+  },
+  "layers": {
+    "pad": 0.0,
+    "arp": 0.4,
+    "bass": 0.0,
+    "chords": 0.75,
+    "lead": 0.5,
+    "drums": 0.6
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 8,
+      "energy": 0.2,
+      "progression": "intro"
+    },
+    {
+      "name": "theme",
+      "bars": 8,
+      "energy": 0.45,
+      "progression": "build"
+    },
+    {
+      "name": "build",
+      "bars": 8,
+      "energy": 0.7,
+      "progression": "build",
+      "cadence": "half"
+    },
+    {
+      "name": "climax",
+      "bars": 8,
+      "energy": 1.0,
+      "progression": "climax",
+      "cadence": "authentic"
+    },
+    {
+      "name": "resolve",
+      "bars": 8,
+      "energy": 0.3,
+      "progression": "intro"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.25,
+      "progression": "intro"
+    },
+    {
+      "name": "build",
+      "bars": 4,
+      "energy": 0.6,
+      "progression": "build",
+      "cadence": "half"
+    },
+    {
+      "name": "climax",
+      "bars": 8,
+      "energy": 1.0,
+      "progression": "climax",
+      "cadence": "authentic"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      1,
+      6
+    ],
+    "pad": [
+      0,
+      4
+    ],
+    "drums": [
+      2,
+      16
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      52
+    ],
+    "pad": [
+      50,
+      70
+    ],
+    "arp": [
+      67,
+      86
+    ],
+    "chords": [
+      52,
+      70
+    ],
+    "lead": [
+      53,
+      77
+    ]
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "version": 1,
+  "title": "Cinematic / orchestral sketch",
+  "genre": "cinematic",
+  "tempo": 90.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "C",
+  "mode": "minor",
+  "seed": 1,
+  "swing": 0.0,
+  "swing_unit": "1/8",
+  "sections": [
+    {
+      "name": "opening",
+      "bars": 8,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.2,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "theme_a",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.4,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "build",
+      "bars": 8,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.6,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "theme_b",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.75,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "climax",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.98,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "resolution",
+      "bars": 8,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.45,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "coda",
+      "bars": 8,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.15,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "opening",
+    "theme_a",
+    "build",
+    "theme_b",
+    "climax",
+    "resolution",
+    "coda"
+  ],
+  "tracks": [
+    {
+      "name": "Orchestral percussion / taiko",
+      "role": "drums",
+      "program": 48,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "build",
+        "theme_b",
+        "climax"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "cinematic.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "cinematic.fill",
+        "fill_every": 8,
+        "laid_back": 0.0,
+        "humanize": {
+          "timing": 0.015,
+          "velocity": 15
+        }
+      },
+      "overrides": {
+        "build": {
+          "pattern": "cinematic.pulse"
+        },
+        "climax": {
+          "pattern": "cinematic.climax"
+        }
+      }
+    },
+    {
+      "name": "Contrabass / cellos",
+      "role": "bass",
+      "program": 43,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "theme_a",
+        "build",
+        "theme_b",
+        "climax"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          "root",
+          null,
+          "octave",
+          null,
+          "root",
+          null,
+          "root",
+          null,
+          "fifth",
+          null,
+          "octave",
+          null,
+          "root",
+          null
+        ],
+        "gate": 0.6,
+        "density": 0.6,
+        "range": [
+          29,
+          51
+        ],
+        "humanize": {
+          "timing": 0.015,
+          "velocity": 15
+        }
+      },
+      "overrides": {
+        "climax": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "Brass section / trombones",
+      "role": "chords",
+      "program": 61,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "build",
+        "theme_b",
+        "climax"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.5,
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.015,
+          "velocity": 15
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "String ensemble",
+      "role": "pad",
+      "program": 48,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "theme_a",
+        "build",
+        "theme_b",
+        "climax",
+        "resolution"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.015,
+          "velocity": 15
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Harp",
+      "role": "arp",
+      "program": 46,
+      "channel": 3,
+      "volume": 72,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "theme_a",
+        "climax"
+      ],
+      "generator": {
+        "type": "arp",
+        "style": "pinned",
+        "rate": "1/16",
+        "density": 0.5,
+        "range": [
+          61,
+          83
+        ],
+        "humanize": {
+          "timing": 0.015,
+          "velocity": 15
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Choir",
+      "role": "pad",
+      "program": 52,
+      "channel": 4,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "opening",
+        "theme_b",
+        "climax"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.015,
+          "velocity": 15
+        },
+        "seed": 271
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Piano",
+      "role": "chords",
+      "program": 0,
+      "channel": 5,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "opening",
+        "climax",
+        "resolution",
+        "coda"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "block",
+        "density": 0.5,
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.015,
+          "velocity": 15
+        },
+        "seed": 932
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Underscore pad",
+      "role": "pad",
+      "program": 89,
+      "channel": 6,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "opening",
+        "theme_a",
+        "resolution",
+        "coda"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.015,
+          "velocity": 15
+        },
+        "seed": 699
+      },
+      "overrides": {}
+    },
+    {
+      "name": "French horn",
+      "role": "lead",
+      "program": 60,
+      "channel": 7,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "theme_a",
+        "theme_b",
+        "climax",
+        "resolution"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.3,
+        "cells": [
+          [
+            8.0,
+            4.0,
+            4.0
+          ],
+          [
+            12.0,
+            4.0
+          ],
+          [
+            6.0,
+            2.0,
+            8.0
+          ],
+          [
+            4.0,
+            4.0,
+            4.0,
+            4.0
+          ]
+        ],
+        "stepwise": 0.6,
+        "chord_tone_strong": 0.8,
+        "max_leap": 12,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.015,
+          "velocity": 15
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

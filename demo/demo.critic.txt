@@ -1,0 +1,2 @@
+critic score: 100/100
+  no issues found

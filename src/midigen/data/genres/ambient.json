@@ -1,0 +1,207 @@
+{
+  "name": "ambient",
+  "display": "Ambient",
+  "aliases": [
+    "drone",
+    "atmospheric",
+    "meditation",
+    "new age"
+  ],
+  "description": "Slow or beatless, long sustained chords (2+ bars each), lydian/major colour with added 9ths, sparse bell/harp arpeggios, very low density, gentle energy contour.",
+  "tempo": {
+    "min": 55,
+    "max": 95,
+    "default": 70
+  },
+  "swing": 0.0,
+  "swing_unit": "1/8",
+  "modes": [
+    "lydian",
+    "major",
+    "dorian"
+  ],
+  "keys": [
+    "D",
+    "E",
+    "C",
+    "A"
+  ],
+  "harmony": {
+    "extensions": "9ths",
+    "secondary_dominants": 0.0,
+    "borrowed": 0.1,
+    "beats_per_chord": 8,
+    "progressions": {
+      "lydian": {
+        "a": [
+          "Imaj7",
+          "II",
+          "Imaj7",
+          "vii"
+        ],
+        "b": [
+          "IV",
+          "II",
+          "Imaj7",
+          "Imaj7"
+        ]
+      },
+      "major": {
+        "a": [
+          "Imaj9",
+          "IVmaj9",
+          "vi9",
+          "IVmaj9"
+        ],
+        "b": [
+          "ii9",
+          "IVmaj9",
+          "Imaj9",
+          "Imaj9"
+        ]
+      },
+      "dorian": {
+        "a": [
+          "i9",
+          "IV9"
+        ],
+        "b": [
+          "bVIImaj7",
+          "IV9",
+          "i9",
+          "i9"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "pad": {
+      "instrument": "space_pad",
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.15,
+        "octave": 4
+      }
+    },
+    "arp": {
+      "instrument": "harp",
+      "generator": {
+        "type": "arp",
+        "style": "random",
+        "rate": "1/8",
+        "octave": 5,
+        "gate": 0.9
+      }
+    },
+    "bass": {
+      "instrument": "warm_pad",
+      "name": "Drone",
+      "generator": {
+        "type": "bass",
+        "style": "sustained",
+        "density": 0.2,
+        "octave": 2
+      }
+    },
+    "lead": {
+      "instrument": "flute",
+      "generator": {
+        "type": "lead",
+        "style": "sparse",
+        "density": 0.25,
+        "range": [
+          67,
+          88
+        ]
+      }
+    },
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "ambient",
+        "density": 0.25,
+        "fill": false
+      }
+    }
+  },
+  "layers": {
+    "pad": 0.0,
+    "arp": 0.35,
+    "bass": 0.0,
+    "lead": 0.5,
+    "drums": 0.6
+  },
+  "form": [
+    {
+      "name": "a",
+      "bars": 16,
+      "energy": 0.2,
+      "progression": "a"
+    },
+    {
+      "name": "b",
+      "bars": 16,
+      "energy": 0.45,
+      "progression": "b"
+    },
+    {
+      "name": "c",
+      "bars": 16,
+      "energy": 0.65,
+      "progression": "a"
+    },
+    {
+      "name": "fade",
+      "bars": 8,
+      "energy": 0.2,
+      "progression": "b"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "a",
+      "bars": 8,
+      "energy": 0.25,
+      "progression": "a"
+    },
+    {
+      "name": "b",
+      "bars": 8,
+      "energy": 0.6,
+      "progression": "b"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      0,
+      4
+    ],
+    "pad": [
+      0,
+      4
+    ],
+    "arp": [
+      1,
+      8
+    ]
+  },
+  "register": {
+    "bass": [
+      26,
+      50
+    ],
+    "pad": [
+      48,
+      76
+    ],
+    "arp": [
+      62,
+      90
+    ],
+    "lead": [
+      67,
+      90
+    ]
+  }
+}

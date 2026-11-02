@@ -1,0 +1,244 @@
+{
+  "name": "rock",
+  "display": "Rock",
+  "aliases": [
+    "indie rock",
+    "alt rock",
+    "punk",
+    "hard rock",
+    "grunge"
+  ],
+  "description": "Straight 8ths, backbeat on 2 and 4, driving root-note bass in 8ths, power chords or strummed triads, mixolydian bVII borrowing, verse/chorus form with a guitar solo section.",
+  "tempo": {
+    "min": 100,
+    "max": 160,
+    "default": 122
+  },
+  "swing": 0.0,
+  "swing_unit": "1/8",
+  "modes": [
+    "major",
+    "mixolydian",
+    "minor"
+  ],
+  "keys": [
+    "E",
+    "A",
+    "D",
+    "G"
+  ],
+  "harmony": {
+    "extensions": "triads",
+    "secondary_dominants": 0.05,
+    "borrowed": 0.25,
+    "beats_per_chord": 4,
+    "progressions": {
+      "major": {
+        "verse": [
+          "I",
+          "V",
+          "vi",
+          "IV"
+        ],
+        "chorus": [
+          "IV",
+          "I",
+          "V",
+          "vi"
+        ],
+        "solo": [
+          "vi",
+          "IV",
+          "I",
+          "V"
+        ]
+      },
+      "mixolydian": {
+        "verse": [
+          "I",
+          "bVII",
+          "IV",
+          "I"
+        ],
+        "chorus": [
+          "IV",
+          "bVII",
+          "I",
+          "I"
+        ],
+        "solo": [
+          "I",
+          "bVII",
+          "IV",
+          "IV"
+        ]
+      },
+      "minor": {
+        "verse": [
+          "i",
+          "bVII",
+          "bVI",
+          "bVII"
+        ],
+        "chorus": [
+          "bVI",
+          "bVII",
+          "i",
+          "i"
+        ],
+        "solo": [
+          "i",
+          "iv",
+          "bVII",
+          "V"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "rock",
+        "density": 0.55,
+        "fill": true
+      }
+    },
+    "bass": {
+      "instrument": "pick_bass",
+      "generator": {
+        "type": "bass",
+        "style": "pulse",
+        "density": 0.55,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "distorted_guitar",
+      "name": "Guitar",
+      "generator": {
+        "type": "chords",
+        "style": "power",
+        "density": 0.55,
+        "octave": 3
+      }
+    },
+    "lead": {
+      "instrument": "overdriven_guitar",
+      "name": "Lead guitar",
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.5,
+        "range": [
+          64,
+          88
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.0,
+    "bass": 0.3,
+    "chords": 0.0,
+    "lead": 0.6
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.5,
+      "progression": "verse"
+    },
+    {
+      "name": "verse",
+      "bars": 8,
+      "energy": 0.6,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.85,
+      "progression": "chorus"
+    },
+    {
+      "name": "verse2",
+      "bars": 8,
+      "energy": 0.6,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "chorus"
+    },
+    {
+      "name": "solo",
+      "bars": 8,
+      "energy": 0.8,
+      "progression": "solo"
+    },
+    {
+      "name": "chorus3",
+      "bars": 8,
+      "energy": 0.95,
+      "progression": "chorus"
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "energy": 0.5,
+      "progression": "verse"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.5,
+      "progression": "verse"
+    },
+    {
+      "name": "verse",
+      "bars": 4,
+      "energy": 0.6,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "chorus"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      2,
+      10
+    ],
+    "drums": [
+      10,
+      30
+    ],
+    "bass": [
+      4,
+      10
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      52
+    ],
+    "chords": [
+      48,
+      72
+    ],
+    "lead": [
+      64,
+      86
+    ]
+  }
+}

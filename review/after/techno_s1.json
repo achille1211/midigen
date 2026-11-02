@@ -1,0 +1,411 @@
+{
+  "version": 1,
+  "title": "Techno sketch",
+  "genre": "techno",
+  "tempo": 130.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "F",
+  "mode": "minor",
+  "seed": 1,
+  "swing": 0.027,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 16,
+      "chords": [
+        "i9",
+        "bVImaj9"
+      ],
+      "energy": 0.4,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "build_in",
+      "bars": 16,
+      "chords": [
+        "i7"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0
+      ]
+    },
+    {
+      "name": "main_a",
+      "bars": 32,
+      "chords": [
+        "i7"
+      ],
+      "energy": 0.75,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0
+      ]
+    },
+    {
+      "name": "breakdown",
+      "bars": 16,
+      "chords": [
+        "i7"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0
+      ]
+    },
+    {
+      "name": "build",
+      "bars": 8,
+      "chords": [
+        "i7"
+      ],
+      "energy": 0.6,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0
+      ]
+    },
+    {
+      "name": "peak",
+      "bars": 32,
+      "chords": [
+        "i7"
+      ],
+      "energy": 0.95,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0
+      ]
+    },
+    {
+      "name": "outro",
+      "bars": 16,
+      "chords": [
+        "i9",
+        "bVImaj9"
+      ],
+      "energy": 0.4,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "build_in",
+    "main_a",
+    "breakdown",
+    "build",
+    "peak",
+    "outro"
+  ],
+  "tracks": [
+    {
+      "name": "Drum machine (909-style)",
+      "role": "drums",
+      "program": 24,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "build_in",
+        "main_a",
+        "build",
+        "peak",
+        "outro"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "techno.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "techno.build",
+        "fill_every": 32,
+        "laid_back": 0.0,
+        "humanize": {
+          "timing": 0.0043,
+          "velocity": 6
+        }
+      },
+      "overrides": {
+        "intro": {
+          "pattern": "techno.minimal"
+        },
+        "build": {
+          "pattern": "techno.build"
+        },
+        "peak": {
+          "pattern": "techno.peak"
+        },
+        "outro": {
+          "pattern": "techno.minimal"
+        }
+      }
+    },
+    {
+      "name": "Synth bass",
+      "role": "bass",
+      "program": 38,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "build_in",
+        "main_a",
+        "peak",
+        "outro"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          0.0,
+          100.0,
+          100.0,
+          100.0,
+          0.0,
+          100.0,
+          100.0,
+          100.0,
+          0.0,
+          100.0,
+          100.0,
+          100.0,
+          0.0,
+          100.0,
+          100.0,
+          100.0
+        ],
+        "tokens": [
+          null,
+          "root",
+          "root",
+          "root",
+          null,
+          "root",
+          "root",
+          "root",
+          null,
+          "root",
+          "root",
+          "root",
+          null,
+          "root",
+          "root",
+          "octave"
+        ],
+        "gate": 0.3,
+        "density": 0.6,
+        "range": [
+          25,
+          47
+        ],
+        "humanize": {
+          "timing": 0.0043,
+          "velocity": 6
+        }
+      },
+      "overrides": {
+        "peak": {
+          "rhythm": [
+            100.0,
+            0.0,
+            100.0,
+            80.0,
+            0.0,
+            100.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            80.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            "octave",
+            "root",
+            null,
+            "third",
+            "root",
+            null,
+            "root",
+            null,
+            "octave",
+            "seventh",
+            null,
+            "root",
+            null,
+            "octave"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Synth stab",
+      "role": "chords",
+      "program": 90,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "main_a",
+        "breakdown",
+        "peak"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0043,
+          "velocity": 6
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Atmospheric pad",
+      "role": "pad",
+      "program": 95,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "breakdown",
+        "build"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0043,
+          "velocity": 6
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Acid / saw lead",
+      "role": "lead",
+      "program": 81,
+      "channel": 3,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "peak"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "riff",
+        "density": 0.8,
+        "cells": [
+          [
+            1.0,
+            1.0,
+            2.0,
+            1.0,
+            1.0,
+            2.0,
+            -2.0,
+            2.0,
+            1.0,
+            1.0,
+            2.0
+          ],
+          [
+            2.0,
+            -1.0,
+            1.0,
+            2.0,
+            -2.0,
+            2.0,
+            2.0,
+            -2.0,
+            2.0
+          ],
+          [
+            1.0,
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            -1.0
+          ]
+        ],
+        "stepwise": 0.5,
+        "chord_tone_strong": 0.5,
+        "max_leap": 12,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.0043,
+          "velocity": 6
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

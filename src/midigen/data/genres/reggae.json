@@ -1,0 +1,212 @@
+{
+  "name": "reggae",
+  "display": "Reggae",
+  "aliases": [
+    "roots reggae",
+    "dub",
+    "ska",
+    "rocksteady",
+    "dancehall"
+  ],
+  "description": "One-drop drums (kick and rim on beat 3), off-beat guitar/organ skank on the 'and', melodic bass that leaves space on the downbeat, simple I-IV-V or i-iv loops, relaxed swing.",
+  "tempo": {
+    "min": 60,
+    "max": 90,
+    "default": 76
+  },
+  "swing": 0.36,
+  "swing_unit": "1/16",
+  "modes": [
+    "major",
+    "minor",
+    "dorian"
+  ],
+  "keys": [
+    "G",
+    "A",
+    "C",
+    "D"
+  ],
+  "harmony": {
+    "extensions": "triads",
+    "secondary_dominants": 0.0,
+    "borrowed": 0.05,
+    "beats_per_chord": 4,
+    "progressions": {
+      "major": {
+        "verse": [
+          "I",
+          "IV",
+          "I",
+          "V"
+        ],
+        "chorus": [
+          "IV",
+          "V",
+          "I",
+          "vi"
+        ]
+      },
+      "minor": {
+        "verse": [
+          "i",
+          "iv",
+          "i",
+          "v"
+        ],
+        "chorus": [
+          "bVI",
+          "bVII",
+          "i",
+          "i"
+        ]
+      },
+      "dorian": {
+        "verse": [
+          "i",
+          "IV"
+        ],
+        "chorus": [
+          "bVII",
+          "IV",
+          "i",
+          "i"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "one_drop",
+        "density": 0.45,
+        "fill": true
+      }
+    },
+    "bass": {
+      "instrument": "finger_bass",
+      "generator": {
+        "type": "bass",
+        "style": "reggae",
+        "density": 0.5,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "organ",
+      "name": "Skank",
+      "generator": {
+        "type": "chords",
+        "style": "offbeat",
+        "density": 0.5,
+        "octave": 4,
+        "rate": "1/4"
+      }
+    },
+    "lead": {
+      "instrument": "flute",
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.4,
+        "range": [
+          65,
+          86
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.0,
+    "bass": 0.0,
+    "chords": 0.0,
+    "lead": 0.5
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.4,
+      "progression": "verse"
+    },
+    {
+      "name": "verse",
+      "bars": 8,
+      "energy": 0.55,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.75,
+      "progression": "chorus"
+    },
+    {
+      "name": "verse2",
+      "bars": 8,
+      "energy": 0.55,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "energy": 0.8,
+      "progression": "chorus"
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "energy": 0.4,
+      "progression": "verse"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.4,
+      "progression": "verse"
+    },
+    {
+      "name": "verse",
+      "bars": 4,
+      "energy": 0.55,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.8,
+      "progression": "chorus"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      1,
+      8
+    ],
+    "drums": [
+      4,
+      16
+    ],
+    "bass": [
+      2,
+      8
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      52
+    ],
+    "chords": [
+      55,
+      76
+    ],
+    "lead": [
+      65,
+      88
+    ]
+  }
+}

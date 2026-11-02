@@ -1,0 +1,4 @@
+wrote funk_s3.json and funk_s3.mid — 60 bars @ 104.0 BPM, G dorian, tracks [Funk kit:1483, Slap / finger bass:448, Muted 'chicken-scratch' guitar:2040, Clavinet:1316, Horn section stabs:124, Tenor sax lead:101]
+critic score: 91/100
+  [warning] out_of_key: Slap / finger bass: 48 note(s) (11%) are outside the key and the current chord. (Slap / finger bass bars 5,6,7,8,9,10) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] parallels: Muted 'chicken-scratch' guitar: parallel fifths/octaves in 2 chord change(s). (Muted 'chicken-scratch' guitar bars 37,53) -> Use contrary/oblique motion or a different inversion (voice leading).

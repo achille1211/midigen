@@ -1,0 +1,6 @@
+wrote neo_soul_s1.json and neo_soul_s1.mid — 76 bars @ 84.0 BPM, Ab major, tracks [Vintage kit:1331, Finger / fretless bass:304, Rhodes / Wurlitzer:608, Strings / pad:144, Clean electric guitar:168, Vocal stand-in:243]
+critic score: 96/100
+  [info] out_of_key: Finger / fretless bass: 1 note(s) (0%) are outside the key and the current chord. (Finger / fretless bass bars 68) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] out_of_key: Rhodes / Wurlitzer: 2 note(s) (0%) are outside the key and the current chord. (Rhodes / Wurlitzer bars 5,29) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] out_of_key: Strings / pad: 1 note(s) (1%) are outside the key and the current chord. (Strings / pad bars 1) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] out_of_key: Clean electric guitar: 3 note(s) (2%) are outside the key and the current chord. (Clean electric guitar bars 33,41,69) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.

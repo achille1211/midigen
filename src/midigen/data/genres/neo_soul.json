@@ -1,0 +1,217 @@
+{
+  "name": "neo_soul",
+  "display": "Neo-soul",
+  "aliases": [
+    "neosoul",
+    "r&b",
+    "rnb",
+    "soul",
+    "dilla"
+  ],
+  "description": "Laid-back, behind-the-beat drums with ghost notes, lush extended chords (9ths, 11ths), chromatic secondary dominants, melodic finger bass, Rhodes voicings.",
+  "tempo": {
+    "min": 68,
+    "max": 98,
+    "default": 84
+  },
+  "swing": 0.45,
+  "swing_unit": "1/16",
+  "modes": [
+    "major",
+    "dorian",
+    "minor"
+  ],
+  "keys": [
+    "Eb",
+    "Ab",
+    "Db",
+    "F"
+  ],
+  "harmony": {
+    "extensions": "9ths",
+    "secondary_dominants": 0.35,
+    "borrowed": 0.2,
+    "beats_per_chord": 4,
+    "progressions": {
+      "major": {
+        "verse": [
+          "IVmaj9",
+          "iii7",
+          "vi9",
+          "ii9"
+        ],
+        "chorus": [
+          "ii9",
+          "V9",
+          "iii7",
+          "vi9"
+        ]
+      },
+      "dorian": {
+        "verse": [
+          "i9",
+          "IV9",
+          "bIIImaj7",
+          "ii7"
+        ],
+        "chorus": [
+          "bVIImaj7",
+          "IV9",
+          "i9",
+          "i9"
+        ]
+      },
+      "minor": {
+        "verse": [
+          "i9",
+          "iv9",
+          "bVIImaj7",
+          "bIIImaj7"
+        ],
+        "chorus": [
+          "bVImaj7",
+          "V7",
+          "i9",
+          "iv9"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "neo_soul",
+        "density": 0.5,
+        "fill": true,
+        "humanize": {
+          "timing": 0.025,
+          "velocity": 12
+        }
+      }
+    },
+    "bass": {
+      "instrument": "finger_bass",
+      "generator": {
+        "type": "bass",
+        "style": "syncopated",
+        "density": 0.5,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "electric_piano",
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.45,
+        "octave": 4
+      }
+    },
+    "lead": {
+      "instrument": "electric_piano",
+      "name": "Keys lead",
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.4,
+        "range": [
+          65,
+          86
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.3,
+    "bass": 0.3,
+    "chords": 0.0,
+    "lead": 0.55
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.3,
+      "progression": "verse"
+    },
+    {
+      "name": "verse",
+      "bars": 8,
+      "energy": 0.55,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.75,
+      "progression": "chorus"
+    },
+    {
+      "name": "verse2",
+      "bars": 8,
+      "energy": 0.6,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "energy": 0.8,
+      "progression": "chorus"
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "energy": 0.35,
+      "progression": "verse"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.3,
+      "progression": "verse"
+    },
+    {
+      "name": "verse",
+      "bars": 4,
+      "energy": 0.55,
+      "progression": "verse"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.8,
+      "progression": "chorus"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      1,
+      8
+    ],
+    "drums": [
+      8,
+      28
+    ],
+    "bass": [
+      2,
+      8
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      52
+    ],
+    "chords": [
+      52,
+      74
+    ],
+    "lead": [
+      65,
+      88
+    ]
+  }
+}

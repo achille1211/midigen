@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "title": "A Sad Lofi Hip Hop Beat",
+  "genre": "lofi_hiphop",
+  "tempo": 82,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "D",
+  "mode": "minor",
+  "seed": 3,
+  "swing": 0.167,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "chords": [
+        "i7",
+        "iv7",
+        "V7",
+        "i7"
+      ],
+      "energy": 0.25,
+      "beats_per_chord": 4.0,
+      "cadence": "authentic"
+    },
+    {
+      "name": "loop_a",
+      "bars": 4,
+      "chords": [
+        "i7",
+        "bIIImaj7",
+        "V7",
+        "i7"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "cadence": "authentic"
+    },
+    {
+      "name": "loop_b",
+      "bars": 4,
+      "chords": [
+        "i7",
+        "iv7",
+        "V7",
+        "i7"
+      ],
+      "energy": 0.6,
+      "beats_per_chord": 4.0,
+      "cadence": "authentic"
+    },
+    {
+      "name": "breakdown",
+      "bars": 4,
+      "chords": [
+        "i7",
+        "bVImaj7",
+        "V7",
+        "i7"
+      ],
+      "energy": 0.3,
+      "beats_per_chord": 4.0,
+      "cadence": "authentic"
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "loop_a",
+    "loop_b",
+    "breakdown"
+  ],
+  "tracks": [
+    {
+      "name": "Dusty drum kit",
+      "role": "drums",
+      "program": 8,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "loop_a",
+        "loop_b",
+        "breakdown"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "lofi_hiphop.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "lofi_hiphop.fill",
+        "fill_every": 8,
+        "laid_back": 12.0,
+        "humanize": {
+          "timing": 0.0246,
+          "velocity": 18
+        }
+      },
+      "overrides": {
+        "loop_b": {
+          "pattern": "lofi_hiphop.loop_b"
+        },
+        "breakdown": {
+          "pattern": "lofi_hiphop.breakdown"
+        }
+      }
+    },
+    {
+      "name": "Upright / finger bass",
+      "role": "bass",
+      "program": 32,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "loop_a",
+        "loop_b"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          80.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          60.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "fifth",
+          null,
+          null,
+          "octave",
+          null,
+          null,
+          null,
+          "approach",
+          null
+        ],
+        "gate": 0.8,
+        "density": 0.6,
+        "range": [
+          29,
+          51
+        ],
+        "humanize": {
+          "timing": 0.0246,
+          "velocity": 18
+        },
+        "laid_back": 6.0
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Electric piano (Rhodes)",
+      "role": "chords",
+      "program": 4,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0246,
+          "velocity": 18
+        },
+        "laid_back": 6.0
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Warm pad",
+      "role": "pad",
+      "program": 89,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "breakdown"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0246,
+          "velocity": 18
+        },
+        "laid_back": 6.0
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Vibraphone / flute / muted lead",
+      "role": "lead",
+      "program": 11,
+      "channel": 3,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "loop_b"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "sparse",
+        "density": 0.35,
+        "cells": [
+          [
+            4.0,
+            -2.0,
+            2.0,
+            -4.0,
+            4.0
+          ],
+          [
+            2.0,
+            2.0,
+            4.0,
+            -8.0
+          ],
+          [
+            6.0,
+            2.0,
+            -4.0,
+            4.0
+          ],
+          [
+            -4.0,
+            2.0,
+            2.0,
+            8.0
+          ]
+        ],
+        "stepwise": 0.7,
+        "chord_tone_strong": 0.7,
+        "max_leap": 7,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.0246,
+          "velocity": 18
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

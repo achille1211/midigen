@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "midigen"
+version = "0.1.0"
+description = "Theory-driven multitrack MIDI generator/arranger with LLM-safe JSON edit ops, CLI and MCP server"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["mido>=1.3", "jsonschema>=4"]
+
+[project.optional-dependencies]
+preview = ["matplotlib>=3.7"]
+mcp = ["mcp>=1.2"]
+dev = ["pytest>=7", "matplotlib>=3.7", "mcp>=1.2"]
+
+[project.scripts]
+midigen = "midigen.cli:main"
+midigen-mcp = "midigen.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+midigen = ["data/*.json", "data/genres/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

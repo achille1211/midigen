@@ -1,0 +1,222 @@
+{
+  "name": "house",
+  "display": "House",
+  "aliases": [
+    "deep house",
+    "house music",
+    "garage"
+  ],
+  "description": "Four-on-the-floor kick, offbeat open hats, clap on 2 and 4; offbeat bass, minor 7th piano/organ stabs, 8/16-bar phrasing with builds and drops.",
+  "tempo": {
+    "min": 118,
+    "max": 128,
+    "default": 124
+  },
+  "swing": 0.24,
+  "swing_unit": "1/16",
+  "modes": [
+    "minor",
+    "dorian",
+    "major"
+  ],
+  "keys": [
+    "A",
+    "F",
+    "G",
+    "C"
+  ],
+  "harmony": {
+    "extensions": "7ths",
+    "secondary_dominants": 0.0,
+    "borrowed": 0.1,
+    "beats_per_chord": 4,
+    "progressions": {
+      "minor": {
+        "main": [
+          "i7",
+          "iv7",
+          "bVIImaj7",
+          "bIIImaj7"
+        ],
+        "drop": [
+          "i7",
+          "bVImaj7",
+          "iv7",
+          "v7"
+        ]
+      },
+      "dorian": {
+        "main": [
+          "i7",
+          "IV7"
+        ],
+        "drop": [
+          "i7",
+          "IV7",
+          "bVIImaj7",
+          "IV7"
+        ]
+      },
+      "major": {
+        "main": [
+          "vi7",
+          "IVmaj7",
+          "Imaj7",
+          "V"
+        ],
+        "drop": [
+          "IVmaj7",
+          "V",
+          "iii7",
+          "vi7"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "house",
+        "density": 0.55,
+        "fill": true
+      }
+    },
+    "bass": {
+      "instrument": "synth_bass",
+      "generator": {
+        "type": "bass",
+        "style": "offbeat",
+        "density": 0.55,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "piano",
+      "generator": {
+        "type": "chords",
+        "style": "offbeat",
+        "density": 0.5,
+        "octave": 4
+      }
+    },
+    "lead": {
+      "instrument": "pluck",
+      "generator": {
+        "type": "lead",
+        "style": "riff",
+        "density": 0.45,
+        "range": [
+          67,
+          88
+        ]
+      }
+    },
+    "pad": {
+      "instrument": "warm_pad",
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.2,
+        "octave": 4
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.35,
+    "bass": 0.5,
+    "chords": 0.0,
+    "lead": 0.75,
+    "pad": 0.0
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 8,
+      "energy": 0.35,
+      "progression": "main"
+    },
+    {
+      "name": "build",
+      "bars": 8,
+      "energy": 0.55,
+      "progression": "main"
+    },
+    {
+      "name": "drop",
+      "bars": 16,
+      "energy": 0.9,
+      "progression": "drop"
+    },
+    {
+      "name": "breakdown",
+      "bars": 8,
+      "energy": 0.3,
+      "progression": "main"
+    },
+    {
+      "name": "drop2",
+      "bars": 16,
+      "energy": 0.95,
+      "progression": "drop"
+    },
+    {
+      "name": "outro",
+      "bars": 8,
+      "energy": 0.35,
+      "progression": "main"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.35,
+      "progression": "main"
+    },
+    {
+      "name": "build",
+      "bars": 4,
+      "energy": 0.55,
+      "progression": "main"
+    },
+    {
+      "name": "drop",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "drop"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      2,
+      10
+    ],
+    "drums": [
+      10,
+      32
+    ],
+    "bass": [
+      3,
+      10
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      50
+    ],
+    "chords": [
+      55,
+      76
+    ],
+    "lead": [
+      67,
+      90
+    ],
+    "pad": [
+      48,
+      72
+    ]
+  }
+}

@@ -1,0 +1,399 @@
+{
+  "version": 1,
+  "title": "House sketch",
+  "genre": "house",
+  "tempo": 124.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "C",
+  "mode": "minor",
+  "seed": 2,
+  "swing": 0.083,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 16,
+      "chords": [
+        "i9",
+        "iv9"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "groove",
+      "bars": 16,
+      "chords": [
+        "i7",
+        "bVII",
+        "bVImaj7",
+        "bVII"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "main_a",
+      "bars": 32,
+      "chords": [
+        "i7",
+        "bVII",
+        "bVImaj7",
+        "bVII"
+      ],
+      "energy": 0.7,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "breakdown",
+      "bars": 16,
+      "chords": [
+        "i9",
+        "iv9"
+      ],
+      "energy": 0.3,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "drop",
+      "bars": 32,
+      "chords": [
+        "i9",
+        "iv9"
+      ],
+      "energy": 0.85,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "outro",
+      "bars": 16,
+      "chords": [
+        "i7",
+        "bVII",
+        "bVImaj7",
+        "bVII"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "groove",
+    "main_a",
+    "breakdown",
+    "drop",
+    "outro"
+  ],
+  "tracks": [
+    {
+      "name": "909/808-style drum machine",
+      "role": "drums",
+      "program": 25,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "drums",
+        "pattern": "house.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "house.fill",
+        "fill_every": 16,
+        "transition": "house.drop_in",
+        "laid_back": 0.0,
+        "humanize": {
+          "timing": 0.0083,
+          "velocity": 8
+        }
+      },
+      "overrides": {
+        "intro": {
+          "pattern": "house.intro"
+        },
+        "main_a": {
+          "pattern": "house.groove_perc"
+        },
+        "breakdown": {
+          "pattern": "house.breakdown"
+        },
+        "outro": {
+          "pattern": "house.intro"
+        }
+      }
+    },
+    {
+      "name": "Synth bass",
+      "role": "bass",
+      "program": 38,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "groove",
+        "main_a",
+        "drop",
+        "outro"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          80.0
+        ],
+        "tokens": [
+          null,
+          null,
+          "root",
+          null,
+          null,
+          null,
+          "root",
+          null,
+          null,
+          null,
+          "octave",
+          null,
+          null,
+          null,
+          "root",
+          "fifth"
+        ],
+        "gate": 0.4,
+        "density": 0.6,
+        "range": [
+          32,
+          54
+        ],
+        "humanize": {
+          "timing": 0.0083,
+          "velocity": 8
+        }
+      },
+      "overrides": {
+        "drop": {
+          "rhythm": [
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            100.0,
+            0.0
+          ],
+          "tokens": [
+            null,
+            null,
+            "root",
+            null,
+            null,
+            "octave",
+            null,
+            "root",
+            null,
+            null,
+            "root",
+            null,
+            null,
+            "seventh",
+            "octave",
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "Piano / organ stabs",
+      "role": "chords",
+      "program": 0,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "main_a",
+        "breakdown",
+        "drop"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0083,
+          "velocity": 8
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Warm pad / strings",
+      "role": "pad",
+      "program": 89,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "breakdown",
+        "drop"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0083,
+          "velocity": 8
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Vocal chop / lead",
+      "role": "lead",
+      "program": 85,
+      "channel": 3,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "breakdown",
+        "drop"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "riff",
+        "density": 0.4,
+        "cells": [
+          [
+            3.0,
+            3.0,
+            2.0,
+            -8.0
+          ],
+          [
+            -2.0,
+            2.0,
+            -2.0,
+            2.0,
+            4.0,
+            -4.0
+          ],
+          [
+            4.0,
+            -4.0,
+            4.0,
+            -4.0
+          ],
+          [
+            2.0,
+            -1.0,
+            1.0,
+            2.0,
+            2.0,
+            -8.0
+          ]
+        ],
+        "stepwise": 0.65,
+        "chord_tone_strong": 0.75,
+        "max_leap": 7,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.0083,
+          "velocity": 8
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

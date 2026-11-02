@@ -1,0 +1,176 @@
+{
+ "_doc": "16th-note step grids per bar (strings may span several bars: 32 chars = 2 bars). x=accent o=normal g=ghost r=roll(3 fast hits) .=rest. Instruments map to GM drum notes in drums.py. A pattern may carry optional 'verse'/'chorus' sub-grids (same format) used in matching sections (chorus also when energy >= 0.8). 'keep_ghosts' lists voices whose g hits survive low density.",
+ "rock": {
+  "kick": "x.....o.x.o.....",
+  "snare": "....x.......x...",
+  "chh": "o.o.o.o.o.o.o.o.",
+  "chorus": {
+   "kick": "x.....o.x.o.....",
+   "snare": "....x.......x...",
+   "ohh": "o.o.o.o.o.o.o.o.",
+   "crash4": "x..............."
+  },
+  "verse": {
+   "kick": "x.......x.o.....",
+   "snare": "....x.......x...",
+   "chh": "o.o.o.o.o.o.o.o."
+  }
+ },
+ "pop": {
+  "kick": "x.....o.x.......",
+  "snare": "....x.......x...",
+  "chh": "o.o.o.o.o.o.o.o.",
+  "clap": "............o...",
+  "chorus": {
+   "kick": "x.....o.x.o.....",
+   "snare": "....x.......x...",
+   "clap": "....o.......o...",
+   "chh": "o.o.o.o.o.o.o.o.",
+   "ohh": "..............o.",
+   "crash4": "x..............."
+  },
+  "verse": {
+   "kick": "x.......x.......",
+   "snare": "....x.......x...",
+   "chh": "o.o.o.o.o.o.o.o."
+  }
+ },
+ "four_on_floor": {
+  "kick": "x...x...x...x...",
+  "clap": "....x.......x...",
+  "ohh": "..o...o...o...o.",
+  "chh": "g.g.g.g.g.g.g.g."
+ },
+ "house": {
+  "kick": "x...x...x...x...",
+  "clap": "....x.......x...",
+  "ohh": "..o...o...o...o.",
+  "shaker": "gogggogggogggogg"
+ },
+ "techno": {
+  "kick": "x...x...x...x...",
+  "rim": "......o.....o..o",
+  "chh": "o.o.o.o.o.o.o.o.",
+  "ohh": "..o...o...o...o.",
+  "clap": "....o.......o...",
+  "chorus": {
+   "kick": "x...x...x...x...",
+   "clap": "....o.......o...",
+   "chh": "gogogogogogogogo",
+   "ohh": "..o...o...o...o.",
+   "ride": "o.o.o.o.o.o.o.o."
+  }
+ },
+ "hiphop": {
+  "kick": "x......o..x.....",
+  "snare": "....x.......x...",
+  "chh": "o.o.o.o.o.o.o.o."
+ },
+ "boom_bap": {
+  "kick": "x......o..x...o.",
+  "snare": "....x.......x...",
+  "chh": "o.o.o.o.o.o.o.o.",
+  "rim": "...........g...."
+ },
+ "trap": {
+  "kick": "x.........x...x.x.......x.....x.",
+  "snare": "........x...............x.......",
+  "chh": "o.o.o.o.o.o.r.o.o.o.o.o.r.r.o.o.",
+  "ohh": "..............................o."
+ },
+ "halftime": {
+  "kick": "x.........o.....",
+  "snare": "........x.......",
+  "chh": "o.o.o.o.o.o.o.o."
+ },
+ "dnb": {
+  "kick": "x.........x.....",
+  "snare": "....x.......x...",
+  "chh": "o.o.o.o.o.o.o.o.",
+  "ride": "..o...o...o...o."
+ },
+ "breakbeat": {
+  "kick": "x.x.......xx....",
+  "snare": "....x..g.g..x..g",
+  "chh": "o.o.o.o.o.o.o.o."
+ },
+ "ballad": {
+  "kick": "x.......x.......",
+  "rim": "....o.......o...",
+  "chh": "o...o...o...o..."
+ },
+ "funk": {
+  "kick": "x..x..x...x..x..",
+  "snare": "....x..g.g..x..g",
+  "chh": "oooooooooooooooo",
+  "chorus": {
+   "kick": "x..x..x...x..x..",
+   "snare": "....x..g.g..x..g",
+   "chh": "oooooooooooooooo",
+   "ohh": "..............o.",
+   "crash4": "x..............."
+  }
+ },
+ "neo_soul": {
+  "kick": "x......o..x..o..",
+  "snare": "....x.......x..g",
+  "chh": "o.go.go.go.go.go"
+ },
+ "shuffle": {
+  "kick": "x.....x.x.......",
+  "snare": "....x.......x...",
+  "chh": "o.o.o.o.o.o.o.o."
+ },
+ "jazz": {
+  "ride": "o...o.o.o...o.o.",
+  "phh": "....o.......o...",
+  "kick": "g...g...g...g...",
+  "snare": "......g.......g.",
+  "comp": "snare"
+ },
+ "one_drop": {
+  "kick": "........x.......",
+  "rim": "........x.......",
+  "chh": "..o...o...o...o."
+ },
+ "bossa": {
+  "kick": "x.....x.x.....x.",
+  "rim": "x..x..x...x..x..",
+  "chh": "gggggggggggggggg",
+  "keep_ghosts": [
+   "chh"
+  ]
+ },
+ "synthwave": {
+  "kick": "x.......x.......",
+  "snare": "....x.......x...",
+  "chh": "o.o.o.o.o.o.o.o.",
+  "chorus": {
+   "kick": "x.......x.......",
+   "snare": "....x.......x...",
+   "chh": "o.o.o.o.o.o.o.o.",
+   "ohh": "..............o.",
+   "crash4": "x..............."
+  }
+ },
+ "cinematic": {
+  "kick": "x.......x.......",
+  "tom_lo": "x.....x.....x...",
+  "tom_mid": "...o.......o....",
+  "crash": "................"
+ },
+ "ambient": {
+  "kick": "x...............",
+  "rim": "........g.......",
+  "shaker": "..g...g...g...g.",
+  "keep_ghosts": [
+   "rim",
+   "shaker"
+  ]
+ },
+ "minimal": {
+  "kick": "x.......x.......",
+  "rim": "....o.......o...",
+  "chh": "..g...g...g...g."
+ }
+}

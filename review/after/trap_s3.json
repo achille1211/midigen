@@ -1,0 +1,499 @@
+{
+  "version": 1,
+  "title": "Trap sketch",
+  "genre": "trap",
+  "tempo": 140.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "F#",
+  "mode": "minor",
+  "seed": 3,
+  "swing": 0.017,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 8,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "hook",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI"
+      ],
+      "energy": 0.85,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "verse",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI"
+      ],
+      "energy": 0.65,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "hook2",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI"
+      ],
+      "energy": 0.9,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "verse2",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI"
+      ],
+      "energy": 0.65,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "bridge",
+      "bars": 8,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.45,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "hook3",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI"
+      ],
+      "energy": 0.9,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "outro",
+      "bars": 8,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.3,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "hook",
+    "verse",
+    "hook2",
+    "verse2",
+    "bridge",
+    "hook3",
+    "outro"
+  ],
+  "tracks": [
+    {
+      "name": "808 drum kit",
+      "role": "drums",
+      "program": 25,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "hook",
+        "verse",
+        "hook2",
+        "verse2",
+        "bridge",
+        "hook3"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "trap.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "trap.fill",
+        "fill_every": 8,
+        "laid_back": 0.0,
+        "humanize": {
+          "timing": 0.0047,
+          "velocity": 12
+        }
+      },
+      "overrides": {
+        "hook": {
+          "pattern": "trap.hook"
+        },
+        "hook2": {
+          "pattern": "trap.hook"
+        },
+        "verse2": {
+          "pattern": "trap.trap_b"
+        },
+        "bridge": {
+          "pattern": "trap.half_hats"
+        },
+        "hook3": {
+          "pattern": "trap.hook"
+        }
+      }
+    },
+    {
+      "name": "808 bass",
+      "role": "bass",
+      "program": 38,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "hook",
+        "verse",
+        "hook2",
+        "verse2",
+        "hook3"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "root",
+          null,
+          null,
+          null,
+          "octave",
+          null
+        ],
+        "gate": 0.95,
+        "density": 0.6,
+        "range": [
+          25,
+          47
+        ],
+        "humanize": {
+          "timing": 0.0047,
+          "velocity": 12
+        }
+      },
+      "overrides": {
+        "hook": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "octave",
+            null,
+            null,
+            "root",
+            null,
+            "fifth",
+            null,
+            null,
+            null
+          ]
+        },
+        "hook2": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "octave",
+            null,
+            null,
+            "root",
+            null,
+            "fifth",
+            null,
+            null,
+            null
+          ]
+        },
+        "hook3": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "octave",
+            null,
+            null,
+            "root",
+            null,
+            "fifth",
+            null,
+            null,
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "Piano / dark strings",
+      "role": "chords",
+      "program": 0,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "hook",
+        "hook2",
+        "hook3"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "pad",
+        "density": 0.5,
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0047,
+          "velocity": 12
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Choir / dark pad",
+      "role": "pad",
+      "program": 91,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "hook",
+        "hook2",
+        "bridge",
+        "hook3",
+        "outro"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0047,
+          "velocity": 12
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Bells / music box / flute",
+      "role": "lead",
+      "program": 10,
+      "channel": 3,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "lead",
+        "style": "riff",
+        "density": 0.5,
+        "cells": [
+          [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            4.0,
+            -4.0
+          ],
+          [
+            3.0,
+            3.0,
+            2.0,
+            -8.0
+          ],
+          [
+            -2.0,
+            2.0,
+            1.0,
+            1.0,
+            2.0,
+            8.0
+          ],
+          [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            4.0
+          ]
+        ],
+        "stepwise": 0.6,
+        "chord_tone_strong": 0.65,
+        "max_leap": 7,
+        "range": [
+          67,
+          91
+        ],
+        "humanize": {
+          "timing": 0.0047,
+          "velocity": 12
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

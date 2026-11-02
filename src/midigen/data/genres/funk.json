@@ -1,0 +1,232 @@
+{
+  "name": "funk",
+  "display": "Funk",
+  "aliases": [
+    "funky",
+    "p-funk",
+    "disco funk"
+  ],
+  "description": "Syncopated 16th grooves emphasising 'the one', ghost-note snare, busy interlocking bass, dominant 7th/9th vamps in dorian/mixolydian, guitar or clav stabs and horn riffs.",
+  "tempo": {
+    "min": 92,
+    "max": 118,
+    "default": 104
+  },
+  "swing": 0.24,
+  "swing_unit": "1/16",
+  "modes": [
+    "dorian",
+    "mixolydian",
+    "minor"
+  ],
+  "keys": [
+    "E",
+    "A",
+    "D",
+    "G"
+  ],
+  "harmony": {
+    "extensions": "9ths",
+    "secondary_dominants": 0.0,
+    "borrowed": 0.0,
+    "beats_per_chord": 8,
+    "progressions": {
+      "dorian": {
+        "main": [
+          "i7",
+          "IV9"
+        ],
+        "chorus": [
+          "bIIImaj7",
+          "IV9",
+          "i7",
+          "IV9"
+        ],
+        "bridge": [
+          "bVII",
+          "IV",
+          "v7",
+          "IV9"
+        ]
+      },
+      "mixolydian": {
+        "main": [
+          "I7",
+          "IV9"
+        ],
+        "chorus": [
+          "bVII",
+          "IV",
+          "I7",
+          "I7"
+        ],
+        "bridge": [
+          "IV9",
+          "bVII",
+          "V7",
+          "V7"
+        ]
+      },
+      "minor": {
+        "main": [
+          "i7",
+          "iv7"
+        ],
+        "chorus": [
+          "bVI",
+          "bVII",
+          "i7",
+          "i7"
+        ],
+        "bridge": [
+          "iv7",
+          "V7",
+          "i7",
+          "V7"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "funk",
+        "density": 0.6,
+        "fill": true,
+        "humanize": {
+          "timing": 0.01,
+          "velocity": 10
+        }
+      }
+    },
+    "bass": {
+      "instrument": "finger_bass",
+      "generator": {
+        "type": "bass",
+        "style": "syncopated",
+        "density": 0.7,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "clean_guitar",
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.65,
+        "octave": 4
+      }
+    },
+    "lead": {
+      "instrument": "brass",
+      "generator": {
+        "type": "lead",
+        "style": "riff",
+        "density": 0.5,
+        "range": [
+          62,
+          84
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.0,
+    "bass": 0.3,
+    "chords": 0.0,
+    "lead": 0.6
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.45,
+      "progression": "main"
+    },
+    {
+      "name": "groove",
+      "bars": 8,
+      "energy": 0.65,
+      "progression": "main"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.85,
+      "progression": "chorus"
+    },
+    {
+      "name": "groove2",
+      "bars": 8,
+      "energy": 0.65,
+      "progression": "main"
+    },
+    {
+      "name": "bridge",
+      "bars": 8,
+      "energy": 0.7,
+      "progression": "bridge"
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "chorus"
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "energy": 0.5,
+      "progression": "main"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.45,
+      "progression": "main"
+    },
+    {
+      "name": "groove",
+      "bars": 4,
+      "energy": 0.65,
+      "progression": "main"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.85,
+      "progression": "chorus"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      2,
+      10
+    ],
+    "drums": [
+      16,
+      40
+    ],
+    "bass": [
+      4,
+      12
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      52
+    ],
+    "chords": [
+      55,
+      76
+    ],
+    "lead": [
+      62,
+      86
+    ]
+  }
+}

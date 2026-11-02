@@ -1,0 +1,203 @@
+{
+  "name": "bossa_nova",
+  "display": "Bossa nova",
+  "aliases": [
+    "bossa",
+    "samba",
+    "brazilian",
+    "latin jazz"
+  ],
+  "description": "Gentle syncopated nylon-guitar comping with 7th/9th chords, surdo-like kick on 1 and the 'and' of 2, rim-click clave, root-fifth bass, smooth stepwise melodies with chromatic colour (II7 secondary dominants).",
+  "tempo": {
+    "min": 110,
+    "max": 145,
+    "default": 130
+  },
+  "swing": 0.0,
+  "swing_unit": "1/16",
+  "modes": [
+    "major",
+    "minor"
+  ],
+  "keys": [
+    "F",
+    "D",
+    "C",
+    "G"
+  ],
+  "harmony": {
+    "extensions": "9ths",
+    "secondary_dominants": 0.35,
+    "borrowed": 0.1,
+    "beats_per_chord": 8,
+    "progressions": {
+      "major": {
+        "a": [
+          "Imaj7",
+          "V7/V",
+          "ii7",
+          "V7"
+        ],
+        "b": [
+          "IVmaj7",
+          "iv7",
+          "iii7",
+          "V7/ii"
+        ]
+      },
+      "minor": {
+        "a": [
+          "i7",
+          "iv7",
+          "V7",
+          "i7"
+        ],
+        "b": [
+          "bVImaj7",
+          "ii\u00f87",
+          "V7",
+          "i7"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "bossa",
+        "density": 0.4,
+        "fill": false,
+        "humanize": {
+          "timing": 0.01,
+          "velocity": 8
+        }
+      }
+    },
+    "bass": {
+      "instrument": "acoustic_bass",
+      "generator": {
+        "type": "bass",
+        "style": "root_fifth",
+        "density": 0.4,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "guitar",
+      "name": "Nylon guitar",
+      "generator": {
+        "type": "chords",
+        "style": "bossa",
+        "density": 0.5,
+        "octave": 4
+      }
+    },
+    "lead": {
+      "instrument": "flute",
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.45,
+        "range": [
+          62,
+          84
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.0,
+    "bass": 0.0,
+    "chords": 0.0,
+    "lead": 0.4
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.35,
+      "progression": "a"
+    },
+    {
+      "name": "a",
+      "bars": 8,
+      "energy": 0.55,
+      "progression": "a"
+    },
+    {
+      "name": "b",
+      "bars": 8,
+      "energy": 0.65,
+      "progression": "b",
+      "cadence": "half"
+    },
+    {
+      "name": "a2",
+      "bars": 8,
+      "energy": 0.6,
+      "progression": "a",
+      "cadence": "authentic"
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "energy": 0.35,
+      "progression": "a"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.35,
+      "progression": "a"
+    },
+    {
+      "name": "a",
+      "bars": 4,
+      "energy": 0.55,
+      "progression": "a"
+    },
+    {
+      "name": "b",
+      "bars": 4,
+      "energy": 0.65,
+      "progression": "b"
+    },
+    {
+      "name": "a2",
+      "bars": 4,
+      "energy": 0.6,
+      "progression": "a"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      1,
+      8
+    ],
+    "drums": [
+      6,
+      30
+    ],
+    "bass": [
+      2,
+      4
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      52
+    ],
+    "chords": [
+      52,
+      74
+    ],
+    "lead": [
+      64,
+      84
+    ]
+  }
+}

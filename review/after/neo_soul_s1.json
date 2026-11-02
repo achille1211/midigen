@@ -1,0 +1,499 @@
+{
+  "version": 1,
+  "title": "Neo-soul sketch",
+  "genre": "neo_soul",
+  "tempo": 84.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "Ab",
+  "mode": "major",
+  "seed": 1,
+  "swing": 0.183,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "chords": [
+        "IVmaj9",
+        "iv9",
+        "iii7",
+        "vi9"
+      ],
+      "energy": 0.3,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "verse",
+      "bars": 16,
+      "chords": [
+        "ii9",
+        "bVII13",
+        "Imaj9"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        8.0
+      ],
+      "cadence": "authentic"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "chords": [
+        "IVmaj9",
+        "iii7",
+        "vi11",
+        "V9sus4"
+      ],
+      "energy": 0.7,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "verse2",
+      "bars": 16,
+      "chords": [
+        "ii9",
+        "bVII13",
+        "Imaj9"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        8.0
+      ],
+      "cadence": "authentic"
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "chords": [
+        "IVmaj9",
+        "iii7",
+        "vi11",
+        "V9sus4"
+      ],
+      "energy": 0.75,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "bridge",
+      "bars": 8,
+      "chords": [
+        "IVmaj9",
+        "iii7",
+        "vi11",
+        "V9sus4"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "chorus3",
+      "bars": 8,
+      "chords": [
+        "IVmaj9",
+        "iii7",
+        "vi11",
+        "V9sus4"
+      ],
+      "energy": 0.8,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "outro_vamp",
+      "bars": 8,
+      "chords": [
+        "ii9",
+        "bVII13",
+        "Imaj9"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        8.0
+      ],
+      "cadence": "authentic"
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse2",
+    "chorus2",
+    "bridge",
+    "chorus3",
+    "outro_vamp"
+  ],
+  "tracks": [
+    {
+      "name": "Vintage kit",
+      "role": "drums",
+      "program": 0,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "verse",
+        "chorus",
+        "verse2",
+        "chorus2",
+        "bridge",
+        "chorus3",
+        "outro_vamp"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "neo_soul.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "neo_soul.fill",
+        "fill_every": 8,
+        "laid_back": 20.0,
+        "humanize": {
+          "timing": 0.0252,
+          "velocity": 18
+        }
+      },
+      "overrides": {
+        "chorus": {
+          "pattern": "neo_soul.chorus"
+        },
+        "chorus2": {
+          "pattern": "neo_soul.chorus"
+        },
+        "bridge": {
+          "pattern": "neo_soul.bridge"
+        },
+        "chorus3": {
+          "pattern": "neo_soul.chorus"
+        }
+      }
+    },
+    {
+      "name": "Finger / fretless bass",
+      "role": "bass",
+      "program": 33,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "verse",
+        "chorus",
+        "verse2",
+        "chorus2",
+        "bridge",
+        "chorus3",
+        "outro_vamp"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          80.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          80.0,
+          0.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "scale_step",
+          null,
+          null,
+          "root",
+          null,
+          null,
+          "fifth",
+          null,
+          null
+        ],
+        "gate": 0.8,
+        "density": 0.6,
+        "range": [
+          30,
+          52
+        ],
+        "humanize": {
+          "timing": 0.0252,
+          "velocity": 18
+        },
+        "laid_back": 10.0
+      },
+      "overrides": {
+        "chorus3": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            80.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            80.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            80.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            "seventh",
+            null,
+            null,
+            "octave",
+            null,
+            "fifth",
+            null,
+            null,
+            "root",
+            null,
+            null,
+            "approach",
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "Rhodes / Wurlitzer",
+      "role": "chords",
+      "program": 4,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0252,
+          "velocity": 18
+        },
+        "laid_back": 10.0
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Strings / pad",
+      "role": "pad",
+      "program": 48,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "chorus",
+        "chorus2",
+        "bridge",
+        "chorus3"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0252,
+          "velocity": 18
+        },
+        "laid_back": 10.0
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Clean electric guitar",
+      "role": "chords",
+      "program": 27,
+      "channel": 3,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "chorus",
+        "verse2",
+        "chorus2",
+        "chorus3",
+        "outro_vamp"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "block",
+        "density": 0.5,
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0252,
+          "velocity": 18
+        },
+        "laid_back": 10.0,
+        "seed": 268
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Vocal stand-in",
+      "role": "lead",
+      "program": 53,
+      "channel": 4,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "verse",
+        "chorus",
+        "verse2",
+        "chorus2",
+        "chorus3"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.45,
+        "cells": [
+          [
+            -1.0,
+            3.0,
+            2.0,
+            2.0,
+            -8.0
+          ],
+          [
+            2.0,
+            1.0,
+            1.0,
+            4.0,
+            -8.0
+          ],
+          [
+            -4.0,
+            1.0,
+            1.0,
+            2.0,
+            8.0
+          ],
+          [
+            -2.0,
+            2.0,
+            1.0,
+            1.0,
+            2.0,
+            4.0,
+            -4.0
+          ]
+        ],
+        "stepwise": 0.7,
+        "chord_tone_strong": 0.6,
+        "max_leap": 7,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.0252,
+          "velocity": 18
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

@@ -1,0 +1,860 @@
+{
+  "version": 1,
+  "title": "Pop sketch",
+  "genre": "pop",
+  "tempo": 116.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "A",
+  "mode": "major",
+  "seed": 3,
+  "swing": 0.017,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "chords": [
+        "vi",
+        "IV",
+        "I",
+        "V"
+      ],
+      "energy": 0.4,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "verse1",
+      "bars": 8,
+      "chords": [
+        "IV",
+        "I",
+        "V",
+        "vi"
+      ],
+      "energy": 0.45,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "deceptive"
+    },
+    {
+      "name": "pre_chorus",
+      "bars": 4,
+      "chords": [
+        "I",
+        "V",
+        "vi",
+        "IV"
+      ],
+      "energy": 0.6,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "chorus1",
+      "bars": 8,
+      "chords": [
+        "IVmaj7",
+        "V7",
+        "iii7",
+        "vi"
+      ],
+      "energy": 0.85,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "post_chorus",
+      "bars": 4,
+      "chords": [
+        "I",
+        "vi",
+        "IV",
+        "V"
+      ],
+      "energy": 0.75,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "verse2",
+      "bars": 8,
+      "chords": [
+        "IV",
+        "I",
+        "V",
+        "vi"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "deceptive"
+    },
+    {
+      "name": "pre_chorus2",
+      "bars": 4,
+      "chords": [
+        "I",
+        "V",
+        "vi",
+        "IV"
+      ],
+      "energy": 0.65,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "chords": [
+        "IVmaj7",
+        "V7",
+        "iii7",
+        "vi"
+      ],
+      "energy": 0.9,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "bridge",
+      "bars": 8,
+      "chords": [
+        "I",
+        "vi",
+        "IV",
+        "V"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "final_chorus",
+      "bars": 16,
+      "chords": [
+        "IVmaj7",
+        "V7",
+        "iii7",
+        "vi"
+      ],
+      "energy": 0.95,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "chords": [
+        "I",
+        "V",
+        "vi",
+        "IV"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "verse1",
+    "pre_chorus",
+    "chorus1",
+    "post_chorus",
+    "verse2",
+    "pre_chorus2",
+    "chorus2",
+    "bridge",
+    "final_chorus",
+    "outro"
+  ],
+  "tracks": [
+    {
+      "name": "Pop kit / electronic",
+      "role": "drums",
+      "program": 0,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "verse1",
+        "pre_chorus",
+        "chorus1",
+        "post_chorus",
+        "verse2",
+        "pre_chorus2",
+        "chorus2",
+        "bridge",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "pop.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "pop.fill",
+        "fill_every": 8,
+        "transition": "pop.chorus_in",
+        "laid_back": 0.0,
+        "humanize": {
+          "timing": 0.0077,
+          "velocity": 8
+        }
+      },
+      "overrides": {
+        "verse1": {
+          "pattern": "pop.verse"
+        },
+        "pre_chorus": {
+          "pattern": "pop.pre_chorus"
+        },
+        "chorus1": {
+          "pattern": "pop.chorus"
+        },
+        "post_chorus": {
+          "pattern": "pop.chorus"
+        },
+        "verse2": {
+          "pattern": "pop.verse"
+        },
+        "pre_chorus2": {
+          "pattern": "pop.pre_chorus"
+        },
+        "chorus2": {
+          "pattern": "pop.chorus"
+        },
+        "bridge": {
+          "pattern": "pop.bridge"
+        },
+        "final_chorus": {
+          "pattern": "pop.chorus"
+        }
+      }
+    },
+    {
+      "name": "Finger / synth bass",
+      "role": "bass",
+      "program": 33,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "verse1",
+        "pre_chorus",
+        "chorus1",
+        "post_chorus",
+        "verse2",
+        "pre_chorus2",
+        "chorus2",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "root",
+          "root",
+          null,
+          "fifth",
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "gate": 0.75,
+        "density": 0.6,
+        "range": [
+          30,
+          52
+        ],
+        "humanize": {
+          "timing": 0.0077,
+          "velocity": 8
+        }
+      },
+      "overrides": {
+        "pre_chorus": {
+          "rhythm": [
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "octave",
+            null,
+            "root",
+            null
+          ]
+        },
+        "chorus1": {
+          "rhythm": [
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "octave",
+            null,
+            "root",
+            null
+          ]
+        },
+        "post_chorus": {
+          "rhythm": [
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "octave",
+            null,
+            "root",
+            null
+          ]
+        },
+        "chorus2": {
+          "rhythm": [
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "octave",
+            null,
+            "root",
+            null
+          ]
+        },
+        "final_chorus": {
+          "rhythm": [
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "root",
+            null,
+            "octave",
+            null,
+            "root",
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "Piano",
+      "role": "chords",
+      "program": 0,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "verse1",
+        "pre_chorus",
+        "chorus1",
+        "verse2",
+        "pre_chorus2",
+        "chorus2",
+        "bridge",
+        "final_chorus",
+        "outro"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0077,
+          "velocity": 8
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Synth pad",
+      "role": "pad",
+      "program": 90,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "pre_chorus",
+        "chorus1",
+        "post_chorus",
+        "pre_chorus2",
+        "chorus2",
+        "bridge",
+        "final_chorus",
+        "outro"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0077,
+          "velocity": 8
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Acoustic / clean guitar",
+      "role": "chords",
+      "program": 25,
+      "channel": 3,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "chorus1",
+        "verse2",
+        "chorus2",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          100.0,
+          0.0,
+          100.0,
+          80.0,
+          0.0,
+          80.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          80.0,
+          0.0,
+          80.0,
+          100.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0077,
+          "velocity": 8
+        },
+        "seed": 268
+      },
+      "overrides": {}
+    },
+    {
+      "name": "String section",
+      "role": "pad",
+      "program": 48,
+      "channel": 4,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "chorus1",
+        "chorus2",
+        "bridge",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0077,
+          "velocity": 8
+        },
+        "seed": 101
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Synth hook (post-chorus)",
+      "role": "lead",
+      "program": 81,
+      "channel": 5,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "post_chorus",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.55,
+        "cells": [
+          [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            4.0,
+            -4.0
+          ],
+          [
+            -2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            4.0
+          ],
+          [
+            3.0,
+            3.0,
+            2.0,
+            4.0,
+            -4.0
+          ],
+          [
+            -2.0,
+            1.0,
+            1.0,
+            2.0,
+            2.0,
+            8.0
+          ]
+        ],
+        "stepwise": 0.75,
+        "chord_tone_strong": 0.75,
+        "max_leap": 7,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.0077,
+          "velocity": 8
+        },
+        "seed": 447
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Vocal stand-in",
+      "role": "lead",
+      "program": 53,
+      "channel": 6,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "verse1",
+        "pre_chorus",
+        "chorus1",
+        "verse2",
+        "pre_chorus2",
+        "chorus2",
+        "bridge",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.55,
+        "cells": [
+          [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            4.0,
+            -4.0
+          ],
+          [
+            -2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            4.0
+          ],
+          [
+            3.0,
+            3.0,
+            2.0,
+            4.0,
+            -4.0
+          ],
+          [
+            -2.0,
+            1.0,
+            1.0,
+            2.0,
+            2.0,
+            8.0
+          ]
+        ],
+        "stepwise": 0.75,
+        "chord_tone_strong": 0.75,
+        "max_leap": 7,
+        "range": [
+          64,
+          86
+        ],
+        "humanize": {
+          "timing": 0.0077,
+          "velocity": 8
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

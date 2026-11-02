@@ -1,0 +1,498 @@
+{
+  "version": 1,
+  "title": "Bossa nova sketch",
+  "genre": "bossa_nova",
+  "tempo": 132.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "C",
+  "mode": "major",
+  "seed": 1,
+  "swing": 0.033,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "chords": [
+        "Imaj7",
+        "vi7",
+        "ii7",
+        "V7"
+      ],
+      "energy": 0.3,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "head_a1",
+      "bars": 8,
+      "chords": [
+        "Imaj7",
+        "II7#11",
+        "ii7",
+        "bII7",
+        "Imaj7"
+      ],
+      "energy": 0.45,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        4.0,
+        4.0,
+        8.0
+      ]
+    },
+    {
+      "name": "head_a2",
+      "bars": 8,
+      "chords": [
+        "Imaj7",
+        "II7#11",
+        "ii7",
+        "bII7",
+        "Imaj7"
+      ],
+      "energy": 0.45,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        4.0,
+        4.0,
+        8.0
+      ]
+    },
+    {
+      "name": "head_b",
+      "bars": 16,
+      "chords": [
+        "IVmaj7",
+        "iv6",
+        "iii7",
+        "VI7b9"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "head_a3",
+      "bars": 8,
+      "chords": [
+        "Imaj7",
+        "II7#11",
+        "ii7",
+        "bII7",
+        "Imaj7"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        4.0,
+        4.0,
+        8.0
+      ]
+    },
+    {
+      "name": "solo",
+      "bars": 32,
+      "chords": [
+        "ii9",
+        "V7b9",
+        "Imaj7"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        8.0
+      ],
+      "cadence": "authentic"
+    },
+    {
+      "name": "last_a",
+      "bars": 8,
+      "chords": [
+        "Imaj7",
+        "II7#11",
+        "ii7",
+        "bII7",
+        "Imaj7"
+      ],
+      "energy": 0.45,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        4.0,
+        4.0,
+        8.0
+      ]
+    },
+    {
+      "name": "outro",
+      "bars": 8,
+      "chords": [
+        "Imaj7",
+        "II7#11",
+        "ii7",
+        "bII7",
+        "Imaj7"
+      ],
+      "energy": 0.3,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        4.0,
+        4.0,
+        8.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "head_a1",
+    "head_a2",
+    "head_b",
+    "head_a3",
+    "solo",
+    "last_a",
+    "outro"
+  ],
+  "tracks": [
+    {
+      "name": "Brush kit",
+      "role": "drums",
+      "program": 40,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "head_a1",
+        "head_a2",
+        "head_b",
+        "head_a3",
+        "solo",
+        "last_a"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "bossa_nova.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "bossa_nova.fill",
+        "fill_every": 8,
+        "laid_back": 5.0,
+        "humanize": {
+          "timing": 0.0176,
+          "velocity": 12
+        }
+      },
+      "overrides": {
+        "head_b": {
+          "pattern": "bossa_nova.samba_feel"
+        }
+      }
+    },
+    {
+      "name": "Acoustic bass",
+      "role": "bass",
+      "program": 32,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "head_a1",
+        "head_a2",
+        "head_b",
+        "head_a3",
+        "solo",
+        "last_a",
+        "outro"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          80.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "fifth",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "approach",
+          null
+        ],
+        "gate": 0.85,
+        "density": 0.6,
+        "range": [
+          29,
+          51
+        ],
+        "humanize": {
+          "timing": 0.0176,
+          "velocity": 12
+        },
+        "laid_back": 2.5
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Nylon guitar (batida)",
+      "role": "chords",
+      "program": 24,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0176,
+          "velocity": 12
+        },
+        "laid_back": 2.5
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Strings",
+      "role": "pad",
+      "program": 48,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "head_b",
+        "last_a",
+        "outro"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0176,
+          "velocity": 12
+        },
+        "laid_back": 2.5
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Piano",
+      "role": "chords",
+      "program": 0,
+      "channel": 3,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "solo"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "block",
+        "density": 0.5,
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0176,
+          "velocity": 12
+        },
+        "laid_back": 2.5,
+        "seed": 932
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Tenor sax (Getz-style)",
+      "role": "chords",
+      "program": 66,
+      "channel": 4,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "solo"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.5,
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0176,
+          "velocity": 12
+        },
+        "laid_back": 2.5,
+        "seed": 778
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Flute",
+      "role": "lead",
+      "program": 73,
+      "channel": 5,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "head_a1",
+        "head_a2",
+        "head_b",
+        "head_a3",
+        "last_a"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.45,
+        "cells": [
+          [
+            3.0,
+            3.0,
+            2.0,
+            -2.0,
+            4.0,
+            -2.0
+          ],
+          [
+            -2.0,
+            2.0,
+            2.0,
+            2.0,
+            8.0
+          ],
+          [
+            4.0,
+            2.0,
+            2.0,
+            -4.0,
+            2.0,
+            2.0
+          ],
+          [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            6.0
+          ]
+        ],
+        "stepwise": 0.75,
+        "chord_tone_strong": 0.6,
+        "max_leap": 9,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.0176,
+          "velocity": 12
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

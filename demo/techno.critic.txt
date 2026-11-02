@@ -1,0 +1,2 @@
+critic score: 99/100
+  [info] melody: 3/6 melodic leaps are not resolved by step. (Acid / saw lead) -> Follow a leap with stepwise motion in the opposite direction.

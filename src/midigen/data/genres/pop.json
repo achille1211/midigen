@@ -1,0 +1,270 @@
+{
+  "name": "pop",
+  "display": "Pop",
+  "aliases": [
+    "pop song",
+    "radio pop",
+    "synth pop",
+    "synthpop",
+    "dance pop"
+  ],
+  "description": "Clear verse/pre-chorus/chorus form, energy rising into the chorus, I-V-vi-IV family progressions, catchy repeated chorus motif, layered synths and pads.",
+  "tempo": {
+    "min": 90,
+    "max": 128,
+    "default": 110
+  },
+  "swing": 0.0,
+  "swing_unit": "1/16",
+  "modes": [
+    "major",
+    "minor"
+  ],
+  "keys": [
+    "C",
+    "G",
+    "D",
+    "A"
+  ],
+  "harmony": {
+    "extensions": "triads",
+    "secondary_dominants": 0.1,
+    "borrowed": 0.15,
+    "beats_per_chord": 4,
+    "progressions": {
+      "major": {
+        "verse": [
+          "vi",
+          "IV",
+          "I",
+          "V"
+        ],
+        "pre": [
+          "IV",
+          "V",
+          "iii",
+          "vi"
+        ],
+        "chorus": [
+          "I",
+          "V",
+          "vi",
+          "IV"
+        ],
+        "bridge": [
+          "IV",
+          "V",
+          "vi",
+          "V"
+        ]
+      },
+      "minor": {
+        "verse": [
+          "i",
+          "bVI",
+          "bIII",
+          "bVII"
+        ],
+        "pre": [
+          "iv",
+          "bVI",
+          "bVII",
+          "V"
+        ],
+        "chorus": [
+          "bVI",
+          "bVII",
+          "i",
+          "i"
+        ],
+        "bridge": [
+          "iv",
+          "bVII",
+          "bIII",
+          "V"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "pop",
+        "density": 0.5,
+        "fill": true
+      }
+    },
+    "bass": {
+      "instrument": "synth_bass",
+      "generator": {
+        "type": "bass",
+        "style": "root_fifth",
+        "density": 0.5,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "piano",
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.5,
+        "octave": 4
+      }
+    },
+    "pad": {
+      "instrument": "warm_pad",
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.2,
+        "octave": 4
+      }
+    },
+    "lead": {
+      "instrument": "square_lead",
+      "name": "Lead",
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.5,
+        "range": [
+          64,
+          86
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.4,
+    "bass": 0.35,
+    "chords": 0.0,
+    "pad": 0.7,
+    "lead": 0.5
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.3,
+      "progression": "chorus"
+    },
+    {
+      "name": "verse",
+      "bars": 8,
+      "energy": 0.5,
+      "progression": "verse"
+    },
+    {
+      "name": "pre",
+      "bars": 4,
+      "energy": 0.65,
+      "progression": "pre",
+      "cadence": "half"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "chorus"
+    },
+    {
+      "name": "verse2",
+      "bars": 8,
+      "energy": 0.55,
+      "progression": "verse"
+    },
+    {
+      "name": "pre2",
+      "bars": 4,
+      "energy": 0.7,
+      "progression": "pre",
+      "cadence": "half"
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "energy": 0.95,
+      "progression": "chorus"
+    },
+    {
+      "name": "bridge",
+      "bars": 8,
+      "energy": 0.6,
+      "progression": "bridge",
+      "cadence": "half"
+    },
+    {
+      "name": "chorus3",
+      "bars": 8,
+      "energy": 1.0,
+      "progression": "chorus"
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "energy": 0.35,
+      "progression": "chorus"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 2,
+      "energy": 0.3,
+      "progression": "chorus"
+    },
+    {
+      "name": "verse",
+      "bars": 4,
+      "energy": 0.5,
+      "progression": "verse"
+    },
+    {
+      "name": "pre",
+      "bars": 2,
+      "energy": 0.65,
+      "progression": "pre",
+      "cadence": "half"
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "chorus"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      2,
+      10
+    ],
+    "drums": [
+      8,
+      30
+    ],
+    "bass": [
+      2,
+      10
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      52
+    ],
+    "chords": [
+      52,
+      74
+    ],
+    "pad": [
+      48,
+      72
+    ],
+    "lead": [
+      64,
+      88
+    ]
+  }
+}

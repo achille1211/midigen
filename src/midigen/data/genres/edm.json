@@ -1,0 +1,233 @@
+{
+  "name": "edm",
+  "display": "EDM (big room / progressive)",
+  "aliases": [
+    "electronic dance",
+    "big room",
+    "progressive house",
+    "future bass",
+    "festival"
+  ],
+  "description": "128 BPM four-on-the-floor, long builds with snare rolls into explosive drops, supersaw chord stabs, sidechained offbeat bass, catchy lead riff, breakdown with pads.",
+  "tempo": {
+    "min": 124,
+    "max": 132,
+    "default": 128
+  },
+  "swing": 0.0,
+  "swing_unit": "1/16",
+  "modes": [
+    "minor",
+    "major"
+  ],
+  "keys": [
+    "F",
+    "G",
+    "A",
+    "C"
+  ],
+  "harmony": {
+    "extensions": "triads",
+    "secondary_dominants": 0.0,
+    "borrowed": 0.1,
+    "beats_per_chord": 4,
+    "progressions": {
+      "minor": {
+        "main": [
+          "i",
+          "bVI",
+          "bIII",
+          "bVII"
+        ],
+        "drop": [
+          "bVI",
+          "bVII",
+          "i",
+          "i"
+        ]
+      },
+      "major": {
+        "main": [
+          "vi",
+          "IV",
+          "I",
+          "V"
+        ],
+        "drop": [
+          "IV",
+          "V",
+          "vi",
+          "I"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "four_on_floor",
+        "density": 0.55,
+        "fill": true
+      }
+    },
+    "bass": {
+      "instrument": "synth_bass",
+      "generator": {
+        "type": "bass",
+        "style": "offbeat",
+        "density": 0.6,
+        "octave": 2
+      }
+    },
+    "chords": {
+      "instrument": "polysynth",
+      "name": "Supersaw",
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.6,
+        "octave": 4
+      }
+    },
+    "pad": {
+      "instrument": "warm_pad",
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.2,
+        "octave": 4
+      }
+    },
+    "arp": {
+      "instrument": "square_lead",
+      "generator": {
+        "type": "arp",
+        "style": "updown",
+        "rate": "1/16",
+        "octave": 5,
+        "gate": 0.5
+      }
+    },
+    "lead": {
+      "instrument": "saw_lead",
+      "generator": {
+        "type": "lead",
+        "style": "riff",
+        "density": 0.55,
+        "range": [
+          67,
+          90
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.5,
+    "bass": 0.5,
+    "chords": 0.8,
+    "pad": 0.0,
+    "arp": 0.55,
+    "lead": 0.8
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 8,
+      "energy": 0.35,
+      "progression": "main"
+    },
+    {
+      "name": "build",
+      "bars": 8,
+      "energy": 0.6,
+      "progression": "main"
+    },
+    {
+      "name": "drop",
+      "bars": 16,
+      "energy": 1.0,
+      "progression": "drop"
+    },
+    {
+      "name": "breakdown",
+      "bars": 8,
+      "energy": 0.3,
+      "progression": "main"
+    },
+    {
+      "name": "build2",
+      "bars": 8,
+      "energy": 0.65,
+      "progression": "main"
+    },
+    {
+      "name": "drop2",
+      "bars": 16,
+      "energy": 1.0,
+      "progression": "drop"
+    },
+    {
+      "name": "outro",
+      "bars": 8,
+      "energy": 0.35,
+      "progression": "main"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.35,
+      "progression": "main"
+    },
+    {
+      "name": "build",
+      "bars": 4,
+      "energy": 0.6,
+      "progression": "main"
+    },
+    {
+      "name": "drop",
+      "bars": 8,
+      "energy": 1.0,
+      "progression": "drop"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      2,
+      10
+    ],
+    "drums": [
+      8,
+      36
+    ],
+    "bass": [
+      3,
+      10
+    ]
+  },
+  "register": {
+    "bass": [
+      28,
+      50
+    ],
+    "chords": [
+      55,
+      72
+    ],
+    "pad": [
+      52,
+      72
+    ],
+    "arp": [
+      76,
+      96
+    ],
+    "lead": [
+      64,
+      84
+    ]
+  }
+}

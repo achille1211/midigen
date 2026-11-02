@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "title": "Reggae sketch",
+  "genre": "reggae",
+  "tempo": 74.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "G",
+  "mode": "major",
+  "seed": 1,
+  "swing": 0.1,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "chords": [
+        "I",
+        "V",
+        "vi",
+        "IV"
+      ],
+      "energy": 0.4,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "verse",
+      "bars": 16,
+      "chords": [
+        "I",
+        "IV"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "chorus",
+      "bars": 8,
+      "chords": [
+        "I",
+        "IV",
+        "V",
+        "IV"
+      ],
+      "energy": 0.7,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "verse2",
+      "bars": 16,
+      "chords": [
+        "I",
+        "IV"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "chorus2",
+      "bars": 8,
+      "chords": [
+        "I",
+        "IV",
+        "V",
+        "IV"
+      ],
+      "energy": 0.75,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "dub_break",
+      "bars": 8,
+      "chords": [
+        "I",
+        "V",
+        "vi",
+        "IV"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "chorus3",
+      "bars": 8,
+      "chords": [
+        "I",
+        "IV",
+        "V",
+        "IV"
+      ],
+      "energy": 0.75,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "outro",
+      "bars": 8,
+      "chords": [
+        "I",
+        "V",
+        "vi",
+        "IV"
+      ],
+      "energy": 0.45,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse2",
+    "chorus2",
+    "dub_break",
+    "chorus3",
+    "outro"
+  ],
+  "tracks": [
+    {
+      "name": "Reggae kit",
+      "role": "drums",
+      "program": 0,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "drums",
+        "pattern": "reggae.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "reggae.fill",
+        "fill_every": 8,
+        "laid_back": 10.0,
+        "humanize": {
+          "timing": 0.0099,
+          "velocity": 12
+        }
+      },
+      "overrides": {
+        "chorus": {
+          "pattern": "reggae.rockers"
+        },
+        "chorus2": {
+          "pattern": "reggae.rockers"
+        },
+        "dub_break": {
+          "pattern": "reggae.dub_drop"
+        },
+        "chorus3": {
+          "pattern": "reggae.steppers"
+        }
+      }
+    },
+    {
+      "name": "Electric bass (dark)",
+      "role": "bass",
+      "program": 33,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          80.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          80.0,
+          0.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "fifth",
+          null,
+          "root",
+          null,
+          null,
+          null,
+          null,
+          "scale_step",
+          null,
+          null
+        ],
+        "gate": 0.7,
+        "density": 0.6,
+        "range": [
+          28,
+          50
+        ],
+        "humanize": {
+          "timing": 0.0099,
+          "velocity": 12
+        },
+        "laid_back": 5.0
+      },
+      "overrides": {
+        "dub_break": {
+          "rhythm": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0
+          ],
+          "tokens": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "fifth",
+            null,
+            "root",
+            null,
+            null,
+            null,
+            null,
+            null,
+            "octave",
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "Skank guitar",
+      "role": "chords",
+      "program": 27,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "verse",
+        "chorus",
+        "verse2",
+        "chorus2",
+        "chorus3",
+        "outro"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0099,
+          "velocity": 12
+        },
+        "laid_back": 5.0
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Organ bubble",
+      "role": "chords",
+      "program": 16,
+      "channel": 2,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "verse",
+        "chorus",
+        "verse2",
+        "chorus2",
+        "chorus3",
+        "outro"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0099,
+          "velocity": 12
+        },
+        "laid_back": 5.0,
+        "seed": 442
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Piano skank",
+      "role": "chords",
+      "program": 0,
+      "channel": 3,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "verse",
+        "chorus",
+        "verse2",
+        "chorus2",
+        "chorus3"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0099,
+          "velocity": 12
+        },
+        "laid_back": 5.0,
+        "seed": 932
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Horn section",
+      "role": "chords",
+      "program": 61,
+      "channel": 4,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "chorus",
+        "chorus2",
+        "chorus3"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.5,
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0099,
+          "velocity": 12
+        },
+        "laid_back": 5.0,
+        "seed": 549
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Melodica / vocal stand-in",
+      "role": "lead",
+      "program": 22,
+      "channel": 5,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "verse",
+        "chorus",
+        "verse2",
+        "chorus2",
+        "chorus3"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.4,
+        "cells": [
+          [
+            -4.0,
+            2.0,
+            2.0,
+            4.0,
+            4.0
+          ],
+          [
+            2.0,
+            2.0,
+            -2.0,
+            2.0,
+            8.0
+          ],
+          [
+            -2.0,
+            2.0,
+            4.0,
+            -4.0,
+            4.0
+          ],
+          [
+            -2.0,
+            2.0,
+            2.0,
+            2.0,
+            4.0,
+            -4.0
+          ]
+        ],
+        "stepwise": 0.7,
+        "chord_tone_strong": 0.7,
+        "max_leap": 7,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.0099,
+          "velocity": 12
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

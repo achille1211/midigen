@@ -1,0 +1,6152 @@
+{
+ "ambient_s1": {
+  "name": "ambient_s1",
+  "genre": "ambient",
+  "key": "E major",
+  "tempo": 70.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 144.0,
+  "programs": {
+   "Soft percussion": null,
+   "Cello / sub drone": 42,
+   "Warm / new age pad": 88,
+   "Halo / atmosphere pad": 94,
+   "Slow strings": 49,
+   "Celesta / music box / tubular bells": 8,
+   "Soft piano": 0
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Cello / sub drone": 70.8,
+   "Warm / new age pad": 70.0,
+   "Halo / atmosphere pad": 67.6,
+   "Slow strings": 64.3,
+   "Celesta / music box / tubular bells": 80.6,
+   "Soft piano": 81.2
+  },
+  "progressions": {
+   "emergence": "Imaj7 IVmaj7",
+   "drift": "Imaj7 IVmaj7",
+   "bloom": "Isus2 Vsus4 vi9 IVmaj9",
+   "stillness": "Isus2 Vsus4 vi9 IVmaj9",
+   "bloom2": "Isus2 Vsus4 vi9 IVmaj9",
+   "dissolve": "Imaj7 IVmaj7"
+  },
+  "strong_clash_pct": 8.8,
+  "kick_with_bass_pct": 55.6,
+  "bass_on_kick_pct": 31.2,
+  "bass_root_on_change_pct": 22.2,
+  "bass_range": [
+   28,
+   37
+  ],
+  "bass_notes_per_bar": 0.67,
+  "bass_downbeat_pct": 100.0,
+  "bass_big_leaps": 0,
+  "kick_steps": "o.o.............",
+  "snare_steps": "................",
+  "drum_pitches": {
+   "82": 240,
+   "51": 64,
+   "36": 54,
+   "37": 30,
+   "49": 2
+  },
+  "drum_vel_sd": 16.5,
+  "timing_dev_ms_mean": 12.6,
+  "swing_ratio_8th": 0.504,
+  "swing_ratio_16th": 0.496,
+  "spec_swing": [
+   0.0,
+   "1/8"
+  ],
+  "genre_file_swing": [
+   0.0,
+   "8th"
+  ],
+  "genre_file_tempo": [
+   55,
+   90,
+   70
+  ],
+  "genre_file_kick": null,
+  "genre_file_snare": null,
+  "vel_sd": {
+   "Soft percussion": 16.5,
+   "Cello / sub drone": 12.0,
+   "Warm / new age pad": 14.3,
+   "Halo / atmosphere pad": 11.6,
+   "Slow strings": 11.0,
+   "Celesta / music box / tubular bells": 12.8,
+   "Soft piano": 13.7
+  },
+  "offbeat_onset_pct": {
+   "Cello / sub drone": 0.0,
+   "Warm / new age pad": 0.0,
+   "Halo / atmosphere pad": 0.0,
+   "Slow strings": 0.0,
+   "Celesta / music box / tubular bells": 9.7,
+   "Soft piano": 24.0
+  },
+  "voice_leading": {
+   "Warm / new age pad": {
+    "chord_changes": 19,
+    "mean_motion": 5.8,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     52,
+     68
+    ],
+    "voices": 3.8,
+    "low_cluster": 0
+   },
+   "Halo / atmosphere pad": {
+    "chord_changes": 12,
+    "mean_motion": 6.5,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     52,
+     68
+    ],
+    "voices": 3.6,
+    "low_cluster": 0
+   },
+   "Slow strings": {
+    "chord_changes": 4,
+    "mean_motion": 10,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     52,
+     68
+    ],
+    "voices": 3.5,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 62,
+   "range": [
+    76,
+    90
+   ],
+   "span": 14,
+   "step_pct": 52.5,
+   "leap_gt5th_pct": 0.0,
+   "max_leap": 7,
+   "dir_change_pct": 30.0,
+   "repeated_pitch_pct": 37.7,
+   "phrase_ends": 30,
+   "phrase_end_chord_tone_pct": 73.3,
+   "strong_beat_chord_tone_pct": 81.2,
+   "rest_pct": 33.4,
+   "bars_with_lead": 48,
+   "repeated_bar_pct": 70.8,
+   "distinct_bar_rhythms": 16,
+   "notes_per_bar": 1.29,
+   "short_notes_pct": 0.0,
+   "mean_dur": 2.06
+  },
+  "energy": [
+   {
+    "section": "emergence",
+    "spec_energy": 0.15,
+    "bars": 16.0,
+    "notes_per_bar": 1.0,
+    "mean_vel": 49.8,
+    "active": 1
+   },
+   {
+    "section": "drift",
+    "spec_energy": 0.3,
+    "bars": 32.0,
+    "notes_per_bar": 4.8,
+    "mean_vel": 73.7,
+    "active": 4
+   },
+   {
+    "section": "bloom",
+    "spec_energy": 0.5,
+    "bars": 32.0,
+    "notes_per_bar": 11.7,
+    "mean_vel": 56.5,
+    "active": 7
+   },
+   {
+    "section": "stillness",
+    "spec_energy": 0.2,
+    "bars": 16.0,
+    "notes_per_bar": 2.5,
+    "mean_vel": 69.8,
+    "active": 2
+   },
+   {
+    "section": "bloom2",
+    "spec_energy": 0.45,
+    "bars": 32.0,
+    "notes_per_bar": 10.1,
+    "mean_vel": 46.7,
+    "active": 5
+   },
+   {
+    "section": "dissolve",
+    "spec_energy": 0.1,
+    "bars": 16.0,
+    "notes_per_bar": 1.0,
+    "mean_vel": 47.6,
+    "active": 1
+   }
+  ]
+ },
+ "bossa_nova_s1": {
+  "name": "bossa_nova_s1",
+  "genre": "bossa_nova",
+  "key": "C major",
+  "tempo": 132.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 92.0,
+  "programs": {
+   "Brush kit": null,
+   "Acoustic bass": 32,
+   "Nylon guitar (batida)": 24,
+   "Strings": 48,
+   "Piano": 0,
+   "Tenor sax (Getz-style)": 66,
+   "Flute": 73
+  },
+  "tech": [],
+  "in_key_pct": 87.8,
+  "chord_tone_pct": {
+   "Acoustic bass": 49.6,
+   "Nylon guitar (batida)": 60.5,
+   "Strings": 72.1,
+   "Piano": 69.8,
+   "Tenor sax (Getz-style)": 65.8,
+   "Flute": 52.2
+  },
+  "progressions": {
+   "intro": "Imaj7 vi7 ii7 V7",
+   "head_a1": "Imaj7 II7#11 ii7 bII7 Imaj7",
+   "head_a2": "Imaj7 II7#11 ii7 bII7 Imaj7",
+   "head_b": "IVmaj7 iv6 iii7 VI7b9",
+   "head_a3": "Imaj7 II7#11 ii7 bII7 Imaj7",
+   "solo": "ii9 V7b9 Imaj7",
+   "last_a": "Imaj7 II7#11 ii7 bII7 Imaj7",
+   "outro": "Imaj7 II7#11 ii7 bII7 Imaj7"
+  },
+  "strong_clash_pct": 9.3,
+  "kick_with_bass_pct": 75.0,
+  "bass_on_kick_pct": 90.9,
+  "bass_root_on_change_pct": 40.2,
+  "bass_range": [
+   29,
+   50
+  ],
+  "bass_notes_per_bar": 2.87,
+  "bass_downbeat_pct": 23.5,
+  "bass_big_leaps": 0,
+  "kick_steps": "x.....x.x.....x.",
+  "snare_steps": "................",
+  "drum_pitches": {
+   "42": 448,
+   "36": 320,
+   "37": 250,
+   "82": 224,
+   "45": 20
+  },
+  "drum_vel_sd": 24.8,
+  "timing_dev_ms_mean": 4.8,
+  "swing_ratio_8th": 0.512,
+  "swing_ratio_16th": 0.525,
+  "spec_swing": [
+   0.033,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.1,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   110,
+   150,
+   132
+  ],
+  "genre_file_kick": "x.....x.x.....x.",
+  "genre_file_snare": null,
+  "vel_sd": {
+   "Brush kit": 24.8,
+   "Acoustic bass": 18.4,
+   "Nylon guitar (batida)": 8.1,
+   "Strings": 8.2,
+   "Piano": 7.2,
+   "Tenor sax (Getz-style)": 8.1,
+   "Flute": 8.6
+  },
+  "offbeat_onset_pct": {
+   "Acoustic bass": 50.8,
+   "Nylon guitar (batida)": 76.9,
+   "Strings": 36.5,
+   "Piano": 35.4,
+   "Tenor sax (Getz-style)": 57.5,
+   "Flute": 64.7
+  },
+  "voice_leading": {
+   "Nylon guitar (batida)": {
+    "chord_changes": 67,
+    "mean_motion": 7.0,
+    "max_voice_leap": 7,
+    "parallel_5_8": 0,
+    "range": [
+     53,
+     71
+    ],
+    "voices": 4,
+    "low_cluster": 0
+   },
+   "Strings": {
+    "chord_changes": 25,
+    "mean_motion": 5.3,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     48,
+     67
+    ],
+    "voices": 4,
+    "low_cluster": 0
+   },
+   "Piano": {
+    "chord_changes": 23,
+    "mean_motion": 9.3,
+    "max_voice_leap": 7,
+    "parallel_5_8": 0,
+    "range": [
+     53,
+     71
+    ],
+    "voices": 4,
+    "low_cluster": 0
+   },
+   "Tenor sax (Getz-style)": {
+    "chord_changes": 23,
+    "mean_motion": 9.3,
+    "max_voice_leap": 7,
+    "parallel_5_8": 0,
+    "range": [
+     53,
+     71
+    ],
+    "voices": 4,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 232,
+   "range": [
+    64,
+    86
+   ],
+   "span": 22,
+   "step_pct": 63.6,
+   "leap_gt5th_pct": 0.9,
+   "max_leap": 11,
+   "dir_change_pct": 40.9,
+   "repeated_pitch_pct": 11.3,
+   "phrase_ends": 33,
+   "phrase_end_chord_tone_pct": 69.7,
+   "strong_beat_chord_tone_pct": 61.7,
+   "rest_pct": 17.2,
+   "bars_with_lead": 48,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 46,
+   "notes_per_bar": 4.83,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.69
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.3,
+    "bars": 4.0,
+    "notes_per_bar": 24.0,
+    "mean_vel": 68.9,
+    "active": 1
+   },
+   {
+    "section": "head_a1",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 47.1,
+    "mean_vel": 77.3,
+    "active": 4
+   },
+   {
+    "section": "head_a2",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 46.6,
+    "mean_vel": 76.5,
+    "active": 4
+   },
+   {
+    "section": "head_b",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 56.9,
+    "mean_vel": 71.9,
+    "active": 5
+   },
+   {
+    "section": "head_a3",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 46.4,
+    "mean_vel": 77.6,
+    "active": 4
+   },
+   {
+    "section": "solo",
+    "spec_energy": 0.55,
+    "bars": 32.0,
+    "notes_per_bar": 64.4,
+    "mean_vel": 77.8,
+    "active": 5
+   },
+   {
+    "section": "last_a",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 47.9,
+    "mean_vel": 75.2,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.3,
+    "bars": 8.0,
+    "notes_per_bar": 29.5,
+    "mean_vel": 67.0,
+    "active": 3
+   }
+  ]
+ },
+ "cinematic_s1": {
+  "name": "cinematic_s1",
+  "genre": "cinematic",
+  "key": "C minor",
+  "tempo": 90.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 80.0,
+  "programs": {
+   "Orchestral percussion / taiko": null,
+   "Contrabass / cellos": 43,
+   "Brass section / trombones": 61,
+   "String ensemble": 48,
+   "Harp": 46,
+   "Choir": 52,
+   "Piano": 0,
+   "Underscore pad": 89,
+   "French horn": 60
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Contrabass / cellos": 70.5,
+   "Brass section / trombones": 54.2,
+   "String ensemble": 58.3,
+   "Harp": 64.1,
+   "Choir": 58.3,
+   "Piano": 56.0,
+   "Underscore pad": 58.3,
+   "French horn": 49.4
+  },
+  "progressions": {
+   "opening": "i bVI bIII bVII",
+   "theme_a": "i bVI bIII bVII",
+   "build": "i bVI bIII bVII",
+   "theme_b": "i bVI bIII bVII",
+   "climax": "i bVI bIII bVII",
+   "resolution": "i bVI bIII bVII",
+   "coda": "i bVI bIII bVII"
+  },
+  "strong_clash_pct": 0.5,
+  "kick_with_bass_pct": 41.9,
+  "bass_on_kick_pct": 16.1,
+  "bass_root_on_change_pct": 17.5,
+  "bass_range": [
+   32,
+   51
+  ],
+  "bass_notes_per_bar": 4.2,
+  "bass_downbeat_pct": 16.7,
+  "bass_big_leaps": 0,
+  "kick_steps": "o..o..o.o..o..o.",
+  "snare_steps": "....o.......o...",
+  "drum_pitches": {
+   "41": 234,
+   "36": 129,
+   "45": 91,
+   "38": 44,
+   "49": 16
+  },
+  "drum_vel_sd": 17.7,
+  "timing_dev_ms_mean": 5.1,
+  "swing_ratio_8th": 0.508,
+  "swing_ratio_16th": 0.5,
+  "spec_swing": [
+   0.0,
+   "1/8"
+  ],
+  "genre_file_swing": [
+   0.0,
+   "8th"
+  ],
+  "genre_file_tempo": [
+   60,
+   140,
+   90
+  ],
+  "genre_file_kick": "x.......x.......",
+  "genre_file_snare": null,
+  "vel_sd": {
+   "Orchestral percussion / taiko": 17.7,
+   "Contrabass / cellos": 14.3,
+   "Brass section / trombones": 10.7,
+   "String ensemble": 11.2,
+   "Harp": 12.9,
+   "Choir": 12.1,
+   "Piano": 13.9,
+   "Underscore pad": 10.2,
+   "French horn": 13.6
+  },
+  "offbeat_onset_pct": {
+   "Contrabass / cellos": 64.0,
+   "Brass section / trombones": 66.4,
+   "String ensemble": 0.0,
+   "Harp": 83.6,
+   "Choir": 0.0,
+   "Piano": 0.0,
+   "Underscore pad": 0.0,
+   "French horn": 38.6
+  },
+  "voice_leading": {
+   "Brass section / trombones": {
+    "chord_changes": 19,
+    "mean_motion": 2.9,
+    "max_voice_leap": 2,
+    "parallel_5_8": 0,
+    "range": [
+     53,
+     63
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "String ensemble": {
+    "chord_changes": 31,
+    "mean_motion": 2.9,
+    "max_voice_leap": 2,
+    "parallel_5_8": 0,
+    "range": [
+     53,
+     63
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Choir": {
+    "chord_changes": 19,
+    "mean_motion": 2.9,
+    "max_voice_leap": 2,
+    "parallel_5_8": 0,
+    "range": [
+     53,
+     63
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Piano": {
+    "chord_changes": 19,
+    "mean_motion": 2.9,
+    "max_voice_leap": 2,
+    "parallel_5_8": 0,
+    "range": [
+     53,
+     63
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Underscore pad": {
+    "chord_changes": 19,
+    "mean_motion": 2.9,
+    "max_voice_leap": 2,
+    "parallel_5_8": 0,
+    "range": [
+     53,
+     63
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 166,
+   "range": [
+    63,
+    80
+   ],
+   "span": 17,
+   "step_pct": 62.4,
+   "leap_gt5th_pct": 3.0,
+   "max_leap": 9,
+   "dir_change_pct": 42.7,
+   "repeated_pitch_pct": 15.8,
+   "phrase_ends": 2,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 55.6,
+   "rest_pct": 7.9,
+   "bars_with_lead": 56,
+   "repeated_bar_pct": 16.1,
+   "distinct_bar_rhythms": 36,
+   "notes_per_bar": 2.96,
+   "short_notes_pct": 0.0,
+   "mean_dur": 1.24
+  },
+  "energy": [
+   {
+    "section": "opening",
+    "spec_energy": 0.2,
+    "bars": 8.0,
+    "notes_per_bar": 4.5,
+    "mean_vel": 56.3,
+    "active": 3
+   },
+   {
+    "section": "theme_a",
+    "spec_energy": 0.4,
+    "bars": 16.0,
+    "notes_per_bar": 30.5,
+    "mean_vel": 74.3,
+    "active": 5
+   },
+   {
+    "section": "build",
+    "spec_energy": 0.6,
+    "bars": 8.0,
+    "notes_per_bar": 25.6,
+    "mean_vel": 85.6,
+    "active": 4
+   },
+   {
+    "section": "theme_b",
+    "spec_energy": 0.75,
+    "bars": 16.0,
+    "notes_per_bar": 42.3,
+    "mean_vel": 89.5,
+    "active": 6
+   },
+   {
+    "section": "climax",
+    "spec_energy": 0.98,
+    "bars": 16.0,
+    "notes_per_bar": 63.1,
+    "mean_vel": 91.8,
+    "active": 8
+   },
+   {
+    "section": "resolution",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 7.5,
+    "mean_vel": 71.7,
+    "active": 4
+   },
+   {
+    "section": "coda",
+    "spec_energy": 0.15,
+    "bars": 8.0,
+    "notes_per_bar": 3.0,
+    "mean_vel": 58.2,
+    "active": 2
+   }
+  ]
+ },
+ "drum_and_bass_s1": {
+  "name": "drum_and_bass_s1",
+  "genre": "drum_and_bass",
+  "key": "G minor",
+  "tempo": 174.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 168.0,
+  "programs": {
+   "Breakbeat kit": null,
+   "Sub / reese bass": 38,
+   "Rhodes / piano": 4,
+   "Lush pad / strings": 89,
+   "Lead / vocal stand-in": 81
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Sub / reese bass": 72.5,
+   "Rhodes / piano": 65.8,
+   "Lush pad / strings": 82.4,
+   "Lead / vocal stand-in": 69.4
+  },
+  "progressions": {
+   "intro": "i7 bVImaj7",
+   "build": "i9 bVImaj7 bIIImaj7 bVII",
+   "drop": "i9 bVImaj7 bIIImaj7 bVII",
+   "breakdown": "i7 bVImaj7",
+   "build2": "i9 bVImaj7 bIIImaj7 bVII",
+   "drop2": "i9 bVImaj7 bIIImaj7 bVII",
+   "outro": "i9 bVImaj7 bIIImaj7 bVII"
+  },
+  "strong_clash_pct": 9.7,
+  "kick_with_bass_pct": 43.1,
+  "bass_on_kick_pct": 40.0,
+  "bass_root_on_change_pct": 9.5,
+  "bass_range": [
+   27,
+   46
+  ],
+  "bass_notes_per_bar": 1.9,
+  "bass_downbeat_pct": 20.0,
+  "bass_big_leaps": 0,
+  "kick_steps": "x.o.......xo....",
+  "snare_steps": "....x..o.o..x..o",
+  "drum_pitches": {
+   "42": 1047,
+   "82": 912,
+   "38": 607,
+   "36": 297,
+   "51": 216,
+   "49": 4
+  },
+  "drum_vel_sd": 25.4,
+  "timing_dev_ms_mean": 1.7,
+  "swing_ratio_8th": 0.504,
+  "swing_ratio_16th": 0.508,
+  "spec_swing": [
+   0.017,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.05,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   165,
+   178,
+   174
+  ],
+  "genre_file_kick": "x.........x.....",
+  "genre_file_snare": "....x..x.x..x.x.",
+  "vel_sd": {
+   "Breakbeat kit": 25.4,
+   "Sub / reese bass": 9.7,
+   "Rhodes / piano": 9.9,
+   "Lush pad / strings": 7.3,
+   "Lead / vocal stand-in": 10.4
+  },
+  "offbeat_onset_pct": {
+   "Sub / reese bass": 80.0,
+   "Rhodes / piano": 62.7,
+   "Lush pad / strings": 0.0,
+   "Lead / vocal stand-in": 37.8
+  },
+  "voice_leading": {
+   "Rhodes / piano": {
+    "chord_changes": 24,
+    "mean_motion": 6.0,
+    "max_voice_leap": 6,
+    "parallel_5_8": 0,
+    "range": [
+     51,
+     69
+    ],
+    "voices": 3.8,
+    "low_cluster": 0
+   },
+   "Lush pad / strings": {
+    "chord_changes": 26,
+    "mean_motion": 5.0,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     50,
+     65
+    ],
+    "voices": 3.8,
+    "low_cluster": 7
+   }
+  },
+  "melody": {
+   "notes": 222,
+   "range": [
+    67,
+    86
+   ],
+   "span": 19,
+   "step_pct": 67.0,
+   "leap_gt5th_pct": 4.1,
+   "max_leap": 14,
+   "dir_change_pct": 39.5,
+   "repeated_pitch_pct": 11.3,
+   "phrase_ends": 9,
+   "phrase_end_chord_tone_pct": 55.6,
+   "strong_beat_chord_tone_pct": 79.3,
+   "rest_pct": 9.7,
+   "bars_with_lead": 80,
+   "repeated_bar_pct": 33.8,
+   "distinct_bar_rhythms": 40,
+   "notes_per_bar": 2.77,
+   "short_notes_pct": 0.0,
+   "mean_dur": 1.3
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 32.0,
+    "notes_per_bar": 24.9,
+    "mean_vel": 56.5,
+    "active": 2
+   },
+   {
+    "section": "build",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 40.8,
+    "mean_vel": 73.6,
+    "active": 3
+   },
+   {
+    "section": "drop",
+    "spec_energy": 0.95,
+    "bars": 32.0,
+    "notes_per_bar": 46.2,
+    "mean_vel": 82.1,
+    "active": 4
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.35,
+    "bars": 16.0,
+    "notes_per_bar": 15.4,
+    "mean_vel": 73.4,
+    "active": 3
+   },
+   {
+    "section": "build2",
+    "spec_energy": 0.6,
+    "bars": 8.0,
+    "notes_per_bar": 13.1,
+    "mean_vel": 71.4,
+    "active": 2
+   },
+   {
+    "section": "drop2",
+    "spec_energy": 0.95,
+    "bars": 32.0,
+    "notes_per_bar": 48.1,
+    "mean_vel": 94.0,
+    "active": 4
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.35,
+    "bars": 32.0,
+    "notes_per_bar": 26.0,
+    "mean_vel": 55.5,
+    "active": 2
+   }
+  ]
+ },
+ "edm_s1": {
+  "name": "edm_s1",
+  "genre": "edm",
+  "key": "G minor",
+  "tempo": 128.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 96.0,
+  "programs": {
+   "Electronic kit": null,
+   "Synth bass": 38,
+   "Supersaw / pluck chords": 90,
+   "Pad": 89,
+   "Arp synth": 80,
+   "Supersaw lead": 81
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Synth bass": 100.0,
+   "Supersaw / pluck chords": 100.0,
+   "Pad": 100.0,
+   "Arp synth": 100.0,
+   "Supersaw lead": 57.0
+  },
+  "progressions": {
+   "intro": "i bVI bIII bVII",
+   "build": "i bVII bVI bVII",
+   "drop": "i bVI bIII bVII",
+   "breakdown": "i bVII bVI bVII",
+   "build2": "i bVII bVI bVII",
+   "drop2": "i bVI bIII bVII",
+   "outro": "i bVI bIII bVII"
+  },
+  "strong_clash_pct": 2.7,
+  "kick_with_bass_pct": 0.0,
+  "bass_on_kick_pct": 0.0,
+  "bass_root_on_change_pct": 66.7,
+  "bass_range": [
+   27,
+   46
+  ],
+  "bass_notes_per_bar": 5.33,
+  "bass_downbeat_pct": 0.0,
+  "bass_big_leaps": 16,
+  "kick_steps": "x...x...x...x...",
+  "snare_steps": "....x...o...x.o.",
+  "drum_pitches": {
+   "42": 582,
+   "38": 323,
+   "36": 303,
+   "46": 112,
+   "54": 112,
+   "39": 56,
+   "49": 33
+  },
+  "drum_vel_sd": 26.7,
+  "timing_dev_ms_mean": 0.3,
+  "swing_ratio_8th": 0.5,
+  "swing_ratio_16th": 0.5,
+  "spec_swing": [
+   0.0,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.0,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   124,
+   132,
+   128
+  ],
+  "genre_file_kick": "x...x...x...x...",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "Electronic kit": 26.7,
+   "Synth bass": 10.9,
+   "Supersaw / pluck chords": 10.7,
+   "Pad": 6.5,
+   "Arp synth": 8.9,
+   "Supersaw lead": 11.8
+  },
+  "offbeat_onset_pct": {
+   "Synth bass": 100.0,
+   "Supersaw / pluck chords": 60.0,
+   "Pad": 0.0,
+   "Arp synth": 75.0,
+   "Supersaw lead": 58.0
+  },
+  "voice_leading": {
+   "Supersaw / pluck chords": {
+    "chord_changes": 55,
+    "mean_motion": 4.1,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     57,
+     67
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Pad": {
+    "chord_changes": 23,
+    "mean_motion": 6.4,
+    "max_voice_leap": 7,
+    "parallel_5_8": 0,
+    "range": [
+     48,
+     65
+    ],
+    "voices": 3,
+    "low_cluster": 4
+   }
+  },
+  "melody": {
+   "notes": 314,
+   "range": [
+    65,
+    87
+   ],
+   "span": 22,
+   "step_pct": 71.2,
+   "leap_gt5th_pct": 2.6,
+   "max_leap": 12,
+   "dir_change_pct": 28.5,
+   "repeated_pitch_pct": 14.7,
+   "phrase_ends": 33,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 83.5,
+   "rest_pct": 14.5,
+   "bars_with_lead": 56,
+   "repeated_bar_pct": 51.8,
+   "distinct_bar_rhythms": 4,
+   "notes_per_bar": 5.61,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.61
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.4,
+    "bars": 16.0,
+    "notes_per_bar": 28.1,
+    "mean_vel": 73.9,
+    "active": 3
+   },
+   {
+    "section": "build",
+    "spec_energy": 0.7,
+    "bars": 8.0,
+    "notes_per_bar": 50.6,
+    "mean_vel": 78.5,
+    "active": 3
+   },
+   {
+    "section": "drop",
+    "spec_energy": 1.0,
+    "bars": 16.0,
+    "notes_per_bar": 62.2,
+    "mean_vel": 83.5,
+    "active": 4
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.3,
+    "bars": 16.0,
+    "notes_per_bar": 23.1,
+    "mean_vel": 67.3,
+    "active": 3
+   },
+   {
+    "section": "build2",
+    "spec_energy": 0.75,
+    "bars": 8.0,
+    "notes_per_bar": 44.0,
+    "mean_vel": 78.2,
+    "active": 4
+   },
+   {
+    "section": "drop2",
+    "spec_energy": 1.0,
+    "bars": 16.0,
+    "notes_per_bar": 78.9,
+    "mean_vel": 84.2,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.4,
+    "bars": 16.0,
+    "notes_per_bar": 12.0,
+    "mean_vel": 78.6,
+    "active": 2
+   }
+  ]
+ },
+ "funk_s1": {
+  "name": "funk_s1",
+  "genre": "funk",
+  "key": "A dorian",
+  "tempo": 104.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 60.0,
+  "programs": {
+   "Funk kit": null,
+   "Slap / finger bass": 36,
+   "Muted 'chicken-scratch' guitar": 28,
+   "Clavinet": 7,
+   "Horn section stabs": 61,
+   "Tenor sax lead": 66
+  },
+  "tech": [],
+  "in_key_pct": 98.6,
+  "chord_tone_pct": {
+   "Slap / finger bass": 83.5,
+   "Muted 'chicken-scratch' guitar": 95.5,
+   "Clavinet": 96.8,
+   "Horn section stabs": 95.2,
+   "Tenor sax lead": 88.4
+  },
+  "progressions": {
+   "intro": "i7 IV9",
+   "groove_a": "i7",
+   "groove_a2": "i7",
+   "chorus": "i7 bVII IV7 i7",
+   "breakdown": "i7",
+   "groove_b": "i7 bVII IV7 i7",
+   "chorus2": "i7 bVII IV7 i7",
+   "vamp_out": "i7 IV9"
+  },
+  "strong_clash_pct": 0.0,
+  "kick_with_bass_pct": 53.4,
+  "bass_on_kick_pct": 26.1,
+  "bass_root_on_change_pct": 86.7,
+  "bass_range": [
+   31,
+   50
+  ],
+  "bass_notes_per_bar": 7.47,
+  "bass_downbeat_pct": 12.5,
+  "bass_big_leaps": 0,
+  "kick_steps": "x.x.......x..x..",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 894,
+   "38": 284,
+   "36": 219,
+   "46": 39,
+   "54": 28,
+   "49": 7,
+   "50": 7,
+   "45": 7
+  },
+  "drum_vel_sd": 25.7,
+  "timing_dev_ms_mean": 6.3,
+  "swing_ratio_8th": 0.76,
+  "swing_ratio_16th": 0.533,
+  "spec_swing": [
+   0.067,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.2,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   92,
+   120,
+   104
+  ],
+  "genre_file_kick": "x.x.......x..x..",
+  "genre_file_snare": "....x..x.x..x..x",
+  "vel_sd": {
+   "Funk kit": 25.7,
+   "Slap / finger bass": 19.2,
+   "Muted 'chicken-scratch' guitar": 9.5,
+   "Clavinet": 9.7,
+   "Horn section stabs": 9.6,
+   "Tenor sax lead": 9.9
+  },
+  "offbeat_onset_pct": {
+   "Slap / finger bass": 79.5,
+   "Muted 'chicken-scratch' guitar": 84.7,
+   "Clavinet": 84.6,
+   "Horn section stabs": 100.0,
+   "Tenor sax lead": 61.1
+  },
+  "voice_leading": {
+   "Muted 'chicken-scratch' guitar": {
+    "chord_changes": 11,
+    "mean_motion": 4.4,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     57,
+     67
+    ],
+    "voices": 3.9,
+    "low_cluster": 0
+   },
+   "Clavinet": {
+    "chord_changes": 9,
+    "mean_motion": 4,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     57,
+     67
+    ],
+    "voices": 3.9,
+    "low_cluster": 0
+   },
+   "Horn section stabs": {
+    "chord_changes": 7,
+    "mean_motion": 4.3,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     57,
+     67
+    ],
+    "voices": 3.9,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 95,
+   "range": [
+    69,
+    86
+   ],
+   "span": 17,
+   "step_pct": 59.6,
+   "leap_gt5th_pct": 2.1,
+   "max_leap": 9,
+   "dir_change_pct": 21.5,
+   "repeated_pitch_pct": 30.9,
+   "phrase_ends": 50,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 80.8,
+   "rest_pct": 49.4,
+   "bars_with_lead": 24,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 21,
+   "notes_per_bar": 3.96,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.51
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.55,
+    "bars": 4.0,
+    "notes_per_bar": 64.5,
+    "mean_vel": 76.5,
+    "active": 2
+   },
+   {
+    "section": "groove_a",
+    "spec_energy": 0.65,
+    "bars": 8.0,
+    "notes_per_bar": 100.8,
+    "mean_vel": 78.4,
+    "active": 4
+   },
+   {
+    "section": "groove_a2",
+    "spec_energy": 0.7,
+    "bars": 8.0,
+    "notes_per_bar": 105.0,
+    "mean_vel": 79.6,
+    "active": 5
+   },
+   {
+    "section": "chorus",
+    "spec_energy": 0.8,
+    "bars": 8.0,
+    "notes_per_bar": 106.2,
+    "mean_vel": 83.9,
+    "active": 6
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.4,
+    "bars": 8.0,
+    "notes_per_bar": 26.5,
+    "mean_vel": 81.3,
+    "active": 2
+   },
+   {
+    "section": "groove_b",
+    "spec_energy": 0.7,
+    "bars": 8.0,
+    "notes_per_bar": 100.6,
+    "mean_vel": 80.8,
+    "active": 5
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.85,
+    "bars": 8.0,
+    "notes_per_bar": 107.6,
+    "mean_vel": 84.1,
+    "active": 6
+   },
+   {
+    "section": "vamp_out",
+    "spec_energy": 0.75,
+    "bars": 8.0,
+    "notes_per_bar": 105.2,
+    "mean_vel": 79.5,
+    "active": 5
+   }
+  ]
+ },
+ "funk_s2": {
+  "name": "funk_s2",
+  "genre": "funk",
+  "key": "D dorian",
+  "tempo": 104.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 60.0,
+  "programs": {
+   "Funk kit": null,
+   "Slap / finger bass": 36,
+   "Muted 'chicken-scratch' guitar": 28,
+   "Clavinet": 7,
+   "Horn section stabs": 61,
+   "Tenor sax lead": 66
+  },
+  "tech": [],
+  "in_key_pct": 98.6,
+  "chord_tone_pct": {
+   "Slap / finger bass": 86.2,
+   "Muted 'chicken-scratch' guitar": 98.5,
+   "Clavinet": 100.0,
+   "Horn section stabs": 100.0,
+   "Tenor sax lead": 88.6
+  },
+  "progressions": {
+   "intro": "i7 IV9",
+   "groove_a": "i7",
+   "groove_a2": "i7",
+   "chorus": "i7 bVII IV7 i7",
+   "breakdown": "i7",
+   "groove_b": "i7",
+   "chorus2": "i7 bVII IV7 i7",
+   "vamp_out": "i7 bVII IV7 i7"
+  },
+  "strong_clash_pct": 0.0,
+  "kick_with_bass_pct": 53.4,
+  "bass_on_kick_pct": 26.1,
+  "bass_root_on_change_pct": 93.3,
+  "bass_range": [
+   31,
+   50
+  ],
+  "bass_notes_per_bar": 7.47,
+  "bass_downbeat_pct": 12.5,
+  "bass_big_leaps": 0,
+  "kick_steps": "x.x.......x..x..",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 897,
+   "38": 276,
+   "36": 219,
+   "46": 39,
+   "54": 28,
+   "49": 7,
+   "50": 7,
+   "45": 7
+  },
+  "drum_vel_sd": 25.6,
+  "timing_dev_ms_mean": 6.2,
+  "swing_ratio_8th": 0.76,
+  "swing_ratio_16th": 0.533,
+  "spec_swing": [
+   0.067,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.2,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   92,
+   120,
+   104
+  ],
+  "genre_file_kick": "x.x.......x..x..",
+  "genre_file_snare": "....x..x.x..x..x",
+  "vel_sd": {
+   "Funk kit": 25.6,
+   "Slap / finger bass": 18.5,
+   "Muted 'chicken-scratch' guitar": 9.7,
+   "Clavinet": 9.1,
+   "Horn section stabs": 9.4,
+   "Tenor sax lead": 9.8
+  },
+  "offbeat_onset_pct": {
+   "Slap / finger bass": 82.6,
+   "Muted 'chicken-scratch' guitar": 84.1,
+   "Clavinet": 84.0,
+   "Horn section stabs": 100.0,
+   "Tenor sax lead": 66.7
+  },
+  "voice_leading": {
+   "Muted 'chicken-scratch' guitar": {
+    "chord_changes": 8,
+    "mean_motion": 3.8,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     55,
+     67
+    ],
+    "voices": 3.9,
+    "low_cluster": 0
+   },
+   "Clavinet": {
+    "chord_changes": 6,
+    "mean_motion": 3,
+    "max_voice_leap": 2,
+    "parallel_5_8": 0,
+    "range": [
+     55,
+     65
+    ],
+    "voices": 3.9,
+    "low_cluster": 0
+   },
+   "Horn section stabs": {
+    "chord_changes": 6,
+    "mean_motion": 3,
+    "max_voice_leap": 2,
+    "parallel_5_8": 0,
+    "range": [
+     55,
+     65
+    ],
+    "voices": 3.8,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 105,
+   "range": [
+    67,
+    86
+   ],
+   "span": 19,
+   "step_pct": 57.7,
+   "leap_gt5th_pct": 5.8,
+   "max_leap": 10,
+   "dir_change_pct": 39.8,
+   "repeated_pitch_pct": 26.0,
+   "phrase_ends": 57,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 100.0,
+   "rest_pct": 48.5,
+   "bars_with_lead": 24,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 19,
+   "notes_per_bar": 4.38,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.47
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.55,
+    "bars": 4.0,
+    "notes_per_bar": 64.5,
+    "mean_vel": 77.1,
+    "active": 2
+   },
+   {
+    "section": "groove_a",
+    "spec_energy": 0.65,
+    "bars": 8.0,
+    "notes_per_bar": 101.1,
+    "mean_vel": 78.1,
+    "active": 4
+   },
+   {
+    "section": "groove_a2",
+    "spec_energy": 0.7,
+    "bars": 8.0,
+    "notes_per_bar": 104.9,
+    "mean_vel": 80.1,
+    "active": 5
+   },
+   {
+    "section": "chorus",
+    "spec_energy": 0.8,
+    "bars": 8.0,
+    "notes_per_bar": 106.5,
+    "mean_vel": 83.6,
+    "active": 6
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.4,
+    "bars": 8.0,
+    "notes_per_bar": 26.5,
+    "mean_vel": 81.8,
+    "active": 2
+   },
+   {
+    "section": "groove_b",
+    "spec_energy": 0.7,
+    "bars": 8.0,
+    "notes_per_bar": 106.0,
+    "mean_vel": 79.7,
+    "active": 5
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.85,
+    "bars": 8.0,
+    "notes_per_bar": 106.8,
+    "mean_vel": 84.4,
+    "active": 6
+   },
+   {
+    "section": "vamp_out",
+    "spec_energy": 0.75,
+    "bars": 8.0,
+    "notes_per_bar": 100.6,
+    "mean_vel": 81.1,
+    "active": 5
+   }
+  ]
+ },
+ "funk_s3": {
+  "name": "funk_s3",
+  "genre": "funk",
+  "key": "G dorian",
+  "tempo": 104.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 60.0,
+  "programs": {
+   "Funk kit": null,
+   "Slap / finger bass": 36,
+   "Muted 'chicken-scratch' guitar": 28,
+   "Clavinet": 7,
+   "Horn section stabs": 61,
+   "Tenor sax lead": 66
+  },
+  "tech": [],
+  "in_key_pct": 98.6,
+  "chord_tone_pct": {
+   "Slap / finger bass": 81.2,
+   "Muted 'chicken-scratch' guitar": 95.6,
+   "Clavinet": 96.8,
+   "Horn section stabs": 100.0,
+   "Tenor sax lead": 81.2
+  },
+  "progressions": {
+   "intro": "i7 IV9",
+   "groove_a": "i7",
+   "groove_a2": "i7",
+   "chorus": "i7 bVII IV7 i7",
+   "breakdown": "i7 IV9",
+   "groove_b": "i7 IV9",
+   "chorus2": "i7 bVII IV7 i7",
+   "vamp_out": "i7"
+  },
+  "strong_clash_pct": 0.6,
+  "kick_with_bass_pct": 53.4,
+  "bass_on_kick_pct": 26.1,
+  "bass_root_on_change_pct": 80.0,
+  "bass_range": [
+   31,
+   51
+  ],
+  "bass_notes_per_bar": 7.47,
+  "bass_downbeat_pct": 12.5,
+  "bass_big_leaps": 2,
+  "kick_steps": "x.x.......x..x..",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 894,
+   "38": 282,
+   "36": 219,
+   "46": 39,
+   "54": 28,
+   "49": 7,
+   "50": 7,
+   "45": 7
+  },
+  "drum_vel_sd": 26.0,
+  "timing_dev_ms_mean": 6.2,
+  "swing_ratio_8th": 0.76,
+  "swing_ratio_16th": 0.533,
+  "spec_swing": [
+   0.067,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.2,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   92,
+   120,
+   104
+  ],
+  "genre_file_kick": "x.x.......x..x..",
+  "genre_file_snare": "....x..x.x..x..x",
+  "vel_sd": {
+   "Funk kit": 26.0,
+   "Slap / finger bass": 18.5,
+   "Muted 'chicken-scratch' guitar": 9.6,
+   "Clavinet": 9.2,
+   "Horn section stabs": 9.9,
+   "Tenor sax lead": 10.2
+  },
+  "offbeat_onset_pct": {
+   "Slap / finger bass": 80.8,
+   "Muted 'chicken-scratch' guitar": 83.7,
+   "Clavinet": 83.4,
+   "Horn section stabs": 100.0,
+   "Tenor sax lead": 79.2
+  },
+  "voice_leading": {
+   "Muted 'chicken-scratch' guitar": {
+    "chord_changes": 12,
+    "mean_motion": 6,
+    "max_voice_leap": 4,
+    "parallel_5_8": 2,
+    "range": [
+     55,
+     67
+    ],
+    "voices": 3.9,
+    "low_cluster": 0
+   },
+   "Clavinet": {
+    "chord_changes": 10,
+    "mean_motion": 6,
+    "max_voice_leap": 4,
+    "parallel_5_8": 2,
+    "range": [
+     55,
+     67
+    ],
+    "voices": 3.9,
+    "low_cluster": 0
+   },
+   "Horn section stabs": {
+    "chord_changes": 6,
+    "mean_motion": 6,
+    "max_voice_leap": 4,
+    "parallel_5_8": 2,
+    "range": [
+     55,
+     67
+    ],
+    "voices": 3.9,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 101,
+   "range": [
+    64,
+    86
+   ],
+   "span": 22,
+   "step_pct": 57.0,
+   "leap_gt5th_pct": 8.0,
+   "max_leap": 12,
+   "dir_change_pct": 27.3,
+   "repeated_pitch_pct": 18.0,
+   "phrase_ends": 56,
+   "phrase_end_chord_tone_pct": 98.2,
+   "strong_beat_chord_tone_pct": 70.0,
+   "rest_pct": 57.7,
+   "bars_with_lead": 24,
+   "repeated_bar_pct": 8.3,
+   "distinct_bar_rhythms": 20,
+   "notes_per_bar": 4.21,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.4
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.55,
+    "bars": 4.0,
+    "notes_per_bar": 64.5,
+    "mean_vel": 75.0,
+    "active": 2
+   },
+   {
+    "section": "groove_a",
+    "spec_energy": 0.65,
+    "bars": 8.0,
+    "notes_per_bar": 101.0,
+    "mean_vel": 78.9,
+    "active": 4
+   },
+   {
+    "section": "groove_a2",
+    "spec_energy": 0.7,
+    "bars": 8.0,
+    "notes_per_bar": 104.8,
+    "mean_vel": 79.1,
+    "active": 5
+   },
+   {
+    "section": "chorus",
+    "spec_energy": 0.8,
+    "bars": 8.0,
+    "notes_per_bar": 106.6,
+    "mean_vel": 84.4,
+    "active": 6
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.4,
+    "bars": 8.0,
+    "notes_per_bar": 26.5,
+    "mean_vel": 81.6,
+    "active": 2
+   },
+   {
+    "section": "groove_b",
+    "spec_energy": 0.7,
+    "bars": 8.0,
+    "notes_per_bar": 105.5,
+    "mean_vel": 80.9,
+    "active": 5
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.85,
+    "bars": 8.0,
+    "notes_per_bar": 106.8,
+    "mean_vel": 84.4,
+    "active": 6
+   },
+   {
+    "section": "vamp_out",
+    "spec_energy": 0.75,
+    "bars": 8.0,
+    "notes_per_bar": 105.6,
+    "mean_vel": 81.3,
+    "active": 5
+   }
+  ]
+ },
+ "house_s1": {
+  "name": "house_s1",
+  "genre": "house",
+  "key": "F minor",
+  "tempo": 124.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 128.0,
+  "programs": {
+   "909/808-style drum machine": null,
+   "Synth bass": 38,
+   "Piano / organ stabs": 0,
+   "Warm pad / strings": 89,
+   "Vocal chop / lead": 85
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Synth bass": 90.6,
+   "Piano / organ stabs": 84.2,
+   "Warm pad / strings": 94.4,
+   "Vocal chop / lead": 86.7
+  },
+  "progressions": {
+   "intro": "i9 iv9",
+   "groove": "i7 bVII bVImaj7 bVII",
+   "main_a": "i9 iv9",
+   "breakdown": "i9 iv9",
+   "drop": "i7 bVII bVImaj7 bVII",
+   "outro": "i7 bVII bVImaj7 bVII"
+  },
+  "strong_clash_pct": 0.5,
+  "kick_with_bass_pct": 0.0,
+  "bass_on_kick_pct": 0.0,
+  "bass_root_on_change_pct": 62.5,
+  "bass_range": [
+   37,
+   53
+  ],
+  "bass_notes_per_bar": 4.0,
+  "bass_downbeat_pct": 0.0,
+  "bass_big_leaps": 16,
+  "kick_steps": "x...x...x...x...",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 1000,
+   "82": 736,
+   "36": 448,
+   "46": 382,
+   "39": 192,
+   "37": 150,
+   "63": 60,
+   "38": 54
+  },
+  "drum_vel_sd": 26.2,
+  "timing_dev_ms_mean": 5.1,
+  "swing_ratio_8th": 0.506,
+  "swing_ratio_16th": 0.542,
+  "spec_swing": [
+   0.083,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.25,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   118,
+   128,
+   124
+  ],
+  "genre_file_kick": "x...x...x...x...",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "909/808-style drum machine": 26.2,
+   "Synth bass": 11.6,
+   "Piano / organ stabs": 8.2,
+   "Warm pad / strings": 7.9,
+   "Vocal chop / lead": 13.2
+  },
+  "offbeat_onset_pct": {
+   "Synth bass": 100.0,
+   "Piano / organ stabs": 100.0,
+   "Warm pad / strings": 0.0,
+   "Vocal chop / lead": 52.3
+  },
+  "voice_leading": {
+   "Piano / organ stabs": {
+    "chord_changes": 24,
+    "mean_motion": 10.1,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     53,
+     68
+    ],
+    "voices": 3.8,
+    "low_cluster": 0
+   },
+   "Warm pad / strings": {
+    "chord_changes": 8,
+    "mean_motion": 10.6,
+    "max_voice_leap": 7,
+    "parallel_5_8": 0,
+    "range": [
+     49,
+     67
+    ],
+    "voices": 3.6,
+    "low_cluster": 3
+   }
+  },
+  "melody": {
+   "notes": 128,
+   "range": [
+    65,
+    87
+   ],
+   "span": 22,
+   "step_pct": 54.3,
+   "leap_gt5th_pct": 7.1,
+   "max_leap": 12,
+   "dir_change_pct": 37.3,
+   "repeated_pitch_pct": 16.5,
+   "phrase_ends": 77,
+   "phrase_end_chord_tone_pct": 97.4,
+   "strong_beat_chord_tone_pct": 92.7,
+   "rest_pct": 48.9,
+   "bars_with_lead": 48,
+   "repeated_bar_pct": 41.7,
+   "distinct_bar_rhythms": 24,
+   "notes_per_bar": 2.67,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.77
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 16.0,
+    "notes_per_bar": 8.5,
+    "mean_vel": 78.5,
+    "active": 1
+   },
+   {
+    "section": "groove",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 25.9,
+    "mean_vel": 72.8,
+    "active": 2
+   },
+   {
+    "section": "main_a",
+    "spec_energy": 0.7,
+    "bars": 32.0,
+    "notes_per_bar": 64.2,
+    "mean_vel": 67.2,
+    "active": 3
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.3,
+    "bars": 16.0,
+    "notes_per_bar": 44.1,
+    "mean_vel": 59.2,
+    "active": 4
+   },
+   {
+    "section": "drop",
+    "spec_energy": 0.85,
+    "bars": 32.0,
+    "notes_per_bar": 47.1,
+    "mean_vel": 79.0,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.35,
+    "bars": 16.0,
+    "notes_per_bar": 13.0,
+    "mean_vel": 75.8,
+    "active": 2
+   }
+  ]
+ },
+ "house_s2": {
+  "name": "house_s2",
+  "genre": "house",
+  "key": "C minor",
+  "tempo": 124.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 128.0,
+  "programs": {
+   "909/808-style drum machine": null,
+   "Synth bass": 38,
+   "Piano / organ stabs": 0,
+   "Warm pad / strings": 89,
+   "Vocal chop / lead": 85
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Synth bass": 90.6,
+   "Piano / organ stabs": 84.2,
+   "Warm pad / strings": 75.0,
+   "Vocal chop / lead": 72.1
+  },
+  "progressions": {
+   "intro": "i9 iv9",
+   "groove": "i7 bVII bVImaj7 bVII",
+   "main_a": "i7 bVII bVImaj7 bVII",
+   "breakdown": "i9 iv9",
+   "drop": "i9 iv9",
+   "outro": "i7 bVII bVImaj7 bVII"
+  },
+  "strong_clash_pct": 15.0,
+  "kick_with_bass_pct": 0.0,
+  "bass_on_kick_pct": 0.0,
+  "bass_root_on_change_pct": 62.5,
+  "bass_range": [
+   32,
+   53
+  ],
+  "bass_notes_per_bar": 4.0,
+  "bass_downbeat_pct": 0.0,
+  "bass_big_leaps": 8,
+  "kick_steps": "x...x...x...x...",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 1000,
+   "82": 736,
+   "36": 448,
+   "46": 382,
+   "39": 192,
+   "37": 150,
+   "63": 60,
+   "38": 55
+  },
+  "drum_vel_sd": 26.1,
+  "timing_dev_ms_mean": 5.2,
+  "swing_ratio_8th": 0.506,
+  "swing_ratio_16th": 0.542,
+  "spec_swing": [
+   0.083,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.25,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   118,
+   128,
+   124
+  ],
+  "genre_file_kick": "x...x...x...x...",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "909/808-style drum machine": 26.1,
+   "Synth bass": 11.9,
+   "Piano / organ stabs": 8.6,
+   "Warm pad / strings": 7.5,
+   "Vocal chop / lead": 12.9
+  },
+  "offbeat_onset_pct": {
+   "Synth bass": 100.0,
+   "Piano / organ stabs": 100.0,
+   "Warm pad / strings": 0.0,
+   "Vocal chop / lead": 54.3
+  },
+  "voice_leading": {
+   "Piano / organ stabs": {
+    "chord_changes": 23,
+    "mean_motion": 10,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     51,
+     70
+    ],
+    "voices": 3.8,
+    "low_cluster": 0
+   },
+   "Warm pad / strings": {
+    "chord_changes": 23,
+    "mean_motion": 12,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     51,
+     67
+    ],
+    "voices": 4,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 140,
+   "range": [
+    63,
+    84
+   ],
+   "span": 21,
+   "step_pct": 64.7,
+   "leap_gt5th_pct": 3.6,
+   "max_leap": 12,
+   "dir_change_pct": 38.4,
+   "repeated_pitch_pct": 11.5,
+   "phrase_ends": 80,
+   "phrase_end_chord_tone_pct": 70.0,
+   "strong_beat_chord_tone_pct": 75.4,
+   "rest_pct": 44.2,
+   "bars_with_lead": 48,
+   "repeated_bar_pct": 25.0,
+   "distinct_bar_rhythms": 28,
+   "notes_per_bar": 2.92,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.76
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 16.0,
+    "notes_per_bar": 8.5,
+    "mean_vel": 78.6,
+    "active": 1
+   },
+   {
+    "section": "groove",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 25.9,
+    "mean_vel": 72.5,
+    "active": 2
+   },
+   {
+    "section": "main_a",
+    "spec_energy": 0.7,
+    "bars": 32.0,
+    "notes_per_bar": 62.2,
+    "mean_vel": 66.8,
+    "active": 3
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.3,
+    "bars": 16.0,
+    "notes_per_bar": 44.1,
+    "mean_vel": 59.3,
+    "active": 4
+   },
+   {
+    "section": "drop",
+    "spec_energy": 0.85,
+    "bars": 32.0,
+    "notes_per_bar": 47.9,
+    "mean_vel": 79.9,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.35,
+    "bars": 16.0,
+    "notes_per_bar": 13.0,
+    "mean_vel": 75.7,
+    "active": 2
+   }
+  ]
+ },
+ "house_s3": {
+  "name": "house_s3",
+  "genre": "house",
+  "key": "G minor",
+  "tempo": 124.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 128.0,
+  "programs": {
+   "909/808-style drum machine": null,
+   "Synth bass": 38,
+   "Piano / organ stabs": 0,
+   "Warm pad / strings": 89,
+   "Vocal chop / lead": 85
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Synth bass": 87.5,
+   "Piano / organ stabs": 89.2,
+   "Warm pad / strings": 100.0,
+   "Vocal chop / lead": 81.7
+  },
+  "progressions": {
+   "intro": "i9 iv9",
+   "groove": "i7 bVII bVImaj7 bVII",
+   "main_a": "i9 iv9",
+   "breakdown": "i7 bVII bVImaj7 bVII",
+   "drop": "i7 bVII bVImaj7 bVII",
+   "outro": "i9 iv9"
+  },
+  "strong_clash_pct": 9.7,
+  "kick_with_bass_pct": 0.0,
+  "bass_on_kick_pct": 0.0,
+  "bass_root_on_change_pct": 56.2,
+  "bass_range": [
+   36,
+   53
+  ],
+  "bass_notes_per_bar": 4.0,
+  "bass_downbeat_pct": 0.0,
+  "bass_big_leaps": 20,
+  "kick_steps": "x...x...x...x...",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 1000,
+   "82": 736,
+   "36": 448,
+   "46": 382,
+   "39": 192,
+   "37": 150,
+   "63": 60,
+   "38": 53
+  },
+  "drum_vel_sd": 26.2,
+  "timing_dev_ms_mean": 5.1,
+  "swing_ratio_8th": 0.506,
+  "swing_ratio_16th": 0.542,
+  "spec_swing": [
+   0.083,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.25,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   118,
+   128,
+   124
+  ],
+  "genre_file_kick": "x...x...x...x...",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "909/808-style drum machine": 26.2,
+   "Synth bass": 12.1,
+   "Piano / organ stabs": 8.4,
+   "Warm pad / strings": 9.2,
+   "Vocal chop / lead": 12.4
+  },
+  "offbeat_onset_pct": {
+   "Synth bass": 100.0,
+   "Piano / organ stabs": 100.0,
+   "Warm pad / strings": 0.0,
+   "Vocal chop / lead": 50.7
+  },
+  "voice_leading": {
+   "Piano / organ stabs": {
+    "chord_changes": 16,
+    "mean_motion": 10.1,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     51,
+     70
+    ],
+    "voices": 3.7,
+    "low_cluster": 0
+   },
+   "Warm pad / strings": {
+    "chord_changes": 0,
+    "mean_motion": 0,
+    "max_voice_leap": 0,
+    "parallel_5_8": 0,
+    "range": [
+     50,
+     65
+    ],
+    "voices": 3.5,
+    "low_cluster": 12
+   }
+  },
+  "melody": {
+   "notes": 142,
+   "range": [
+    63,
+    81
+   ],
+   "span": 18,
+   "step_pct": 62.4,
+   "leap_gt5th_pct": 4.3,
+   "max_leap": 12,
+   "dir_change_pct": 28.6,
+   "repeated_pitch_pct": 16.3,
+   "phrase_ends": 80,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 93.8,
+   "rest_pct": 44.3,
+   "bars_with_lead": 48,
+   "repeated_bar_pct": 27.1,
+   "distinct_bar_rhythms": 25,
+   "notes_per_bar": 2.96,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.75
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 16.0,
+    "notes_per_bar": 8.5,
+    "mean_vel": 78.4,
+    "active": 1
+   },
+   {
+    "section": "groove",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 25.9,
+    "mean_vel": 72.3,
+    "active": 2
+   },
+   {
+    "section": "main_a",
+    "spec_energy": 0.7,
+    "bars": 32.0,
+    "notes_per_bar": 64.2,
+    "mean_vel": 67.3,
+    "active": 3
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.3,
+    "bars": 16.0,
+    "notes_per_bar": 43.9,
+    "mean_vel": 58.4,
+    "active": 4
+   },
+   {
+    "section": "drop",
+    "spec_energy": 0.85,
+    "bars": 32.0,
+    "notes_per_bar": 47.3,
+    "mean_vel": 79.2,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.35,
+    "bars": 16.0,
+    "notes_per_bar": 13.0,
+    "mean_vel": 76.5,
+    "active": 2
+   }
+  ]
+ },
+ "jazz_s1": {
+  "name": "jazz_s1",
+  "genre": "jazz",
+  "key": "Bb major",
+  "tempo": 140.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 152.0,
+  "programs": {
+   "Jazz kit / brushes": null,
+   "Upright bass": 32,
+   "Acoustic piano": 0,
+   "Trumpet": 56,
+   "Tenor / alto sax": 66
+  },
+  "tech": [],
+  "in_key_pct": 92.0,
+  "chord_tone_pct": {
+   "Upright bass": 54.3,
+   "Acoustic piano": 64.1,
+   "Trumpet": 76.2,
+   "Tenor / alto sax": 63.3
+  },
+  "progressions": {
+   "intro": "Imaj7 VI7b9 ii7 V7",
+   "head_a1": "ii7 V7 Imaj7",
+   "head_a2": "ii7 V7 Imaj7",
+   "head_b": "I6 vi7 ii7 V7 iii7 VI7 ii7 V7",
+   "head_a3": "ii7 V7 Imaj7",
+   "solo_sax": "ii7 V7 Imaj7",
+   "solo_piano": "I6 vi7 ii7 V7 iii7 VI7 ii7 V7",
+   "trading_fours": "ii7 V7 Imaj7",
+   "head_out": "Imaj7 VI7b9 ii7 V7",
+   "ending": "Imaj7 VI7b9 ii7 V7"
+  },
+  "strong_clash_pct": 14.9,
+  "kick_with_bass_pct": 95.2,
+  "bass_on_kick_pct": 91.9,
+  "bass_root_on_change_pct": 47.4,
+  "bass_range": [
+   30,
+   51
+  ],
+  "bass_notes_per_bar": 4.0,
+  "bass_downbeat_pct": 14.1,
+  "bass_big_leaps": 1,
+  "kick_steps": "x...x...x...x...",
+  "snare_steps": "o.............o.",
+  "drum_pitches": {
+   "51": 768,
+   "36": 587,
+   "38": 379,
+   "44": 350,
+   "45": 19,
+   "49": 8
+  },
+  "drum_vel_sd": 31.4,
+  "timing_dev_ms_mean": 20.7,
+  "swing_ratio_8th": 0.625,
+  "swing_ratio_16th": 0.504,
+  "spec_swing": [
+   0.233,
+   "1/8"
+  ],
+  "genre_file_swing": [
+   0.7,
+   "8th"
+  ],
+  "genre_file_tempo": [
+   90,
+   260,
+   140
+  ],
+  "genre_file_kick": "x...x...x...x...",
+  "genre_file_snare": "..........x.....",
+  "vel_sd": {
+   "Jazz kit / brushes": 31.4,
+   "Upright bass": 11.9,
+   "Acoustic piano": 9.6,
+   "Trumpet": 10.6,
+   "Tenor / alto sax": 10.2
+  },
+  "offbeat_onset_pct": {
+   "Upright bass": 39.5,
+   "Acoustic piano": 67.6,
+   "Trumpet": 77.0,
+   "Tenor / alto sax": 65.5
+  },
+  "voice_leading": {
+   "Acoustic piano": {
+    "chord_changes": 122,
+    "mean_motion": 5.9,
+    "max_voice_leap": 11,
+    "parallel_5_8": 2,
+    "range": [
+     50,
+     70
+    ],
+    "voices": 3.5,
+    "low_cluster": 116
+   },
+   "Trumpet": {
+    "chord_changes": 80,
+    "mean_motion": 6.3,
+    "max_voice_leap": 10,
+    "parallel_5_8": 1,
+    "range": [
+     50,
+     70
+    ],
+    "voices": 3.6,
+    "low_cluster": 18
+   }
+  },
+  "melody": {
+   "notes": 676,
+   "range": [
+    63,
+    87
+   ],
+   "span": 24,
+   "step_pct": 62.8,
+   "leap_gt5th_pct": 3.3,
+   "max_leap": 11,
+   "dir_change_pct": 39.6,
+   "repeated_pitch_pct": 7.3,
+   "phrase_ends": 77,
+   "phrase_end_chord_tone_pct": 71.4,
+   "strong_beat_chord_tone_pct": 73.5,
+   "rest_pct": 28.9,
+   "bars_with_lead": 116,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 116,
+   "notes_per_bar": 5.83,
+   "short_notes_pct": 0.1,
+   "mean_dur": 0.49
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 4.0,
+    "notes_per_bar": 23.5,
+    "mean_vel": 76.3,
+    "active": 3
+   },
+   {
+    "section": "head_a1",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 39.9,
+    "mean_vel": 79.1,
+    "active": 5
+   },
+   {
+    "section": "head_a2",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 40.6,
+    "mean_vel": 79.7,
+    "active": 5
+   },
+   {
+    "section": "head_b",
+    "spec_energy": 0.55,
+    "bars": 8.0,
+    "notes_per_bar": 56.6,
+    "mean_vel": 78.6,
+    "active": 5
+   },
+   {
+    "section": "head_a3",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 43.6,
+    "mean_vel": 77.2,
+    "active": 5
+   },
+   {
+    "section": "solo_sax",
+    "spec_energy": 0.75,
+    "bars": 32.0,
+    "notes_per_bar": 31.8,
+    "mean_vel": 79.4,
+    "active": 4
+   },
+   {
+    "section": "solo_piano",
+    "spec_energy": 0.65,
+    "bars": 32.0,
+    "notes_per_bar": 36.3,
+    "mean_vel": 76.3,
+    "active": 3
+   },
+   {
+    "section": "trading_fours",
+    "spec_energy": 0.7,
+    "bars": 16.0,
+    "notes_per_bar": 53.2,
+    "mean_vel": 81.5,
+    "active": 5
+   },
+   {
+    "section": "head_out",
+    "spec_energy": 0.6,
+    "bars": 32.0,
+    "notes_per_bar": 47.4,
+    "mean_vel": 79.2,
+    "active": 5
+   },
+   {
+    "section": "ending",
+    "spec_energy": 0.4,
+    "bars": 4.0,
+    "notes_per_bar": 38.0,
+    "mean_vel": 75.9,
+    "active": 5
+   }
+  ]
+ },
+ "jazz_s2": {
+  "name": "jazz_s2",
+  "genre": "jazz",
+  "key": "Eb major",
+  "tempo": 140.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 152.0,
+  "programs": {
+   "Jazz kit / brushes": null,
+   "Upright bass": 32,
+   "Acoustic piano": 0,
+   "Trumpet": 56,
+   "Tenor / alto sax": 66
+  },
+  "tech": [],
+  "in_key_pct": 93.1,
+  "chord_tone_pct": {
+   "Upright bass": 53.1,
+   "Acoustic piano": 60.1,
+   "Trumpet": 73.3,
+   "Tenor / alto sax": 62.2
+  },
+  "progressions": {
+   "intro": "I6 vi7 ii7 V7 iii7 VI7 ii7 V7",
+   "head_a1": "Imaj7 VI7b9 ii7 V7",
+   "head_a2": "Imaj7 VI7b9 ii7 V7",
+   "head_b": "ii7 V7 Imaj7",
+   "head_a3": "Imaj7 VI7b9 ii7 V7",
+   "solo_sax": "I6 vi7 ii7 V7 iii7 VI7 ii7 V7",
+   "solo_piano": "I6 vi7 ii7 V7 iii7 VI7 ii7 V7",
+   "trading_fours": "ii7 V7 Imaj7",
+   "head_out": "ii7 V7 Imaj7",
+   "ending": "ii7 V7 Imaj7"
+  },
+  "strong_clash_pct": 13.4,
+  "kick_with_bass_pct": 96.5,
+  "bass_on_kick_pct": 91.9,
+  "bass_root_on_change_pct": 37.5,
+  "bass_range": [
+   34,
+   52
+  ],
+  "bass_notes_per_bar": 4.0,
+  "bass_downbeat_pct": 17.1,
+  "bass_big_leaps": 0,
+  "kick_steps": "x...x...x...x...",
+  "snare_steps": "o.............oo",
+  "drum_pitches": {
+   "51": 768,
+   "36": 579,
+   "38": 368,
+   "44": 344,
+   "45": 19,
+   "49": 8
+  },
+  "drum_vel_sd": 31.5,
+  "timing_dev_ms_mean": 18.6,
+  "swing_ratio_8th": 0.625,
+  "swing_ratio_16th": 0.508,
+  "spec_swing": [
+   0.233,
+   "1/8"
+  ],
+  "genre_file_swing": [
+   0.7,
+   "8th"
+  ],
+  "genre_file_tempo": [
+   90,
+   260,
+   140
+  ],
+  "genre_file_kick": "x...x...x...x...",
+  "genre_file_snare": "..........x.....",
+  "vel_sd": {
+   "Jazz kit / brushes": 31.5,
+   "Upright bass": 11.8,
+   "Acoustic piano": 10.0,
+   "Trumpet": 10.3,
+   "Tenor / alto sax": 10.8
+  },
+  "offbeat_onset_pct": {
+   "Upright bass": 38.7,
+   "Acoustic piano": 69.1,
+   "Trumpet": 57.3,
+   "Tenor / alto sax": 66.3
+  },
+  "voice_leading": {
+   "Acoustic piano": {
+    "chord_changes": 139,
+    "mean_motion": 6.3,
+    "max_voice_leap": 10,
+    "parallel_5_8": 3,
+    "range": [
+     50,
+     70
+    ],
+    "voices": 3.5,
+    "low_cluster": 62
+   },
+   "Trumpet": {
+    "chord_changes": 70,
+    "mean_motion": 7.3,
+    "max_voice_leap": 10,
+    "parallel_5_8": 8,
+    "range": [
+     50,
+     70
+    ],
+    "voices": 3.5,
+    "low_cluster": 22
+   }
+  },
+  "melody": {
+   "notes": 709,
+   "range": [
+    63,
+    87
+   ],
+   "span": 24,
+   "step_pct": 70.6,
+   "leap_gt5th_pct": 2.7,
+   "max_leap": 12,
+   "dir_change_pct": 42.3,
+   "repeated_pitch_pct": 4.9,
+   "phrase_ends": 58,
+   "phrase_end_chord_tone_pct": 75.9,
+   "strong_beat_chord_tone_pct": 66.4,
+   "rest_pct": 27.5,
+   "bars_with_lead": 116,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 116,
+   "notes_per_bar": 6.11,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.47
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 4.0,
+    "notes_per_bar": 31.5,
+    "mean_vel": 73.2,
+    "active": 3
+   },
+   {
+    "section": "head_a1",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 47.9,
+    "mean_vel": 77.6,
+    "active": 5
+   },
+   {
+    "section": "head_a2",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 41.8,
+    "mean_vel": 79.7,
+    "active": 5
+   },
+   {
+    "section": "head_b",
+    "spec_energy": 0.55,
+    "bars": 8.0,
+    "notes_per_bar": 42.2,
+    "mean_vel": 78.2,
+    "active": 5
+   },
+   {
+    "section": "head_a3",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 43.0,
+    "mean_vel": 75.1,
+    "active": 5
+   },
+   {
+    "section": "solo_sax",
+    "spec_energy": 0.75,
+    "bars": 32.0,
+    "notes_per_bar": 41.4,
+    "mean_vel": 80.5,
+    "active": 4
+   },
+   {
+    "section": "solo_piano",
+    "spec_energy": 0.65,
+    "bars": 32.0,
+    "notes_per_bar": 36.1,
+    "mean_vel": 76.6,
+    "active": 3
+   },
+   {
+    "section": "trading_fours",
+    "spec_energy": 0.7,
+    "bars": 16.0,
+    "notes_per_bar": 49.2,
+    "mean_vel": 81.8,
+    "active": 5
+   },
+   {
+    "section": "head_out",
+    "spec_energy": 0.6,
+    "bars": 32.0,
+    "notes_per_bar": 42.8,
+    "mean_vel": 78.9,
+    "active": 5
+   },
+   {
+    "section": "ending",
+    "spec_energy": 0.4,
+    "bars": 4.0,
+    "notes_per_bar": 34.0,
+    "mean_vel": 76.3,
+    "active": 5
+   }
+  ]
+ },
+ "jazz_s3": {
+  "name": "jazz_s3",
+  "genre": "jazz",
+  "key": "C major",
+  "tempo": 140.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 152.0,
+  "programs": {
+   "Jazz kit / brushes": null,
+   "Upright bass": 32,
+   "Acoustic piano": 0,
+   "Trumpet": 56,
+   "Tenor / alto sax": 66
+  },
+  "tech": [],
+  "in_key_pct": 89.5,
+  "chord_tone_pct": {
+   "Upright bass": 58.6,
+   "Acoustic piano": 72.3,
+   "Trumpet": 76.3,
+   "Tenor / alto sax": 67.5
+  },
+  "progressions": {
+   "intro": "ii7 V7 Imaj7",
+   "head_a1": "I6 vi7 ii7 V7 iii7 VI7 ii7 V7",
+   "head_a2": "I6 vi7 ii7 V7 iii7 VI7 ii7 V7",
+   "head_b": "Imaj7 VI7b9 ii7 V7",
+   "head_a3": "I6 vi7 ii7 V7 iii7 VI7 ii7 V7",
+   "solo_sax": "Imaj7 VI7b9 ii7 V7",
+   "solo_piano": "Imaj7 VI7b9 ii7 V7",
+   "trading_fours": "I6 vi7 ii7 V7 iii7 VI7 ii7 V7",
+   "head_out": "Imaj7 VI7b9 ii7 V7",
+   "ending": "ii7 V7 Imaj7"
+  },
+  "strong_clash_pct": 11.7,
+  "kick_with_bass_pct": 96.5,
+  "bass_on_kick_pct": 91.9,
+  "bass_root_on_change_pct": 75.7,
+  "bass_range": [
+   31,
+   52
+  ],
+  "bass_notes_per_bar": 4.0,
+  "bass_downbeat_pct": 16.3,
+  "bass_big_leaps": 0,
+  "kick_steps": "x...x...x...x...",
+  "snare_steps": "o.............oo",
+  "drum_pitches": {
+   "51": 768,
+   "36": 579,
+   "38": 371,
+   "44": 328,
+   "45": 19,
+   "49": 8
+  },
+  "drum_vel_sd": 31.9,
+  "timing_dev_ms_mean": 20.1,
+  "swing_ratio_8th": 0.627,
+  "swing_ratio_16th": 0.508,
+  "spec_swing": [
+   0.233,
+   "1/8"
+  ],
+  "genre_file_swing": [
+   0.7,
+   "8th"
+  ],
+  "genre_file_tempo": [
+   90,
+   260,
+   140
+  ],
+  "genre_file_kick": "x...x...x...x...",
+  "genre_file_snare": "..........x.....",
+  "vel_sd": {
+   "Jazz kit / brushes": 31.9,
+   "Upright bass": 12.3,
+   "Acoustic piano": 10.0,
+   "Trumpet": 10.2,
+   "Tenor / alto sax": 10.4
+  },
+  "offbeat_onset_pct": {
+   "Upright bass": 37.5,
+   "Acoustic piano": 68.9,
+   "Trumpet": 75.1,
+   "Tenor / alto sax": 65.4
+  },
+  "voice_leading": {
+   "Acoustic piano": {
+    "chord_changes": 126,
+    "mean_motion": 6.1,
+    "max_voice_leap": 12,
+    "parallel_5_8": 1,
+    "range": [
+     50,
+     71
+    ],
+    "voices": 3.6,
+    "low_cluster": 48
+   },
+   "Trumpet": {
+    "chord_changes": 100,
+    "mean_motion": 7.7,
+    "max_voice_leap": 12,
+    "parallel_5_8": 6,
+    "range": [
+     50,
+     71
+    ],
+    "voices": 3.5,
+    "low_cluster": 60
+   }
+  },
+  "melody": {
+   "notes": 708,
+   "range": [
+    64,
+    86
+   ],
+   "span": 22,
+   "step_pct": 64.5,
+   "leap_gt5th_pct": 2.4,
+   "max_leap": 12,
+   "dir_change_pct": 49.6,
+   "repeated_pitch_pct": 5.4,
+   "phrase_ends": 73,
+   "phrase_end_chord_tone_pct": 90.4,
+   "strong_beat_chord_tone_pct": 73.5,
+   "rest_pct": 26.9,
+   "bars_with_lead": 116,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 116,
+   "notes_per_bar": 6.1,
+   "short_notes_pct": 0.3,
+   "mean_dur": 0.48
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 4.0,
+    "notes_per_bar": 23.5,
+    "mean_vel": 78.9,
+    "active": 3
+   },
+   {
+    "section": "head_a1",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 53.4,
+    "mean_vel": 78.3,
+    "active": 5
+   },
+   {
+    "section": "head_a2",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 44.1,
+    "mean_vel": 79.2,
+    "active": 5
+   },
+   {
+    "section": "head_b",
+    "spec_energy": 0.55,
+    "bars": 8.0,
+    "notes_per_bar": 47.1,
+    "mean_vel": 77.9,
+    "active": 5
+   },
+   {
+    "section": "head_a3",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 48.1,
+    "mean_vel": 77.1,
+    "active": 5
+   },
+   {
+    "section": "solo_sax",
+    "spec_energy": 0.75,
+    "bars": 32.0,
+    "notes_per_bar": 31.4,
+    "mean_vel": 81.2,
+    "active": 4
+   },
+   {
+    "section": "solo_piano",
+    "spec_energy": 0.65,
+    "bars": 32.0,
+    "notes_per_bar": 28.2,
+    "mean_vel": 75.6,
+    "active": 3
+   },
+   {
+    "section": "trading_fours",
+    "spec_energy": 0.7,
+    "bars": 16.0,
+    "notes_per_bar": 64.5,
+    "mean_vel": 81.4,
+    "active": 5
+   },
+   {
+    "section": "head_out",
+    "spec_energy": 0.6,
+    "bars": 32.0,
+    "notes_per_bar": 52.4,
+    "mean_vel": 78.9,
+    "active": 5
+   },
+   {
+    "section": "ending",
+    "spec_energy": 0.4,
+    "bars": 4.0,
+    "notes_per_bar": 36.5,
+    "mean_vel": 77.1,
+    "active": 5
+   }
+  ]
+ },
+ "lofi_hiphop_s1": {
+  "name": "lofi_hiphop_s1",
+  "genre": "lofi_hiphop",
+  "key": "Eb major",
+  "tempo": 82.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 44.0,
+  "programs": {
+   "Dusty drum kit": null,
+   "Upright / finger bass": 32,
+   "Electric piano (Rhodes)": 4,
+   "Warm pad": 89,
+   "Nylon / jazz guitar": 24,
+   "Vibraphone / flute / muted lead": 11
+  },
+  "tech": [],
+  "in_key_pct": 96.5,
+  "chord_tone_pct": {
+   "Upright / finger bass": 74.2,
+   "Electric piano (Rhodes)": 91.8,
+   "Warm pad": 96.9,
+   "Nylon / jazz guitar": 85.9,
+   "Vibraphone / flute / muted lead": 89.6
+  },
+  "progressions": {
+   "intro": "ii9 V13 Imaj9 vi9",
+   "loop_a": "Imaj7 vi7 ii7 V7",
+   "loop_b": "IVmaj9 iii7 ii9 Imaj9",
+   "loop_a2": "Imaj7 vi7 ii7 V7",
+   "breakdown": "ii9 V13 Imaj9 vi9",
+   "loop_b2": "IVmaj9 iii7 ii9 Imaj9",
+   "outro": "Imaj7 vi7 ii7 V7"
+  },
+  "strong_clash_pct": 6.8,
+  "kick_with_bass_pct": 70.7,
+  "bass_on_kick_pct": 64.1,
+  "bass_root_on_change_pct": 72.7,
+  "bass_range": [
+   29,
+   51
+  ],
+  "bass_notes_per_bar": 2.91,
+  "bass_downbeat_pct": 18.0,
+  "bass_big_leaps": 2,
+  "kick_steps": "x......oooo...o.",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 289,
+   "36": 116,
+   "38": 102,
+   "46": 14,
+   "37": 6,
+   "49": 3
+  },
+  "drum_vel_sd": 24.7,
+  "timing_dev_ms_mean": 12.9,
+  "swing_ratio_8th": 0.508,
+  "swing_ratio_16th": 0.596,
+  "spec_swing": [
+   0.167,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.5,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   70,
+   92,
+   82
+  ],
+  "genre_file_kick": "x......x..x.....",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "Dusty drum kit": 24.7,
+   "Upright / finger bass": 22.9,
+   "Electric piano (Rhodes)": 11.9,
+   "Warm pad": 10.1,
+   "Nylon / jazz guitar": 10.9,
+   "Vibraphone / flute / muted lead": 11.1
+  },
+  "offbeat_onset_pct": {
+   "Upright / finger bass": 82.0,
+   "Electric piano (Rhodes)": 65.3,
+   "Warm pad": 12.5,
+   "Nylon / jazz guitar": 26.6,
+   "Vibraphone / flute / muted lead": 50.0
+  },
+  "voice_leading": {
+   "Electric piano (Rhodes)": {
+    "chord_changes": 35,
+    "mean_motion": 6.2,
+    "max_voice_leap": 7,
+    "parallel_5_8": 3,
+    "range": [
+     50,
+     68
+    ],
+    "voices": 3.7,
+    "low_cluster": 7
+   },
+   "Warm pad": {
+    "chord_changes": 7,
+    "mean_motion": 7.4,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     50,
+     67
+    ],
+    "voices": 4,
+    "low_cluster": 3
+   },
+   "Nylon / jazz guitar": {
+    "chord_changes": 11,
+    "mean_motion": 5.7,
+    "max_voice_leap": 6,
+    "parallel_5_8": 1,
+    "range": [
+     50,
+     67
+    ],
+    "voices": 3.9,
+    "low_cluster": 1
+   }
+  },
+  "melody": {
+   "notes": 48,
+   "range": [
+    67,
+    84
+   ],
+   "span": 17,
+   "step_pct": 72.3,
+   "leap_gt5th_pct": 0.0,
+   "max_leap": 5,
+   "dir_change_pct": 23.9,
+   "repeated_pitch_pct": 25.5,
+   "phrase_ends": 19,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 80.0,
+   "rest_pct": 40.0,
+   "bars_with_lead": 16,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 16,
+   "notes_per_bar": 3.0,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.8
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.25,
+    "bars": 4.0,
+    "notes_per_bar": 8.0,
+    "mean_vel": 62.6,
+    "active": 1
+   },
+   {
+    "section": "loop_a",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 26.1,
+    "mean_vel": 76.1,
+    "active": 3
+   },
+   {
+    "section": "loop_b",
+    "spec_energy": 0.6,
+    "bars": 8.0,
+    "notes_per_bar": 31.8,
+    "mean_vel": 77.6,
+    "active": 4
+   },
+   {
+    "section": "loop_a2",
+    "spec_energy": 0.55,
+    "bars": 8.0,
+    "notes_per_bar": 30.0,
+    "mean_vel": 76.1,
+    "active": 4
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.3,
+    "bars": 4.0,
+    "notes_per_bar": 20.8,
+    "mean_vel": 66.8,
+    "active": 3
+   },
+   {
+    "section": "loop_b2",
+    "spec_energy": 0.65,
+    "bars": 8.0,
+    "notes_per_bar": 36.0,
+    "mean_vel": 76.9,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.2,
+    "bars": 4.0,
+    "notes_per_bar": 12.0,
+    "mean_vel": 64.0,
+    "active": 2
+   }
+  ]
+ },
+ "neo_soul_s1": {
+  "name": "neo_soul_s1",
+  "genre": "neo_soul",
+  "key": "Ab major",
+  "tempo": 84.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 76.0,
+  "programs": {
+   "Vintage kit": null,
+   "Finger / fretless bass": 33,
+   "Rhodes / Wurlitzer": 4,
+   "Strings / pad": 48,
+   "Clean electric guitar": 27,
+   "Vocal stand-in": 53
+  },
+  "tech": [],
+  "in_key_pct": 94.0,
+  "chord_tone_pct": {
+   "Finger / fretless bass": 82.2,
+   "Rhodes / Wurlitzer": 88.3,
+   "Strings / pad": 91.0,
+   "Clean electric guitar": 88.7,
+   "Vocal stand-in": 75.7
+  },
+  "progressions": {
+   "intro": "IVmaj9 iv9 iii7 vi9",
+   "verse": "ii9 bVII13 Imaj9",
+   "chorus": "IVmaj9 iii7 vi11 V9sus4",
+   "verse2": "ii9 bVII13 Imaj9",
+   "chorus2": "IVmaj9 iii7 vi11 V9sus4",
+   "bridge": "IVmaj9 iii7 vi11 V9sus4",
+   "chorus3": "IVmaj9 iii7 vi11 V9sus4",
+   "outro_vamp": "ii9 bVII13 Imaj9"
+  },
+  "strong_clash_pct": 13.0,
+  "kick_with_bass_pct": 52.7,
+  "bass_on_kick_pct": 44.7,
+  "bass_root_on_change_pct": 64.5,
+  "bass_range": [
+   30,
+   51
+  ],
+  "bass_notes_per_bar": 4.0,
+  "bass_downbeat_pct": 19.7,
+  "bass_big_leaps": 0,
+  "kick_steps": "x.....x...xx....",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 617,
+   "36": 258,
+   "38": 167,
+   "37": 158,
+   "51": 56,
+   "54": 42,
+   "46": 21,
+   "45": 8
+  },
+  "drum_vel_sd": 24.6,
+  "timing_dev_ms_mean": 16.3,
+  "swing_ratio_8th": 0.508,
+  "swing_ratio_16th": 0.612,
+  "spec_swing": [
+   0.183,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.55,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   68,
+   98,
+   84
+  ],
+  "genre_file_kick": "x.....x...xx....",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "Vintage kit": 24.6,
+   "Finger / fretless bass": 19.2,
+   "Rhodes / Wurlitzer": 11.9,
+   "Strings / pad": 12.1,
+   "Clean electric guitar": 10.6,
+   "Vocal stand-in": 11.6
+  },
+  "offbeat_onset_pct": {
+   "Finger / fretless bass": 78.0,
+   "Rhodes / Wurlitzer": 57.7,
+   "Strings / pad": 23.6,
+   "Clean electric guitar": 19.0,
+   "Vocal stand-in": 66.7
+  },
+  "voice_leading": {
+   "Rhodes / Wurlitzer": {
+    "chord_changes": 58,
+    "mean_motion": 6.7,
+    "max_voice_leap": 9,
+    "parallel_5_8": 0,
+    "range": [
+     56,
+     70
+    ],
+    "voices": 3.8,
+    "low_cluster": 0
+   },
+   "Strings / pad": {
+    "chord_changes": 28,
+    "mean_motion": 6.3,
+    "max_voice_leap": 5,
+    "parallel_5_8": 1,
+    "range": [
+     48,
+     65
+    ],
+    "voices": 3.9,
+    "low_cluster": 19
+   },
+   "Clean electric guitar": {
+    "chord_changes": 29,
+    "mean_motion": 6.5,
+    "max_voice_leap": 8,
+    "parallel_5_8": 0,
+    "range": [
+     56,
+     70
+    ],
+    "voices": 3.7,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 243,
+   "range": [
+    63,
+    87
+   ],
+   "span": 24,
+   "step_pct": 69.8,
+   "leap_gt5th_pct": 4.5,
+   "max_leap": 12,
+   "dir_change_pct": 42.3,
+   "repeated_pitch_pct": 5.4,
+   "phrase_ends": 39,
+   "phrase_end_chord_tone_pct": 92.3,
+   "strong_beat_chord_tone_pct": 86.5,
+   "rest_pct": 37.7,
+   "bars_with_lead": 56,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 56,
+   "notes_per_bar": 4.34,
+   "short_notes_pct": 15.6,
+   "mean_dur": 0.57
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.3,
+    "bars": 4.0,
+    "notes_per_bar": 12.0,
+    "mean_vel": 63.5,
+    "active": 2
+   },
+   {
+    "section": "verse",
+    "spec_energy": 0.5,
+    "bars": 16.0,
+    "notes_per_bar": 35.3,
+    "mean_vel": 74.8,
+    "active": 4
+   },
+   {
+    "section": "chorus",
+    "spec_energy": 0.7,
+    "bars": 8.0,
+    "notes_per_bar": 42.9,
+    "mean_vel": 81.0,
+    "active": 6
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 39.2,
+    "mean_vel": 77.0,
+    "active": 5
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.75,
+    "bars": 8.0,
+    "notes_per_bar": 43.2,
+    "mean_vel": 80.1,
+    "active": 6
+   },
+   {
+    "section": "bridge",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 28.2,
+    "mean_vel": 71.9,
+    "active": 4
+   },
+   {
+    "section": "chorus3",
+    "spec_energy": 0.8,
+    "bars": 8.0,
+    "notes_per_bar": 45.2,
+    "mean_vel": 80.8,
+    "active": 6
+   },
+   {
+    "section": "outro_vamp",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 35.0,
+    "mean_vel": 73.5,
+    "active": 4
+   }
+  ]
+ },
+ "pop_s1": {
+  "name": "pop_s1",
+  "genre": "pop",
+  "key": "G major",
+  "tempo": 116.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 76.0,
+  "programs": {
+   "Pop kit / electronic": null,
+   "Finger / synth bass": 33,
+   "Piano": 0,
+   "Synth pad": 90,
+   "Acoustic / clean guitar": 25,
+   "String section": 48,
+   "Synth hook (post-chorus)": 81,
+   "Vocal stand-in": 53
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Finger / synth bass": 100.0,
+   "Piano": 100.0,
+   "Synth pad": 100.0,
+   "Acoustic / clean guitar": 100.0,
+   "String section": 100.0,
+   "Synth hook (post-chorus)": 56.0,
+   "Vocal stand-in": 56.6
+  },
+  "progressions": {
+   "intro": "I vi IV V",
+   "verse1": "vi IV I V",
+   "pre_chorus": "I V vi IV",
+   "chorus1": "IV I V vi",
+   "post_chorus": "IVmaj7 V7 iii7 vi",
+   "verse2": "vi IV I V",
+   "pre_chorus2": "I V vi IV",
+   "chorus2": "IV I V vi",
+   "bridge": "vi IV I V",
+   "final_chorus": "I vi IV V",
+   "outro": "IVmaj7 V7 iii7 vi"
+  },
+  "strong_clash_pct": 1.5,
+  "kick_with_bass_pct": 93.4,
+  "bass_on_kick_pct": 46.0,
+  "bass_root_on_change_pct": 78.9,
+  "bass_range": [
+   31,
+   52
+  ],
+  "bass_notes_per_bar": 5.26,
+  "bass_downbeat_pct": 15.0,
+  "bass_big_leaps": 2,
+  "kick_steps": "x.....o.x.....o.",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 537,
+   "38": 199,
+   "36": 197,
+   "46": 112,
+   "39": 56,
+   "37": 28,
+   "49": 6
+  },
+  "drum_vel_sd": 22.4,
+  "timing_dev_ms_mean": 2.2,
+  "swing_ratio_8th": 0.502,
+  "swing_ratio_16th": 0.508,
+  "spec_swing": [
+   0.017,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.05,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   90,
+   130,
+   116
+  ],
+  "genre_file_kick": "x.......x.x.....",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "Pop kit / electronic": 22.4,
+   "Finger / synth bass": 11.3,
+   "Piano": 9.3,
+   "Synth pad": 7.9,
+   "Acoustic / clean guitar": 8.6,
+   "String section": 7.1,
+   "Synth hook (post-chorus)": 9.5,
+   "Vocal stand-in": 10.3
+  },
+  "offbeat_onset_pct": {
+   "Finger / synth bass": 63.8,
+   "Piano": 66.7,
+   "Synth pad": 0.0,
+   "Acoustic / clean guitar": 83.9,
+   "String section": 0.0,
+   "Synth hook (post-chorus)": 68.8,
+   "Vocal stand-in": 63.5
+  },
+  "voice_leading": {
+   "Piano": {
+    "chord_changes": 67,
+    "mean_motion": 3.9,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     54,
+     71
+    ],
+    "voices": 3.0,
+    "low_cluster": 0
+   },
+   "Synth pad": {
+    "chord_changes": 52,
+    "mean_motion": 3.0,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     47,
+     64
+    ],
+    "voices": 3.1,
+    "low_cluster": 0
+   },
+   "Acoustic / clean guitar": {
+    "chord_changes": 38,
+    "mean_motion": 3.3,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     54,
+     67
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "String section": {
+    "chord_changes": 38,
+    "mean_motion": 3,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     54,
+     64
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 125,
+   "range": [
+    66,
+    86
+   ],
+   "span": 20,
+   "step_pct": 75.8,
+   "leap_gt5th_pct": 2.4,
+   "max_leap": 12,
+   "dir_change_pct": 40.7,
+   "repeated_pitch_pct": 6.5,
+   "phrase_ends": 16,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 85.7,
+   "rest_pct": 22.6,
+   "bars_with_lead": 24,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 21,
+   "notes_per_bar": 5.21,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.59
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.4,
+    "bars": 4.0,
+    "notes_per_bar": 17.8,
+    "mean_vel": 73.3,
+    "active": 3
+   },
+   {
+    "section": "verse1",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 31.6,
+    "mean_vel": 77.5,
+    "active": 4
+   },
+   {
+    "section": "pre_chorus",
+    "spec_energy": 0.6,
+    "bars": 4.0,
+    "notes_per_bar": 48.5,
+    "mean_vel": 84.2,
+    "active": 5
+   },
+   {
+    "section": "chorus1",
+    "spec_energy": 0.85,
+    "bars": 8.0,
+    "notes_per_bar": 74.5,
+    "mean_vel": 85.0,
+    "active": 7
+   },
+   {
+    "section": "post_chorus",
+    "spec_energy": 0.75,
+    "bars": 4.0,
+    "notes_per_bar": 33.5,
+    "mean_vel": 91.1,
+    "active": 4
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 60.5,
+    "mean_vel": 74.1,
+    "active": 5
+   },
+   {
+    "section": "pre_chorus2",
+    "spec_energy": 0.65,
+    "bars": 4.0,
+    "notes_per_bar": 45.8,
+    "mean_vel": 83.9,
+    "active": 5
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.9,
+    "bars": 8.0,
+    "notes_per_bar": 77.0,
+    "mean_vel": 87.6,
+    "active": 7
+   },
+   {
+    "section": "bridge",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 32.6,
+    "mean_vel": 72.6,
+    "active": 5
+   },
+   {
+    "section": "final_chorus",
+    "spec_energy": 0.95,
+    "bars": 16.0,
+    "notes_per_bar": 82.4,
+    "mean_vel": 89.0,
+    "active": 8
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.35,
+    "bars": 4.0,
+    "notes_per_bar": 15.0,
+    "mean_vel": 64.7,
+    "active": 2
+   }
+  ]
+ },
+ "pop_s2": {
+  "name": "pop_s2",
+  "genre": "pop",
+  "key": "D major",
+  "tempo": 116.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 76.0,
+  "programs": {
+   "Pop kit / electronic": null,
+   "Finger / synth bass": 33,
+   "Piano": 0,
+   "Synth pad": 90,
+   "Acoustic / clean guitar": 25,
+   "String section": 48,
+   "Synth hook (post-chorus)": 81,
+   "Vocal stand-in": 53
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Finger / synth bass": 100.0,
+   "Piano": 100.0,
+   "Synth pad": 100.0,
+   "Acoustic / clean guitar": 100.0,
+   "String section": 100.0,
+   "Synth hook (post-chorus)": 57.1,
+   "Vocal stand-in": 57.1
+  },
+  "progressions": {
+   "intro": "I V vi IV",
+   "verse1": "IV I V vi",
+   "pre_chorus": "vi IV I V",
+   "chorus1": "I vi IV V",
+   "post_chorus": "IVmaj7 V7 iii7 vi",
+   "verse2": "IV I V vi",
+   "pre_chorus2": "vi IV I V",
+   "chorus2": "I vi IV V",
+   "bridge": "I V vi IV",
+   "final_chorus": "I vi IV V",
+   "outro": "IV I V vi"
+  },
+  "strong_clash_pct": 1.8,
+  "kick_with_bass_pct": 93.4,
+  "bass_on_kick_pct": 46.0,
+  "bass_root_on_change_pct": 78.9,
+  "bass_range": [
+   30,
+   50
+  ],
+  "bass_notes_per_bar": 5.26,
+  "bass_downbeat_pct": 15.0,
+  "bass_big_leaps": 0,
+  "kick_steps": "x.....o.x.....o.",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 527,
+   "36": 197,
+   "38": 191,
+   "46": 112,
+   "39": 56,
+   "37": 28,
+   "49": 6
+  },
+  "drum_vel_sd": 22.3,
+  "timing_dev_ms_mean": 2.2,
+  "swing_ratio_8th": 0.502,
+  "swing_ratio_16th": 0.508,
+  "spec_swing": [
+   0.017,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.05,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   90,
+   130,
+   116
+  ],
+  "genre_file_kick": "x.......x.x.....",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "Pop kit / electronic": 22.3,
+   "Finger / synth bass": 11.6,
+   "Piano": 9.3,
+   "Synth pad": 8.1,
+   "Acoustic / clean guitar": 8.1,
+   "String section": 6.7,
+   "Synth hook (post-chorus)": 8.8,
+   "Vocal stand-in": 9.8
+  },
+  "offbeat_onset_pct": {
+   "Finger / synth bass": 63.2,
+   "Piano": 66.7,
+   "Synth pad": 0.0,
+   "Acoustic / clean guitar": 84.2,
+   "String section": 0.0,
+   "Synth hook (post-chorus)": 65.1,
+   "Vocal stand-in": 62.5
+  },
+  "voice_leading": {
+   "Piano": {
+    "chord_changes": 71,
+    "mean_motion": 3.7,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     52,
+     67
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Synth pad": {
+    "chord_changes": 56,
+    "mean_motion": 3.0,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     50,
+     67
+    ],
+    "voices": 3.0,
+    "low_cluster": 0
+   },
+   "Acoustic / clean guitar": {
+    "chord_changes": 39,
+    "mean_motion": 3.4,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     52,
+     67
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "String section": {
+    "chord_changes": 39,
+    "mean_motion": 3,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     52,
+     62
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 126,
+   "range": [
+    64,
+    86
+   ],
+   "span": 22,
+   "step_pct": 76.0,
+   "leap_gt5th_pct": 0.8,
+   "max_leap": 10,
+   "dir_change_pct": 51.6,
+   "repeated_pitch_pct": 3.2,
+   "phrase_ends": 12,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 87.1,
+   "rest_pct": 15.4,
+   "bars_with_lead": 24,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 23,
+   "notes_per_bar": 5.25,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.64
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.4,
+    "bars": 4.0,
+    "notes_per_bar": 16.5,
+    "mean_vel": 71.7,
+    "active": 3
+   },
+   {
+    "section": "verse1",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 31.5,
+    "mean_vel": 77.5,
+    "active": 4
+   },
+   {
+    "section": "pre_chorus",
+    "spec_energy": 0.6,
+    "bars": 4.0,
+    "notes_per_bar": 49.5,
+    "mean_vel": 84.4,
+    "active": 5
+   },
+   {
+    "section": "chorus1",
+    "spec_energy": 0.85,
+    "bars": 8.0,
+    "notes_per_bar": 74.2,
+    "mean_vel": 86.2,
+    "active": 7
+   },
+   {
+    "section": "post_chorus",
+    "spec_energy": 0.75,
+    "bars": 4.0,
+    "notes_per_bar": 33.8,
+    "mean_vel": 91.7,
+    "active": 4
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 60.1,
+    "mean_vel": 75.5,
+    "active": 5
+   },
+   {
+    "section": "pre_chorus2",
+    "spec_energy": 0.65,
+    "bars": 4.0,
+    "notes_per_bar": 45.2,
+    "mean_vel": 82.7,
+    "active": 5
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.9,
+    "bars": 8.0,
+    "notes_per_bar": 74.1,
+    "mean_vel": 87.7,
+    "active": 7
+   },
+   {
+    "section": "bridge",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 31.9,
+    "mean_vel": 71.6,
+    "active": 5
+   },
+   {
+    "section": "final_chorus",
+    "spec_energy": 0.95,
+    "bars": 16.0,
+    "notes_per_bar": 83.6,
+    "mean_vel": 89.4,
+    "active": 8
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.35,
+    "bars": 4.0,
+    "notes_per_bar": 12.0,
+    "mean_vel": 66.4,
+    "active": 2
+   }
+  ]
+ },
+ "pop_s3": {
+  "name": "pop_s3",
+  "genre": "pop",
+  "key": "A major",
+  "tempo": 116.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 76.0,
+  "programs": {
+   "Pop kit / electronic": null,
+   "Finger / synth bass": 33,
+   "Piano": 0,
+   "Synth pad": 90,
+   "Acoustic / clean guitar": 25,
+   "String section": 48,
+   "Synth hook (post-chorus)": 81,
+   "Vocal stand-in": 53
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Finger / synth bass": 100.0,
+   "Piano": 100.0,
+   "Synth pad": 100.0,
+   "Acoustic / clean guitar": 100.0,
+   "String section": 100.0,
+   "Synth hook (post-chorus)": 60.5,
+   "Vocal stand-in": 61.6
+  },
+  "progressions": {
+   "intro": "vi IV I V",
+   "verse1": "IV I V vi",
+   "pre_chorus": "I V vi IV",
+   "chorus1": "IVmaj7 V7 iii7 vi",
+   "post_chorus": "I vi IV V",
+   "verse2": "IV I V vi",
+   "pre_chorus2": "I V vi IV",
+   "chorus2": "IVmaj7 V7 iii7 vi",
+   "bridge": "I vi IV V",
+   "final_chorus": "IVmaj7 V7 iii7 vi",
+   "outro": "I V vi IV"
+  },
+  "strong_clash_pct": 1.7,
+  "kick_with_bass_pct": 93.4,
+  "bass_on_kick_pct": 46.0,
+  "bass_root_on_change_pct": 78.9,
+  "bass_range": [
+   30,
+   52
+  ],
+  "bass_notes_per_bar": 5.26,
+  "bass_downbeat_pct": 15.0,
+  "bass_big_leaps": 2,
+  "kick_steps": "x.....o.x.....o.",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 535,
+   "36": 197,
+   "38": 193,
+   "46": 112,
+   "39": 56,
+   "37": 28,
+   "49": 6
+  },
+  "drum_vel_sd": 22.3,
+  "timing_dev_ms_mean": 2.2,
+  "swing_ratio_8th": 0.502,
+  "swing_ratio_16th": 0.508,
+  "spec_swing": [
+   0.017,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.05,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   90,
+   130,
+   116
+  ],
+  "genre_file_kick": "x.......x.x.....",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "Pop kit / electronic": 22.3,
+   "Finger / synth bass": 11.5,
+   "Piano": 9.2,
+   "Synth pad": 7.7,
+   "Acoustic / clean guitar": 7.7,
+   "String section": 6.9,
+   "Synth hook (post-chorus)": 9.3,
+   "Vocal stand-in": 9.6
+  },
+  "offbeat_onset_pct": {
+   "Finger / synth bass": 66.5,
+   "Piano": 66.7,
+   "Synth pad": 0.0,
+   "Acoustic / clean guitar": 85.0,
+   "String section": 0.0,
+   "Synth hook (post-chorus)": 61.2,
+   "Vocal stand-in": 64.1
+  },
+  "voice_leading": {
+   "Piano": {
+    "chord_changes": 55,
+    "mean_motion": 3.6,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     50,
+     66
+    ],
+    "voices": 3.3,
+    "low_cluster": 0
+   },
+   "Synth pad": {
+    "chord_changes": 43,
+    "mean_motion": 3.2,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     49,
+     66
+    ],
+    "voices": 3.4,
+    "low_cluster": 3
+   },
+   "Acoustic / clean guitar": {
+    "chord_changes": 24,
+    "mean_motion": 4.3,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     50,
+     66
+    ],
+    "voices": 3.6,
+    "low_cluster": 0
+   },
+   "String section": {
+    "chord_changes": 24,
+    "mean_motion": 3.0,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     49,
+     66
+    ],
+    "voices": 3.6,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 129,
+   "range": [
+    64,
+    86
+   ],
+   "span": 22,
+   "step_pct": 75.8,
+   "leap_gt5th_pct": 2.3,
+   "max_leap": 11,
+   "dir_change_pct": 35.4,
+   "repeated_pitch_pct": 8.6,
+   "phrase_ends": 13,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 93.8,
+   "rest_pct": 14.4,
+   "bars_with_lead": 24,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 22,
+   "notes_per_bar": 5.38,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.64
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.4,
+    "bars": 4.0,
+    "notes_per_bar": 17.8,
+    "mean_vel": 71.2,
+    "active": 3
+   },
+   {
+    "section": "verse1",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 31.6,
+    "mean_vel": 78.3,
+    "active": 4
+   },
+   {
+    "section": "pre_chorus",
+    "spec_energy": 0.6,
+    "bars": 4.0,
+    "notes_per_bar": 48.0,
+    "mean_vel": 83.5,
+    "active": 5
+   },
+   {
+    "section": "chorus1",
+    "spec_energy": 0.85,
+    "bars": 8.0,
+    "notes_per_bar": 86.5,
+    "mean_vel": 85.1,
+    "active": 7
+   },
+   {
+    "section": "post_chorus",
+    "spec_energy": 0.75,
+    "bars": 4.0,
+    "notes_per_bar": 31.8,
+    "mean_vel": 91.1,
+    "active": 4
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 59.8,
+    "mean_vel": 75.9,
+    "active": 5
+   },
+   {
+    "section": "pre_chorus2",
+    "spec_energy": 0.65,
+    "bars": 4.0,
+    "notes_per_bar": 45.2,
+    "mean_vel": 84.1,
+    "active": 5
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.9,
+    "bars": 8.0,
+    "notes_per_bar": 87.0,
+    "mean_vel": 86.5,
+    "active": 7
+   },
+   {
+    "section": "bridge",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 30.6,
+    "mean_vel": 71.1,
+    "active": 5
+   },
+   {
+    "section": "final_chorus",
+    "spec_energy": 0.95,
+    "bars": 16.0,
+    "notes_per_bar": 93.8,
+    "mean_vel": 88.3,
+    "active": 8
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.35,
+    "bars": 4.0,
+    "notes_per_bar": 12.0,
+    "mean_vel": 64.4,
+    "active": 2
+   }
+  ]
+ },
+ "reggae_s1": {
+  "name": "reggae_s1",
+  "genre": "reggae",
+  "key": "G major",
+  "tempo": 74.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 76.0,
+  "programs": {
+   "Reggae kit": null,
+   "Electric bass (dark)": 33,
+   "Skank guitar": 27,
+   "Organ bubble": 16,
+   "Piano skank": 0,
+   "Horn section": 61,
+   "Melodica / vocal stand-in": 22
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Electric bass (dark)": 74.3,
+   "Skank guitar": 100.0,
+   "Organ bubble": 100.0,
+   "Piano skank": 100.0,
+   "Horn section": 98.2,
+   "Melodica / vocal stand-in": 64.5
+  },
+  "progressions": {
+   "intro": "I V vi IV",
+   "verse": "I IV",
+   "chorus": "I IV V IV",
+   "verse2": "I IV",
+   "chorus2": "I IV V IV",
+   "dub_break": "I V vi IV",
+   "chorus3": "I IV V IV",
+   "outro": "I V vi IV"
+  },
+  "strong_clash_pct": 0.9,
+  "kick_with_bass_pct": 87.4,
+  "bass_on_kick_pct": 32.8,
+  "bass_root_on_change_pct": 89.5,
+  "bass_range": [
+   30,
+   50
+  ],
+  "bass_notes_per_bar": 3.89,
+  "bass_downbeat_pct": 19.3,
+  "bass_big_leaps": 1,
+  "kick_steps": "o.......x.......",
+  "snare_steps": "................",
+  "drum_pitches": {
+   "42": 660,
+   "36": 111,
+   "37": 74,
+   "46": 56,
+   "38": 28,
+   "50": 9,
+   "45": 9,
+   "49": 4
+  },
+  "drum_vel_sd": 23.9,
+  "timing_dev_ms_mean": 10.3,
+  "swing_ratio_8th": 0.508,
+  "swing_ratio_16th": 0.562,
+  "spec_swing": [
+   0.1,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.3,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   60,
+   90,
+   74
+  ],
+  "genre_file_kick": "........x.......",
+  "genre_file_snare": null,
+  "vel_sd": {
+   "Reggae kit": 23.9,
+   "Electric bass (dark)": 18.6,
+   "Skank guitar": 8.2,
+   "Organ bubble": 8.2,
+   "Piano skank": 8.2,
+   "Horn section": 8.1,
+   "Melodica / vocal stand-in": 9.4
+  },
+  "offbeat_onset_pct": {
+   "Electric bass (dark)": 59.8,
+   "Skank guitar": 13.0,
+   "Organ bubble": 100.0,
+   "Piano skank": 56.0,
+   "Horn section": 55.7,
+   "Melodica / vocal stand-in": 59.8
+  },
+  "voice_leading": {
+   "Skank guitar": {
+    "chord_changes": 67,
+    "mean_motion": 3.8,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     55,
+     67
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Organ bubble": {
+    "chord_changes": 67,
+    "mean_motion": 3.8,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     55,
+     67
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Piano skank": {
+    "chord_changes": 55,
+    "mean_motion": 3.9,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     55,
+     67
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Horn section": {
+    "chord_changes": 23,
+    "mean_motion": 5.1,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     55,
+     67
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 234,
+   "range": [
+    64,
+    86
+   ],
+   "span": 22,
+   "step_pct": 57.9,
+   "leap_gt5th_pct": 2.6,
+   "max_leap": 12,
+   "dir_change_pct": 46.6,
+   "repeated_pitch_pct": 11.6,
+   "phrase_ends": 54,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 77.6,
+   "rest_pct": 29.7,
+   "bars_with_lead": 56,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 50,
+   "notes_per_bar": 4.18,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.67
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.4,
+    "bars": 4.0,
+    "notes_per_bar": 38.2,
+    "mean_vel": 74.5,
+    "active": 4
+   },
+   {
+    "section": "verse",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 54.1,
+    "mean_vel": 78.0,
+    "active": 6
+   },
+   {
+    "section": "chorus",
+    "spec_energy": 0.7,
+    "bars": 8.0,
+    "notes_per_bar": 78.9,
+    "mean_vel": 78.2,
+    "active": 7
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 54.0,
+    "mean_vel": 78.6,
+    "active": 6
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.75,
+    "bars": 8.0,
+    "notes_per_bar": 85.0,
+    "mean_vel": 79.4,
+    "active": 7
+   },
+   {
+    "section": "dub_break",
+    "spec_energy": 0.35,
+    "bars": 8.0,
+    "notes_per_bar": 8.6,
+    "mean_vel": 79.9,
+    "active": 2
+   },
+   {
+    "section": "chorus3",
+    "spec_energy": 0.75,
+    "bars": 8.0,
+    "notes_per_bar": 69.2,
+    "mean_vel": 85.1,
+    "active": 7
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 38.0,
+    "mean_vel": 76.5,
+    "active": 4
+   }
+  ]
+ },
+ "rock_s1": {
+  "name": "rock_s1",
+  "genre": "rock",
+  "key": "A major",
+  "tempo": 120.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 100.0,
+  "programs": {
+   "Rock kit": null,
+   "Picked electric bass": 34,
+   "Distorted rhythm guitar": 30,
+   "Rock organ": 18,
+   "Lead guitar": 29
+  },
+  "tech": [],
+  "in_key_pct": 99.4,
+  "chord_tone_pct": {
+   "Picked electric bass": 93.6,
+   "Distorted rhythm guitar": 100.0,
+   "Rock organ": 100.0,
+   "Lead guitar": 63.3
+  },
+  "progressions": {
+   "intro": "I IV V IV",
+   "verse": "vi IV I V",
+   "chorus": "I IV V IV",
+   "verse2": "vi IV I V",
+   "chorus2": "I IV V IV",
+   "solo": "I IV V IV",
+   "bridge": "I IV V IV",
+   "final_chorus": "vi IV I V",
+   "outro": "I IV V IV"
+  },
+  "strong_clash_pct": 0.3,
+  "kick_with_bass_pct": 85.5,
+  "bass_on_kick_pct": 40.6,
+  "bass_root_on_change_pct": 100.0,
+  "bass_range": [
+   32,
+   49
+  ],
+  "bass_notes_per_bar": 6.08,
+  "bass_downbeat_pct": 16.4,
+  "bass_big_leaps": 1,
+  "kick_steps": "x.....o.x.x.....",
+  "snare_steps": "....x...o...x...",
+  "drum_pitches": {
+   "42": 385,
+   "46": 336,
+   "36": 289,
+   "38": 289,
+   "49": 45,
+   "51": 32,
+   "50": 18,
+   "41": 18
+  },
+  "drum_vel_sd": 18.0,
+  "timing_dev_ms_mean": 4.0,
+  "swing_ratio_8th": 0.5,
+  "swing_ratio_16th": 0.5,
+  "spec_swing": [
+   0.0,
+   "1/8"
+  ],
+  "genre_file_swing": [
+   0.0,
+   "8th"
+  ],
+  "genre_file_tempo": [
+   100,
+   160,
+   120
+  ],
+  "genre_file_kick": "x.......x.x.....",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "Rock kit": 18.0,
+   "Picked electric bass": 20.2,
+   "Distorted rhythm guitar": 10.0,
+   "Rock organ": 8.7,
+   "Lead guitar": 9.3
+  },
+  "offbeat_onset_pct": {
+   "Picked electric bass": 65.3,
+   "Distorted rhythm guitar": 66.9,
+   "Rock organ": 0.0,
+   "Lead guitar": 49.6
+  },
+  "voice_leading": {
+   "Distorted rhythm guitar": {
+    "chord_changes": 99,
+    "mean_motion": 13.4,
+    "max_voice_leap": 7,
+    "parallel_5_8": 198,
+    "range": [
+     50,
+     69
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Rock organ": {
+    "chord_changes": 63,
+    "mean_motion": 3.6,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     56,
+     66
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 226,
+   "range": [
+    64,
+    86
+   ],
+   "span": 22,
+   "step_pct": 54.7,
+   "leap_gt5th_pct": 4.0,
+   "max_leap": 12,
+   "dir_change_pct": 37.9,
+   "repeated_pitch_pct": 10.2,
+   "phrase_ends": 31,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 76.9,
+   "rest_pct": 25.3,
+   "bars_with_lead": 60,
+   "repeated_bar_pct": 3.3,
+   "distinct_bar_rhythms": 49,
+   "notes_per_bar": 3.77,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.79
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.6,
+    "bars": 8.0,
+    "notes_per_bar": 49.4,
+    "mean_vel": 82.0,
+    "active": 4
+   },
+   {
+    "section": "verse",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 44.6,
+    "mean_vel": 76.0,
+    "active": 3
+   },
+   {
+    "section": "chorus",
+    "spec_energy": 0.85,
+    "bars": 8.0,
+    "notes_per_bar": 50.6,
+    "mean_vel": 85.5,
+    "active": 5
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.6,
+    "bars": 16.0,
+    "notes_per_bar": 47.7,
+    "mean_vel": 77.3,
+    "active": 4
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.9,
+    "bars": 8.0,
+    "notes_per_bar": 52.0,
+    "mean_vel": 87.6,
+    "active": 5
+   },
+   {
+    "section": "solo",
+    "spec_energy": 0.85,
+    "bars": 16.0,
+    "notes_per_bar": 49.8,
+    "mean_vel": 86.2,
+    "active": 5
+   },
+   {
+    "section": "bridge",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 40.0,
+    "mean_vel": 79.0,
+    "active": 3
+   },
+   {
+    "section": "final_chorus",
+    "spec_energy": 0.95,
+    "bars": 16.0,
+    "notes_per_bar": 51.6,
+    "mean_vel": 89.1,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.7,
+    "bars": 4.0,
+    "notes_per_bar": 50.8,
+    "mean_vel": 83.0,
+    "active": 4
+   }
+  ]
+ },
+ "rock_s2": {
+  "name": "rock_s2",
+  "genre": "rock",
+  "key": "D major",
+  "tempo": 120.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 100.0,
+  "programs": {
+   "Rock kit": null,
+   "Picked electric bass": 34,
+   "Distorted rhythm guitar": 30,
+   "Rock organ": 18,
+   "Lead guitar": 29
+  },
+  "tech": [],
+  "in_key_pct": 99.5,
+  "chord_tone_pct": {
+   "Picked electric bass": 93.6,
+   "Distorted rhythm guitar": 100.0,
+   "Rock organ": 100.0,
+   "Lead guitar": 66.1
+  },
+  "progressions": {
+   "intro": "vi IV I V",
+   "verse": "I IV V IV",
+   "chorus": "I IV V IV",
+   "verse2": "I IV V IV",
+   "chorus2": "I IV V IV",
+   "solo": "I IV V IV",
+   "bridge": "I IV V IV",
+   "final_chorus": "vi IV I V",
+   "outro": "vi IV I V"
+  },
+  "strong_clash_pct": 1.2,
+  "kick_with_bass_pct": 85.5,
+  "bass_on_kick_pct": 40.6,
+  "bass_root_on_change_pct": 100.0,
+  "bass_range": [
+   30,
+   50
+  ],
+  "bass_notes_per_bar": 6.08,
+  "bass_downbeat_pct": 16.4,
+  "bass_big_leaps": 8,
+  "kick_steps": "x.....o.x.x.....",
+  "snare_steps": "....x...o...x...",
+  "drum_pitches": {
+   "42": 381,
+   "46": 336,
+   "38": 295,
+   "36": 289,
+   "49": 45,
+   "51": 32,
+   "50": 18,
+   "41": 18
+  },
+  "drum_vel_sd": 18.0,
+  "timing_dev_ms_mean": 4.0,
+  "swing_ratio_8th": 0.5,
+  "swing_ratio_16th": 0.5,
+  "spec_swing": [
+   0.0,
+   "1/8"
+  ],
+  "genre_file_swing": [
+   0.0,
+   "8th"
+  ],
+  "genre_file_tempo": [
+   100,
+   160,
+   120
+  ],
+  "genre_file_kick": "x.......x.x.....",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "Rock kit": 18.0,
+   "Picked electric bass": 19.7,
+   "Distorted rhythm guitar": 9.8,
+   "Rock organ": 9.3,
+   "Lead guitar": 9.2
+  },
+  "offbeat_onset_pct": {
+   "Picked electric bass": 65.5,
+   "Distorted rhythm guitar": 67.8,
+   "Rock organ": 0.0,
+   "Lead guitar": 41.3
+  },
+  "voice_leading": {
+   "Distorted rhythm guitar": {
+    "chord_changes": 99,
+    "mean_motion": 11.5,
+    "max_voice_leap": 7,
+    "parallel_5_8": 198,
+    "range": [
+     50,
+     71
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Rock organ": {
+    "chord_changes": 63,
+    "mean_motion": 4.1,
+    "max_voice_leap": 3,
+    "parallel_5_8": 0,
+    "range": [
+     52,
+     67
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 230,
+   "range": [
+    64,
+    86
+   ],
+   "span": 22,
+   "step_pct": 57.6,
+   "leap_gt5th_pct": 3.9,
+   "max_leap": 12,
+   "dir_change_pct": 40.4,
+   "repeated_pitch_pct": 8.7,
+   "phrase_ends": 28,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 84.3,
+   "rest_pct": 19.2,
+   "bars_with_lead": 60,
+   "repeated_bar_pct": 0.0,
+   "distinct_bar_rhythms": 50,
+   "notes_per_bar": 3.83,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.84
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.6,
+    "bars": 8.0,
+    "notes_per_bar": 48.8,
+    "mean_vel": 81.7,
+    "active": 4
+   },
+   {
+    "section": "verse",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 44.6,
+    "mean_vel": 77.3,
+    "active": 3
+   },
+   {
+    "section": "chorus",
+    "spec_energy": 0.85,
+    "bars": 8.0,
+    "notes_per_bar": 52.0,
+    "mean_vel": 86.5,
+    "active": 5
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.6,
+    "bars": 16.0,
+    "notes_per_bar": 47.7,
+    "mean_vel": 76.5,
+    "active": 4
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.9,
+    "bars": 8.0,
+    "notes_per_bar": 49.9,
+    "mean_vel": 87.4,
+    "active": 5
+   },
+   {
+    "section": "solo",
+    "spec_energy": 0.85,
+    "bars": 16.0,
+    "notes_per_bar": 50.9,
+    "mean_vel": 85.9,
+    "active": 5
+   },
+   {
+    "section": "bridge",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 40.0,
+    "mean_vel": 78.9,
+    "active": 3
+   },
+   {
+    "section": "final_chorus",
+    "spec_energy": 0.95,
+    "bars": 16.0,
+    "notes_per_bar": 51.3,
+    "mean_vel": 88.0,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.7,
+    "bars": 4.0,
+    "notes_per_bar": 51.5,
+    "mean_vel": 84.9,
+    "active": 4
+   }
+  ]
+ },
+ "rock_s3": {
+  "name": "rock_s3",
+  "genre": "rock",
+  "key": "G major",
+  "tempo": 120.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 100.0,
+  "programs": {
+   "Rock kit": null,
+   "Picked electric bass": 34,
+   "Distorted rhythm guitar": 30,
+   "Rock organ": 18,
+   "Lead guitar": 29
+  },
+  "tech": [],
+  "in_key_pct": 99.3,
+  "chord_tone_pct": {
+   "Picked electric bass": 93.6,
+   "Distorted rhythm guitar": 100.0,
+   "Rock organ": 100.0,
+   "Lead guitar": 66.5
+  },
+  "progressions": {
+   "intro": "I IV V IV",
+   "verse": "vi IV I V",
+   "chorus": "I IV V IV",
+   "verse2": "vi IV I V",
+   "chorus2": "I IV V IV",
+   "solo": "I IV V IV",
+   "bridge": "vi IV I V",
+   "final_chorus": "I IV V IV",
+   "outro": "I IV V IV"
+  },
+  "strong_clash_pct": 0.6,
+  "kick_with_bass_pct": 85.5,
+  "bass_on_kick_pct": 40.6,
+  "bass_root_on_change_pct": 100.0,
+  "bass_range": [
+   30,
+   45
+  ],
+  "bass_notes_per_bar": 6.08,
+  "bass_downbeat_pct": 16.4,
+  "bass_big_leaps": 0,
+  "kick_steps": "x.....o.x.x.....",
+  "snare_steps": "....x...o...x...",
+  "drum_pitches": {
+   "42": 378,
+   "46": 336,
+   "38": 291,
+   "36": 289,
+   "49": 45,
+   "51": 32,
+   "50": 18,
+   "41": 18
+  },
+  "drum_vel_sd": 17.7,
+  "timing_dev_ms_mean": 3.9,
+  "swing_ratio_8th": 0.5,
+  "swing_ratio_16th": 0.508,
+  "spec_swing": [
+   0.0,
+   "1/8"
+  ],
+  "genre_file_swing": [
+   0.0,
+   "8th"
+  ],
+  "genre_file_tempo": [
+   100,
+   160,
+   120
+  ],
+  "genre_file_kick": "x.......x.x.....",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "Rock kit": 17.7,
+   "Picked electric bass": 20.0,
+   "Distorted rhythm guitar": 9.6,
+   "Rock organ": 8.9,
+   "Lead guitar": 9.1
+  },
+  "offbeat_onset_pct": {
+   "Picked electric bass": 65.6,
+   "Distorted rhythm guitar": 67.2,
+   "Rock organ": 0.0,
+   "Lead guitar": 41.7
+  },
+  "voice_leading": {
+   "Distorted rhythm guitar": {
+    "chord_changes": 99,
+    "mean_motion": 20.1,
+    "max_voice_leap": 10,
+    "parallel_5_8": 198,
+    "range": [
+     50,
+     72
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Rock organ": {
+    "chord_changes": 63,
+    "mean_motion": 4.5,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     54,
+     67
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 218,
+   "range": [
+    64,
+    84
+   ],
+   "span": 20,
+   "step_pct": 56.2,
+   "leap_gt5th_pct": 5.5,
+   "max_leap": 12,
+   "dir_change_pct": 55.1,
+   "repeated_pitch_pct": 8.3,
+   "phrase_ends": 31,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 84.6,
+   "rest_pct": 22.8,
+   "bars_with_lead": 60,
+   "repeated_bar_pct": 6.7,
+   "distinct_bar_rhythms": 49,
+   "notes_per_bar": 3.63,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.85
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.6,
+    "bars": 8.0,
+    "notes_per_bar": 48.6,
+    "mean_vel": 83.3,
+    "active": 4
+   },
+   {
+    "section": "verse",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 44.6,
+    "mean_vel": 77.0,
+    "active": 3
+   },
+   {
+    "section": "chorus",
+    "spec_energy": 0.85,
+    "bars": 8.0,
+    "notes_per_bar": 50.8,
+    "mean_vel": 85.3,
+    "active": 5
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.6,
+    "bars": 16.0,
+    "notes_per_bar": 47.7,
+    "mean_vel": 77.6,
+    "active": 4
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.9,
+    "bars": 8.0,
+    "notes_per_bar": 51.4,
+    "mean_vel": 86.9,
+    "active": 5
+   },
+   {
+    "section": "solo",
+    "spec_energy": 0.85,
+    "bars": 16.0,
+    "notes_per_bar": 50.8,
+    "mean_vel": 86.5,
+    "active": 5
+   },
+   {
+    "section": "bridge",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 40.0,
+    "mean_vel": 78.7,
+    "active": 3
+   },
+   {
+    "section": "final_chorus",
+    "spec_energy": 0.95,
+    "bars": 16.0,
+    "notes_per_bar": 50.6,
+    "mean_vel": 88.7,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.7,
+    "bars": 4.0,
+    "notes_per_bar": 50.2,
+    "mean_vel": 84.2,
+    "active": 4
+   }
+  ]
+ },
+ "synthwave_s1": {
+  "name": "synthwave_s1",
+  "genre": "synthwave",
+  "key": "E minor",
+  "tempo": 100.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 128.0,
+  "programs": {
+   "80s drum machine": null,
+   "Analog synth bass": 39,
+   "Synth brass": 62,
+   "Polysynth pad": 90,
+   "Arpeggiator": 80,
+   "Synth strings": 50,
+   "Saw / square lead": 81
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Analog synth bass": 95.2,
+   "Synth brass": 84.6,
+   "Polysynth pad": 95.8,
+   "Arpeggiator": 91.1,
+   "Synth strings": 93.3,
+   "Saw / square lead": 59.4
+  },
+  "progressions": {
+   "intro": "iadd9 bVImaj7 bIIIadd9 bVII",
+   "intro_drums": "i bVI bIII bVII",
+   "verse": "i bVII bVI bVII",
+   "chorus": "i bVI bIII bVII",
+   "verse2": "i bVII bVI bVII",
+   "chorus2": "i bVI bIII bVII",
+   "solo": "i bVI bIII bVII",
+   "breakdown": "i bVII bVI bVII",
+   "final_chorus": "iadd9 bVImaj7 bIIIadd9 bVII",
+   "outro": "i bVI bIII bVII"
+  },
+  "strong_clash_pct": 2.0,
+  "kick_with_bass_pct": 95.0,
+  "bass_on_kick_pct": 22.8,
+  "bass_root_on_change_pct": 71.9,
+  "bass_range": [
+   31,
+   52
+  ],
+  "bass_notes_per_bar": 10.5,
+  "bass_downbeat_pct": 7.7,
+  "bass_big_leaps": 20,
+  "kick_steps": "x...o...x...o...",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 1200,
+   "36": 322,
+   "38": 258,
+   "46": 212,
+   "50": 24,
+   "47": 24,
+   "45": 24,
+   "41": 24
+  },
+  "drum_vel_sd": 23.8,
+  "timing_dev_ms_mean": 0.9,
+  "swing_ratio_8th": 0.502,
+  "swing_ratio_16th": 0.5,
+  "spec_swing": [
+   0.0,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.0,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   80,
+   120,
+   100
+  ],
+  "genre_file_kick": "x.......x.......",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "80s drum machine": 23.8,
+   "Analog synth bass": 14.6,
+   "Synth brass": 5.2,
+   "Polysynth pad": 6.6,
+   "Arpeggiator": 8.1,
+   "Synth strings": 6.9,
+   "Saw / square lead": 6.1
+  },
+  "offbeat_onset_pct": {
+   "Analog synth bass": 77.0,
+   "Synth brass": 50.0,
+   "Polysynth pad": 0.0,
+   "Arpeggiator": 81.5,
+   "Synth strings": 0.0,
+   "Saw / square lead": 29.2
+  },
+  "voice_leading": {
+   "Synth brass": {
+    "chord_changes": 35,
+    "mean_motion": 3.5,
+    "max_voice_leap": 5,
+    "parallel_5_8": 0,
+    "range": [
+     54,
+     71
+    ],
+    "voices": 3.2,
+    "low_cluster": 0
+   },
+   "Polysynth pad": {
+    "chord_changes": 110,
+    "mean_motion": 4.0,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     47,
+     66
+    ],
+    "voices": 3.1,
+    "low_cluster": 0
+   },
+   "Synth strings": {
+    "chord_changes": 43,
+    "mean_motion": 4.6,
+    "max_voice_leap": 4,
+    "parallel_5_8": 0,
+    "range": [
+     47,
+     66
+    ],
+    "voices": 3.1,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 202,
+   "range": [
+    66,
+    86
+   ],
+   "span": 20,
+   "step_pct": 63.2,
+   "leap_gt5th_pct": 7.0,
+   "max_leap": 13,
+   "dir_change_pct": 42.5,
+   "repeated_pitch_pct": 9.0,
+   "phrase_ends": 17,
+   "phrase_end_chord_tone_pct": 76.5,
+   "strong_beat_chord_tone_pct": 75.2,
+   "rest_pct": 12.8,
+   "bars_with_lead": 64,
+   "repeated_bar_pct": 81.2,
+   "distinct_bar_rhythms": 4,
+   "notes_per_bar": 3.16,
+   "short_notes_pct": 0.0,
+   "mean_dur": 1.1
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 8.0,
+    "notes_per_bar": 17.9,
+    "mean_vel": 67.7,
+    "active": 2
+   },
+   {
+    "section": "intro_drums",
+    "spec_energy": 0.5,
+    "bars": 8.0,
+    "notes_per_bar": 37.0,
+    "mean_vel": 75.7,
+    "active": 4
+   },
+   {
+    "section": "verse",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 38.8,
+    "mean_vel": 82.9,
+    "active": 4
+   },
+   {
+    "section": "chorus",
+    "spec_energy": 0.8,
+    "bars": 16.0,
+    "notes_per_bar": 67.4,
+    "mean_vel": 83.9,
+    "active": 6
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.6,
+    "bars": 16.0,
+    "notes_per_bar": 42.4,
+    "mean_vel": 81.9,
+    "active": 5
+   },
+   {
+    "section": "chorus2",
+    "spec_energy": 0.85,
+    "bars": 16.0,
+    "notes_per_bar": 68.2,
+    "mean_vel": 85.1,
+    "active": 6
+   },
+   {
+    "section": "solo",
+    "spec_energy": 0.8,
+    "bars": 16.0,
+    "notes_per_bar": 50.6,
+    "mean_vel": 83.5,
+    "active": 5
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.35,
+    "bars": 8.0,
+    "notes_per_bar": 22.0,
+    "mean_vel": 65.9,
+    "active": 3
+   },
+   {
+    "section": "final_chorus",
+    "spec_energy": 0.95,
+    "bars": 16.0,
+    "notes_per_bar": 70.4,
+    "mean_vel": 86.9,
+    "active": 7
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.4,
+    "bars": 8.0,
+    "notes_per_bar": 29.0,
+    "mean_vel": 68.3,
+    "active": 3
+   }
+  ]
+ },
+ "techno_s1": {
+  "name": "techno_s1",
+  "genre": "techno",
+  "key": "F minor",
+  "tempo": 130.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 136.0,
+  "programs": {
+   "Drum machine (909-style)": null,
+   "Synth bass": 38,
+   "Synth stab": 90,
+   "Atmospheric pad": 95,
+   "Acid / saw lead": 81
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "Synth bass": 95.6,
+   "Synth stab": 100.0,
+   "Atmospheric pad": 100.0,
+   "Acid / saw lead": 60.4
+  },
+  "progressions": {
+   "intro": "i9 bVImaj9",
+   "build_in": "i7",
+   "main_a": "i7",
+   "breakdown": "i7",
+   "build": "i7",
+   "peak": "i7",
+   "outro": "i9 bVImaj9"
+  },
+  "strong_clash_pct": 3.9,
+  "kick_with_bass_pct": 25.3,
+  "bass_on_kick_pct": 13.7,
+  "bass_root_on_change_pct": 64.7,
+  "bass_range": [
+   25,
+   41
+  ],
+  "bass_notes_per_bar": 8.0,
+  "bass_downbeat_pct": 2.9,
+  "bass_big_leaps": 4,
+  "kick_steps": "x.o.x.o.x.o.x.o.",
+  "snare_steps": "....x.......x...",
+  "drum_pitches": {
+   "42": 1090,
+   "36": 588,
+   "46": 308,
+   "51": 248,
+   "38": 192,
+   "39": 154,
+   "37": 124,
+   "49": 4
+  },
+  "drum_vel_sd": 26.2,
+  "timing_dev_ms_mean": 2.0,
+  "swing_ratio_8th": 0.502,
+  "swing_ratio_16th": 0.513,
+  "spec_swing": [
+   0.027,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.08,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   125,
+   140,
+   130
+  ],
+  "genre_file_kick": "x...x...x...x...",
+  "genre_file_snare": "....x.......x...",
+  "vel_sd": {
+   "Drum machine (909-style)": 26.2,
+   "Synth bass": 10.9,
+   "Synth stab": 9.1,
+   "Atmospheric pad": 4.9,
+   "Acid / saw lead": 4.7
+  },
+  "offbeat_onset_pct": {
+   "Synth bass": 95.6,
+   "Synth stab": 100.0,
+   "Atmospheric pad": 0.0,
+   "Acid / saw lead": 71.4
+  },
+  "voice_leading": {
+   "Synth stab": {
+    "chord_changes": 0,
+    "mean_motion": 0,
+    "max_voice_leap": 0,
+    "parallel_5_8": 0,
+    "range": [
+     56,
+     65
+    ],
+    "voices": 4,
+    "low_cluster": 0
+   },
+   "Atmospheric pad": {
+    "chord_changes": 0,
+    "mean_motion": 0,
+    "max_voice_leap": 0,
+    "parallel_5_8": 0,
+    "range": [
+     53,
+     63
+    ],
+    "voices": 4,
+    "low_cluster": 0
+   }
+  },
+  "melody": {
+   "notes": 280,
+   "range": [
+    63,
+    84
+   ],
+   "span": 21,
+   "step_pct": 61.3,
+   "leap_gt5th_pct": 3.2,
+   "max_leap": 12,
+   "dir_change_pct": 47.5,
+   "repeated_pitch_pct": 4.3,
+   "phrase_ends": 13,
+   "phrase_end_chord_tone_pct": 100.0,
+   "strong_beat_chord_tone_pct": 75.0,
+   "rest_pct": 40.7,
+   "bars_with_lead": 32,
+   "repeated_bar_pct": 56.2,
+   "distinct_bar_rhythms": 6,
+   "notes_per_bar": 8.75,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.27
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.4,
+    "bars": 16.0,
+    "notes_per_bar": 13.0,
+    "mean_vel": 69.4,
+    "active": 1
+   },
+   {
+    "section": "build_in",
+    "spec_energy": 0.55,
+    "bars": 16.0,
+    "notes_per_bar": 34.3,
+    "mean_vel": 73.8,
+    "active": 2
+   },
+   {
+    "section": "main_a",
+    "spec_energy": 0.75,
+    "bars": 32.0,
+    "notes_per_bar": 42.2,
+    "mean_vel": 77.4,
+    "active": 3
+   },
+   {
+    "section": "breakdown",
+    "spec_energy": 0.35,
+    "bars": 16.0,
+    "notes_per_bar": 9.0,
+    "mean_vel": 65.6,
+    "active": 2
+   },
+   {
+    "section": "build",
+    "spec_energy": 0.6,
+    "bars": 8.0,
+    "notes_per_bar": 22.6,
+    "mean_vel": 76.6,
+    "active": 2
+   },
+   {
+    "section": "peak",
+    "spec_energy": 0.95,
+    "bars": 32.0,
+    "notes_per_bar": 60.1,
+    "mean_vel": 78.4,
+    "active": 4
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.4,
+    "bars": 16.0,
+    "notes_per_bar": 24.0,
+    "mean_vel": 73.7,
+    "active": 2
+   }
+  ]
+ },
+ "trap_s1": {
+  "name": "trap_s1",
+  "genre": "trap",
+  "key": "C# minor",
+  "tempo": 140.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 104.0,
+  "programs": {
+   "808 drum kit": null,
+   "808 bass": 38,
+   "Piano / dark strings": 0,
+   "Choir / dark pad": 91,
+   "Bells / music box / flute": 10
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "808 bass": 100.0,
+   "Piano / dark strings": 100.0,
+   "Choir / dark pad": 97.9,
+   "Bells / music box / flute": 59.1
+  },
+  "progressions": {
+   "intro": "i bVI",
+   "hook": "i bVI bIII bVII",
+   "verse": "i bVI bIII bVII",
+   "hook2": "i bVI bIII bVII",
+   "verse2": "i bVI bIII bVII",
+   "bridge": "i bVI",
+   "hook3": "i bVI bIII bVII",
+   "outro": "i bVI bIII bVII"
+  },
+  "strong_clash_pct": 3.5,
+  "kick_with_bass_pct": 57.8,
+  "bass_on_kick_pct": 56.6,
+  "bass_root_on_change_pct": 76.9,
+  "bass_range": [
+   28,
+   47
+  ],
+  "bass_notes_per_bar": 2.77,
+  "bass_downbeat_pct": 27.8,
+  "bass_big_leaps": 8,
+  "kick_steps": "x.....o...x..x..",
+  "snare_steps": "........x.....oo",
+  "drum_pitches": {
+   "42": 1657,
+   "36": 282,
+   "38": 255,
+   "39": 70,
+   "46": 15,
+   "49": 5
+  },
+  "drum_vel_sd": 19.9,
+  "timing_dev_ms_mean": 6.9,
+  "swing_ratio_8th": 0.502,
+  "swing_ratio_16th": 0.508,
+  "spec_swing": [
+   0.017,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.05,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   130,
+   160,
+   140
+  ],
+  "genre_file_kick": "x.........x...x.",
+  "genre_file_snare": "........x.......",
+  "vel_sd": {
+   "808 drum kit": 19.9,
+   "808 bass": 11.9,
+   "Piano / dark strings": 8.2,
+   "Choir / dark pad": 10.1,
+   "Bells / music box / flute": 11.3
+  },
+  "offbeat_onset_pct": {
+   "808 bass": 62.5,
+   "Piano / dark strings": 0.0,
+   "Choir / dark pad": 0.0,
+   "Bells / music box / flute": 62.7
+  },
+  "voice_leading": {
+   "Piano / dark strings": {
+    "chord_changes": 47,
+    "mean_motion": 3.0,
+    "max_voice_leap": 2,
+    "parallel_5_8": 0,
+    "range": [
+     54,
+     64
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Choir / dark pad": {
+    "chord_changes": 63,
+    "mean_motion": 2.7,
+    "max_voice_leap": 2,
+    "parallel_5_8": 0,
+    "range": [
+     51,
+     61
+    ],
+    "voices": 3,
+    "low_cluster": 14
+   }
+  },
+  "melody": {
+   "notes": 496,
+   "range": [
+    68,
+    90
+   ],
+   "span": 22,
+   "step_pct": 68.9,
+   "leap_gt5th_pct": 4.2,
+   "max_leap": 12,
+   "dir_change_pct": 35.4,
+   "repeated_pitch_pct": 12.5,
+   "phrase_ends": 64,
+   "phrase_end_chord_tone_pct": 98.4,
+   "strong_beat_chord_tone_pct": 78.3,
+   "rest_pct": 25.3,
+   "bars_with_lead": 104,
+   "repeated_bar_pct": 34.6,
+   "distinct_bar_rhythms": 11,
+   "notes_per_bar": 4.77,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.63
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 8.0,
+    "notes_per_bar": 7.0,
+    "mean_vel": 73.0,
+    "active": 2
+   },
+   {
+    "section": "hook",
+    "spec_energy": 0.85,
+    "bars": 16.0,
+    "notes_per_bar": 44.9,
+    "mean_vel": 86.6,
+    "active": 5
+   },
+   {
+    "section": "verse",
+    "spec_energy": 0.65,
+    "bars": 16.0,
+    "notes_per_bar": 31.5,
+    "mean_vel": 84.7,
+    "active": 3
+   },
+   {
+    "section": "hook2",
+    "spec_energy": 0.9,
+    "bars": 16.0,
+    "notes_per_bar": 45.3,
+    "mean_vel": 86.8,
+    "active": 5
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.65,
+    "bars": 16.0,
+    "notes_per_bar": 30.9,
+    "mean_vel": 91.1,
+    "active": 3
+   },
+   {
+    "section": "bridge",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 16.6,
+    "mean_vel": 78.5,
+    "active": 3
+   },
+   {
+    "section": "hook3",
+    "spec_energy": 0.9,
+    "bars": 16.0,
+    "notes_per_bar": 44.3,
+    "mean_vel": 87.2,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.3,
+    "bars": 8.0,
+    "notes_per_bar": 8.0,
+    "mean_vel": 68.6,
+    "active": 2
+   }
+  ]
+ },
+ "trap_s2": {
+  "name": "trap_s2",
+  "genre": "trap",
+  "key": "F minor",
+  "tempo": 140.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 104.0,
+  "programs": {
+   "808 drum kit": null,
+   "808 bass": 38,
+   "Piano / dark strings": 0,
+   "Choir / dark pad": 91,
+   "Bells / music box / flute": 10
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "808 bass": 75.0,
+   "Piano / dark strings": 83.3,
+   "Choir / dark pad": 86.7,
+   "Bells / music box / flute": 52.8
+  },
+  "progressions": {
+   "intro": "i bVI bIII bVII",
+   "hook": "i bVI",
+   "verse": "i bVI",
+   "hook2": "i bVI",
+   "verse2": "i bVI",
+   "bridge": "i bVI",
+   "hook3": "i bVI",
+   "outro": "i bVI"
+  },
+  "strong_clash_pct": 1.1,
+  "kick_with_bass_pct": 57.8,
+  "bass_on_kick_pct": 56.6,
+  "bass_root_on_change_pct": 38.5,
+  "bass_range": [
+   25,
+   41
+  ],
+  "bass_notes_per_bar": 2.77,
+  "bass_downbeat_pct": 27.8,
+  "bass_big_leaps": 8,
+  "kick_steps": "x.....o...x..x..",
+  "snare_steps": "........x.....oo",
+  "drum_pitches": {
+   "42": 1664,
+   "36": 282,
+   "38": 259,
+   "39": 70,
+   "46": 15,
+   "49": 5
+  },
+  "drum_vel_sd": 20.2,
+  "timing_dev_ms_mean": 7.0,
+  "swing_ratio_8th": 0.502,
+  "swing_ratio_16th": 0.508,
+  "spec_swing": [
+   0.017,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.05,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   130,
+   160,
+   140
+  ],
+  "genre_file_kick": "x.........x...x.",
+  "genre_file_snare": "........x.......",
+  "vel_sd": {
+   "808 drum kit": 20.2,
+   "808 bass": 12.6,
+   "Piano / dark strings": 7.4,
+   "Choir / dark pad": 10.4,
+   "Bells / music box / flute": 11.0
+  },
+  "offbeat_onset_pct": {
+   "808 bass": 60.1,
+   "Piano / dark strings": 0.0,
+   "Choir / dark pad": 0.0,
+   "Bells / music box / flute": 63.6
+  },
+  "voice_leading": {
+   "Piano / dark strings": {
+    "chord_changes": 23,
+    "mean_motion": 1,
+    "max_voice_leap": 1,
+    "parallel_5_8": 0,
+    "range": [
+     56,
+     65
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Choir / dark pad": {
+    "chord_changes": 39,
+    "mean_motion": 1.6,
+    "max_voice_leap": 4,
+    "parallel_5_8": 1,
+    "range": [
+     48,
+     61
+    ],
+    "voices": 3,
+    "low_cluster": 4
+   }
+  },
+  "melody": {
+   "notes": 506,
+   "range": [
+    67,
+    91
+   ],
+   "span": 24,
+   "step_pct": 68.3,
+   "leap_gt5th_pct": 4.6,
+   "max_leap": 12,
+   "dir_change_pct": 32.3,
+   "repeated_pitch_pct": 14.3,
+   "phrase_ends": 44,
+   "phrase_end_chord_tone_pct": 84.1,
+   "strong_beat_chord_tone_pct": 77.8,
+   "rest_pct": 20.5,
+   "bars_with_lead": 104,
+   "repeated_bar_pct": 51.0,
+   "distinct_bar_rhythms": 11,
+   "notes_per_bar": 4.87,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.65
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 8.0,
+    "notes_per_bar": 8.5,
+    "mean_vel": 71.2,
+    "active": 2
+   },
+   {
+    "section": "hook",
+    "spec_energy": 0.85,
+    "bars": 16.0,
+    "notes_per_bar": 43.3,
+    "mean_vel": 86.6,
+    "active": 5
+   },
+   {
+    "section": "verse",
+    "spec_energy": 0.65,
+    "bars": 16.0,
+    "notes_per_bar": 30.0,
+    "mean_vel": 84.7,
+    "active": 3
+   },
+   {
+    "section": "hook2",
+    "spec_energy": 0.9,
+    "bars": 16.0,
+    "notes_per_bar": 44.4,
+    "mean_vel": 87.4,
+    "active": 5
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.65,
+    "bars": 16.0,
+    "notes_per_bar": 32.5,
+    "mean_vel": 91.5,
+    "active": 3
+   },
+   {
+    "section": "bridge",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 17.4,
+    "mean_vel": 76.4,
+    "active": 3
+   },
+   {
+    "section": "hook3",
+    "spec_energy": 0.9,
+    "bars": 16.0,
+    "notes_per_bar": 43.4,
+    "mean_vel": 87.5,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.3,
+    "bars": 8.0,
+    "notes_per_bar": 6.0,
+    "mean_vel": 71.1,
+    "active": 2
+   }
+  ]
+ },
+ "trap_s3": {
+  "name": "trap_s3",
+  "genre": "trap",
+  "key": "F# minor",
+  "tempo": 140.0,
+  "ts": [
+   4,
+   4
+  ],
+  "bars": 104.0,
+  "programs": {
+   "808 drum kit": null,
+   "808 bass": 38,
+   "Piano / dark strings": 0,
+   "Choir / dark pad": 91,
+   "Bells / music box / flute": 10
+  },
+  "tech": [],
+  "in_key_pct": 100.0,
+  "chord_tone_pct": {
+   "808 bass": 75.0,
+   "Piano / dark strings": 83.3,
+   "Choir / dark pad": 91.7,
+   "Bells / music box / flute": 57.5
+  },
+  "progressions": {
+   "intro": "i bVI bIII bVII",
+   "hook": "i bVI",
+   "verse": "i bVI",
+   "hook2": "i bVI",
+   "verse2": "i bVI",
+   "bridge": "i bVI bIII bVII",
+   "hook3": "i bVI",
+   "outro": "i bVI bIII bVII"
+  },
+  "strong_clash_pct": 1.4,
+  "kick_with_bass_pct": 57.8,
+  "bass_on_kick_pct": 56.6,
+  "bass_root_on_change_pct": 38.5,
+  "bass_range": [
+   26,
+   42
+  ],
+  "bass_notes_per_bar": 2.77,
+  "bass_downbeat_pct": 27.8,
+  "bass_big_leaps": 8,
+  "kick_steps": "x.....o...x..x..",
+  "snare_steps": "........x.....oo",
+  "drum_pitches": {
+   "42": 1656,
+   "36": 282,
+   "38": 255,
+   "39": 70,
+   "46": 15,
+   "49": 5
+  },
+  "drum_vel_sd": 19.6,
+  "timing_dev_ms_mean": 7.0,
+  "swing_ratio_8th": 0.502,
+  "swing_ratio_16th": 0.508,
+  "spec_swing": [
+   0.017,
+   "1/16"
+  ],
+  "genre_file_swing": [
+   0.05,
+   "16th"
+  ],
+  "genre_file_tempo": [
+   130,
+   160,
+   140
+  ],
+  "genre_file_kick": "x.........x...x.",
+  "genre_file_snare": "........x.......",
+  "vel_sd": {
+   "808 drum kit": 19.6,
+   "808 bass": 11.9,
+   "Piano / dark strings": 8.3,
+   "Choir / dark pad": 10.2,
+   "Bells / music box / flute": 11.0
+  },
+  "offbeat_onset_pct": {
+   "808 bass": 60.8,
+   "Piano / dark strings": 0.0,
+   "Choir / dark pad": 0.0,
+   "Bells / music box / flute": 62.8
+  },
+  "voice_leading": {
+   "Piano / dark strings": {
+    "chord_changes": 23,
+    "mean_motion": 1,
+    "max_voice_leap": 1,
+    "parallel_5_8": 0,
+    "range": [
+     57,
+     66
+    ],
+    "voices": 3,
+    "low_cluster": 0
+   },
+   "Choir / dark pad": {
+    "chord_changes": 47,
+    "mean_motion": 2.6,
+    "max_voice_leap": 7,
+    "parallel_5_8": 0,
+    "range": [
+     47,
+     62
+    ],
+    "voices": 3,
+    "low_cluster": 6
+   }
+  },
+  "melody": {
+   "notes": 494,
+   "range": [
+    68,
+    90
+   ],
+   "span": 22,
+   "step_pct": 59.4,
+   "leap_gt5th_pct": 4.3,
+   "max_leap": 13,
+   "dir_change_pct": 34.8,
+   "repeated_pitch_pct": 15.6,
+   "phrase_ends": 48,
+   "phrase_end_chord_tone_pct": 83.3,
+   "strong_beat_chord_tone_pct": 79.8,
+   "rest_pct": 20.1,
+   "bars_with_lead": 104,
+   "repeated_bar_pct": 44.2,
+   "distinct_bar_rhythms": 11,
+   "notes_per_bar": 4.75,
+   "short_notes_pct": 0.0,
+   "mean_dur": 0.67
+  },
+  "energy": [
+   {
+    "section": "intro",
+    "spec_energy": 0.35,
+    "bars": 8.0,
+    "notes_per_bar": 7.8,
+    "mean_vel": 71.2,
+    "active": 2
+   },
+   {
+    "section": "hook",
+    "spec_energy": 0.85,
+    "bars": 16.0,
+    "notes_per_bar": 42.6,
+    "mean_vel": 86.5,
+    "active": 5
+   },
+   {
+    "section": "verse",
+    "spec_energy": 0.65,
+    "bars": 16.0,
+    "notes_per_bar": 30.6,
+    "mean_vel": 84.1,
+    "active": 3
+   },
+   {
+    "section": "hook2",
+    "spec_energy": 0.9,
+    "bars": 16.0,
+    "notes_per_bar": 43.8,
+    "mean_vel": 87.4,
+    "active": 5
+   },
+   {
+    "section": "verse2",
+    "spec_energy": 0.65,
+    "bars": 16.0,
+    "notes_per_bar": 31.9,
+    "mean_vel": 90.5,
+    "active": 3
+   },
+   {
+    "section": "bridge",
+    "spec_energy": 0.45,
+    "bars": 8.0,
+    "notes_per_bar": 18.9,
+    "mean_vel": 75.3,
+    "active": 3
+   },
+   {
+    "section": "hook3",
+    "spec_energy": 0.9,
+    "bars": 16.0,
+    "notes_per_bar": 44.1,
+    "mean_vel": 86.9,
+    "active": 5
+   },
+   {
+    "section": "outro",
+    "spec_energy": 0.3,
+    "bars": 8.0,
+    "notes_per_bar": 6.8,
+    "mean_vel": 66.1,
+    "active": 2
+   }
+  ]
+ }
+}

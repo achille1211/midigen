@@ -1,0 +1,678 @@
+{
+  "version": 1,
+  "title": "Synthwave / retrowave sketch",
+  "genre": "synthwave",
+  "tempo": 100.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "E",
+  "mode": "minor",
+  "seed": 1,
+  "swing": 0.0,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 8,
+      "chords": [
+        "iadd9",
+        "bVImaj7",
+        "bIIIadd9",
+        "bVII"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "intro_drums",
+      "bars": 8,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "verse",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVII",
+        "bVI",
+        "bVII"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "chorus",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.8,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "verse2",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVII",
+        "bVI",
+        "bVII"
+      ],
+      "energy": 0.6,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "chorus2",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.85,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "solo",
+      "bars": 16,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.8,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "breakdown",
+      "bars": 8,
+      "chords": [
+        "i",
+        "bVII",
+        "bVI",
+        "bVII"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "name": "final_chorus",
+      "bars": 16,
+      "chords": [
+        "iadd9",
+        "bVImaj7",
+        "bIIIadd9",
+        "bVII"
+      ],
+      "energy": 0.95,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "outro",
+      "bars": 8,
+      "chords": [
+        "i",
+        "bVI",
+        "bIII",
+        "bVII"
+      ],
+      "energy": 0.4,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "intro_drums",
+    "verse",
+    "chorus",
+    "verse2",
+    "chorus2",
+    "solo",
+    "breakdown",
+    "final_chorus",
+    "outro"
+  ],
+  "tracks": [
+    {
+      "name": "80s drum machine",
+      "role": "drums",
+      "program": 25,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro_drums",
+        "verse",
+        "chorus",
+        "verse2",
+        "chorus2",
+        "solo",
+        "final_chorus",
+        "outro"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "synthwave.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "synthwave.fill",
+        "fill_every": 8,
+        "transition": "synthwave.crash_in",
+        "laid_back": 0.0,
+        "humanize": {
+          "timing": 0.0033,
+          "velocity": 6
+        }
+      },
+      "overrides": {
+        "intro_drums": {
+          "pattern": "synthwave.intro"
+        },
+        "chorus": {
+          "pattern": "synthwave.driving"
+        },
+        "chorus2": {
+          "pattern": "synthwave.driving"
+        },
+        "solo": {
+          "pattern": "synthwave.driving"
+        },
+        "final_chorus": {
+          "pattern": "synthwave.driving"
+        },
+        "outro": {
+          "pattern": "synthwave.intro"
+        }
+      }
+    },
+    {
+      "name": "Analog synth bass",
+      "role": "bass",
+      "program": 39,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro_drums",
+        "verse",
+        "chorus",
+        "verse2",
+        "chorus2",
+        "solo",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0,
+          100.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          "octave",
+          null,
+          "root",
+          null,
+          "octave",
+          null,
+          "root",
+          null,
+          "octave",
+          null,
+          "root",
+          null,
+          "octave",
+          null
+        ],
+        "gate": 0.5,
+        "density": 0.6,
+        "range": [
+          30,
+          52
+        ],
+        "humanize": {
+          "timing": 0.0033,
+          "velocity": 6
+        }
+      },
+      "overrides": {
+        "chorus": {
+          "rhythm": [
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0
+          ],
+          "tokens": [
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root"
+          ]
+        },
+        "chorus2": {
+          "rhythm": [
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0
+          ],
+          "tokens": [
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root"
+          ]
+        },
+        "solo": {
+          "rhythm": [
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0
+          ],
+          "tokens": [
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root"
+          ]
+        },
+        "final_chorus": {
+          "rhythm": [
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0,
+            100.0,
+            80.0
+          ],
+          "tokens": [
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root",
+            "root"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Synth brass",
+      "role": "chords",
+      "program": 62,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "chorus",
+        "chorus2",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.5,
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0033,
+          "velocity": 6
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Polysynth pad",
+      "role": "pad",
+      "program": 90,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0033,
+          "velocity": 6
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Arpeggiator",
+      "role": "arp",
+      "program": 80,
+      "channel": 3,
+      "volume": 72,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "intro_drums",
+        "verse",
+        "chorus",
+        "verse2",
+        "chorus2",
+        "breakdown",
+        "final_chorus",
+        "outro"
+      ],
+      "generator": {
+        "type": "arp",
+        "style": "up",
+        "rate": "1/16",
+        "density": 0.5,
+        "range": [
+          61,
+          83
+        ],
+        "humanize": {
+          "timing": 0.0033,
+          "velocity": 6
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Synth strings",
+      "role": "pad",
+      "program": 50,
+      "channel": 4,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "verse2",
+        "solo",
+        "breakdown",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0033,
+          "velocity": 6
+        },
+        "seed": 101
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Saw / square lead",
+      "role": "lead",
+      "program": 81,
+      "channel": 5,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "chorus",
+        "chorus2",
+        "solo",
+        "final_chorus"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.45,
+        "cells": [
+          [
+            4.0,
+            4.0,
+            8.0
+          ],
+          [
+            2.0,
+            2.0,
+            4.0,
+            8.0
+          ],
+          [
+            6.0,
+            2.0,
+            4.0,
+            4.0
+          ],
+          [
+            8.0,
+            -4.0,
+            4.0
+          ]
+        ],
+        "stepwise": 0.65,
+        "chord_tone_strong": 0.75,
+        "max_leap": 12,
+        "range": [
+          64,
+          88
+        ],
+        "humanize": {
+          "timing": 0.0033,
+          "velocity": 6
+        },
+        "seed": 1
+      },
+      "overrides": {}
+    }
+  ]
+}

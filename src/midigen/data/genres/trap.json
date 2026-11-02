@@ -1,0 +1,217 @@
+{
+  "name": "trap",
+  "display": "Trap",
+  "aliases": [
+    "drill",
+    "trap beat",
+    "808"
+  ],
+  "description": "Half-time feel at 130-160 BPM (felt at 65-80), sparse booming 808 bass tied to the kick, rapid hi-hat rolls, dark minor/harmonic-minor loops, simple bell or pluck melody.",
+  "tempo": {
+    "min": 130,
+    "max": 160,
+    "default": 140
+  },
+  "swing": 0.0,
+  "swing_unit": "1/16",
+  "modes": [
+    "minor",
+    "harmonic_minor",
+    "phrygian"
+  ],
+  "keys": [
+    "C",
+    "F",
+    "G",
+    "E"
+  ],
+  "harmony": {
+    "extensions": "triads",
+    "secondary_dominants": 0.0,
+    "borrowed": 0.0,
+    "beats_per_chord": 8,
+    "progressions": {
+      "minor": {
+        "main": [
+          "i",
+          "bVI",
+          "bIII",
+          "bVII"
+        ],
+        "hook": [
+          "i",
+          "bVI",
+          "iv",
+          "V"
+        ]
+      },
+      "harmonic_minor": {
+        "main": [
+          "i",
+          "bVI",
+          "iv",
+          "V"
+        ],
+        "hook": [
+          "i",
+          "iv",
+          "bVI",
+          "V"
+        ]
+      },
+      "phrygian": {
+        "main": [
+          "i",
+          "bII",
+          "i",
+          "bVII"
+        ],
+        "hook": [
+          "i",
+          "bII",
+          "bVII",
+          "i"
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "drums": {
+      "generator": {
+        "type": "drums",
+        "pattern": "trap",
+        "density": 0.6,
+        "fill": true
+      }
+    },
+    "bass": {
+      "instrument": "synth_bass",
+      "name": "808",
+      "generator": {
+        "type": "bass",
+        "style": "sustained",
+        "density": 0.5,
+        "octave": 1
+      }
+    },
+    "chords": {
+      "instrument": "choir",
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.2,
+        "octave": 4
+      }
+    },
+    "lead": {
+      "instrument": "bell",
+      "generator": {
+        "type": "lead",
+        "style": "riff",
+        "density": 0.45,
+        "range": [
+          67,
+          88
+        ]
+      }
+    }
+  },
+  "layers": {
+    "drums": 0.4,
+    "bass": 0.4,
+    "chords": 0.0,
+    "lead": 0.0
+  },
+  "form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.3,
+      "progression": "main"
+    },
+    {
+      "name": "hook",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "hook"
+    },
+    {
+      "name": "verse",
+      "bars": 16,
+      "energy": 0.65,
+      "progression": "main"
+    },
+    {
+      "name": "hook2",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "hook"
+    },
+    {
+      "name": "verse2",
+      "bars": 16,
+      "energy": 0.65,
+      "progression": "main"
+    },
+    {
+      "name": "hook3",
+      "bars": 8,
+      "energy": 0.95,
+      "progression": "hook"
+    },
+    {
+      "name": "outro",
+      "bars": 4,
+      "energy": 0.3,
+      "progression": "main"
+    }
+  ],
+  "short_form": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "energy": 0.3,
+      "progression": "main"
+    },
+    {
+      "name": "hook",
+      "bars": 8,
+      "energy": 0.9,
+      "progression": "hook"
+    },
+    {
+      "name": "verse",
+      "bars": 4,
+      "energy": 0.6,
+      "progression": "main"
+    }
+  ],
+  "density_targets": {
+    "lead": [
+      1,
+      8
+    ],
+    "drums": [
+      10,
+      40
+    ],
+    "bass": [
+      1,
+      4
+    ]
+  },
+  "register": {
+    "bass": [
+      24,
+      46
+    ],
+    "chords": [
+      55,
+      76
+    ],
+    "lead": [
+      67,
+      90
+    ]
+  }
+}

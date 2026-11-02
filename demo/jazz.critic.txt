@@ -1,0 +1,4 @@
+critic score: 90/100
+  [warning] out_of_key: Upright bass: 11 note(s) (17%) are outside the key and the current chord. (Upright bass bars 2,5,6,7,10,11) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] out_of_key: Acoustic piano: 2 note(s) (1%) are outside the key and the current chord. (Acoustic piano bars 11,15) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] parallels: Trumpet: parallel fifths/octaves in 1 chord change(s). (Trumpet bars 10) -> Use contrary/oblique motion or a different inversion (voice leading).

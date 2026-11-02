@@ -1,0 +1,5 @@
+wrote jazz_s2.json and jazz_s2.mid — 152 bars @ 140.0 BPM, Eb major, tracks [Jazz kit / brushes:2086, Upright bass:608, Acoustic piano:1760, Trumpet:1136, Tenor / alto sax:709]
+critic score: 90/100
+  [warning] out_of_key: Upright bass: 61 note(s) (10%) are outside the key and the current chord. (Upright bass bars 4,6,9,13,19,24) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] out_of_key: Acoustic piano: 11 note(s) (1%) are outside the key and the current chord. (Acoustic piano bars 3,9,13,17,29,33) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.
+  [info] out_of_key: Trumpet: 4 note(s) (0%) are outside the key and the current chord. (Trumpet bars 5,13,29,33) -> Use chord tones/scale tones, or reharmonise so the chord contains those notes.

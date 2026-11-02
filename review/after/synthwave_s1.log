@@ -1,0 +1,3 @@
+wrote synthwave_s1.json and synthwave_s1.mid — 128 bars @ 100.0 BPM, E minor, tracks [80s drum machine:2093, Analog synth bass:1344, Synth brass:312, Polysynth pad:357, Arpeggiator:1792, Synth strings:150, Saw / square lead:202]
+critic score: 92/100
+  [warning] melody: Saw / square lead has 2 leap(s) larger than an octave. (Saw / square lead) -> Keep melodic leaps within an octave.

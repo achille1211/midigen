@@ -1,0 +1,443 @@
+{
+  "version": 1,
+  "title": "Jazz (swing) sketch",
+  "genre": "jazz",
+  "tempo": 140.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "Bb",
+  "mode": "major",
+  "seed": 1,
+  "swing": 0.233,
+  "swing_unit": "1/8",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 4,
+      "chords": [
+        "Imaj7",
+        "VI7b9",
+        "ii7",
+        "V7"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "head_a1",
+      "bars": 8,
+      "chords": [
+        "ii7",
+        "V7",
+        "Imaj7"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        8.0
+      ],
+      "cadence": "authentic"
+    },
+    {
+      "name": "head_a2",
+      "bars": 8,
+      "chords": [
+        "ii7",
+        "V7",
+        "Imaj7"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        8.0
+      ],
+      "cadence": "authentic"
+    },
+    {
+      "name": "head_b",
+      "bars": 8,
+      "chords": [
+        "I6",
+        "vi7",
+        "ii7",
+        "V7",
+        "iii7",
+        "VI7",
+        "ii7",
+        "V7"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "head_a3",
+      "bars": 8,
+      "chords": [
+        "ii7",
+        "V7",
+        "Imaj7"
+      ],
+      "energy": 0.5,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        8.0
+      ],
+      "cadence": "authentic"
+    },
+    {
+      "name": "solo_sax",
+      "bars": 32,
+      "chords": [
+        "ii7",
+        "V7",
+        "Imaj7"
+      ],
+      "energy": 0.75,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        8.0
+      ],
+      "cadence": "authentic"
+    },
+    {
+      "name": "solo_piano",
+      "bars": 32,
+      "chords": [
+        "I6",
+        "vi7",
+        "ii7",
+        "V7",
+        "iii7",
+        "VI7",
+        "ii7",
+        "V7"
+      ],
+      "energy": 0.65,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "trading_fours",
+      "bars": 16,
+      "chords": [
+        "ii7",
+        "V7",
+        "Imaj7"
+      ],
+      "energy": 0.7,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        8.0
+      ],
+      "cadence": "authentic"
+    },
+    {
+      "name": "head_out",
+      "bars": 32,
+      "chords": [
+        "Imaj7",
+        "VI7b9",
+        "ii7",
+        "V7"
+      ],
+      "energy": 0.6,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    },
+    {
+      "name": "ending",
+      "bars": 4,
+      "chords": [
+        "Imaj7",
+        "VI7b9",
+        "ii7",
+        "V7"
+      ],
+      "energy": 0.4,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "cadence": "half"
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "head_a1",
+    "head_a2",
+    "head_b",
+    "head_a3",
+    "solo_sax",
+    "solo_piano",
+    "trading_fours",
+    "head_out",
+    "ending"
+  ],
+  "tracks": [
+    {
+      "name": "Jazz kit / brushes",
+      "role": "drums",
+      "program": 32,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "drums",
+        "pattern": "jazz.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "jazz.fill",
+        "fill_every": 8,
+        "transition": "jazz.ending",
+        "laid_back": 5.0,
+        "humanize": {
+          "timing": 0.028,
+          "velocity": 15
+        }
+      },
+      "overrides": {
+        "intro": {
+          "pattern": "jazz.two_feel"
+        },
+        "head_a1": {
+          "pattern": "jazz.two_feel"
+        },
+        "head_a2": {
+          "pattern": "jazz.two_feel"
+        },
+        "solo_piano": {
+          "pattern": "jazz.solo_comping"
+        },
+        "ending": {
+          "pattern": "jazz.ending"
+        }
+      }
+    },
+    {
+      "name": "Upright bass",
+      "role": "bass",
+      "program": 32,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "bass",
+        "style": "walking",
+        "density": 0.6,
+        "range": [
+          30,
+          52
+        ],
+        "humanize": {
+          "timing": 0.028,
+          "velocity": 15
+        },
+        "laid_back": 2.5
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Acoustic piano",
+      "role": "chords",
+      "program": 0,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "chords",
+        "style": "comp",
+        "density": 0.5,
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.028,
+          "velocity": 15
+        },
+        "laid_back": 2.5
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Trumpet",
+      "role": "chords",
+      "program": 56,
+      "channel": 2,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "head_a1",
+        "head_a2",
+        "head_b",
+        "head_a3",
+        "trading_fours",
+        "head_out",
+        "ending"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.5,
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.028,
+          "velocity": 15
+        },
+        "laid_back": 2.5,
+        "seed": 637
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Tenor / alto sax",
+      "role": "lead",
+      "program": 66,
+      "channel": 3,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "head_a1",
+        "head_a2",
+        "head_b",
+        "head_a3",
+        "solo_sax",
+        "trading_fours",
+        "head_out",
+        "ending"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.65,
+        "cells": [
+          [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ],
+          [
+            -2.0,
+            2.0,
+            2.0,
+            2.0,
+            4.0,
+            -4.0
+          ],
+          [
+            3.0,
+            1.0,
+            2.0,
+            2.0,
+            -4.0,
+            4.0
+          ],
+          [
+            -2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            4.0
+          ]
+        ],
+        "stepwise": 0.65,
+        "chord_tone_strong": 0.8,
+        "max_leap": 9,
+        "range": [
+          63,
+          87
+        ],
+        "humanize": {
+          "timing": 0.028,
+          "velocity": 15
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}

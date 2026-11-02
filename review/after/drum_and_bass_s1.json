@@ -1,0 +1,444 @@
+{
+  "version": 1,
+  "title": "Drum and bass sketch",
+  "genre": "drum_and_bass",
+  "tempo": 174.0,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "G",
+  "mode": "minor",
+  "seed": 1,
+  "swing": 0.017,
+  "swing_unit": "1/16",
+  "sections": [
+    {
+      "name": "intro",
+      "bars": 32,
+      "chords": [
+        "i7",
+        "bVImaj7"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "name": "build",
+      "bars": 16,
+      "chords": [
+        "i9",
+        "bVImaj7",
+        "bIIImaj7",
+        "bVII"
+      ],
+      "energy": 0.55,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "drop",
+      "bars": 32,
+      "chords": [
+        "i9",
+        "bVImaj7",
+        "bIIImaj7",
+        "bVII"
+      ],
+      "energy": 0.95,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "breakdown",
+      "bars": 16,
+      "chords": [
+        "i7",
+        "bVImaj7"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "name": "build2",
+      "bars": 8,
+      "chords": [
+        "i9",
+        "bVImaj7",
+        "bIIImaj7",
+        "bVII"
+      ],
+      "energy": 0.6,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "drop2",
+      "bars": 32,
+      "chords": [
+        "i9",
+        "bVImaj7",
+        "bIIImaj7",
+        "bVII"
+      ],
+      "energy": 0.95,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "outro",
+      "bars": 32,
+      "chords": [
+        "i9",
+        "bVImaj7",
+        "bIIImaj7",
+        "bVII"
+      ],
+      "energy": 0.35,
+      "beats_per_chord": 4.0,
+      "chord_beats": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ]
+    }
+  ],
+  "arrangement": [
+    "intro",
+    "build",
+    "drop",
+    "breakdown",
+    "build2",
+    "drop2",
+    "outro"
+  ],
+  "tracks": [
+    {
+      "name": "Breakbeat kit",
+      "role": "drums",
+      "program": 24,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "build",
+        "drop",
+        "build2",
+        "drop2",
+        "outro"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "drum_and_bass.main",
+        "density": 0.55,
+        "fill": true,
+        "fill_pattern": "drum_and_bass.fill",
+        "fill_every": 8,
+        "transition": "drum_and_bass.drop_in",
+        "laid_back": 0.0,
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 10
+        }
+      },
+      "overrides": {
+        "intro": {
+          "pattern": "drum_and_bass.intro"
+        },
+        "build2": {
+          "pattern": "drum_and_bass.halftime"
+        },
+        "drop2": {
+          "pattern": "drum_and_bass.amen"
+        },
+        "outro": {
+          "pattern": "drum_and_bass.intro"
+        }
+      }
+    },
+    {
+      "name": "Sub / reese bass",
+      "role": "bass",
+      "program": 38,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "drop",
+        "drop2"
+      ],
+      "generator": {
+        "type": "bass",
+        "style": "template",
+        "rhythm": [
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          100.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "tokens": [
+          "root",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "root",
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "gate": 0.9,
+        "density": 0.6,
+        "range": [
+          25,
+          47
+        ],
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 10
+        }
+      },
+      "overrides": {
+        "drop": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            "root",
+            null,
+            null,
+            "octave",
+            null,
+            null,
+            null,
+            "root",
+            null,
+            null,
+            "fifth",
+            null,
+            null
+          ]
+        },
+        "drop2": {
+          "rhythm": [
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0
+          ],
+          "tokens": [
+            "root",
+            null,
+            null,
+            "root",
+            null,
+            null,
+            "octave",
+            null,
+            null,
+            null,
+            "root",
+            null,
+            null,
+            "fifth",
+            null,
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "Rhodes / piano",
+      "role": "chords",
+      "program": 4,
+      "channel": 1,
+      "volume": 82,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "build",
+        "drop",
+        "breakdown",
+        "drop2"
+      ],
+      "generator": {
+        "type": "chords",
+        "style": "stabs",
+        "density": 0.5,
+        "range": [
+          50,
+          72
+        ],
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 10
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Lush pad / strings",
+      "role": "pad",
+      "program": 89,
+      "channel": 2,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "intro",
+        "build",
+        "breakdown",
+        "build2",
+        "outro"
+      ],
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.3,
+        "range": [
+          47,
+          69
+        ],
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 10
+        }
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Lead / vocal stand-in",
+      "role": "lead",
+      "program": 81,
+      "channel": 3,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "drop",
+        "breakdown",
+        "drop2"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "melodic",
+        "density": 0.4,
+        "cells": [
+          [
+            8.0,
+            8.0
+          ],
+          [
+            4.0,
+            4.0,
+            8.0
+          ],
+          [
+            6.0,
+            2.0,
+            8.0
+          ],
+          [
+            2.0,
+            2.0,
+            4.0,
+            -8.0
+          ]
+        ],
+        "stepwise": 0.7,
+        "chord_tone_strong": 0.75,
+        "max_leap": 7,
+        "range": [
+          66,
+          90
+        ],
+        "humanize": {
+          "timing": 0.0087,
+          "velocity": 10
+        }
+      },
+      "overrides": {}
+    }
+  ]
+}
