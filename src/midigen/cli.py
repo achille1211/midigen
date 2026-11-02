@@ -441,6 +441,11 @@ def cmd_train(args):
 
 
 def main(argv=None):
+    # Windows redirected output often uses a legacy code page. Musical summaries
+    # must not turn a successful generation into an encoding error.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(errors="backslashreplace")
     ap = argparse.ArgumentParser(prog="midigen", description="Theory-driven multitrack MIDI generator/arranger")
     ap.add_argument("--genre-path", action="append", default=[], metavar="DIR_OR_FILE",
                     help="extra genre-pack folder or .json file (repeatable; later wins over earlier, over "
@@ -556,6 +561,8 @@ def main(argv=None):
     from . import doctor as _doctor, ui as _ui  # setup helpers: `midigen doctor`, `midigen ui`
     _doctor.add_parser(sub)
     _ui.add_parser(sub)
+    from . import products
+    products.add_parser(sub)
 
     # --genre-path is accepted before or after the subcommand
     argv = list(sys.argv[1:] if argv is None else argv)

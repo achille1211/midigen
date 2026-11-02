@@ -162,7 +162,7 @@
   function renderInterp(song) {
     const box = $("interp"), i = song && song.interpreted;
     if (!i) { box.classList.add("hidden"); return; }
-    const src = i.source === "preset" ? "Preset “" + i.preset + "”" : i.source === "prompt" ? "Your description “" + i.prompt + "”" : "Your manual settings";
+    const src = i.source === "preset" ? "Preset “" + i.preset + "”" : i.source === "prompt" ? "Your description “" + i.prompt + "”" : i.source === "edit" ? "Your edit" : "Your manual settings";
     let h = '<div class="line">' + esc(i.line) + "</div>" +
       '<div class="sub">' + esc(src) + (i.title ? " · title: <b>" + esc(i.title) + "</b>" : "") +
       (i.recognised ? " · picked " + esc(i.genre_label) + " from " + esc(i.recognised.how) : "") +
@@ -767,6 +767,7 @@
     el.textContent = parts.join(" · ");
     el.classList.toggle("warn", !!(u && u.generations_limit && u.generations_left !== null && u.generations_left <= 3));
     $("takeCount").textContent = sess ? "Take " + sess.take_count + " of " + sess.max_takes : "";
+    $("editForm").classList.toggle("hidden", !state.song);
     const full = sess && sess.take_count >= sess.max_takes;
     const out = u && u.generations_limit && u.generations_left === 0;
     [$("newTakeBtn"), $("regenBtn")].forEach((b) => {
@@ -897,6 +898,20 @@
       setStatus(t.label + ": new seed " + t.seed + " · score " + t.score + " · " + t.elapsed_ms + " ms", "ok");
     });
   }
+
+  $("editForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!state.song || takesFull()) return;
+    const instruction = $("editInstruction").value.trim();
+    if (!instruction) return;
+    return busy($("editBtn"), "Applying edit…", async () => {
+      const t = await api("/api/sessions/" + state.session.id + "/takes/" + state.song.id + "/edit",
+        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ instruction }) });
+      acceptTake(t);
+      await showTake(t.id);
+      setStatus(t.label + ": " + instruction + " · score " + t.score, "ok");
+    });
+  });
 
   function regenerate(sections, btn) {
     if (!state.song || takesFull()) return;

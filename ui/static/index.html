@@ -102,6 +102,11 @@
       <button id="regenBtn" class="btn mid accent" title="Re-roll every unlocked section; locked sections keep their exact notes. Makes a new take.">⟳ Regenerate unlocked</button>
       <button id="compareBtn" class="btn mid ghost" aria-pressed="false" title="Compare two takes">⇄ Compare</button>
     </div>
+    <form id="editForm" class="transport hidden">
+      <label for="editInstruction">Edit current take</label>
+      <input id="editInstruction" type="text" maxlength="2000" placeholder="Make it sadder, busier bass, slower by 10" required>
+      <button id="editBtn" class="btn mid" type="submit">Apply edit as new take</button>
+    </form>
     <div id="comparePanel" class="compare hidden">
       <div class="cmp-head">
         <label>A <select id="cmpA"></select></label>

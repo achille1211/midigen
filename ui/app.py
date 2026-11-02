@@ -313,17 +313,10 @@ def parse_duration(text: str) -> float | None:
 
 def recognised_genre(text: str) -> tuple[str | None, str | None]:
     """What (if anything) in the prompt picked the genre: ('synthwave', 'genre word') / ('lofi_hiphop', 'mood')."""
-    t = text.lower()
-    g = mg.detect_genre(t)
-    if g:
-        return g, "genre word"
-    try:
-        from midigen import nl
-        for pat, gen in getattr(nl, "MOOD_GENRE", []):
-            if re.search(pat, t):
-                return gen, "mood/use-case words"
-    except Exception:  # noqa: BLE001 - parser internals are optional
-        pass
+    from midigen import nl
+    _, info = nl.interpret(text, seed=1)
+    if info.get("genre_reason") != "default" or info.get("moods"):
+        return info["genre"], info.get("genre_reason")
     return None, None
 
 
@@ -890,6 +883,31 @@ def do_new_take(sess: Session, body, ip) -> dict:
         return take_payload(sess, t, ip)
 
 
+def do_edit(sess: Session, parent: Take, body, ip) -> dict:
+    if not isinstance(body, dict) or not isinstance(body.get("instruction"), str) or not body["instruction"].strip():
+        raise ApiError("Describe the change you want.", field="instruction")
+    with sess.lock:
+        if not parent.spec_exact:
+            raise ApiError("This take combines regenerated sections. Edit an original or whole-song take instead.", status=409)
+        if parent.locked:
+            raise ApiError("Unlock sections before editing the song.", status=409, code="locked")
+        _check_take_room(sess)
+        RATE.hit(ip)
+        started = time.perf_counter()
+        from midigen.nl import edit_to_ops, NotUnderstood
+        try:
+            ops = edit_to_ops(parent.spec, body["instruction"])
+            spec = mg.apply_ops(parent.spec, ops)
+        except (NotUnderstood, ValueError) as exc:
+            raise ApiError(str(exc), status=422, field="instruction", code="not_understood")
+        perf = mg.render(spec)
+        report = mg.critique(spec)
+        take = _add_take(sess, "edit", parent, spec, perf, report,
+                         elapsed_ms=round((time.perf_counter() - started) * 1000, 1),
+                         info={"source": "edit", "explanation": body["instruction"], "ops": ops})
+        return take_payload(sess, take, ip)
+
+
 def do_regenerate(sess: Session, parent: Take, body, ip) -> dict:
     if not isinstance(body, dict):
         raise ApiError("request body must be a JSON object")
@@ -1090,6 +1108,10 @@ class Handler(BaseHTTPRequestHandler):
             m = re.fullmatch(rf"/api/sessions/({SID})/takes", path)
             if m:
                 return self._json(200, do_new_take(STORE.get(m.group(1)), self._body(), ip))
+            m = re.fullmatch(rf"/api/sessions/({SID})/takes/({TID})/edit", path)
+            if m:
+                sess, t = self._take(*m.groups())
+                return self._json(200, do_edit(sess, t, self._body(), ip))
             m = re.fullmatch(rf"/api/sessions/({SID})/takes/({TID})/regenerate", path)
             if m:
                 sess, t = self._take(*m.groups())

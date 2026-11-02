@@ -551,7 +551,8 @@ def _clause_ops(spec: dict, c: str, orig: str | None = None) -> list[dict] | Non
         return [{"op": "set_key", "key": spec["key"], "mode": m.group(1).replace(" ", "_")}]
     if re.search(r"\b(sadder|darker|more melancholic)\b", c) and "chord" not in c:
         return [{"op": "set_key", "key": spec["key"], "mode": "minor"}] if spec["mode"] not in ("minor", "aeolian", "dorian", "phrygian") \
-            else [{"op": "reharmonize", "technique": "borrowed"}]
+            else [{"op": "set_key", "key": spec["key"], "mode": "minor"},
+                  {"op": "change_tempo", "delta": -8}]
     if re.search(r"\b(happier|brighter)\b", c):
         return [{"op": "set_key", "key": spec["key"], "mode": "major"}]
     # harmony

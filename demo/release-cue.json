@@ -1,0 +1,151 @@
+{
+  "version": 2,
+  "title": "Ambient sketch",
+  "genre": "ambient",
+  "tempo": 55,
+  "time_signature": [
+    4,
+    4
+  ],
+  "key": "A",
+  "mode": "major",
+  "seed": 23,
+  "swing": 0.0,
+  "swing_unit": "1/8",
+  "sections": [
+    {
+      "name": "a",
+      "bars": 4,
+      "chords": [
+        "Imaj9",
+        "IVmaj9",
+        "vi9",
+        "IVmaj9"
+      ],
+      "energy": 0.25,
+      "beats_per_chord": 8
+    },
+    {
+      "name": "b",
+      "bars": 4,
+      "chords": [
+        "ii9",
+        "IVmaj9",
+        "Imaj9",
+        "Imaj9"
+      ],
+      "energy": 0.6,
+      "beats_per_chord": 8
+    }
+  ],
+  "arrangement": [
+    "a",
+    "b"
+  ],
+  "tracks": [
+    {
+      "name": "Drums",
+      "role": "drums",
+      "program": 0,
+      "channel": 9,
+      "volume": 105,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "b"
+      ],
+      "generator": {
+        "type": "drums",
+        "pattern": "ambient",
+        "density": 0.25,
+        "fill": false
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Drone",
+      "role": "bass",
+      "program": 89,
+      "channel": 0,
+      "volume": 100,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "bass",
+        "style": "sustained",
+        "density": 0.2,
+        "range": [
+          26,
+          50
+        ]
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Pad",
+      "role": "pad",
+      "program": 91,
+      "channel": 1,
+      "volume": 70,
+      "pan": 64,
+      "mute": false,
+      "sections": null,
+      "generator": {
+        "type": "pad",
+        "style": "pad",
+        "density": 0.15,
+        "range": [
+          48,
+          76
+        ]
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Arp",
+      "role": "arp",
+      "program": 46,
+      "channel": 2,
+      "volume": 72,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "b"
+      ],
+      "generator": {
+        "type": "arp",
+        "style": "random",
+        "rate": "1/8",
+        "gate": 0.9,
+        "range": [
+          62,
+          90
+        ]
+      },
+      "overrides": {}
+    },
+    {
+      "name": "Lead",
+      "role": "lead",
+      "program": 73,
+      "channel": 3,
+      "volume": 96,
+      "pan": 64,
+      "mute": false,
+      "sections": [
+        "b"
+      ],
+      "generator": {
+        "type": "lead",
+        "style": "sparse",
+        "density": 0.25,
+        "range": [
+          67,
+          90
+        ]
+      },
+      "overrides": {}
+    }
+  ]
+}

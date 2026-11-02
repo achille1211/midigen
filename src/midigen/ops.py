@@ -66,6 +66,24 @@ def _apply(s: dict, op: dict) -> None:
     elif name == "change_tempo":
         s["tempo"] = max(20, min(300, s["tempo"] + op["delta"]))
     elif name == "set_key":
+        old_key, old_mode = s["key"], s["mode"]
+        new_mode = op.get("mode", old_mode)
+        if new_mode != old_mode:
+            # Changing the melody scale alone leaves explicit major chords sounding happy.
+            # Revoice diatonic harmony in the destination mode; retain chromatic colours.
+            from .theory import parse_chord, scale_pcs
+            old_scale = set(scale_pcs(old_key, old_mode))
+            for sec in s["sections"]:
+                chords = []
+                for symbol in sec["chords"]:
+                    chord = parse_chord(symbol, old_key, old_mode)
+                    degree = harmony.degree_of(symbol, old_key, old_mode)
+                    if degree is not None and set(chord.pcs) <= old_scale:
+                        symbol = harmony.diatonic_chord(degree, new_mode,
+                                                       seventh=any(x in chord.intervals for x in (10, 11)),
+                                                       ninth=14 in chord.intervals)
+                    chords.append(symbol)
+                sec["chords"] = chords
         s["key"] = op["key"][0].upper() + op["key"][1:]
         if "mode" in op:
             s["mode"] = op["mode"]
@@ -208,10 +226,36 @@ def _apply(s: dict, op: dict) -> None:
         for t in _tracks(s, op.get("track")):
             if t["generator"]["type"] == "clip":
                 continue
+            if not op.get("section"):
+                for section, override in list(t.get("overrides", {}).items()):
+                    if "density" in override or "rhythm" in override or "rhythm_scale" in override:
+                        _apply(s, dict(op, track=t["name"], section=section))
             src = t.get("overrides", {}).get(op.get("section"), {}) if op.get("section") else {}
             cur = src.get("density", t["generator"].get("density", 0.5))
             val = op["density"] if "density" in op else cur + op["delta"]
-            _gen_params(t, op.get("section"), {"density": round(max(0.0, min(1.0, val)), 3)})
+            val = round(max(0.0, min(1.0, val)), 3)
+            params = {"density": val}
+            rhythm = src.get("rhythm", t["generator"].get("rhythm"))
+            if rhythm and t["role"] in ("bass", "chords") and val != cur:
+                rhythm = list(rhythm)
+                candidates = [i for i, v in enumerate(rhythm) if (not v if val > cur else v and i % 16)]
+                # Prefer eighth-note subdivisions; keep bar downbeats when thinning.
+                candidates.sort(key=lambda i: (i % 2, i % 4, i))
+                count = min(len(candidates), max(1, round(abs(val - cur) * len(rhythm))))
+                for i in candidates[:count]:
+                    rhythm[i] = 80 if val > cur else 0
+                params["rhythm"] = rhythm
+                tokens = src.get("tokens", t["generator"].get("tokens"))
+                if val > cur and tokens and len(tokens) == len(rhythm):
+                    tokens = list(tokens)
+                    for i in candidates[:count]:
+                        if tokens[i] is None or tokens[i] == "rest":
+                            tokens[i] = "root"
+                    params["tokens"] = tokens
+            elif t["role"] in ("bass", "chords") and val != cur:
+                scale = src.get("rhythm_scale", t["generator"].get("rhythm_scale", 1.0))
+                params["rhythm_scale"] = round(max(.25, min(4, scale * (1 + (val - cur) * 2))), 3)
+            _gen_params(t, op.get("section"), params)
     elif name == "humanize":
         for t in _tracks(s, op.get("track")):
             t["generator"]["humanize"] = {"timing": op.get("timing", 0.015), "velocity": op.get("velocity", 10)}
