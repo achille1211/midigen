@@ -28,7 +28,8 @@ prompt / instruction ──► LLM or offline parser ──► spec JSON or edit
    It creates a private `.venv` folder (nothing system-wide changes), installs midigen, writes a test song
    `demo.mid` and checks the setup. Add `--audio` for WAV rendering or `--stream` for live MIDI out.
 4. Use it (the installer prints the exact paths):
-   - `.venv/bin/midigen ui` (Windows: `.venv\Scripts\midigen ui`) opens it in your browser
+   - `.venv/bin/midigen ui` (Windows: `.venv\Scripts\midigen ui`) opens the bundled web UI (`ui/`) at http://localhost:8766/
+     (the REST service, if installed, uses 8765)
    - `.venv/bin/midigen new "chill lofi beat in D minor" -o mysong` writes `mysong.mid`, which any DAW opens
    - `.venv/bin/midigen doctor` explains, in plain English, anything that isn't working
 

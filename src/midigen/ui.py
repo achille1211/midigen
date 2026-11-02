@@ -67,7 +67,7 @@ def run(args) -> int:
 def add_parser(sub):
     p = sub.add_parser("ui", help="open midigen in your web browser")
     p.add_argument("--host", default="127.0.0.1")
-    p.add_argument("--port", type=int, default=8765)
+    p.add_argument("--port", type=int, default=8766)  # 8765 is the REST service
     p.add_argument("--no-browser", action="store_true", help="don't open a browser tab")
     p.add_argument("--dry-run", action="store_true", help="print what would be started and exit")
     p.set_defaults(fn=lambda args: sys.exit(run(args)))

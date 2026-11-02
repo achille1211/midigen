@@ -1,0 +1,12 @@
+{
+  "_comment": "midigen-ui limits (free-tier style). Delete this file to use the built-in defaults. See README > Config.",
+  "min_bars": 2,
+  "max_bars": 32,
+  "default_bars": 16,
+  "max_takes_per_song": 8,
+  "max_active_sessions": 50,
+  "session_ttl_minutes": 120,
+  "generations_per_hour_per_ip": 30,
+  "regen_candidates": 3,
+  "trust_proxy_headers": false
+}
