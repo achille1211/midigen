@@ -16,7 +16,25 @@ prompt / instruction ──► LLM or offline parser ──► spec JSON or edit
                                                      .mid (one track per instrument, drums on ch 10) · .png piano roll
 ```
 
-## Install
+## Quick start (no setup needed)
+
+1. Download midigen (on GitHub: green **Code** button, then **Download ZIP**) and unzip it.
+2. You need Python 3.10 or newer. Check with `python3 --version` (Windows: `py --version`); if it's missing or older,
+   get it from [python.org/downloads](https://www.python.org/downloads/) (Windows: tick "Add python.exe to PATH").
+3. Run the installer from the unzipped folder:
+   - **Windows:** double-click `install.bat`
+   - **macOS / Linux:** open a terminal in the folder and run `./install.sh` (or `python3 install.py`)
+
+   It creates a private `.venv` folder (nothing system-wide changes), installs midigen, writes a test song
+   `demo.mid` and checks the setup. Add `--audio` for WAV rendering or `--stream` for live MIDI out.
+4. Use it (the installer prints the exact paths):
+   - `.venv/bin/midigen ui` (Windows: `.venv\Scripts\midigen ui`) opens it in your browser
+   - `.venv/bin/midigen new "chill lofi beat in D minor" -o mysong` writes `mysong.mid`, which any DAW opens
+   - `.venv/bin/midigen doctor` explains, in plain English, anything that isn't working
+
+The installer has been tested on Linux only so far; macOS and Windows should work but are untested.
+
+## Install (developers)
 
 ```bash
 cd midigen

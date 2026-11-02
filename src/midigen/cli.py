@@ -553,6 +553,10 @@ def main(argv=None):
     p.add_argument("--json", help="write the full result as JSON")
     p.set_defaults(fn=cmd_train)
 
+    from . import doctor as _doctor, ui as _ui  # setup helpers: `midigen doctor`, `midigen ui`
+    _doctor.add_parser(sub)
+    _ui.add_parser(sub)
+
     # --genre-path is accepted before or after the subcommand
     argv = list(sys.argv[1:] if argv is None else argv)
     gp, rest, i = [], [], 0
