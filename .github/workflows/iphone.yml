@@ -1,0 +1,38 @@
+name: iPhone prototype
+on:
+  push:
+    branches: [main, codex/iphone-studio]
+    paths: ['ios/**', '.github/workflows/iphone.yml']
+  pull_request:
+    paths: ['ios/**', '.github/workflows/iphone.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: iphone-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-and-test:
+    runs-on: macos-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test native composition and DSP
+        run: swift test --package-path ios
+      - name: Select an installed iPhone simulator
+        run: |
+          DEVICE_ID=$(xcrun simctl list devices available --json | python3 -c 'import json,sys; d=json.load(sys.stdin); print(next(x["udid"] for v in d["devices"].values() for x in v if "iPhone" in x["name"]))')
+          echo "DEVICE_ID=$DEVICE_ID" >> "$GITHUB_ENV"
+      - name: Build and smoke test iPhone app
+        run: >-
+          xcodebuild test -project ios/Midigen.xcodeproj -scheme Midigen
+          -destination "platform=iOS Simulator,id=$DEVICE_ID"
+          -resultBundlePath ios/TestResults.xcresult
+          CODE_SIGNING_ALLOWED=NO
+      - name: Keep simulator test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iphone-test-results
+          path: ios/TestResults.xcresult
+          if-no-files-found: ignore

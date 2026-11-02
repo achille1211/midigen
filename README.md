@@ -18,6 +18,13 @@ prompt / instruction ──► LLM or offline parser ──► spec JSON or edit
 
 ## Quick start (no setup needed)
 
+### iPhone prototype
+
+A native iOS prototype lives in [`ios/`](ios/README.md). It includes offline eight-bar sketches,
+built-in oscillator synths, drum pads, tone controls and WAV sharing. Open
+`ios/Midigen.xcodeproj` on a Mac to build it. This is an early mobile app with a small native
+composer; the full Python genre and editing engine is not embedded yet.
+
 ### Delivery products
 
 `midigen deliver` turns a saved song into a portable product folder and matching ZIP:

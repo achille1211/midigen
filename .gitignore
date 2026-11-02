@@ -4,3 +4,7 @@ __pycache__/
 *.pyc
 *.egg-info/
 demo.mid
+ios/.build/
+ios/DerivedData/
+ios/TestResults.xcresult/
+**/xcuserdata/
