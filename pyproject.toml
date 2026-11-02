@@ -26,4 +26,4 @@ where = ["src"]
 midigen = ["data/*.json", "data/genres/*.json"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "integrations"]

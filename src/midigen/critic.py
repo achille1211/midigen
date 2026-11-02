@@ -29,7 +29,9 @@ def _f(check, severity, message, suggestion=None, track=None, section=None, bars
     return d
 
 
-def critique(spec_or_perf) -> dict:
+def critique(spec_or_perf, mix: dict | None = None) -> dict:
+    """Theory/arrangement findings for a spec. Pass `mix` (a report from `midigen.audio.analyze_mix` /
+    `listening_check`) to add a "mix" section with measured audio findings; it does not change the main score."""
     perf = spec_or_perf if isinstance(spec_or_perf, Performance) else render(spec_or_perf)
     spec = perf.spec
     bb = perf.bar_beats
@@ -249,11 +251,38 @@ def critique(spec_or_perf) -> dict:
                                    section=sec["name"]))
 
     score = max(0, 100 - sum(SEVERITY_COST[f["severity"]] for f in findings))
-    return {"score": score, "findings": findings, "stats": stats}
+    report = {"score": score, "findings": findings, "stats": stats}
+    if mix is not None:
+        attach_mix(report, mix)
+    return report
 
 
-def serious(report: dict) -> list[dict]:
-    return [f for f in report["findings"] if f["severity"] in ("warning", "error")]
+def attach_mix(report: dict, mix: dict) -> dict:
+    """Add a "mix" section (measured from rendered audio) to a critic report, in the critic's finding shape.
+    Kept separate from report["findings"]/["score"] so theory scores stay comparable with and without audio."""
+    keep = ("check", "severity", "message", "suggestion", "track")
+    m = mix.get("metrics", {})
+    report["mix"] = {
+        "score": mix.get("score"),
+        "findings": [{k: f[k] for k in keep if k in f} for f in mix.get("findings", [])],
+        "metrics": {"integrated_lufs": m.get("loudness", {}).get("integrated_lufs"),
+                    "true_peak_dbtp": m.get("true_peak_dbtp"),
+                    "clipped_samples": m.get("clipping", {}).get("clipped_samples"),
+                    "silence_ratio": m.get("silence", {}).get("silence_ratio"),
+                    "stereo_balance_db": m.get("stereo", {}).get("balance_db"),
+                    "bands_db_rel_total": m.get("spectrum", {}).get("bands_db_rel_total"),
+                    "masking_score": mix.get("masking", {}).get("score")},
+        "backend": (mix.get("render") or {}).get("backend"),
+        "verified_by_ear": False,
+    }
+    return report
+
+
+def serious(report: dict, include_mix: bool = False) -> list[dict]:
+    out = [f for f in report["findings"] if f["severity"] in ("warning", "error")]
+    if include_mix and report.get("mix"):
+        out += [f for f in report["mix"]["findings"] if f["severity"] in ("warning", "error")]
+    return out
 
 
 def format_report(report: dict) -> str:
@@ -264,4 +293,16 @@ def format_report(report: dict) -> str:
                      + (f" -> {f['suggestion']}" if f.get("suggestion") else ""))
     if len(lines) == 1:
         lines.append("  no issues found")
+    mix = report.get("mix")
+    if mix:
+        mm = mix["metrics"]
+        lines.append(f"mix (measured from {mix.get('backend') or 'rendered'} audio, not listened to): {mix['score']}/100 | "
+                     f"{mm['integrated_lufs']} LUFS, true peak {mm['true_peak_dbtp']} dBTP, "
+                     f"masking {mm['masking_score']}")
+        for f in mix["findings"]:
+            loc = f" ({f['track']})" if f.get("track") else ""
+            lines.append(f"  [{f['severity']}] {f['check']}: {f['message']}{loc}"
+                         + (f" -> {f['suggestion']}" if f.get("suggestion") else ""))
+        if not mix["findings"]:
+            lines.append("  no mix issues measured")
     return "\n".join(lines)

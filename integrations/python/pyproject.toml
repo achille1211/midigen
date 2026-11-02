@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "midigen-integrations"
+version = "0.1.0"
+description = "Stable Python facade, REST service and MIDI streaming for midigen"
+requires-python = ">=3.10"
+dependencies = ["midigen>=0.1.0"]
+
+[project.optional-dependencies]
+service = ["fastapi>=0.110", "uvicorn>=0.27"]
+stream = ["python-rtmidi>=1.5"]
+test = ["pytest>=7", "httpx>=0.27", "fastapi>=0.110", "uvicorn>=0.27", "lupa>=2"]
+
+[project.scripts]
+midigen-service = "midigen_integrations.service:main"
+midigen-stream = "midigen_integrations.stream:main"
+
+[tool.setuptools.packages.find]
+include = ["midigen_integrations*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

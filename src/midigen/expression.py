@@ -54,12 +54,16 @@ def pedal_events(notes, harmony) -> list[tuple[float, int]]:
     chord span (an anticipation up to half a beat early counts), comes up just before the next chord's first
     attack, and stays up through spans where the track is silent."""
     out: list[tuple[float, int]] = []
-    starts = sorted(n.start for n in notes)
+    ns = sorted(notes, key=lambda n: n.start)
+    starts = [n.start for n in ns]
     if not starts:
         return out
     down = False
     for h in harmony:
-        first = next((s for s in starts if h.start - 0.5 <= s < h.end - 0.5), None)
+        # an early attack only counts as an anticipation of this chord if it is held into it; a short stab on
+        # the "and" before a mid-bar change (2-beat chords) belongs to the previous chord
+        first = next((n.start for n in ns if h.start - 0.5 <= n.start < h.end - 0.5
+                      and (n.start >= h.start - 0.05 or n.start + n.dur > h.start + 0.1)), None)
         if first is None:
             if down:
                 out.append((h.start - 0.03, 0))

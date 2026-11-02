@@ -55,7 +55,8 @@ def analyze(base):
         s = secs[nm]; L = s["bars"] * bb; per = float(s.get("beats_per_chord") or bb); t = 0; i = 0
         sect.append((t0, t0 + L, nm, s["energy"]))
         while t < L - 1e-6:
-            d = min(per, L - t); harm.append((t0 + t, t0 + t + d, parse_chord(s["chords"][i % len(s["chords"])], key, mode), s["chords"][i % len(s["chords"])])); t += d; i += 1
+            durs = [float(x) for x in s.get("chord_beats") or []]  # pack progressions keep their own durations
+            d = min(durs[i % len(durs)] if durs else per, L - t); harm.append((t0 + t, t0 + t + d, parse_chord(s["chords"][i % len(s["chords"])], key, mode), s["chords"][i % len(s["chords"])])); t += d; i += 1
         t0 += L
     total = t0
     def chord_at(b):

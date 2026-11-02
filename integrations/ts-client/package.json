@@ -1,0 +1,17 @@
+{
+  "name": "@midigen/client",
+  "version": "0.1.0",
+  "description": "Typed fetch client for the midigen REST service",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "example": "node examples/generate.ts"
+  },
+  "devDependencies": { "typescript": "^5.6.0", "@types/node": "^22.0.0" },
+  "license": "MIT"
+}

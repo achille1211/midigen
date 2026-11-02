@@ -44,9 +44,23 @@ AUTO_PRIOR = (2.0, 1.0)  # the hand-tuned genre default starts slightly favoured
 ARM_PRIOR = (1.0, 1.0)
 
 
+_TEST_DIR: Path | None = None
+
+
 def data_dir() -> Path:
+    """Store root. ``$MIDIGEN_DATA_DIR`` wins; otherwise ``~/.midigen/experience``. Under pytest (or any
+    process launched from a test) with no explicit dir, a throwaway temp store is used instead, so automated
+    test runs never write to, or learn from, a person's real store."""
+    global _TEST_DIR
     d = os.environ.get("MIDIGEN_DATA_DIR")
-    return Path(d).expanduser() if d else Path.home() / ".midigen" / "experience"
+    if d:
+        return Path(d).expanduser()
+    if os.environ.get("PYTEST_CURRENT_TEST") or os.environ.get("MIDIGEN_TEST_MODE"):
+        if _TEST_DIR is None:
+            import tempfile
+            _TEST_DIR = Path(tempfile.mkdtemp(prefix="midigen-test-store-"))
+        return _TEST_DIR
+    return Path.home() / ".midigen" / "experience"
 
 
 def learning_enabled(flag: bool | None = None) -> bool:
@@ -554,7 +568,11 @@ def apply_policy(spec: dict, g: dict, seed: int, fixed: set | None = None, greed
     space = arm_space(spec, g, prof, fixed)
     rng = random.Random(stable_seed("learn", genre, seed, pol.get("updates", 0)))
     choices = choose(pol, space, rng, greedy=greedy)
-    new = apply_choices(spec, g, choices, prof)
+    from .spec import check, SpecError
+    try:
+        new = check(apply_choices(spec, g, choices, prof))
+    except (SpecError, KeyError, ValueError, TypeError):
+        return spec, {}  # a learned arm that no longer fits must never break generation
     _LAST[fingerprint(new)] = choices
     if len(_LAST) > 256:
         _LAST.pop(next(iter(_LAST)))
@@ -795,12 +813,14 @@ def resolve(ref) -> dict:
 
 def _user_reward(fb: list[dict]) -> float | None:
     vals = []
-    for f in fb:
-        if f.get("target"):
-            continue
+    whole = [f for f in fb if not f.get("target")]
+    ratings = [f for f in whole if f["kind"] == "rating" and f["value"] is not None]
+    if ratings:  # a re-rating replaces the earlier rating
+        vals += [(ratings[-1]["value"] - 1) / 4.0] * 2
+    for f in whole:
         k, v = f["kind"], f["value"]
-        if k == "rating" and v is not None:
-            vals += [(v - 1) / 4.0] * 2
+        if k == "rating":
+            continue
         elif k == "thumbs" and v is not None:
             vals.append(1.0 if v > 0 else 0.0)
         elif k == "keep":
@@ -938,8 +958,11 @@ def edit_signals(old: dict, new: dict) -> list[dict]:
 
 
 def record_edit(old: dict, new: dict, ops=None, source: str = "edit", path: str | None = None,
-                parent: str | None = None) -> str | None:
-    """Record an edit (LLM, offline parser, JSON ops or a hand edit) and learn from what changed."""
+                parent: str | None = None, learn_policy: bool | None = None) -> str | None:
+    """Record an edit (LLM, offline parser, JSON ops or a hand edit) as data. It nudges the generation policy only for
+    hand edits that are confirmed by a later rating (source "manual"), when ``learn_policy=True``, or when
+    ``MIDIGEN_LEARN_EDITS=1``. Routine edit commands therefore never silently change what ``build_spec`` makes
+    next time; ratings, notes and keep/reject do that."""
     if not recording_enabled():
         return None
     try:
@@ -953,7 +976,9 @@ def record_edit(old: dict, new: dict, ops=None, source: str = "edit", path: str 
         st.add_edit(parent, sid, ops, sigs, source)
     except (sqlite3.Error, OSError):
         return None
-    if sigs:
+    if learn_policy is None:
+        learn_policy = source == "manual" or os.environ.get("MIDIGEN_LEARN_EDITS", "") in ("1", "true", "yes")
+    if sigs and learn_policy:
         genre = new["genre"]
         pol, prof = load_policy(genre), load_profile(genre)
         for sg in sigs:
@@ -1228,3 +1253,288 @@ def learn_midi(path: str | Path, genre: str) -> dict:
     pol["user_events"] = pol.get("user_events", 0) + 1
     save_policy(pol)
     return {"genre": g["name"], "analysis": a, "added": added}
+
+
+# ----------------------------------------------------------------------------- status / reset / export
+
+def _learned_genres(root: Path) -> list[str]:
+    return sorted({p.stem for p in (root / "weights").glob("*.json")} | {p.stem for p in (root / "profiles").glob("*.json")})
+
+
+def status(genre: str | None = None) -> dict:
+    root = data_dir()
+    genres = [_gkey(genre)] if genre else _learned_genres(root)
+    out = {"data_dir": str(root), "learning": learning_enabled(), "recording": recording_enabled(), "genres": {}}
+    try:
+        out["store"] = store().counts()
+    except (sqlite3.Error, OSError) as e:
+        out["store"] = {"error": str(e)}
+    for gname in genres:
+        pol, prof = load_policy(gname), load_profile(gname)
+        dims = {}
+        for dim, arms in sorted(pol.get("arms", {}).items()):
+            ranked = sorted(arms, key=lambda a: -arm_mean(pol, dim, a))
+            dims[dim] = [{"arm": a, "mean": round(arm_mean(pol, dim, a), 3),
+                          "user_n": round(arms[a].get("ua", 0) + arms[a].get("ub", 0), 2),
+                          "critic_n": round(arms[a].get("ca", 0) + arms[a].get("cb", 0), 2)} for a in ranked]
+        out["genres"][gname] = {"updates": pol.get("updates", 0), "user_events": pol.get("user_events", 0),
+                                "critic_events": pol.get("critic_events", 0), "preferences": preferences(gname),
+                                "references": len(prof.get("references", [])),
+                                "learned": {k: len(prof.get(k, {})) for k in ("progressions", "bass", "cells")},
+                                "dims": dims}
+    return out
+
+
+def format_status(st: dict) -> str:
+    lines = [f"data dir: {st['data_dir']}  learning: {'on' if st['learning'] else 'off'}  "
+             f"recording: {'on' if st['recording'] else 'off'}", f"store: {st.get('store')}"]
+    if not st["genres"]:
+        lines.append("no learned weights yet (rate songs, `midigen learn file.mid --genre X`, or `midigen train`)")
+    for g, d in st["genres"].items():
+        lines.append(f"\n[{g}] updates={d['updates']} (user {d['user_events']}, critic {d['critic_events']}), "
+                     f"references={d['references']}, learned={d['learned']}")
+        lines += [f"  * {p}" for p in d["preferences"]]
+        for dim, arms in d["dims"].items():
+            top = ", ".join(f"{a['arm']} {a['mean']:.2f} (u{a['user_n']:g}/c{a['critic_n']:g})" for a in arms[:4])
+            lines.append(f"  {dim:<18} {top}")
+    return "\n".join(lines)
+
+
+def reset(genre: str | None = None, store_too: bool = False) -> list[str]:
+    """Delete learned weights and profiles (one genre or all); optionally the experience store too."""
+    root = data_dir()
+    removed = []
+    pat = f"{_gkey(genre)}.json" if genre else "*.json"
+    for sub in ("weights", "profiles"):
+        for p in (root / sub).glob(pat):
+            p.unlink()
+            removed.append(str(p))
+    if store_too and not genre:
+        st = _STORE.pop(str(root), None)
+        if st:
+            st.close()
+        p = root / "experience.sqlite"
+        if p.exists():
+            p.unlink()
+            removed.append(str(p))
+    _LAST.clear()
+    return removed
+
+
+def export(path: str | Path, genre: str | None = None) -> str:
+    """Write weights, profiles, songs (without full specs) and feedback to one JSON file."""
+    root = data_dir()
+    data = {"exported": time.time(), "data_dir": str(root), "weights": {}, "profiles": {}}
+    for sub, k in (("weights", "weights"), ("profiles", "profiles")):
+        for p in (root / sub).glob("*.json"):
+            if not genre or p.stem == _gkey(genre):
+                data[k][p.stem] = json.loads(p.read_text())
+    st = store()
+    data["songs"] = [{k: r[k] for k in ("id", "genre", "seed", "source", "critic_score", "user_reward", "status",
+                                        "choices")} for r in st.songs(genre)]
+    data["feedback"] = st.feedback()
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    Path(path).write_text(json.dumps(data, indent=1))
+    return str(path)
+
+
+def import_weights(path: str | Path) -> list[str]:
+    """Load weights/profiles written by export()."""
+    data = json.loads(Path(path).read_text())
+    for prof in data.get("profiles", {}).values():
+        save_profile(prof)
+    for pol in data.get("weights", {}).values():
+        save_policy(pol)
+    return sorted(data.get("weights", {}))
+
+
+# ----------------------------------------------------------------------------- offline self-improvement
+
+def predicted_user(pol: dict, choices: dict) -> float | None:
+    """Learned user-reward model: evidence-weighted mean of the user posteriors of the chosen arms."""
+    num = den = 0.0
+    for dim, arm in choices.items():
+        st = pol.get("arms", {}).get(dim, {}).get(arm)
+        if not st:
+            continue
+        n = st.get("ua", 0) + st.get("ub", 0)
+        if n < 0.25:
+            continue
+        num += n * (st["ua"] + 1) / (n + 2)
+        den += n
+    return num / den if den else None
+
+
+def evaluate(genre: str, seeds, learn: bool, bars: int | None = None, greedy: bool = True) -> dict:
+    """Mean critic score (and predicted user reward) over fixed seeds, with or without the learned policy."""
+    from .genres import build_spec, get_genre
+    from .critic import critique
+    g = get_genre(genre)
+    pol = load_policy(g["name"])
+    scores, preds = [], []
+    for s in seeds:
+        spec = build_spec(g["name"], seed=s, bars=bars, learn=False)
+        ch = {d: "auto" for d in arm_space(spec, g, load_profile(g["name"]))}
+        if learn:
+            spec, got = apply_policy(spec, g, s, greedy=greedy)
+            ch = got or ch
+        scores.append(critique(spec)["score"])
+        p = predicted_user(pol, ch) if pol.get("user_events") else None
+        if p is not None:
+            preds.append(p)
+    return {"critic": sum(scores) / len(scores), "min": min(scores),
+            "pred_user": (sum(preds) / len(preds)) if preds else None}
+
+
+def _mean(xs):
+    xs = [x for x in xs if x is not None]
+    return sum(xs) / len(xs) if xs else 0.0
+
+
+def _rew(v):
+    c = critic_reward(v["critic"])
+    return c if v.get("pred_user") is None else 0.4 * c + 0.6 * v["pred_user"]
+
+
+def train(genres=None, rounds: int = 5, candidates: int = 8, bars: int | None = None, eval_seeds=(1, 2, 3, 4),
+          seed: int = 0, chart: str | Path | None = None, log=print) -> dict:
+    """Offline self-improvement: per round and genre, generate exploring candidates, score them (critic, plus
+    the learned user-reward model when the user has given feedback), update the policy, then measure the greedy
+    policy on fixed seeds. Round 0 is the state before training; 'baseline' is learning switched off."""
+    from .genres import build_spec, get_genre, list_genres
+    from .critic import critique
+    genres = list(dict.fromkeys(get_genre(x)["name"] for x in (genres or list_genres())))
+    rng = random.Random(seed)
+    base = {g: evaluate(g, eval_seeds, learn=False, bars=bars) for g in genres}
+    start = {g: evaluate(g, eval_seeds, learn=True, bars=bars) if has_data(g) else base[g] for g in genres}
+    curve = [{"round": 0, "eval_critic": _mean(v["critic"] for v in start.values()),
+              "eval_min": min(v["min"] for v in start.values()),
+              "eval_reward": _mean(_rew(v) for v in start.values())}]
+    log(f"baseline (no learning): critic {_mean(v['critic'] for v in base.values()):.2f}")
+    log(f"round 0: greedy eval critic {curve[0]['eval_critic']:.2f}  reward {curve[0]['eval_reward']:.3f}")
+    for r in range(1, rounds + 1):
+        cand_scores, cand_rewards = [], []
+        for gname in genres:
+            g = get_genre(gname)
+            pol, prof = load_policy(gname), load_profile(gname)
+            for _ in range(candidates):
+                s = rng.randrange(1, 10**6)
+                spec = build_spec(gname, seed=s, bars=bars, learn=False)
+                ch = choose(pol, arm_space(spec, g, prof), random.Random(stable_seed("train", gname, s, r)))
+                try:
+                    sc = critique(apply_choices(spec, g, ch, prof))["score"]
+                except Exception:  # noqa: BLE001 - a candidate that fails to render earns zero
+                    sc = 0
+                c, pu = critic_reward(sc), predicted_user(pol, ch)
+                rew = c if pu is None else 0.4 * c + 0.6 * pu
+                update(pol, ch, rew, "critic")
+                cand_scores.append(sc)
+                cand_rewards.append(rew)
+            save_policy(pol)
+        ev = {g: evaluate(g, eval_seeds, learn=True, bars=bars) for g in genres}
+        row = {"round": r, "candidates": len(cand_scores), "cand_critic": _mean(cand_scores),
+               "cand_reward": _mean(cand_rewards), "eval_critic": _mean(v["critic"] for v in ev.values()),
+               "eval_min": min(v["min"] for v in ev.values()),
+               "eval_reward": _mean(_rew(v) for v in ev.values()),
+               "per_genre": {g: round(v["critic"], 2) for g, v in ev.items()}}
+        curve.append(row)
+        log(f"round {r}: candidates critic {row['cand_critic']:.2f} reward {row['cand_reward']:.3f} | "
+            f"greedy eval critic {row['eval_critic']:.2f} (min {row['eval_min']}) reward {row['eval_reward']:.3f}")
+    out = {"genres": genres, "rounds": rounds, "candidates": candidates, "eval_seeds": list(eval_seeds),
+           "bars": bars, "baseline": {g: round(v["critic"], 2) for g, v in base.items()},
+           "baseline_mean": _mean(v["critic"] for v in base.values()), "curve": curve,
+           "final_mean": curve[-1]["eval_critic"], "ascii_chart": ascii_chart(curve)}
+    if chart:
+        out["chart"] = plot_curve(out, chart)
+    return out
+
+
+def ascii_chart(curve: list[dict], key: str = "eval_critic", width: int = 40) -> str:
+    vals = [c[key] for c in curve]
+    lo, hi = min(vals), max(vals)
+    span = (hi - lo) or 1.0
+    return "\n".join(f"r{c['round']:<3}{c[key]:7.2f} |" + "#" * (1 + int((c[key] - lo) / span * (width - 1)))
+                     for c in curve)
+
+
+def plot_curve(result: dict, path: str | Path) -> str | None:
+    """PNG of the training curve (None if matplotlib is missing; the ASCII chart is always available)."""
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+    except ImportError:
+        return None
+    curve = result["curve"]
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot([c["round"] for c in curve], [c["eval_critic"] for c in curve], "o-", label="greedy policy, fixed seeds")
+    cc = [c for c in curve if c.get("cand_critic") is not None]
+    ax.plot([c["round"] for c in cc], [c["cand_critic"] for c in cc], "s--", alpha=.7, label="exploring candidates")
+    ax.axhline(result["baseline_mean"], color="gray", ls=":", label="learning off (baseline)")
+    ax.set_xlabel("training round")
+    ax.set_ylabel("mean critic score (0-100)")
+    ax.set_title("midigen self-training (critic is a proxy; human ratings are ground truth)", fontsize=9)
+    ax.legend()
+    ax.grid(alpha=.3)
+    fig.tight_layout()
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(path, dpi=110)
+    plt.close(fig)
+    return str(path)
+
+
+# ----------------------------------------------------------------------------- UI / service API
+
+def _jsonable(x):
+    return json.loads(json.dumps(x, default=str))
+
+
+def handle(request: dict) -> dict:
+    """One JSON-in/JSON-out entry point for UIs and web services.
+
+    {"action": "rate", "song": <id | 'last' | path | spec>, "rating": 4, "note": "...", "target": "track:Bass"}
+    actions: record, rate, thumbs, keep, reject, feedback, edit, learn_midi, status, preferences, few_shot,
+             songs, reset, export, train. Errors come back as {"ok": false, "error": "..."}."""
+    r = dict(request or {})
+    act = r.pop("action", "")
+    song = r.pop("song", None)
+    try:
+        if act == "record":
+            out = {"song_id": record(r["spec"], source=r.get("source", "ui"), path=r.get("path"), prompt=r.get("prompt"))}
+        elif act == "rate":
+            out = rate(song, r["rating"], note=r.get("note"), target=r.get("target"))
+        elif act == "thumbs":
+            out = thumbs(song, bool(r.get("up", True)), note=r.get("note"), target=r.get("target"))
+        elif act == "keep":
+            out = keep(song, note=r.get("note"))
+        elif act == "reject":
+            out = reject(song, note=r.get("note"))
+        elif act == "feedback":
+            out = feedback(song, r.get("note", ""), target=r.get("target"))
+        elif act == "edit":
+            out = {"song_id": record_edit(r["old"], r["new"], ops=r.get("ops"), source=r.get("source", "ui"))}
+        elif act == "learn_midi":
+            res = learn_midi(r["path"], r["genre"])
+            out = {"genre": res["genre"], "added": res["added"]}
+        elif act == "status":
+            out = status(r.get("genre"))
+        elif act == "preferences":
+            out = {"preferences": preferences(r["genre"])}
+        elif act == "few_shot":
+            out = {"few_shot": few_shot(r["genre"], int(r.get("k", 2)))}
+        elif act == "songs":
+            out = {"songs": [{k: x[k] for k in ("id", "ts", "genre", "source", "critic_score", "user_reward", "status",
+                                                "path")} for x in store().songs(r.get("genre"), int(r.get("limit", 50)))]}
+        elif act == "reset":
+            out = {"removed": reset(r.get("genre"), bool(r.get("all")))}
+        elif act == "export":
+            out = {"path": export(r.get("path", "midigen-learned.json"), r.get("genre"))}
+        elif act == "train":
+            res = train(r.get("genres"), rounds=int(r.get("rounds", 3)), candidates=int(r.get("candidates", 6)),
+                        bars=r.get("bars", 16), log=lambda *_: None)
+            out = {k: res[k] for k in ("genres", "baseline_mean", "final_mean", "curve", "ascii_chart")}
+        else:
+            raise ValueError(f"unknown action {act!r}")
+    except (KeyError, ValueError, TypeError, OSError, sqlite3.Error) as e:
+        return {"ok": False, "error": str(e.args[0] if isinstance(e, KeyError) and e.args else e)}
+    return {"ok": True, **_jsonable(out)}

@@ -11,6 +11,7 @@ from importlib import resources
 from . import harmony
 from .core import stable_seed
 from .spec import check, make_track
+from .theory import is_roman
 
 ROLE_ORDER = ["drums", "bass", "chords", "pad", "arp", "lead"]
 DEFAULT_CADENCE = {"chorus": "authentic", "hook": "authentic", "drop": "authentic", "verse": "half",
@@ -168,8 +169,9 @@ def _pack_progression(g: dict, mode: str, sec: dict, rng: random.Random) -> str:
     for pname in progs:
         pw = [w for w in re.split(r"[^a-z0-9]+", pname.lower()) if w]
         letters = [w for w in re.split(r"[^A-Za-z0-9]+", pname) if len(w) == 1 and w.isupper()]
-        if any(w in pw and w not in _GENERIC and len(w) > 1 for w in words) or \
-                any(w.upper() in letters for w in words if len(w) == 1):
+        if (any(w in pw and w not in _GENERIC and len(w) > 1 for w in words) or
+                any(w.upper() in letters for w in words if len(w) == 1)) and \
+                (g.get("name") not in SEED_VARIETY or rng.random() < 0.6):
             best = pname
             break
     if best is None:
@@ -184,6 +186,22 @@ def _pack_progression(g: dict, mode: str, sec: dict, rng: random.Random) -> str:
     return best
 
 
+# Loop genres whose packs offer only two or three progressions per mode: the seed also decides whether a
+# section's loop starts on its tonic or on another of its chords (bVImaj7-bVII-i7-bVII instead of
+# i7-bVII-bVImaj7-bVII), and section-name matches are only preferred, so the 3 seeds of a genre differ.
+SEED_VARIETY = {"house", "funk"}
+
+
+def _loop_rotation(g: dict, mode: str, sec: dict, chords: list[str], rng: random.Random) -> int:
+    rot = g.setdefault("_rotations", {})
+    base = (mode, _base(sec["name"]))
+    if base not in rot:
+        n = len(chords)
+        ok = [k for k in range(1, n) if chords[k] != chords[k - 1] and chords[0] != chords[-1]]
+        rot[base] = rng.choice(ok) if ok and rng.random() < 0.5 else 0
+    return rot[base]
+
+
 def section_harmony(g: dict, mode: str, sec: dict, rng: random.Random) -> tuple[list[str], list[float] | None]:
     """(chords, chord_beats or None) for a section. Pack progressions keep their own durations (barsPerChord)."""
     h = g.get("harmony", {})
@@ -191,7 +209,13 @@ def section_harmony(g: dict, mode: str, sec: dict, rng: random.Random) -> tuple[
     cbs = h.get("chord_beats", {}).get(mode, {})
     if progs and cbs:
         name = sec.get("progression") if sec.get("progression") in progs else _pack_progression(g, mode, sec, rng)
-        return list(progs[name]), list(cbs[name]) if name in cbs else None
+        chords, beats = list(progs[name]), list(cbs[name]) if name in cbs else None
+        if g.get("name") in SEED_VARIETY and not sec.get("progression"):
+            k = _loop_rotation(g, mode, sec, chords, rng)
+            chords = chords[k:] + chords[:k]
+            if beats and len(beats) == len(progs[name]):
+                beats = beats[k:] + beats[:k]
+        return chords, beats
     return section_progression(g, mode, sec, rng), None
 
 
@@ -278,13 +302,100 @@ def _apply_cadence(chords: list[str], mode: str, cadence: str) -> list[str]:
     return out
 
 
+# Per-genre harmonic colour for pack progressions (which arrive without the functional path's
+# secondary dominants / modal mixture): (secondary-dominant probability, borrowed-chord probability).
+# Applied by *splitting* a long chord so the pack's own progression survives and the harmonic rhythm
+# varies (a chord change on beat 3 into the tonicised / borrowed chord).
+GENRE_COLOUR = {
+    "pop": (0.45, 0.35), "rock": (0.25, 0.5), "synthwave": (0.15, 0.35), "cinematic": (0.25, 0.5),
+    "jazz": (0.6, 0.25), "neo_soul": (0.5, 0.4), "lofi_hiphop": (0.45, 0.35), "bossa_nova": (0.55, 0.25),
+    "funk": (0.15, 0.1), "reggae": (0.15, 0.15), "ambient": (0.0, 0.3), "edm": (0.15, 0.3),
+    "house": (0.15, 0.25), "drum_and_bass": (0.2, 0.3), "techno": (0.0, 0.1), "trap": (0.0, 0.2),
+}
+_NUMERAL_RE = re.compile(r"[b#]?(?:VII|VI|IV|V|III|II|I|vii|vi|iv|v|iii|ii|i)")
+
+
+def _numeral(sym: str) -> str | None:
+    m = _NUMERAL_RE.match(sym)
+    return m.group(0) if m else None
+
+
+def _colour_split(chords: list[str], beats: list[float], i: int, new: str) -> None:
+    """Split chord i: the original keeps the first half, `new` takes the rest (at most one bar)."""
+    b = beats[i]
+    tail = min(b / 2, 4.0)
+    chords.insert(i + 1, new)
+    beats[i] = b - tail
+    beats.insert(i + 1, tail)
+
+
+def colour_harmony(g: dict, mode: str, chords: list[str], beats: list[float] | None,
+                   rng: random.Random) -> tuple[list[str], list[float] | None]:
+    """Genre-weighted secondary dominants and modal interchange for a pack progression.
+
+    Secondary dominant: the second half of a chord of >= 4 beats becomes V7/x of the next chord
+    (x diatonic, not the tonic, not diminished). Borrowed: major keys split IV -> IV iv (minor plagal)
+    or swap ii -> iiø7 / vi -> bVI; minor keys split iv -> IV iv or i -> i IV (dorian IV). The last chord
+    (the cadence goal) is never touched. Returns new (chords, beats)."""
+    if not beats or len(beats) != len(chords) or not all(is_roman(c) for c in chords):
+        return chords, beats
+    sec_p, bor_p = g.get("harmony", {}).get("colour") or GENRE_COLOUR.get(g.get("name", ""), (0.0, 0.0))
+    out, bts = list(chords), [float(b) for b in beats]
+    rich = sum(1 for c in out if any(x in c for x in ("7", "9", "11", "13"))) * 2 >= len(out)
+    fam = harmony._family(mode)
+    # secondary dominants: one per progression with probability sec_p, a second with sec_p / 2
+    for want in (sec_p, sec_p / 2):
+        if rng.random() >= want:
+            break
+        cands = []
+        for j in range(len(out) - 1):
+            cur, tgt = out[j], out[j + 1]
+            base, d = _numeral(tgt), harmony.degree_of_symbol(tgt)
+            if (base is None or d in (None, 0) or "/" in tgt or "/" in cur or tgt.endswith(("°", "ø7", "dim7"))
+                    or bts[j] < 4 or base.lower() in ("bii", "#iv") or harmony.degree_of_symbol(cur) == (d + 4) % 7):
+                continue  # tonic / diminished targets, short chords, or already its dominant
+            cands.append(j)
+        if not cands:
+            break
+        j = rng.choice(cands)
+        _colour_split(out, bts, j, "V7/" + _numeral(out[j + 1]))
+    # modal interchange (one per progression)
+    if rng.random() < bor_p:
+        for j in rng.sample(range(len(out) - 1), len(out) - 1):
+            c = out[j]
+            n = _numeral(c)
+            if n is None or "/" in c:
+                continue
+            if fam == "major" and n == "IV" and bts[j] >= 4:
+                _colour_split(out, bts, j, "iv7" if rich else "iv")
+                break
+            if fam == "major" and n == "ii" and j > 0:
+                out[j] = "iiø7"
+                break
+            if fam == "major" and n == "vi" and j > 0 and not rich:
+                out[j] = "bVI"
+                break
+            if fam == "minor" and mode != "dorian" and n == "iv" and bts[j] >= 4:
+                out[j] = "IV" + ("7" if rich else "")
+                _colour_split(out, bts, j, c)
+                break
+            if fam == "minor" and mode not in ("dorian", "phrygian") and n == "i" and bts[j] >= 8:
+                _colour_split(out, bts, j, "IV7" if rich else "IV")
+                break
+    return out, bts
+
+
 MAX_BARS = 256
 
 
 def build_spec(genre: str = "pop", key: str | None = None, mode: str | None = None, tempo: float | None = None,
                bars: int | None = None, seed: int = 1, roles: list[str] | None = None,
-               title: str | None = None, exclude_roles: list[str] | None = None) -> dict:
-    """Build a complete song spec from a genre profile using the theory engine."""
+               title: str | None = None, exclude_roles: list[str] | None = None,
+               learn: bool | None = None) -> dict:
+    """Build a complete song spec from a genre profile using the theory engine.
+
+    learn: apply the genre's learned policy (see midigen.learn). None = on unless MIDIGEN_LEARN=0;
+    with no learned data the output is identical to learn=False."""
     g = get_genre(genre)
     if bars is not None and not 1 <= int(bars) <= MAX_BARS:
         raise ValueError(f"bars must be between 1 and {MAX_BARS} (got {bars})")
@@ -310,6 +421,8 @@ def build_spec(genre: str = "pop", key: str | None = None, mode: str | None = No
     sections = []
     for s in form:
         chords, cb = section_harmony(g, mode, s, rng)
+        if cb:  # pack progressions: genre-weighted colour, the same for every repeat of a section type
+            chords, cb = colour_harmony(g, mode, chords, cb, random.Random(stable_seed("colour", g["name"], seed, _base(s["name"]))))
         sec = {"name": s["name"], "bars": s["bars"], "chords": chords, "energy": s["energy"],
                "beats_per_chord": g["harmony"].get("beats_per_chord", bb)}
         if cb:
@@ -340,6 +453,10 @@ def build_spec(genre: str = "pop", key: str | None = None, mode: str | None = No
         "key": key, "mode": mode, "seed": seed, "swing": g.get("swing", 0.0), "swing_unit": g.get("swing_unit", "1/16"),
         "sections": sections, "arrangement": [s["name"] for s in sections], "tracks": tracks,
     }
+    from . import learn as _learn
+    if _learn.learning_enabled(learn):
+        fixed = ({"instrumentation"} if roles or exclude_roles else set()) | ({"tempo"} if tempo else set())
+        spec, _ = _learn.apply_policy(check(spec), g, seed, fixed=fixed)
     return check(spec)
 
 

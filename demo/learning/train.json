@@ -1,0 +1,114 @@
+{
+ "genres": [
+  "pop",
+  "funk",
+  "lofi_hiphop",
+  "house"
+ ],
+ "baseline": {
+  "pop": 99.92,
+  "funk": 91.33,
+  "lofi_hiphop": 91.58,
+  "house": 100.0
+ },
+ "baseline_mean": 95.70833333333333,
+ "curve": [
+  {
+   "round": 0,
+   "eval_critic": 95.70833333333333,
+   "eval_min": 84,
+   "eval_reward": 0.8927083333333333
+  },
+  {
+   "round": 1,
+   "candidates": 32,
+   "cand_critic": 97.96875,
+   "cand_reward": 0.94921875,
+   "eval_critic": 99.5625,
+   "eval_min": 91,
+   "eval_reward": 0.9890625,
+   "per_genre": {
+    "pop": 99.92,
+    "funk": 99.08,
+    "lofi_hiphop": 99.25,
+    "house": 100.0
+   }
+  },
+  {
+   "round": 2,
+   "candidates": 32,
+   "cand_critic": 99.21875,
+   "cand_reward": 0.98046875,
+   "eval_critic": 99.54166666666667,
+   "eval_min": 91,
+   "eval_reward": 0.9885416666666667,
+   "per_genre": {
+    "pop": 99.92,
+    "funk": 98.42,
+    "lofi_hiphop": 99.83,
+    "house": 100.0
+   }
+  },
+  {
+   "round": 3,
+   "candidates": 32,
+   "cand_critic": 98.78125,
+   "cand_reward": 0.96953125,
+   "eval_critic": 99.60416666666667,
+   "eval_min": 91,
+   "eval_reward": 0.9901041666666667,
+   "per_genre": {
+    "pop": 99.92,
+    "funk": 99.0,
+    "lofi_hiphop": 99.5,
+    "house": 100.0
+   }
+  },
+  {
+   "round": 4,
+   "candidates": 32,
+   "cand_critic": 99.40625,
+   "cand_reward": 0.98515625,
+   "eval_critic": 99.66666666666667,
+   "eval_min": 92,
+   "eval_reward": 0.9916666666666667,
+   "per_genre": {
+    "pop": 99.92,
+    "funk": 99.17,
+    "lofi_hiphop": 99.58,
+    "house": 100.0
+   }
+  },
+  {
+   "round": 5,
+   "candidates": 32,
+   "cand_critic": 99.78125,
+   "cand_reward": 0.99453125,
+   "eval_critic": 99.70833333333334,
+   "eval_min": 92,
+   "eval_reward": 0.9927083333333334,
+   "per_genre": {
+    "pop": 99.92,
+    "funk": 99.17,
+    "lofi_hiphop": 99.75,
+    "house": 100.0
+   }
+  },
+  {
+   "round": 6,
+   "candidates": 32,
+   "cand_critic": 99.5625,
+   "cand_reward": 0.9890625,
+   "eval_critic": 99.66666666666667,
+   "eval_min": 92,
+   "eval_reward": 0.9916666666666667,
+   "per_genre": {
+    "pop": 99.92,
+    "funk": 99.17,
+    "lofi_hiphop": 99.58,
+    "house": 100.0
+   }
+  }
+ ],
+ "final_mean": 99.66666666666667
+}

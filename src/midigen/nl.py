@@ -65,43 +65,216 @@ def _key_mode(text: str) -> tuple[str | None, str | None]:
     return key, mode
 
 
-def prompt_to_spec(prompt: str, seed: int = 1) -> dict:
-    t = prompt.lower()
+# Mood / use-case vocabulary for people who don't name a genre. Each entry: regex, then what it implies.
+# genre is used only when the prompt names no genre; tempo is "min", "max" or a factor of the genre default.
+PRESETS = [
+    (r"\b(horror|scary|spooky|creepy|haunted|halloween|eerie|sinister|nightmare|zombie|ghost\w*)\b",
+     {"label": "dark/scary", "genre": "ambient", "mode": "minor", "tempo": "min"}),
+    (r"\b(lullaby|lullabies|bedtime|sleep\w*|nursery|baby)\b",
+     {"label": "lullaby", "genre": "ambient", "mode": "major", "tempo": "min", "exclude": ["drums"]}),
+    (r"\b(peaceful|relax\w*|meditat\w*|spa|yoga|serene|tranquil|soothing|gentle)\b",
+     {"label": "calm", "genre": "ambient", "mode": "major", "tempo": "min", "exclude": ["drums"]}),
+    (r"\b(calm|dreamy|atmospheric|floating|ethereal)\b", {"label": "calm", "genre": "ambient", "tempo": "min"}),
+    (r"\b(boss|battle|fight\w*|combat|war|chase|action|intense|aggressive)\b",
+     {"label": "intense/action", "genre": "cinematic", "mode": "minor", "tempo": "max"}),
+    (r"\b(mysterious|mystery|suspense\w*|stealth|sneak\w*|detective|tense|tension)\b",
+     {"label": "tense/mysterious", "genre": "cinematic", "mode": "minor", "tempo": 0.9}),
+    (r"\b(workout|gym|running|hype|energetic|pump\w*)\b", {"label": "energetic", "genre": "edm", "tempo": "max"}),
+    (r"\b(heroic|hero|victory|victorious|fanfare|triumph\w*|adventure\w*|winner|wins?|celebrat\w*|epic|trailer)\b",
+     {"label": "heroic/triumphant", "genre": "cinematic", "mode": "major"}),
+    (r"\b(8[ -]?bit|chiptune|chip tune|retro game|video ?games?|game music|game menu|arcade|pixel|nes|gameboy)\b",
+     {"label": "retro video game", "genre": "synthwave", "tempo": "max", "lead": "square_lead"}),
+    (r"\b(christmas|xmas|holiday|festive|winter wonderland|sleigh)\b",
+     {"label": "festive", "genre": "pop", "mode": "major", "lead": "bell"}),
+    (r"\b(beach|tropical|summer|island|vacation)\b", {"label": "sunny/tropical", "genre": "reggae", "mode": "major"}),
+    (r"\b(party|celebration)\b", {"label": "party", "genre": "house", "tempo": "max"}),
+    (r"\b(corporate|presentation|commercial|advert\w*|ad|jingle|vlog|youtube|explainer|podcast|background)\b",
+     {"label": "light background", "genre": "pop", "mode": "major"}),
+    (r"\b(romantic|romance|love|dinner|candle\w*|wedding)\b", {"label": "romantic", "genre": "neo_soul", "tempo": "min"}),
+    (r"\b(rain\w*|lonely|loneliness|nostalgi\w*|melancholy|melancholic|rainy)\b",
+     {"label": "wistful", "genre": "lofi_hiphop", "mode": "minor", "tempo": 0.9}),
+    (r"\b(sad|sadness|breakup|heartbreak\w*|grief|crying|depress\w*|emotional|somber|sombre|moody)\b",
+     {"label": "sad", "mode": "minor", "tempo": 0.85}),
+    (r"\b(happy|cheerful|joyful|bright|sunny|uplifting|playful|fun)\b", {"label": "happy", "mode": "major", "tempo": 1.05}),
+    (r"\b(chill|study|cozy|mellow|coffee|cafe|lofi)\b", {"label": "chill", "genre": "lofi_hiphop"}),
+]
+# instrument words a non-musician uses -> (GM program, track name); used for "sad piano", "violin solo", "piano piece"
+SOLO_INSTRUMENTS = {"piano": (0, "Piano"), "violin": (40, "Violin"), "cello": (42, "Cello"), "guitar": (24, "Acoustic guitar"),
+                    "acoustic guitar": (24, "Acoustic guitar"), "flute": (73, "Flute"), "harp": (46, "Harp"),
+                    "music box": (10, "Music box"), "strings": (48, "Strings"), "sax": (65, "Sax"), "saxophone": (65, "Sax"),
+                    "organ": (19, "Organ"), "marimba": (12, "Marimba")}
+STOPWORDS = set("""a an the for my our your of to in on at with and or but some something like music song songs track tune
+piece pieces sound sounds kind sort type style vibe vibes feel feeling i me we want need make made please would could that this
+it its is be really very bit little more less long short length about around just only plus also as from into by when
+where while player players scene video videos app apps level levels theme themes loop loops intro outro clip minute minutes
+second seconds sec secs min mins s new give get create write compose play playing played one two three four five six seven
+eight nine ten fifteen twenty thirty sixty half quarter mood vibe ish so too menu soft warm nice good cool some
+driving drive night day time people kids family friends work project film movie short game games""".split())
+NUM_WORDS_BIG = {"ten": 10, "fifteen": 15, "twenty": 20, "thirty": 30, "forty": 40, "forty-five": 45, "fifty": 50,
+                 "sixty": 60, "ninety": 90, "half a": 0.5, "a": 1, "an": 1, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
+
+
+def _vocab() -> set[str]:
+    words = set()
+    for pat, _ in PRESETS + MOOD_GENRE + MOOD_MODE:
+        words |= set(re.findall(r"[a-z]{3,}", re.sub(r"\\w\*|\\b|\[.*?\]|\?", " ", pat)))
+    for ws in ROLE_WORDS.values():
+        for w in ws:
+            words |= set(w.split())
+    words |= set(SOLO_INSTRUMENTS) | {w for k in available_genres() for w in k.split("_")}
+    words |= {"slow", "fast", "upbeat", "laid", "back", "jazz", "jazzy", "rock", "house", "techno", "trap", "funk", "reggae",
+              "ambient", "cinematic", "synthwave", "pop", "metal", "solo", "major", "minor", "bars", "bpm", "tempo", "key",
+              "without", "drums", "beat", "beats", "orchestral", "electronic", "dance", "violin", "cello", "harp", "bells"}
+    return {w for w in words if len(w) >= 3}
+
+
+_VOCAB: set[str] | None = None
+
+
+def correct_typos(text: str, extra: set[str] | None = None) -> tuple[str, dict]:
+    """Fix likely typos ("chil" -> "chill", "vidoe" -> "video", "sader" -> "sadder") against the known vocabulary."""
+    import difflib
+    global _VOCAB
+    if _VOCAB is None:
+        _VOCAB = _vocab()
+    vocab = _VOCAB | (extra or set())
+    fixed = {}
+
+    def sub(m):
+        w = m.group(0)
+        lw = w.lower()
+        if len(lw) < 4 or lw in vocab or lw in STOPWORDS or lw.isdigit() or any(
+                re.search(pat, lw) for pat, _ in PRESETS + MOOD_GENRE + MOOD_MODE):
+            return w
+        c = difflib.get_close_matches(lw, vocab | STOPWORDS, n=1, cutoff=0.8)
+        if c and c[0] != lw and c[0] not in STOPWORDS:
+            fixed[lw] = c[0]
+            return c[0]
+        return w
+    return re.sub(r"[A-Za-z]+", sub, text), fixed
+
+
+def parse_seconds(text: str) -> float | None:
+    """'15 seconds', '30-second', '1 minute', 'a minute and a half', '1:30', '2 mins' -> seconds."""
+    t = text.lower()
+    m = re.search(r"\b(\d{1,2}):(\d{2})\b", t)
+    if m:
+        return int(m.group(1)) * 60 + int(m.group(2))
+    if re.search(r"\b(a|one) minute and a half\b|\b1\.5 ?min", t):
+        return 90.0
+    num = r"(\d+(?:\.\d+)?|half an?|half a|an?|one|two|three|four|five|ten|fifteen|twenty|thirty|forty-five|forty|fifty|sixty|ninety)"
+    m = re.search(rf"\b{num}[\s-]*(seconds?|secs?|s|minutes?|mins?|m)\b", t)
+    if not m:
+        return None
+    n = m.group(1)
+    if m.group(2) == "s" and n.isdigit() and int(n) in (20, 30, 40, 50, 60, 70, 80, 90) and not re.search(rf"\b{n}\s+s\b", t):
+        return None  # "80s" = the decade
+    v = float(n) if n[0].isdigit() else NUM_WORDS_BIG.get(n.replace("half an", "half a"), 1)
+    unit = m.group(2)
+    if unit in ("m",) and v > 10:  # "30m" is ambiguous; treat >10 as seconds is wrong, so skip
+        return None
+    return v * (60 if unit.startswith("m") else 1)
+
+
+def duration_seconds(spec: dict) -> float:
+    from .spec import total_bars
+    num = spec.get("time_signature", [4, 4])[0]
+    return round(total_bars(spec) * num * 60.0 / float(spec["tempo"]), 1)
+
+
+def fmt_duration(sec: float) -> str:
+    sec = int(round(sec))
+    return f"{sec // 60}:{sec % 60:02d}" if sec >= 60 else f"{sec} s"
+
+
+def bars_for_seconds(seconds: float, tempo: float, beats_per_bar: int = 4) -> int:
+    return max(2, min(256, int(round(seconds * tempo / 60.0 / beats_per_bar))))
+
+
+def _solo_instruments(t: str) -> list[str]:
+    found = []
+    for name in sorted(SOLO_INSTRUMENTS, key=len, reverse=True):
+        m = re.search(rf"\b{name}s?\b", t)
+        if m and not any(name in f for f, _ in found):
+            found.append((name, m.start()))
+    return [f for f, _ in sorted(found, key=lambda x: x[1])]
+
+
+def interpret(prompt: str, seed: int = 1) -> tuple[dict, dict]:
+    """prompt -> (spec, info). info says what was understood: genre (and why), mood, key, tempo, length, solo
+    instruments, typo corrections and the words that were not used, so callers can print "Interpreted as: ..."."""
+    raw = prompt.strip()
+    if not raw:
+        raise ValueError('empty prompt; describe the music, e.g. midigen new "calm piano for a meditation app"')
+    fixed_text, typos = correct_typos(raw)
+    t = fixed_text.lower()
+    info: dict = {"typos": typos, "moods": [], "genre_reason": None}
     genre = detect_genre(t)
+    if genre:
+        info["genre_reason"] = "named"
+    presets = [(pat, p) for pat, p in PRESETS if re.search(pat, t)]
+    info["moods"] = list(dict.fromkeys(p["label"] for _, p in presets))
     if genre is None:
         for pat, g in MOOD_GENRE:
             if re.search(pat, t):
-                genre = g
+                genre, info["genre_reason"] = g, f"from '{re.search(pat, t).group(0)}'"
                 break
-    genre = genre or "pop"
+    if genre is None:
+        for pat, p in presets:
+            if p.get("genre"):
+                genre, info["genre_reason"] = p["genre"], f"from '{re.search(pat, t).group(0)}'"
+                break
+    solo = _solo_instruments(t)
+    if genre is None and solo and "cinematic" in available_genres() and any(x in solo for x in ("violin", "cello", "strings")):
+        genre, info["genre_reason"] = "cinematic", f"from '{solo[0]}'"
+    if genre is None:
+        genre, info["genre_reason"] = "pop", "default"
     g = get_genre(genre)
-    key, mode = _key_mode(prompt)
+    key, mode = _key_mode(fixed_text)
     if mode is None:
         for m in MODES:
             if re.search(rf"\b{m}\b", t) and m not in ("minor", "major"):
                 mode = m.replace(" ", "_")
                 break
+    want = None
     if mode is None:
-        for pat, md in MOOD_MODE:
-            if re.search(pat, t):
-                mode = md if md in g["modes"] or md == "minor" else None
-                if md == "minor" and "minor" not in g["modes"]:
-                    mode = next((x for x in g["modes"] if x in ("minor", "dorian", "phrygian", "aeolian")), "minor")
-                if md == "major" and "major" not in g["modes"]:
-                    mode = next((x for x in g["modes"] if x in ("major", "lydian", "mixolydian")), "major")
-                break
+        want = next((p["mode"] for _, p in presets if p.get("mode")), None)
+        if want is None:
+            for pat, md in MOOD_MODE:
+                if re.search(pat, t):
+                    want = md
+                    break
+    if want:
+        if want in g["modes"]:
+            mode = want
+        elif want == "minor":
+            mode = next((x for x in g["modes"] if x in ("minor", "dorian", "phrygian", "aeolian", "harmonic_minor")), "minor")
+        else:
+            mode = next((x for x in g["modes"] if x in ("major", "lydian", "mixolydian", "ionian")), "major")
+    tr = g["tempo"]
     tempo = None
     m = re.search(r"(\d{2,3})\s*(?:bpm|beats per minute)", t) or re.search(r"\b(?:at|tempo)\s+(\d{2,3})\b", t)
     if m:
         tempo = max(20, min(300, int(m.group(1))))
-    elif re.search(r"\b(fast|upbeat|energetic)\b", t):
-        tempo = g["tempo"]["max"]
-    elif re.search(r"\b(slow|laid.?back)\b", t):
-        tempo = g["tempo"]["min"]
+    elif re.search(r"\b(fast|upbeat|energetic|quick|driving)\b", t):
+        tempo = tr["max"]
+    elif re.search(r"\b(slow|laid.?back|slower)\b", t):
+        tempo = tr["min"]
+    else:
+        tw = next((p["tempo"] for _, p in presets if p.get("tempo")), None)
+        if tw == "min":
+            tempo = tr["min"]
+        elif tw == "max":
+            tempo = tr["max"]
+        elif isinstance(tw, float):
+            tempo = round(max(tr["min"], min(tr["max"], tr["default"] * tw)), 1)
+            if tw < 1 and tempo >= tr["default"]:
+                tempo = tr["min"]
     bars = None
     m = re.search(r"(\d+|\w+)[\s-]*bars?\b", t)
     if m and _num(m.group(1)):
         bars = max(1, min(256, _num(m.group(1))))
+    seconds = parse_seconds(t)
     m = re.search(r"seed\s*(\d+)", t)
     if m:
         seed = int(m.group(1))
@@ -114,14 +287,123 @@ def prompt_to_spec(prompt: str, seed: int = 1) -> dict:
     only = re.search(r"\bjust\s+([\w\s,and]+)", t)
     if only:
         roles = [r for r, ws in ROLE_WORDS.items() if any(re.search(rf"\b{re.escape(w)}\b", only.group(1)) for w in ws)] or None
-    spec = build_spec(genre, key=key, mode=mode, tempo=tempo, bars=bars, seed=seed, roles=roles,
-                      exclude_roles=exclude, title=_title(prompt))
+    drum_words = re.search(r"\b(drums?|beats?|percussion|groove|kit)\b", t) and not re.search(r"\b(no|without)\s+(?:\w+\s+)?(drums?|beats?|percussion)\b", t)
+    solo_mode = bool(solo) and not drum_words and (
+        info["genre_reason"] in ("default",) or re.search(r"\b(solo|only|just|piece|alone|unaccompanied)\b", t)
+        or any(re.search(rf"\b{x}\b", t) for x in ("lullaby", "meditat", "sad", "calm", "gentle")) or len(solo) >= 1 and genre in ("ambient", "cinematic", "pop"))
+    if solo_mode:
+        roles = ["chords", "lead"] + (["pad"] if "strings" in solo and len(solo) > 1 else [])
+        info["solo"] = solo
+    for _, p in presets:
+        for r in p.get("exclude", []):
+            if r not in exclude and not (drum_words and r == "drums"):
+                exclude.append(r)
+    if roles:
+        roles = [r for r in roles if r not in exclude] or roles
+        roles = [r for r in roles if r in {v.get("role", k) for k, v in g["instruments"].items()} | set(g["instruments"])] or roles
+    kw = dict(key=key, mode=mode, tempo=tempo, bars=bars, seed=seed, roles=roles, exclude_roles=exclude, title=_title(raw))
+    spec = build_spec(genre, **kw)
+    if seconds and not bars:
+        nb = bars_for_seconds(seconds, float(spec["tempo"]), spec.get("time_signature", [4, 4])[0])
+        spec = build_spec(genre, **{**kw, "bars": nb})
+        info["seconds_requested"] = seconds
+    if solo_mode:
+        spec = _apply_solo(spec, solo)
+    lead_inst = next((p["lead"] for _, p in presets if p.get("lead")), None)
+    if lead_inst and not solo_mode:
+        from .spec import INSTRUMENTS
+        for trk in spec["tracks"]:
+            if trk["role"] == "lead" and lead_inst in INSTRUMENTS:
+                trk["program"] = INSTRUMENTS[lead_inst]
+                trk["name"] = lead_inst.replace("_", " ").capitalize() + " lead"
+                break
+    used = set()
+    for pat, _ in PRESETS + MOOD_GENRE + MOOD_MODE:
+        used |= {w for mm in re.finditer(pat, t) for w in re.findall(r"[a-z0-9]+", mm.group(0))}
+    used |= set(solo) | {w for x in solo for w in x.split()} | set(genre.split("_"))
+    gm = detect_genre(t)
+    unknown = [w for w in re.findall(r"[a-z]+", t) if w not in STOPWORDS and w not in used and len(w) > 2
+               and w not in _vocab_cached() and not (gm and w in gm)]
+    info.update(genre=genre, key=spec["key"], mode=spec["mode"], tempo=spec["tempo"], bars=_total(spec),
+                seconds=duration_seconds(spec), unknown=list(dict.fromkeys(unknown)),
+                instruments=[trk["name"] for trk in spec["tracks"]])
+    return spec, info
+
+
+def _vocab_cached() -> set[str]:
+    global _VOCAB
+    if _VOCAB is None:
+        _VOCAB = _vocab()
+    return _VOCAB
+
+
+def _total(spec: dict) -> int:
+    from .spec import total_bars
+    return total_bars(spec)
+
+
+def _apply_solo(spec: dict, solo: list[str]) -> dict:
+    """Make the chords and lead tracks play the requested instrument(s): "sad piano" = piano chords + piano melody,
+    "violin solo" = violin melody over soft strings, "piano and strings" = piano chords/melody + a strings pad."""
+    from .ops import apply_ops
+    first = solo[0]
+    lead = SOLO_INSTRUMENTS[first]
+    chords = SOLO_INSTRUMENTS["strings"] if first in ("violin", "cello", "strings") else (
+        lead if first not in ("flute", "sax") else SOLO_INSTRUMENTS["piano"])
+    want_pad = "strings" in solo and first != "strings"
+    ops = []
+    roles = {t["role"] for t in spec["tracks"]}
+    if "chords" not in roles:
+        ops.append({"op": "add_instrument", "role": "chords", "name": chords[1] + " (chords)"})
+    if "lead" not in roles:
+        ops.append({"op": "add_instrument", "role": "lead", "name": lead[1] + " (melody)"})
+    if want_pad and "pad" not in roles:
+        ops.append({"op": "add_instrument", "role": "pad", "name": "Strings"})
+    if ops:
+        spec = apply_ops(spec, ops)
+    for trk in spec["tracks"]:
+        if trk["role"] == "chords":
+            trk["program"], trk["name"] = chords[0], chords[1] + " (chords)"
+        elif trk["role"] == "lead":
+            trk["program"], trk["name"] = lead[0], lead[1] + " (melody)"
+        elif trk["role"] == "pad" and want_pad:
+            trk["program"], trk["name"] = 48, "Strings"
+    return spec
+
+
+def describe(info: dict) -> str:
+    """One plain line: 'Interpreted as: sad pop (default genre) · G minor · 98 BPM · 16 bars ≈ 39 s · ...'"""
+    gr = info.get("genre_reason")
+    why = (" (default genre — no genre word recognised)" if info.get("moods") else
+           " (default — no genre or mood word recognised)") if gr == "default" else (f" ({gr})" if gr and gr != "named" else "")
+    mood = (", ".join(info["moods"]) + " ") if info.get("moods") else ""
+    parts = [f"Interpreted as: {mood}{info['genre'].replace('_', ' ')}{why}", f"{info['key']} {info['mode'].replace('_', ' ')}",
+             f"{info['tempo']:g} BPM", f"{info['bars']} bars ≈ {fmt_duration(info['seconds'])}"]
+    if info.get("seconds_requested"):
+        parts[-1] += f" (asked for {fmt_duration(info['seconds_requested'])})"
+    if info.get("solo"):
+        parts.append("solo " + " + ".join(info["solo"]) + ", no drums")
+    s = " · ".join(parts)
+    if info.get("typos"):
+        s += "\n  fixed typos: " + ", ".join(f"{a} → {b}" for a, b in info["typos"].items())
+    if info.get("unknown"):
+        s += "\n  didn't understand: " + ", ".join(f"'{w}'" for w in info["unknown"])
+    return s
+
+
+LAST_INTERPRETATION: dict = {}
+
+
+def prompt_to_spec(prompt: str, seed: int = 1) -> dict:
+    spec, info = interpret(prompt, seed=seed)
+    LAST_INTERPRETATION.clear()
+    LAST_INTERPRETATION.update(info)
     return spec
 
 
 def _title(prompt: str) -> str:
-    words = re.findall(r"[A-Za-z']+", prompt)[:6]
-    return " ".join(w.capitalize() for w in words) or "Untitled"
+    words = re.findall(r"[A-Za-z0-9][A-Za-z0-9'-]*", prompt)[:6]
+    return " ".join(w[:1].upper() + w[1:].lower() if not w[0].isdigit() else w.title() for w in words) or "Untitled"
 
 
 def _role_of(phrase: str) -> tuple[str | None, str | None]:

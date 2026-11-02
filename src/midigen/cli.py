@@ -15,6 +15,7 @@ from .llm import Composer
 from .midi_io import export_midi, import_midi, inspect_midi
 from .nl import HELP, NotUnderstood
 from .ops import Editor, OpError, apply_ops
+from . import learn
 
 
 def _paths(out: str) -> tuple[Path, Path]:
@@ -80,10 +81,23 @@ def _overrides(spec: dict, args) -> dict:
     return spec
 
 
+def _recorded(spec: dict, out: str, sid: str | None = None, **kw) -> None:
+    """Record the written song in the learning store (or point the composer's record at the file)."""
+    js = str(_paths(out)[0])
+    if sid and learn.store().song(sid) and learn.store().song(sid)["fingerprint"] == learn.fingerprint(spec):
+        learn.store().update_song(sid, path=str(Path(js).resolve()))
+    else:
+        sid = learn.record(spec, path=js, **kw)
+    if sid:
+        print(f"song id {sid} — rate it: midigen rate {sid} 1-5 [--note \"...\"]  (or: midigen rate {js} 4)")
+
+
 def cmd_new(args):
     _validate_new(args)
+    sid, kw = None, {}
     if args.genre:
         spec = build_spec(args.genre, key=args.key, mode=args.mode, tempo=args.tempo, bars=args.bars, seed=args.seed)
+        kw["choices"] = learn.choices_for(spec)
         from .llm import refine
         spec, _ = refine(spec)
         src = "offline"
@@ -91,15 +105,24 @@ def cmd_new(args):
         if not args.prompt:
             sys.exit("give a prompt or --genre")
         r = _composer(args).generate(args.prompt, seed=args.seed)
-        spec, src = _overrides(r.spec, args), r.source
+        spec, src, sid = _overrides(r.spec, args), r.source, r.song_id
+        kw["prompt"] = args.prompt
         if r.explanation:
             print(f"[{src}] {r.explanation}")
     _write(spec, args.out, args.png)
-    print(format_report(critique(spec)))
+    rep = critique(spec)
+    print(format_report(rep))
+    _recorded(spec, args.out, sid, source=src, report=rep, **kw)
 
 
 def cmd_edit(args):
     spec = specmod.load(args.spec)
+    parent = None
+    if learn.recording_enabled():
+        try:  # also notices hand edits made to the file since it was recorded
+            parent = learn.resolve(args.spec)["id"]
+        except (KeyError, ValueError, OSError):
+            parent = None
     if args.ops:
         ops = json.loads(Path(args.ops).read_text() if Path(args.ops).exists() else args.ops)
         new = apply_ops(spec, ops)
@@ -108,8 +131,17 @@ def cmd_edit(args):
         r = _composer(args).edit(spec, args.instruction)
         new = r.spec
         print(f"[{r.source}] ops: {json.dumps(r.ops)}")
-    _write(new, args.out or args.spec, args.png)
+    out = args.out or args.spec
+    _write(new, out, args.png)
     print(format_report(critique(new)))
+    if args.ops:
+        sid = learn.record_edit(spec, new, ops=ops, source="ops", path=str(_paths(out)[0]), parent=parent)
+    else:
+        sid = r.song_id
+        if sid:
+            learn.store().update_song(sid, path=str(_paths(out)[0].resolve()))
+    if sid:
+        print(f"song id {sid} — rate it: midigen rate {sid} 1-5")
 
 
 def cmd_render(args):
@@ -179,7 +211,8 @@ def cmd_chat(args):
         ed = Editor(specmod.load(path))
     else:
         ed = None
-    print("midigen chat — describe a song, then edit it in plain words. Commands: /undo /redo /show /critic /save /help /quit")
+    print("midigen chat — describe a song, then edit it in plain words. Commands: /undo /redo /show /critic /save "
+          "/rate N [note] /help /quit")
     print("LLM provider:", "configured" if comp.provider else "none (offline rules; set MIDIGEN_API_KEY/BASE_URL/MODEL)")
     while True:
         try:
@@ -214,6 +247,13 @@ def cmd_chat(args):
         elif line == "/critic":
             print(format_report(critique(ed.spec)))
             continue
+        elif line.startswith("/rate"):
+            parts = line.split(maxsplit=2)
+            try:
+                _print_fb(learn.rate(ed.spec, float(parts[1]), note=parts[2] if len(parts) > 2 else None))
+            except (IndexError, ValueError, KeyError) as e:
+                print("usage: /rate 1-5 [note]", f"({e})" if not isinstance(e, IndexError) else "")
+            continue
         elif line.startswith("/new"):
             r = comp.generate(line[4:].strip() or "pop song", seed=args.seed)
             ed.replace(r.spec, "new song")
@@ -230,7 +270,95 @@ def cmd_chat(args):
             ed.replace(r.spec, line)
             print(f"[{r.source}] {json.dumps(r.ops)}  critic {r.report['score']}/100")
         _write(ed.spec, str(path), args.png, quiet=True)
+        row = learn.store().find(ed.spec) if learn.recording_enabled() else None
+        if row:
+            learn.store().update_song(row["id"], path=str(path.with_suffix(".json").resolve()))
         print(f"saved {path.with_suffix('.json')} / {path.with_suffix('.mid')}")
+
+
+def _target(args) -> str | None:
+    if getattr(args, "track", None):
+        return f"track:{args.track}"
+    if getattr(args, "section", None):
+        return f"section:{args.section}"
+    return None
+
+
+def _print_fb(out: dict) -> None:
+    u = out.get("user_reward")
+    bits = [f"song {out.get('song_id')} ({out.get('genre') or 'no genre'})"]
+    if u is not None:
+        bits.append(f"user score {u:.2f}")
+    for sg in out.get("signals", []):
+        bits.append(f"learned: {sg['phrase']}" if "phrase" in sg else f"credited {', '.join(sg['dims'])} ({sg['reward']:.2f})")
+    print("; ".join(bits))
+
+
+def cmd_rate(args):
+    _print_fb(learn.rate(args.song, args.rating, note=args.note, target=_target(args)))
+
+
+def cmd_feedback(args):
+    _print_fb(learn.feedback(args.song, args.note, target=_target(args)))
+
+
+def cmd_keep(args):
+    _print_fb(learn.keep(args.song, note=args.note))
+
+
+def cmd_reject(args):
+    _print_fb(learn.reject(args.song, note=args.note))
+
+
+def cmd_learn(args):
+    what = args.what
+    if what == "status":
+        st = learn.status(args.genre and resolve_genre(args.genre))
+        print(json.dumps(st, indent=1) if args.json else learn.format_status(st))
+    elif what == "reset":
+        removed = learn.reset(args.genre and resolve_genre(args.genre), store_too=args.all)
+        print(f"removed {len(removed)} file(s)" + ("".join(f"\n  {r}" for r in removed)))
+    elif what == "export":
+        print("wrote", learn.export(args.path or "midigen-learned.json", args.genre and resolve_genre(args.genre)))
+    elif what == "import":
+        if not args.path:
+            raise ValueError("learn import needs a path")
+        print("imported weights for:", ", ".join(learn.import_weights(args.path)) or "nothing")
+    else:
+        p = Path(what)
+        if p.suffix.lower() not in (".mid", ".midi") or not p.exists():
+            raise ValueError(f"{what!r}: give a .mid file to learn from, or status | reset | export | import")
+        if not args.genre:
+            raise ValueError("learning from a MIDI file needs --genre")
+        out = learn.learn_midi(p, resolve_genre(args.genre))
+        a, ad = out["analysis"], out["added"]
+        print(f"learned from {p.name} into [{out['genre']}]: {a['key']} {a['mode']} {a['tempo']} BPM, {a['bars']} bars")
+        for x in ad["progressions"]:
+            print(f"  progression {x['arm']}: {' '.join(x['chords'])}")
+        if ad["bass"]:
+            print(f"  bass pattern {ad['bass']}: {a['bass']['rhythm']}")
+        if ad["cells"]:
+            print(f"  lead rhythm cells {ad['cells']}: {a['lead']['cells']} (stepwise {a['lead']['stepwise']:.0%})")
+        if ad["drums"]:
+            print(f"  nearest drum pattern {ad['drums']['nearest']} (similarity {ad['drums']['similarity']})")
+        if ad["energy"]:
+            print(f"  energy curve {ad['energy']}")
+        print("new songs in this genre now sample these as options; rate them to keep the ones you like")
+
+
+def cmd_train(args):
+    genres = [resolve_genre(g) for g in args.genres.split(",")] if args.genres else None
+    res = learn.train(genres, rounds=args.rounds, candidates=args.candidates, bars=args.bars,
+                      chart=args.chart, seed=args.seed)
+    print(res["ascii_chart"])
+    first, last = res["curve"][0]["eval_critic"], res["final_mean"]
+    print(f"baseline {res['baseline_mean']:.2f} -> round 0 {first:.2f} -> final {last:.2f} "
+          f"(critic score on fixed eval seeds; the critic is a proxy — your ratings are the ground truth)")
+    if res.get("chart"):
+        print("chart:", res["chart"])
+    if args.json:
+        Path(args.json).write_text(json.dumps(res, indent=1))
+        print("wrote", args.json)
 
 
 def main(argv=None):
@@ -254,6 +382,7 @@ def main(argv=None):
     p.add_argument("--random-seed", action="store_true", help="pick a fresh random seed and print it")
     p.add_argument("--png", action="store_true", help="also write a piano-roll PNG")
     p.add_argument("--offline", action="store_true", help="never call the LLM")
+    p.add_argument("--no-learn", action="store_true", help="ignore learned preferences (plain genre defaults)")
     p.set_defaults(fn=cmd_new)
 
     p = sub.add_parser("edit", help="edit a spec with an instruction or JSON ops")
@@ -295,7 +424,50 @@ def main(argv=None):
     p.add_argument("--seed", type=int, default=1)
     p.add_argument("--png", action="store_true")
     p.add_argument("--offline", action="store_true")
+    p.add_argument("--no-learn", action="store_true", help="ignore learned preferences")
     p.set_defaults(fn=cmd_chat)
+
+    ref_help = "song id, 'last', or the song's .json/.mid path"
+    p = sub.add_parser("rate", help="rate a song 1-5 (teaches the per-genre policy)")
+    p.add_argument("song", help=ref_help)
+    p.add_argument("rating", type=float)
+    p.add_argument("--note", help="free text, e.g. 'love the groove, chorus should be bigger'")
+    p.add_argument("--track", help="rate one track (name or role) instead of the song")
+    p.add_argument("--section", help="rate one section (e.g. chorus) instead of the song")
+    p.set_defaults(fn=cmd_rate)
+
+    p = sub.add_parser("feedback", help="free-text feedback on a song, a track or a section")
+    p.add_argument("song", help=ref_help)
+    p.add_argument("note")
+    p.add_argument("--track")
+    p.add_argument("--section")
+    p.set_defaults(fn=cmd_feedback)
+
+    for name, fn, hp in (("keep", cmd_keep, "mark a song as a keeper (positive signal)"),
+                         ("reject", cmd_reject, "mark a song as rejected (negative signal)")):
+        p = sub.add_parser(name, help=hp)
+        p.add_argument("song", help=ref_help)
+        p.add_argument("--note")
+        p.set_defaults(fn=fn)
+
+    p = sub.add_parser("learn", help="learn from a reference MIDI (learn FILE.mid --genre X), or status | reset | "
+                                     "export [PATH] | import PATH")
+    p.add_argument("what", help="a .mid file, or status / reset / export / import")
+    p.add_argument("path", nargs="?")
+    p.add_argument("--genre")
+    p.add_argument("--all", action="store_true", help="(reset) also delete the experience store")
+    p.add_argument("--json", action="store_true", help="(status) machine-readable output")
+    p.set_defaults(fn=cmd_learn)
+
+    p = sub.add_parser("train", help="offline self-training against the critic (+ your learned ratings)")
+    p.add_argument("--rounds", type=int, default=5)
+    p.add_argument("--candidates", type=int, default=8, help="candidates per genre per round")
+    p.add_argument("--genres", help="comma-separated (default: all)")
+    p.add_argument("--bars", type=int, help="bars per candidate (default: the genre form; 16 is faster)")
+    p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--chart", help="write the improvement curve as a PNG")
+    p.add_argument("--json", help="write the full result as JSON")
+    p.set_defaults(fn=cmd_train)
 
     # --genre-path is accepted before or after the subcommand
     argv = list(sys.argv[1:] if argv is None else argv)
@@ -320,6 +492,9 @@ def main(argv=None):
         packs.set_paths(gp)
     if getattr(args, "cmd", None) == "edit" and not args.instruction and not args.ops:
         ap.error("edit needs an instruction or --ops")
+    if getattr(args, "no_learn", False):
+        import os
+        os.environ["MIDIGEN_LEARN"] = "0"
     if getattr(args, "spec", None) and args.cmd == "chat":
         args.spec = str(Path(args.spec).with_suffix(".json"))
     try:
@@ -328,6 +503,8 @@ def main(argv=None):
         sys.exit(f"error: {e}")
     except (specmod.SpecError, OpError, NotUnderstood, ValueError) as e:
         sys.exit(f"error: {e}")
+    except KeyError as e:
+        sys.exit(f"error: {e.args[0] if e.args else e}")
 
 
 if __name__ == "__main__":

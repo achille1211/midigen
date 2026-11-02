@@ -6,7 +6,7 @@ from importlib import resources
 
 from .core import Ctx, Note, clamp
 from .harmony import voice_lead
-from .theory import nearest_pitch
+from .theory import Chord, nearest_pitch
 
 DRUM_MAP = {"kick": 36, "snare": 38, "clap": 39, "rim": 37, "chh": 42, "phh": 44, "ohh": 46,
             "ride": 51, "crash": 49, "tom_hi": 50, "tom_mid": 47, "tom_lo": 41, "shaker": 70,
@@ -122,6 +122,9 @@ def gen_drums(ctx: Ctx) -> list[Note]:
     d = ctx.density
     e = ctx.energy
     rng = ctx.rng
+    # chorus lift: a peak section opens the hats on the off-beat of 2 and 4 and plays a little busier
+    lift = chorusy and e >= 0.75 and ctx.params.get("lift", True) and (ctx.prev_energy is None or e > ctx.prev_energy)
+    few_open = lambda p: sum(1 for x in p["voices"] if x["note"] == 46 for y in x["grid"] if y) * ctx.steps_per_bar < 2 * p["steps"]
     notes: list[Note] = []
     bars = ctx.bars
     rising = ctx.next_energy is not None and ctx.next_energy - e >= 0.25
@@ -148,6 +151,8 @@ def gen_drums(ctx: Ctx) -> list[Note]:
             if e < 0.25 and note in BACKBEAT - {37} and any(v["note"] in KICKS for v in cur["voices"]):
                 continue  # low energy: strip the backbeat
             uniform = len({v for v in grid if v}) <= 1
+            if lift:
+                d = min(1.0, ctx.density + 0.12)
             for i in range(spb):
                 v = grid[i]
                 ghost = False
@@ -182,12 +187,23 @@ def gen_drums(ctx: Ctx) -> list[Note]:
                         scale = {"crescendo": 0.6 + 0.4 * f, "decrescendo": 1.0 - 0.4 * f}.get(rat["curve"], 1.0)
                         notes.append(Note(t + k * step / n, step / n, note, int(max(1, min(127, v * scale)))))
                     continue
-                notes.append(Note(t, step * 0.9, note, v))
+                if lift and note == 42 and spb >= 8 and i in (spb // 2 - spb // 8, spb - spb // 8) and few_open(cur):
+                    note_out = 46   # open hat on the and-of-2 and and-of-4 (pattern has at most one per bar)
+                else:
+                    note_out = note
+                notes.append(Note(t, step * 0.9, note_out, v))
             if cur.get("comp") == note and note in BACKBEAT and d >= 0.35:
                 # jazz-style snare comping: a couple of random "drops" per bar at low velocity
                 for i in rng.sample(range(spb), k=min(spb, 1 + int(d * 2))):
                     if i % 4 and not grid[i]:
                         notes.append(Note(bar * ctx.bar_beats + i * step, step * 0.9, note, 55 + rng.randint(-6, 8)))
+    if lift and not any(v["note"] in (54, 69, 70, 82) and sum(1 for x in v["grid"] if x) * spb >= 4 * v.get("steps", pat["steps"])
+                        for v in pat["voices"]):
+        # chorus lift, part 2: a tambourine on the off-beat 8ths (a percussion layer the verse doesn't have)
+        tv = int(sum(n.vel for n in notes) / len(notes)) if notes else 80   # sits at the kit's level, not under it
+        for bar in range(bars - (1 if fill else 0)):
+            for k in range(int(ctx.bar_beats)):
+                notes.append(Note(bar * ctx.bar_beats + k + 0.5, 0.2, 54, max(1, min(127, tv + rng.randint(-6, 6)))))
     if (ctx.prev_energy is None or e >= 0.6 or (ctx.prev_energy is not None and e - ctx.prev_energy >= 0.2)) and e >= 0.4:
         notes.append(Note(0.0, 1.0, DRUM_MAP["crash"], 105))
     if fill and (fill_pat is None or build):
@@ -223,6 +239,49 @@ def _fill(ctx: Ctx, build: bool) -> list[Note]:
 
 # ------------------------------------------------------------------ bass
 
+BASS_INVERSIONS = {"pop": 0.6, "rock": 0.4, "cinematic": 0.7, "ambient": 0.5, "neo_soul": 0.4, "lofi_hiphop": 0.3,
+                   "bossa_nova": 0.4, "synthwave": 0.3, "reggae": 0.2}
+INVERSION_STYLES = ("root", "root_fifth", "pulse", "octave", "sustained", "kick_lock", "template")
+
+
+def _inversion_bass(ctx: Ctx, style: str) -> dict[int, int]:
+    """Chords (by index) whose bass should be the 3rd: a first inversion that turns a root leap into
+    stepwise bass motion (e.g. I - V6 - vi, IV - I6 - ii). Deterministic, so it consumes no rng.
+
+    Strength comes from the ``inversions`` param or the genre default (club genres: none). The k-th
+    eligible chord is inverted when frac(k * strength) wraps, i.e. about ``strength`` of them."""
+    if style not in INVERSION_STYLES:
+        return {}
+    g = (ctx.spec or {}).get("genre") or ""
+    strength = float(ctx.params.get("inversions", BASS_INVERSIONS.get(g, 0.0)))
+    if strength <= 0:
+        return {}
+    out: dict[int, int] = {}
+    chords = ctx.chords
+    n = len(chords)
+    cycle = len((ctx.section or {}).get("chords") or []) or n
+    acc = 0.5
+    for i in range(1, n - 1):
+        ch, pv, nx = chords[i].chord, chords[i - 1].chord, chords[i + 1].chord
+        if i % cycle == 0 or ch.bass != ch.root or chords[i].dur < 2:
+            continue
+        third = [iv for iv in ch.intervals if iv in (3, 4)]
+        if not third or 6 in ch.intervals or 8 in ch.intervals and 7 not in ch.intervals:
+            continue  # no 3rd, or dim / aug: keep the root
+        t = (ch.root + third[0]) % 12
+        prev_b = out.get(i - 1, pv.bass)
+        dist = lambda a, b: min((a - b) % 12, (b - a) % 12)
+        if dist(prev_b, ch.root) <= 2:
+            continue  # already stepwise
+        d3 = (dist(t, prev_b), dist(t, nx.bass))
+        if max(d3) <= 3 and min(d3) <= 2 and sum(d3) < dist(ch.root, prev_b) + dist(ch.root, nx.bass):
+            acc += strength
+            if acc >= 1.0 - 1e-9:
+                acc -= 1.0
+                out[i] = t
+    return out
+
+
 def gen_bass(ctx: Ctx) -> list[Note]:
     style = ctx.params.get("style", "root")
     lo, hi = _range(ctx, "bass")
@@ -236,8 +295,11 @@ def gen_bass(ctx: Ctx) -> list[Note]:
     def bp(pc, near=None):
         return nearest_pitch(pc, near if near is not None else target, lo, hi)
 
+    inv = _inversion_bass(ctx, style)
     for ci, span in enumerate(ctx.chords):
         ch = span.chord
+        if ci in inv:
+            ch = Chord(ch.root, ch.intervals, inv[ci], ch.symbol)  # first inversion: the 3rd in the bass
         root = bp(ch.bass, prev_pitch if prev_pitch is not None else target)
         if abs(root - target) > 7:
             root = bp(ch.bass)
@@ -460,7 +522,9 @@ def gen_chords(ctx: Ctx) -> list[Note]:
     d = ctx.density
     gate = ctx.params.get("gate", 0.9)
     notes: list[Note] = []
-    prev = None
+    prev = ctx.params.get("_prev_voicing")  # the arranger hands over the last voicing of the previous section
+    if prev and not all(lo - 7 <= p <= hi + 7 for p in prev):
+        prev = None
     rhythm = ctx.params.get("rhythm")
     cell = _rhythm_cell(ctx, rhythm) if rhythm else _comp_cell(ctx, style)
     for span in ctx.chords:
@@ -518,6 +582,7 @@ def gen_chords(ctx: Ctx) -> list[Note]:
                 dur = 0.35 if style in ("stabs", "pulse") else 0.7 if style == "comp" else 0.45
                 for p in v:
                     notes.append(Note(s + t, dur, p, base + acc))
+    ctx.params["_last_voicing"] = list(prev) if prev else None
     return notes
 
 

@@ -316,6 +316,50 @@ def _section_name(name: str, used: set) -> str:
     return out
 
 
+PEAK_RE = re.compile(r"^(drop|peak|climax|chorus|hook)")
+
+
+def _hits_per_step(pat: dict | None) -> float:
+    if not pat:
+        return 0.0
+    return sum(1 for v in pat["voices"] for x in v["grid"] if x) / max(1, pat["steps"])
+
+
+def _arc_fixups(form: list[dict], patterns: dict, main: str, warns: list) -> None:
+    """Make the form's energy arc audible (roadmap fix 4):
+    - a peak section (drop/peak/chorus/hook) never plays a thinner drum pattern than a lower-energy section
+      before it (house: the drop used the bare main groove while main_a had the percussion groove);
+    - a drop that follows a breakdown gets an 8-bar build (rising energy, the drums' snare roll, the
+      breakdown's instruments) when the form has none."""
+    dens = lambda s: _hits_per_step(patterns.get(s.get("drum_pattern") or main))
+    for i, s in enumerate(form):
+        if not PEAK_RE.match(s["name"]) or (s.get("drum_pattern") or main) != main or patterns[main]["variants"].get("chorus"):
+            continue  # an explicit or chorus-variant pattern is the pack author's choice
+        lower = [f for f in form[:i] if f["energy"] < s["energy"]]
+        if not lower:
+            continue
+        lower = [f for f in lower if f.get("drum_pattern") and patterns[f["drum_pattern"]].get("type") in ("main", "variation")
+                 and not re.search(r"intro|outro|break|fill|pre", f["drum_pattern"].split(".", 1)[-1])]
+        if not lower:
+            continue
+        best = max(lower, key=dens)
+        if dens(best) > dens(s) * 1.05 and best.get("drum_pattern"):
+            s["drum_pattern"] = best["drum_pattern"]
+    if any(f["name"].startswith("build") for f in form):
+        return
+    i = 1
+    while i < len(form):
+        prev, s = form[i - 1], form[i]
+        if s["name"].startswith(("drop", "peak")) and prev["energy"] <= s["energy"] - 0.35 and prev["bars"] >= 8:
+            used = {f["name"] for f in form}
+            nm = "build" if "build" not in used else f"build{i}"
+            play = sorted(set(prev.get("play") or []) | {k for k in s.get("play") or [] if k in ("drums", "chords", "pad", "arp")})
+            form.insert(i, {"name": nm, "bars": 8, "energy": round((prev["energy"] + s["energy"]) / 2, 3), "play": play})
+            warns.append(f"inserted an 8-bar {nm} before {s['name']}")
+            i += 1
+        i += 1
+
+
 def convert(raw: dict, path: Path | str = "?") -> tuple[dict, dict, list[str]]:
     """Map one schema-1.x genre file to (profile, drum patterns, warnings)."""
     path = Path(path)
@@ -553,6 +597,7 @@ def convert(raw: dict, path: Path | str = "?") -> tuple[dict, dict, list[str]]:
         form = [{"name": "verse", "bars": 8, "energy": 0.5, "play": list(instruments)},
                 {"name": "chorus", "bars": 8, "energy": 0.85, "play": list(instruments)}]
         warns.append("no arrangement sections: using verse/chorus")
+    _arc_fixups(form, patterns, main, warns)
     short, seen_base, total = [], set(), 0
     for s in form:
         base = re.sub(r"(_?\d+)$", "", s["name"])

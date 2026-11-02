@@ -22,7 +22,7 @@ prompt / instruction ──► LLM or offline parser ──► spec JSON or edit
 cd midigen
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e ".[preview,mcp,dev]"      # core needs only mido + jsonschema
-pytest -q                                # 143 tests (pack tests skip if the pack folders are absent)
+pytest -q                                # 210 tests incl. integrations (pack tests skip if the pack folders are absent)
 python demo/make_demo.py                 # offline demo songs in demo/
 ```
 
@@ -109,10 +109,15 @@ comp = mg.Composer(provider=MyClient())
 
 The schemas `mg.SPEC_SCHEMA`, `mg.OP_SCHEMAS` and `mg.OPS_SCHEMA` are plain JSON Schema, so you can use them for function calling or structured outputs.
 
+To use midigen from other apps (REST service, TypeScript client, REAPER script, live MIDI streaming), install the
+add-on package with `pip install -e integrations/python lupa` (add `"integrations/python[service,test]"` for the
+REST service and its tests, `[stream]` for python-rtmidi); see [integrations/README.md](integrations/README.md).
+Its tests run with the main suite from the repo root and are skipped when it isn't installed.
+
 ## MCP server
 
 `midigen-mcp` (or `python -m midigen.mcp_server`) runs over stdio. Its tools are `generate_song`, `edit_song` (natural language,
-JSON ops, or `undo`/`redo`), `export_midi`, `inspect` (a song or any .mid), `load_song`, `list_ops` and `genre_profile`. Files are written to
+JSON ops, or `undo`/`redo`), `export_midi`, `inspect` (a song or any .mid), `load_song`, `list_ops`, `genre_profile`, and for the learning loop `rate_song`, `song_feedback`, `learn_status`, `learn_reference` and `train`. Files are written to
 `MIDIGEN_WORKDIR` (default `./midigen_songs`).
 
 ```json
@@ -127,6 +132,77 @@ JSON ops, or `undo`/`redo`), `export_midi`, `inspect` (a song or any .mid), `loa
 ```
 
 The MCP client's own model does the creative reasoning, and midigen validates its choices and renders them.
+
+## Learning loop
+
+midigen learns what *you* like, locally and on the CPU, with no API keys. Every generated or edited song is recorded.
+Ratings, notes, keep/reject and edits then update a per-genre policy, which `build_spec` samples from on later runs.
+
+```bash
+midigen new --genre pop -o a          # prints "song id 3f2c… — rate it: midigen rate 3f2c… 1-5"
+midigen rate a.json 4 --note "love the bass, busier drums please"
+midigen rate last 2 --track Bass      # feedback on one track (or --section chorus)
+midigen feedback last "too sparse in the verse" --section verse
+midigen keep last  /  midigen reject last --note "boring"
+midigen learn ref.mid --genre lofi_hiphop   # learn progressions, bass/lead rhythm cells, drum grids, tempo/swing from a MIDI
+midigen learn status [--genre pop] [--json]
+midigen learn export weights.json  /  midigen learn import weights.json  /  midigen learn reset --genre pop [--all]
+midigen train --rounds 5 --candidates 8 --genres pop,funk --chart curve.png   # self-play against the critic
+midigen new --genre pop --no-learn    # ignore what was learned (also: MIDIGEN_LEARN=0, build_spec(..., learn=False))
+```
+
+In chat, use `/rate N [note]`. In the library, use `mg.rate(ref, 4, note=…)`, `mg.feedback`, `mg.keep`, `mg.reject`, `mg.thumbs`,
+`mg.learn_midi`, `mg.train` and `mg.learn_status`. `ref` can be a song id, `last`, a `.json` path or a spec dict.
+For UIs, `midigen.learn.handle({"action": "rate", "song": id, "rating": 4})` is a JSON-in/JSON-out API. Its actions are
+record, rate, thumbs, keep, reject, feedback, edit, learn_midi, status, preferences, few_shot, songs, reset, export and train.
+
+**How it works**
+- An *arm* is a discrete generator choice, such as bass style = octave, chorus progression, drum grid, lead rhythm cells,
+  density, energy curve or tempo nudge.
+- Each genre keeps Beta statistics per arm, with user and critic evidence kept separately.
+  User evidence weighs 4× more and decays by 0.97 per update. Critic evidence decays by 0.995 and is capped.
+- `build_spec` Thompson-samples arms only once a genre has learned data. The sampling is seeded, so the output is
+  deterministic for a given weights state. With an empty store the output is unchanged, and recording alone never changes weights.
+- Explicit arguments (tempo, roles) are never overridden.
+- Notes are mapped to dimensions ("busier", "more swing", "darker", "boring bass"). Edits, including hand edits to a song's .json
+  that are detected on the next `rate`, count as preference signals.
+- The LLM Composer gets the user's top-rated songs and stated preferences as few-shot "user memory" in its prompt.
+
+**The critic is a proxy; your ratings are the ground truth.** `train` only optimises the built-in critic's score, so it can
+improve rule-following (voice leading, clashes, groove consistency) but not taste. Human ratings outweigh critic evidence.
+`train` additionally blends in a user model's prediction once there are ratings.
+
+**Measured** (`demo/learning/make_learning_demo.py`, reproducible):
+- A simulated listener with a hidden taste (octave bass + busier parts, noisy 1–5 ratings) rated 40 pop songs
+  (`tools/simulate_user.py`). The bandit's top arms became exactly the hidden ones. In the first 10 songs the hidden combo
+  came up 0% of the time (mean rating 2.13). In the last 10 it came up 90% of the time (mean rating 4.41).
+  This is asserted in `tests/test_learn.py`.
+- `train --rounds 6` on pop/funk/lofi_hiphop/house, with 12 held-out eval seeds, raised the mean critic score from 95.7 to 99.7
+  (`demo/learning/train_curve.png`/`.txt`). The critic is near its ceiling, so this mostly removes weak outliers.
+
+**Limits.** The arms are a fixed menu, so the bandit picks among things the generator can already do and cannot invent new styles.
+Preferences are per genre and per store, and don't transfer across genres. The simulated user is far cleaner than a real one.
+Learning from MIDI uses heuristics: it guesses roles from program and register, and works best on clean multitrack files.
+
+**Experience store schema** (for downstream readers such as a reward-model/dataset pipeline)
+
+The root is `$MIDIGEN_DATA_DIR` (default `~/.midigen/experience`). Under pytest, or in a process started by a test, with no
+`MIDIGEN_DATA_DIR` set, a temp store is used so automated runs never touch a real one. `MIDIGEN_NO_RECORD=1` disables recording.
+Read it with `midigen.learn.store().songs(limit=…)` (dict rows with JSON columns decoded) or with any SQLite client.
+
+`experience.sqlite`:
+
+| table | columns |
+|---|---|
+| `songs` | `id` TEXT pk, `ts` REAL (unix), `genre`, `seed` INT, `source` (offline/llm/cli/mcp/manual/import/train/…), `parent` (song id), `fingerprint`, `path`, `prompt`, `spec` JSON, `params` JSON, `choices` JSON {dim: arm}, `critic_score` REAL 0–100, `critic_sub` JSON {check: score}, `user_reward` REAL 0..1 or NULL (unrated), `applied_user`, `applied_dims`, `status` (`kept`/`rejected`/NULL) |
+| `feedback` | `id` INT pk, `song_id`, `ts`, `kind` (`rating`/`thumbs`/`keep`/`reject`/`note`), `value` REAL, `target` (`song`, `track:<name>`, `section:<name>`), `note` TEXT |
+| `edits` | `id` INT pk, `song_id` (before), `new_song_id` (after), `ts`, `ops` JSON, `signals` JSON {dim: direction}, `source` |
+| `llm_pairs` | `id` INT pk, `ts`, `genre`, `kind` (generate/edit), `prompt`, `response`, `song_id`, `score` |
+
+`user_reward` combines all feedback on a song. The latest whole-song rating counts double, mapped (r−1)/4. Thumbs, keep (0.85),
+reject (0) and note sentiment also count. Re-rating replaces the earlier rating. `weights/<genre>.json` holds
+`{genre, version, updates, user_events, critic_events, arms: {dim: {arm: {ua, ub, ca, cb}}}, prefs, history}`.
+`profiles/<genre>.json` holds what was learned from reference MIDI: `references, progressions, bass, cells, drum_grids, energy, tempo, swing, intervals`.
 
 ## Genre packs
 

@@ -92,6 +92,8 @@ Arrangement rules:
   Build contrast: intro low, verse mid, chorus/drop high, breakdown low, outro falling.
 - Keep registers separate: bass < chords/pad < lead; arps above chords. Use track "sections" lists to layer instruments.
 - Drums stay on channel 9 (set automatically). Max 16 tracks.
+User memory: if the reference has "user_memory", it holds this user's best-rated past songs in the genre (compact specs with
+their 1-5 rating) and preferences learned from their feedback. Lean towards those choices unless the request says otherwise.
 Reply ONLY with a JSON object, no prose outside it."""
 
 
@@ -119,6 +121,7 @@ class Result:
     source: str = "offline"     # "llm" | "offline" | "offline-fallback"
     attempts: int = 0
     log: list = field(default_factory=list)
+    song_id: str | None = None  # id in the learning store (midigen.learn), for rate()/feedback()
 
 
 def _extract_json(text: str):
@@ -155,28 +158,30 @@ class Composer:
     """High-level conversational API: generate(prompt) and edit(spec, instruction)."""
 
     def __init__(self, provider=None, use_env: bool = True, max_retries: int = 3, critic_rounds: int = 1,
-                 offline_fallback: bool = True, auto_refine: bool = True):
+                 offline_fallback: bool = True, auto_refine: bool = True, record: bool = True):
         self.provider = provider if provider is not None else (OpenAICompatProvider.from_env() if use_env else None)
         self.max_retries, self.critic_rounds = max_retries, critic_rounds
         self.offline_fallback, self.auto_refine = offline_fallback, auto_refine
+        self.record = record  # log songs/edits/validated LLM replies to the learning store
 
     # ------------------------------------------------------------ public API
     def generate(self, prompt: str, seed: int = 1) -> Result:
         baseline = nl.prompt_to_spec(prompt, seed=seed)
         if not self.provider:
-            return self._finish(Result(baseline, explanation="built offline from genre profile", source="offline"))
+            return self._finish(Result(baseline, explanation="built offline from genre profile", source="offline"),
+                                prompt=prompt)
         genre = baseline.get("genre")
         task = (f"User request: {prompt!r}\nA theory-built draft for genre {genre!r} is below. Improve it to fit the request: "
                 "return {\"action\":\"ops\",\"ops\":[...],\"explanation\":\"...\"} to edit the draft (preferred), or "
                 "{\"action\":\"spec\",\"spec\":{...full spec...},\"explanation\":\"...\"} to replace it. If the draft already fits, "
                 "return {\"action\":\"ops\",\"ops\":[],\"explanation\":...}.")
         try:
-            return self._finish(self._llm_loop(baseline, task, genre))
+            return self._finish(self._llm_loop(baseline, task, genre), prompt=prompt)
         except ProviderError as e:
             if not self.offline_fallback:
                 raise
             r = Result(baseline, explanation=f"LLM unavailable ({e}); built offline", source="offline-fallback")
-            return self._finish(r)
+            return self._finish(r, prompt=prompt)
 
     def edit(self, spec: dict, instruction: str) -> Result:
         spec = check(spec)
@@ -184,26 +189,34 @@ class Composer:
         if not self.provider:
             ops = nl.edit_to_ops(spec, instruction)  # raises NotUnderstood
             return self._finish(Result(apply_ops(spec, ops), ops=ops, explanation="offline parser", source="offline"),
-                                refine_ok=False)
+                                refine_ok=False, parent=spec)
         task = (f"User instruction: {instruction!r}\nReturn {{\"action\":\"ops\",\"ops\":[...],\"explanation\":\"...\"}} "
                 "with the smallest set of ops that does it (preferred), or a full replacement spec with action \"spec\".")
         genre = spec.get("genre") or detect_genre(instruction)
         try:
-            return self._finish(self._llm_loop(spec, task, genre), refine_ok=False)
+            return self._finish(self._llm_loop(spec, task, genre), refine_ok=False, parent=spec)
         except (ProviderError, OpError) as e:
             offline_err = e
         if self.offline_fallback:
             ops = nl.edit_to_ops(spec, instruction)
             return self._finish(Result(apply_ops(spec, ops), ops=ops, source="offline-fallback",
-                                       explanation=f"LLM failed ({offline_err}); used offline parser"), refine_ok=False)
+                                       explanation=f"LLM failed ({offline_err}); used offline parser"), refine_ok=False,
+                                parent=spec)
         raise offline_err
 
     # ------------------------------------------------------------ internals
-    def _finish(self, r: Result, refine_ok: bool = True) -> Result:
+    def _finish(self, r: Result, refine_ok: bool = True, prompt: str | None = None, parent: dict | None = None) -> Result:
+        from . import learn
+        choices = learn.choices_for(r.spec) if self.record and parent is None and learn.recording_enabled() else None
         if self.auto_refine and refine_ok:
             r.spec, r.report = refine(r.spec)
         else:
             r.report = critique(r.spec)
+        if self.record:
+            if parent is not None:
+                r.song_id = learn.record_edit(parent, r.spec, ops=r.ops, source=r.source)
+            else:
+                r.song_id = learn.record(r.spec, source=r.source, prompt=prompt, report=r.report, choices=choices)
         return r
 
     def _messages(self, spec: dict, task: str, genre: str | None) -> list[dict]:
@@ -213,6 +226,10 @@ class Composer:
                 ctx["genre_profile"] = profile_summary(genre)
             except KeyError:
                 pass
+            from . import learn
+            shots = learn.few_shot(genre)
+            if shots:  # the user's best-rated past songs and learned preferences for this genre
+                ctx["user_memory"] = shots
         return [
             {"role": "system", "content": THEORY_RULES},
             {"role": "user", "content": "Reference (vocabulary, op catalogue, genre profile):\n" + json.dumps(ctx, separators=(",", ":"))
@@ -246,6 +263,10 @@ class Composer:
             try:
                 new, ops, expl = self._parse(spec, reply)
                 result = Result(new, ops=ops, explanation=expl, source="llm")
+                if self.record:
+                    from . import learn
+                    learn.record_llm_pair(genre, "generate" if "User request" in task else "edit", msgs[-1]["content"][-2000:],
+                                          reply)
                 break
             except (OpError, ValueError, json.JSONDecodeError) as e:
                 errs = e.errors if isinstance(e, OpError) else [str(e)]

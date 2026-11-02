@@ -1,0 +1,278 @@
+{
+ "rounds": 40,
+ "hidden": {
+  "bass_style": "octave",
+  "density": "busier"
+ },
+ "arm_means": {
+  "bass_style": {
+   "auto": 0.505,
+   "kick_lock": 0.501,
+   "octave": 0.877,
+   "pulse": 0.345,
+   "root": 0.267,
+   "root_fifth": 0.372,
+   "syncopated": 0.388,
+   "walking": 0.524
+  },
+  "density": {
+   "auto": 0.421,
+   "busier": 0.805,
+   "sparser": 0.293
+  }
+ },
+ "top_arm": {
+  "bass_style": "octave",
+  "density": "busier"
+ },
+ "first_quarter": {
+  "hit_rate": 0.0,
+  "mean_rating": 2.13
+ },
+ "last_quarter": {
+  "hit_rate": 0.9,
+  "mean_rating": 4.41
+ },
+ "rows": [
+  {
+   "round": 0,
+   "rating": 1.84,
+   "bass_style": "auto",
+   "density": "auto"
+  },
+  {
+   "round": 1,
+   "rating": 3.26,
+   "bass_style": "octave",
+   "density": "sparser"
+  },
+  {
+   "round": 2,
+   "rating": 1.42,
+   "bass_style": "pulse",
+   "density": "sparser"
+  },
+  {
+   "round": 3,
+   "rating": 2.76,
+   "bass_style": "syncopated",
+   "density": "busier"
+  },
+  {
+   "round": 4,
+   "rating": 3.01,
+   "bass_style": "kick_lock",
+   "density": "busier"
+  },
+  {
+   "round": 5,
+   "rating": 1.4,
+   "bass_style": "root",
+   "density": "sparser"
+  },
+  {
+   "round": 6,
+   "rating": 1.78,
+   "bass_style": "root_fifth",
+   "density": "auto"
+  },
+  {
+   "round": 7,
+   "rating": 2.8,
+   "bass_style": "syncopated",
+   "density": "busier"
+  },
+  {
+   "round": 8,
+   "rating": 1.48,
+   "bass_style": "root",
+   "density": "auto"
+  },
+  {
+   "round": 9,
+   "rating": 1.58,
+   "bass_style": "syncopated",
+   "density": "sparser"
+  },
+  {
+   "round": 10,
+   "rating": 4.91,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 11,
+   "rating": 3.0,
+   "bass_style": "kick_lock",
+   "density": "busier"
+  },
+  {
+   "round": 12,
+   "rating": 2.78,
+   "bass_style": "auto",
+   "density": "busier"
+  },
+  {
+   "round": 13,
+   "rating": 3.26,
+   "bass_style": "auto",
+   "density": "busier"
+  },
+  {
+   "round": 14,
+   "rating": 4.62,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 15,
+   "rating": 2.75,
+   "bass_style": "auto",
+   "density": "busier"
+  },
+  {
+   "round": 16,
+   "rating": 3.41,
+   "bass_style": "walking",
+   "density": "busier"
+  },
+  {
+   "round": 17,
+   "rating": 4.98,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 18,
+   "rating": 4.81,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 19,
+   "rating": 3.4,
+   "bass_style": "walking",
+   "density": "busier"
+  },
+  {
+   "round": 20,
+   "rating": 4.31,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 21,
+   "rating": 3.23,
+   "bass_style": "octave",
+   "density": "auto"
+  },
+  {
+   "round": 22,
+   "rating": 4.9,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 23,
+   "rating": 4.68,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 24,
+   "rating": 4.47,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 25,
+   "rating": 4.1,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 26,
+   "rating": 4.43,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 27,
+   "rating": 4.61,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 28,
+   "rating": 4.91,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 29,
+   "rating": 4.97,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 30,
+   "rating": 4.48,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 31,
+   "rating": 4.87,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 32,
+   "rating": 2.76,
+   "bass_style": "walking",
+   "density": "busier"
+  },
+  {
+   "round": 33,
+   "rating": 4.81,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 34,
+   "rating": 4.55,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 35,
+   "rating": 4.01,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 36,
+   "rating": 4.72,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 37,
+   "rating": 4.4,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 38,
+   "rating": 4.82,
+   "bass_style": "octave",
+   "density": "busier"
+  },
+  {
+   "round": 39,
+   "rating": 4.67,
+   "bass_style": "octave",
+   "density": "busier"
+  }
+ ]
+}

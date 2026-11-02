@@ -99,6 +99,14 @@ def _genre(spec: dict):
 NO_RESTATE = {"solo", "solos", "improv", "intro", "outro"}
 
 
+DYNAMICS = 24   # velocity steps per 1.0 of section energy above/below the song's median (generator param "dynamics")
+HOOK_FAMILIES = {"chorus", "hook", "drop", "peak", "climax", "bloom", "loop_b"}
+
+
+def _quotes_hook(fam: str) -> bool:
+    return fam.startswith(("post", "outro", "breakdown", "ending", "coda", "vamp_out", "tag"))
+
+
 def section_family(name: str) -> str:
     """Sections that are instances of one another: chorus1/chorus2/final_chorus -> chorus, verse2 -> verse,
     head_a1 -> head_a, drop_2 -> drop. Pre-/post-choruses keep their own family."""
@@ -123,9 +131,13 @@ def render(spec: dict) -> Performance:
     sections, harmony = [], []
     t0 = 0.0
     seen: dict[str, int] = {}
+    hook_memory: dict = {}   # track -> its first chorus/hook/drop lead, quoted in post-choruses and outros
     lead_memory: dict = {}   # (track, section family, style) -> the lead first played there, restated later
+    carry: dict[int, list] = {}  # last chord voicing per track, so voice leading continues across sections
     # drums first so the bass can interlock with the kick
     track_order = sorted(range(len(spec["tracks"])), key=lambda i: 0 if spec["tracks"][i]["generator"]["type"] == "drums" else 1)
+    es = sorted(secs[n].get("energy", 0.5) for n in order)
+    e_ref = es[len(es) // 2] if es else 0.5
     for idx, name in enumerate(order):
         sec = secs[name]
         occ = seen.get(name, 0)
@@ -146,6 +158,8 @@ def render(spec: dict) -> Performance:
                 continue
             params = dict(tr["generator"])
             params.update(tr.get("overrides", {}).get(name, {}))
+            if carry.get(ti):
+                params["_prev_voicing"] = carry[ti]
             seed = stable_seed(spec.get("seed", 1), params.get("seed", 0), tr["name"], name)
             ctx = Ctx(spec=spec, track=tr, section=sec, params=params, bars=sec["bars"], bar_beats=bb,
                       chords=chords, key=spec["key"], mode=spec["mode"], scale=scale,
@@ -158,16 +172,34 @@ def render(spec: dict) -> Performance:
                 if key in lead_memory and fam not in NO_RESTATE:
                     mem, mem_bars, mem_e = lead_memory[key]
                     notes = restate(ctx, mem, mem_bars, mem_e, notes)
-                elif notes:
+                elif ti in hook_memory and fam not in HOOK_FAMILIES and _quotes_hook(fam) and sec["bars"] >= 4 \
+                        and params.get("hook_quote", True):
+                    # post-chorus, breakdown or outro: open with a 2-bar callback of the hook, then the fresh line
+                    mem, mem_bars, mem_e = hook_memory[ti]
+                    q = min(2, mem_bars) * bb
+                    notes = restate(ctx, [n for n in mem if n.start < q], mem_bars, mem_e, notes, upto=q)
+                if key not in lead_memory and notes and fam not in NO_RESTATE:
                     mem = []
                     for n in notes:
                         m = Note(n.start, n.dur, n.pitch, n.vel)
                         m.pcs = tuple(ctx.chord_at(n.start).chord.pcs)   # harmony it was written over
                         mem.append(m)
                     lead_memory[key] = (mem, sec["bars"], sec.get("energy", 0.5))
+                    if fam in HOOK_FAMILIES and ti not in hook_memory:
+                        hook_memory[ti] = lead_memory[key]
+            dyn = params.get("dynamics", DYNAMICS) if params["type"] != "clip" else 0
+            if dyn:
+                # section dynamics: louder above the song's typical energy, softer below (contrast between
+                # verse and chorus / breakdown and drop is heard, not only seen in the note count)
+                dv = int(round((sec.get("energy", 0.5) - e_ref) * float(dyn)))
+                for n in notes:
+                    n.vel = max(1, min(127, n.vel + dv))
+            if params.get("_last_voicing"):
+                carry[ti] = params["_last_voicing"]
             if params["type"] == "drums" and not kicks:
                 kicks = sorted({round(n.start, 4) for n in notes if n.pitch in (35, 36)})
-            notes = _groove(notes, spec, params, random.Random(seed ^ 0x5EED), length, tr["channel"] == 9)
+            notes = _groove(notes, spec, params, random.Random(seed ^ 0x5EED), length, tr["channel"] == 9,
+                            changes=[c.start for c in chords])
             for n in notes:
                 n.start += t0
             tracks[ti].notes.extend(notes)
@@ -191,9 +223,43 @@ def render(spec: dict) -> Performance:
             last[n.pitch] = n
             kept.append(n)
         t.notes = sorted(kept, key=lambda n: (n.start, n.pitch))
-    if spec.get("declash", True):
-        _declash(tracks, spec, harmony)
+    _lift_peaks(tracks, spec, sections)
+    _declash(tracks, spec, harmony)
     return Performance(spec, tracks, sections, harmony, t0, bb)
+
+
+def _lift_peaks(tracks: list, spec: dict, sections: list) -> int:
+    """A chorus / hook / drop melody that sits lower than the verses (the generator's range and a restated
+    first chorus can leave it there) goes up an octave in every peak section, so the peak is heard as a lift.
+    Applied uniformly, so restated choruses stay identical. Generator param "peak_lift": False opts out.
+    Returns the number of sections lifted."""
+    fam = {s.name: section_family(s.name) for s in sections}
+    peaks = [s for s in sections if fam[s.name] in HOOK_FAMILIES]
+    if not peaks:
+        top = max((s.energy for s in sections), default=0)
+        if top - min((s.energy for s in sections), default=0) < 0.04:
+            return 0
+        peaks = [s for s in sections if s.energy >= top - 1e-9]
+    pk_e = min(s.energy for s in peaks)
+    lifted = 0
+    for t, ts in zip(tracks, spec["tracks"]):
+        g = ts["generator"]
+        if g["type"] != "lead" or not g.get("peak_lift", True):
+            continue
+        inside = lambda n, secs: any(s.start - 1e-6 <= n.start < s.end - 1e-6 for s in secs)
+        pk = [n for n in t.notes if inside(n, peaks)]
+        rest = [s for s in sections if s not in peaks and s.energy < pk_e and fam[s.name] not in ("intro", "outro")]
+        ref = [n for n in t.notes if inside(n, rest)]
+        if len(pk) < 4 or len(ref) < 4:
+            continue
+        mp = sum(n.pitch for n in pk) / len(pk)
+        mr = sum(n.pitch for n in ref) / len(ref)
+        hi = max(max(g.get("range", [0, 84])[1], max(n.pitch for n in ref)) + 3, 0)
+        if mp < mr - 1.0 and max(n.pitch for n in pk) + 12 <= min(hi, 100):
+            for n in pk:
+                n.pitch += 12
+            lifted += len({s.name for s in peaks})
+    return lifted
 
 
 CLASH_PRIORITY = {"lead": 3, "bass": 2}   # everything else (chords, pad, arp ...) is 1; clips are never touched
@@ -207,71 +273,75 @@ def _declash(tracks: list, spec: dict, harmony: list) -> int:
     the nearest chord tone that sounds clean against everything around it. Returns the number of notes moved."""
     import bisect
     gtypes = [t["generator"]["type"] for t in spec["tracks"]]
+    fixed = [g == "clip" or t["generator"].get("declash", True) is False for g, t in zip(gtypes, spec["tracks"])]
     hstarts = [h.start for h in harmony]
 
     def chord_at(t):
         i = bisect.bisect_right(hstarts, t + 1e-6) - 1
         return harmony[max(0, i)].chord if harmony else None
 
-    pitched = [i for i, t in enumerate(tracks) if not t.is_drums and gtypes[i] != "clip" and t.notes]
+    pitched = [i for i, t in enumerate(tracks) if not t.is_drums and t.notes]
     allnotes = sorted(((n, i) for i in pitched for n in tracks[i].notes), key=lambda x: x[0].start)
     starts = [n.start for n, _ in allnotes]
+    owner = {id(n): i for n, i in allnotes}
 
     def sounding(t0, t1, ti):
         """notes of other tracks overlapping [t0, t1)"""
         lo = bisect.bisect_left(starts, t0 - 16.0)
         hi = bisect.bisect_left(starts, t1)
-        return [m for m, j in allnotes[lo:hi] if j != ti and m.start < t1 and m.start + m.dur > t0]
+        return [m for m, j in allnotes[lo:hi] if j != ti and m.vel > 0 and m.start < t1 and m.start + m.dur > t0]
 
-    def rubs(p, others):
-        return any(abs(p - m.pitch) % 12 == 1 for m in others)
+    def pri(j):
+        return CLASH_PRIORITY.get(gtypes[j], 1)
+
+    def revoice(target, tj, ch, may_drop):
+        """move target to the nearest chord tone that rubs with nothing around it (or drop a doubled voicing note)"""
+        if fixed[tj] or (gtypes[tj] == "bass" and target.pitch % 12 == ch.bass):
+            return False
+        pcs = set(ch.pcs)
+        around = sounding(target.start + 0.01, target.start + max(0.02, min(target.dur, 1.0)), tj)
+        own = {m.pitch for m in tracks[tj].notes if m is not target and m.vel > 0 and abs(m.start - target.start) < 0.03}
+        for d in sorted(range(-5, 6), key=lambda d: (abs(d), d > 0)):
+            p = target.pitch + d
+            if d and 0 <= p <= 127 and p not in own and p % 12 in pcs and not any(abs(p - m.pitch) % 12 == 1 for m in around):
+                target.pitch = p
+                return True
+        if may_drop and gtypes[tj] not in MONOPHONIC and own:
+            target.vel = 0
+            return True
+        return False
 
     moved = 0
     for n, ti in allnotes:
-        if abs(n.start - round(n.start)) > 0.03:
+        if n.vel == 0 or abs(n.start - round(n.start)) > 0.03:
             continue
-        at = [m for m in sounding(n.start + 0.01, n.start + 0.011, ti)]
-        foe = next((m for m in at if abs(n.pitch - m.pitch) % 12 == 1), None)
-        if foe is None:
-            continue
+        foe = next((m for m in sounding(n.start + 0.01, n.start + 0.011, ti) if abs(n.pitch - m.pitch) % 12 == 1), None)
         ch = chord_at(n.start)
-        if ch is None:
+        if foe is None or ch is None:
             continue
+        fj = owner[id(foe)]
         pcs = set(ch.pcs)
-        fj = next(j for m, j in allnotes[bisect.bisect_left(starts, foe.start):] if m is foe)
-        if gtypes[fj] == "clip":
-            fj_pri = 9
+        same_onset = abs(foe.start - n.start) < 0.03          # a held note is only re-voiced if it starts here too
+        cands = []
+        # the melody (and its hook) is kept whenever the accompaniment can make room instead
+        if gtypes[ti] == "lead" and pri(fj) == 1 and same_onset:
+            cands = [(foe, fj), (n, ti)]
+        elif gtypes[fj] == "lead" and pri(ti) == 1:
+            cands = [(n, ti)]
         else:
-            fj_pri = CLASH_PRIORITY.get(gtypes[fj], 1)
-        mine_ct, foe_ct = n.pitch % 12 in pcs, foe.pitch % 12 in pcs
-        # who gives way: a non-chord tone first, else the lower-priority part (ties: the later onset, i.e. n)
-        if mine_ct and not foe_ct and fj_pri < 9 and abs(foe.start - n.start) < 0.03:
-            target, tj = foe, fj
-        elif mine_ct and foe_ct and CLASH_PRIORITY.get(gtypes[ti], 1) > fj_pri and abs(foe.start - n.start) < 0.03:
-            target, tj = foe, fj
-        else:
-            target, tj = n, ti
-        if gtypes[tj] == "bass" and target.pitch % 12 == ch.bass and target is not n:
-            target, tj = n, ti            # never move the bass off the chord's bass note
-        around = sounding(target.start + 0.01, target.start + max(0.02, min(target.dur, 1.0)), tj)
-        own = {m.pitch for m in tracks[tj].notes if m is not target and abs(m.start - target.start) < 0.03}
-        core = {(ch.root + i) % 12 for i in ch.intervals[:3]}
-        best = None
-        for d in sorted(range(-5, 6), key=lambda d: (abs(d), d > 0)):
-            p = target.pitch + d
-            if d == 0 or not 0 <= p <= 127 or p in own or p % 12 not in pcs or rubs(p, around):
-                continue
-            if best is None or (p % 12 in core and best % 12 not in core and abs(d) <= abs(best - target.pitch)):
-                best = p
-            if best is not None:
-                break
-        if best is None and gtypes[tj] not in ("lead", "bass") and own:
-            target.vel = 0                 # a doubled voicing note with nowhere clean to go: leave it out
+            n_nct, f_nct = n.pitch % 12 not in pcs, foe.pitch % 12 not in pcs
+            if same_onset and (f_nct and not n_nct or (n_nct == f_nct and pri(fj) < pri(ti))):
+                cands = [(foe, fj), (n, ti)]
+            else:
+                cands = [(n, ti)] + ([(foe, fj)] if same_onset else [])
+        if not same_onset and gtypes[ti] == "lead" and pri(fj) == 1 and not fixed[fj] and n.start - foe.start > 0.25:
+            foe.dur = n.start - foe.start - 0.01        # the held pad/comp voice releases under the melody note
             moved += 1
             continue
-        if best is not None:
-            target.pitch = best
-            moved += 1
+        for k, (tg, tj) in enumerate(cands):
+            if revoice(tg, tj, ch, k == len(cands) - 1):
+                moved += 1
+                break
     for i in pitched:
         tracks[i].notes = [n for n in tracks[i].notes if n.vel > 0]
     return moved
@@ -318,7 +388,8 @@ DEFAULT_HUMANIZE = {"timing": 0.006, "velocity": 4}  # used when a generated tra
 MONOPHONIC = ("bass", "lead")
 
 
-def _groove(notes: list[Note], spec: dict, params: dict, rng: random.Random, length: float, drums: bool) -> list[Note]:
+def _groove(notes: list[Note], spec: dict, params: dict, rng: random.Random, length: float, drums: bool,
+            changes: list[float] | None = None) -> list[Note]:
     """Swing, laid-back backbeat, humanize, then clip monophonic lines so no note rings into the next onset.
 
     Swing convention (spec version 2, identical to the midigen-genres files): `swing` runs 0-1 and puts the
@@ -348,8 +419,9 @@ def _groove(notes: list[Note], spec: dict, params: dict, rng: random.Random, len
         if lb and (not drums or n.pitch in (37, 38, 39, 40)):
             s += lb
         if tj:
-            on_bar = abs(s / bb - round(s / bb)) < 1e-3
-            # never pull a note ahead of a bar line (it would sound under the previous chord)
+            on_bar = abs(s / bb - round(s / bb)) < 1e-3 or any(abs(s - c) < 1e-3 for c in changes or ())
+            # never pull a note ahead of a bar line or a mid-bar chord change (it would sound under the
+            # previous chord)
             s += rng.uniform(0, tj) if s <= 0.01 or (on_bar and not drums) else rng.uniform(-tj, tj)
         v = n.vel + (rng.randint(-vj, vj) if vj else 0)
         s = clamp(s, 0.0, max(0.0, length - 0.01))

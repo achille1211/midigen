@@ -28,11 +28,19 @@ def _key_sig(key: str, mode: str) -> str | None:
     return _SHARP_KEYS[NOTE_NAMES[rel]]
 
 
-def performance_to_midi(perf: Performance, expression: bool = True) -> mido.MidiFile:
+def performance_to_midi(perf: Performance, expression: bool = True, mix: bool = True) -> mido.MidiFile:
     """Type-1 file. With ``expression`` (default) keyboard parts get CC64 sustain pedaling and bass/lead parts
-    pitch-bend glides/scoops from their generator params (see expression.py); the notes are identical either way."""
+    pitch-bend glides/scoops from their generator params (see expression.py); the notes are identical either way.
+    With ``mix`` (default) each track gets the per-genre mixing defaults from ``midigen/data/mix_defaults.json``
+    (CC7 volume, CC10 pan, CC91 reverb, CC93 chorus, all clamped to 0-127); ``mix=False`` writes only the spec's
+    raw volume/pan as CC7/CC10 (the pre-mix behaviour)."""
     spec = perf.spec
     bpm = specmod.quarter_bpm(spec)
+    mixes = None
+    if mix:
+        from .audio.mix import resolve_track_mix
+        mixes = resolve_track_mix(spec.get("genre"), [{"role": t.role, "volume": t.volume, "pan": t.pan}
+                                                      for t in perf.tracks])
     mid = mido.MidiFile(type=1, ticks_per_beat=TPB)
     beat_ticks = TPB  # spec/performance beats are quarter notes in every meter (bar = num*4/den quarters)
     to_t = lambda b: int(round(b * beat_ticks))
@@ -60,8 +68,13 @@ def performance_to_midi(perf: Performance, expression: bool = True) -> mido.Midi
         mt.append(mido.MetaMessage("track_name", name=tr.name, time=0))
         if not tr.is_drums:
             mt.append(mido.Message("program_change", channel=ch, program=tr.program, time=0))
-        mt.append(mido.Message("control_change", channel=ch, control=7, value=int(tr.volume), time=0))
-        mt.append(mido.Message("control_change", channel=ch, control=10, value=int(tr.pan), time=0))
+        if mixes:
+            m = mixes[ti]
+            for cc, key in ((7, "volume"), (10, "pan"), (91, "reverb"), (93, "chorus")):
+                mt.append(mido.Message("control_change", channel=ch, control=cc, value=m[key], time=0))
+        else:
+            mt.append(mido.Message("control_change", channel=ch, control=7, value=max(0, min(127, int(tr.volume))), time=0))
+            mt.append(mido.Message("control_change", channel=ch, control=10, value=max(0, min(127, int(tr.pan))), time=0))
         events = []
         # truncate same-pitch overlaps so note-offs pair correctly
         by_pitch = defaultdict(list)
@@ -100,11 +113,11 @@ def performance_to_midi(perf: Performance, expression: bool = True) -> mido.Midi
     return mid
 
 
-def export_midi(spec_or_perf, path: str | Path, expression: bool = True) -> Performance:
+def export_midi(spec_or_perf, path: str | Path, expression: bool = True, mix: bool = True) -> Performance:
     perf = spec_or_perf if isinstance(spec_or_perf, Performance) else render(spec_or_perf)
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    performance_to_midi(perf, expression=expression).save(str(path))
+    performance_to_midi(perf, expression=expression, mix=mix).save(str(path))
     return perf
 
 

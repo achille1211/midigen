@@ -7,6 +7,8 @@ Typical embedding::
     spec = mg.apply_ops(spec, [{"op": "reharmonize", "technique": "9ths"}])
     report = mg.critique(spec)
     mg.export_midi(spec, "song.mid")
+    sid = mg.learn.record(spec)            # remember it (also done by the CLI, MCP server and Composer)
+    mg.rate(sid, 5, note="busier chorus")  # teach the genre policy; the next build_spec samples from it
 """
 __version__ = "0.1.0"
 
@@ -22,6 +24,9 @@ from .ops import apply_ops, validate_ops, Editor, OpError  # noqa: F401
 from .midi_io import export_midi, import_midi, inspect_midi  # noqa: F401
 from .nl import prompt_to_spec, edit_to_ops, NotUnderstood  # noqa: F401
 from .llm import Composer, OpenAICompatProvider, refine, Result  # noqa: F401
+from . import learn  # noqa: F401
+from .learn import rate, feedback, keep, reject, thumbs, learn_midi, train  # noqa: F401
+from .learn import status as learn_status  # noqa: F401
 
 
 def piano_roll(spec_or_perf, path, title=None):

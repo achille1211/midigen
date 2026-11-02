@@ -34,7 +34,9 @@ def test_pack_report_clean():
     assert {"bigband", "emo", "metal", "screamo"} <= set(mg.available_genres())
     assert set(mg.list_genres()) <= set(mg.available_genres())
     assert len(mg.list_genres()) == 16
-    assert {"jazz@midigen-knowledge", "pop@midigen-knowledge", "rock@midigen-knowledge"} <= set(r["shadowed"])
+    # the knowledge pack renamed its overlapping ids (jazz-combo, pop-studio, rock-band), so nothing is shadowed now
+    assert {"jazz_combo", "pop_studio", "rock_band"} <= set(mg.available_genres())
+    assert not {"jazz@midigen-knowledge", "pop@midigen-knowledge", "rock@midigen-knowledge"} & set(r["shadowed"])
 
 
 @needs_packs
@@ -53,7 +55,8 @@ def test_every_pack_genre_builds_exports_and_scores(gid, tmp_path):
 
 @needs_packs
 @pytest.mark.parametrize("name,expected", [("Big Band", "bigband"), ("lofi-hip-hop", "lofi_hiphop"),
-                                           ("Drum and Bass", "drum_and_bass"), ("jazz@knowledge", "jazz@midigen-knowledge")])
+                                           ("Drum and Bass", "drum_and_bass"), ("jazz-combo", "jazz_combo"), ("Rock Band", "rock_band"),
+                                           ("jazz_combo@knowledge", "jazz_combo@midigen-knowledge")])
 def test_resolve_display_names_and_pack_ids(name, expected):
     assert mg.resolve_genre(name) == expected
 

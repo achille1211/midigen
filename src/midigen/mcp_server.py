@@ -15,6 +15,7 @@ from .llm import Composer, refine
 from .midi_io import export_midi, inspect_midi
 from .nl import edit_to_ops
 from .ops import Editor, apply_ops
+from . import learn
 
 try:  # mcp >= 2
     from mcp.server.mcpserver import MCPServer as _Server
@@ -27,7 +28,8 @@ _SONGS: dict[str, Editor] = {}
 server = _Server(name="midigen", instructions=(
     "Theory-driven multitrack MIDI. Use generate_song to create a song (from a genre or free text), edit_song with a natural "
     "language instruction or JSON ops (see list_ops), export_midi to write a .mid, inspect to read a song or a .mid file. "
-    "You decide structure (sections, chords as roman numerals, energy, instruments); the engine writes the notes."))
+    "You decide structure (sections, chords as roman numerals, energy, instruments); the engine writes the notes. "
+    "Pass the user's reactions to rate_song / song_feedback: midigen learns per-genre preferences from them."))
 
 
 def _id(spec: dict) -> str:
@@ -54,7 +56,10 @@ def _summary(sid: str) -> dict:
 def generate_song(prompt: str = "", genre: str = "", key: str = "", mode: str = "", tempo: float = 0, bars: int = 0,
                   seed: int = 1) -> dict:
     if genre:
-        spec, _ = refine(build_spec(genre, key=key or None, mode=mode or None, tempo=tempo or None, bars=bars or None, seed=seed))
+        raw = build_spec(genre, key=key or None, mode=mode or None, tempo=tempo or None, bars=bars or None, seed=seed)
+        ch = learn.choices_for(raw)
+        spec, rep = refine(raw)
+        learn.record(spec, source="mcp", report=rep, choices=ch)
     else:
         spec = Composer(use_env=False).generate(prompt or "pop song", seed=seed).spec
         if key or mode or tempo:
@@ -77,7 +82,9 @@ def edit_song(song_id: str, instruction: str = "", ops_json: str = "") -> dict:
         label = ed.undo() if instruction.strip().lower() == "undo" else ed.redo()
         return {"done": label, **_summary(song_id)}
     ops = json.loads(ops_json) if ops_json else edit_to_ops(ed.spec, instruction)
+    old = ed.spec
     ed.apply(ops, label=instruction or "ops")
+    learn.record_edit(old, ed.spec, ops=ops, source="mcp")
     return {"applied_ops": ops, **_summary(song_id)}
 
 
@@ -121,6 +128,51 @@ def list_ops() -> dict:
 @server.tool(name="genre_profile", description="Return the knowledge-base profile for a genre.")
 def genre_profile(genre: str) -> dict:
     return get_genre(genre)
+
+
+def _song_ref(song_id: str, path: str = ""):
+    if song_id in _SONGS:
+        return _SONGS[song_id].spec
+    return path or song_id  # a learning-store id, 'last', or a file path
+
+
+@server.tool(name="rate_song", description="Record the user's rating (1-5) of a song, optionally with a note and a target "
+             "('track:Bass', 'section:chorus'). Ratings dominate what midigen learns for the genre.")
+def rate_song(song_id: str, rating: float, note: str = "", target: str = "") -> dict:
+    return learn.rate(_song_ref(song_id), rating, note=note or None, target=target or None)
+
+
+@server.tool(name="song_feedback", description="Record free-text feedback, thumbs up/down, keep or reject for a song "
+             "(kind: note | up | down | keep | reject). Words like 'busier', 'more swing', 'bigger chorus' become preferences.")
+def song_feedback(song_id: str, note: str = "", kind: str = "note", target: str = "") -> dict:
+    ref = _song_ref(song_id)
+    if kind in ("up", "down"):
+        return learn.thumbs(ref, kind == "up", note=note or None, target=target or None)
+    if kind == "keep":
+        return learn.keep(ref, note=note or None)
+    if kind == "reject":
+        return learn.reject(ref, note=note or None)
+    return learn.feedback(ref, note, target=target or None)
+
+
+@server.tool(name="learn_status", description="What midigen has learned (per genre: arm scores, preferences, references).")
+def learn_status(genre: str = "") -> dict:
+    return learn.status(genre or None)
+
+
+@server.tool(name="learn_reference", description="Learn from a reference .mid file for a genre: its progressions, bass "
+             "pattern, lead rhythm cells, drum feel and energy become options that new songs sample.")
+def learn_reference(path: str, genre: str) -> dict:
+    out = learn.learn_midi(path, genre)
+    return {"genre": out["genre"], "added": out["added"]}
+
+
+@server.tool(name="train", description="Offline self-training against the critic and the learned user model; returns the "
+             "improvement curve. The critic is a proxy: user ratings are the ground truth.")
+def train(genres: str = "", rounds: int = 3, candidates: int = 6, bars: int = 16) -> dict:
+    res = learn.train([g for g in genres.split(",") if g] or None, rounds=rounds, candidates=candidates,
+                      bars=bars or None, log=lambda *_: None)
+    return {k: res[k] for k in ("genres", "baseline_mean", "final_mean", "curve", "ascii_chart")}
 
 
 def main():

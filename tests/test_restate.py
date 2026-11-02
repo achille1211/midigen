@@ -41,3 +41,17 @@ def test_restate_param_switches_it_off():
     a = mg.render(spec)
     b = mg.render(off)
     assert [n.pitch for t in a.tracks for n in t.notes] != [n.pitch for t in b.tracks for n in t.notes]
+
+
+def test_post_chorus_or_outro_quotes_the_hook():
+    from midigen.arranger import HOOK_FAMILIES, _quotes_hook, section_family
+    assert _quotes_hook("post_chorus") and _quotes_hook("outro") and not _quotes_hook("bridge")
+    assert "chorus" in HOOK_FAMILIES and section_family("loop_b2") in HOOK_FAMILIES
+    spec = mg.build_spec("rock", seed=2)
+    off = copy.deepcopy(spec)
+    for t in off["tracks"]:
+        if t["generator"]["type"] == "lead":
+            t["generator"]["hook_quote"] = False
+    mg.check(off)
+    a, b = mg.render(spec), mg.render(off)
+    assert [n.pitch for t in a.tracks for n in t.notes] != [n.pitch for t in b.tracks for n in t.notes]

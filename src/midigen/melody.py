@@ -7,6 +7,7 @@ direction, keeps the line in range and lands phrase ends on cadence-appropriate 
 from __future__ import annotations
 
 import math
+import random
 
 from dataclasses import dataclass
 
@@ -195,6 +196,56 @@ def _pitch_to_deg(p: int, tonic: int, scale: list[int], base_octave: int = 5) ->
     return o * 7 + d
 
 
+def arc_offset(pos: float, amp: float, peak: float = 0.65) -> float:
+    """Phrase contour in scale steps: rise to `amp` at `peak` (0..1 of the phrase), fall back to 0 at the end.
+    Centred so the phrase's average register stays where it was."""
+    pos = min(1.0, max(0.0, pos))
+    up = pos / peak if pos < peak else (1.0 - pos) / (1.0 - peak)
+    return amp * up - amp / 2.0
+
+
+def vary_rhythm(rng: random.Random, m: list[MotifNote], total_steps: int) -> list[MotifNote]:
+    """Light rhythmic variation of a motif repeat (pitch contour kept): split a long note, merge two
+    short ones, or anticipate a beat note by a 16th (syncopation)."""
+    out = [MotifNote(n.step, n.length, n.interval) for n in m]
+    if len(out) < 2:
+        return out
+    ops = ["split", "merge", "anticipate"]
+    rng.shuffle(ops)
+    for op in ops:
+        if op == "split":
+            longs = [i for i, n in enumerate(out) if n.length >= 4]
+            if longs:
+                i = rng.choice(longs)
+                n = out[i]
+                h = n.length // 2
+                out[i] = MotifNote(n.step, h, n.interval)
+                out.insert(i + 1, MotifNote(n.step + h, n.length - h, rng.choice([1, -1])))
+                if i + 2 < len(out):
+                    out[i + 2].interval -= out[i + 1].interval  # later notes keep their pitches
+                return out
+        elif op == "merge":
+            pairs = [i for i in range(len(out) - 1) if out[i].step + out[i].length == out[i + 1].step
+                     and out[i].length + out[i + 1].length <= 8 and out[i].length <= 2]
+            if pairs:
+                i = rng.choice(pairs)
+                a, b = out[i], out.pop(i + 1)
+                a.length += b.length
+                if i + 1 < len(out):
+                    out[i + 1].interval += b.interval
+                return out
+        else:
+            beats = [i for i in range(1, len(out)) if out[i].step % 4 == 0 and out[i].step >= 1
+                     and out[i - 1].step + 1 < out[i].step]
+            if beats:
+                i = rng.choice(beats)
+                prev = out[i - 1]
+                prev.length = min(prev.length, out[i].step - 1 - prev.step)
+                out[i] = MotifNote(out[i].step - 1, min(total_steps - out[i].step + 1, out[i].length + 1), out[i].interval)
+                return out
+    return out
+
+
 def gen_lead(ctx: Ctx) -> list[Note]:
     style = ctx.params.get("style", "melodic")
     lo, hi = _range(ctx, "lead")
@@ -207,6 +258,9 @@ def gen_lead(ctx: Ctx) -> list[Note]:
     plan = plan_phrases(ctx, motif_bars)
     centre = (lo + hi) // 2 + int(round((ctx.energy - 0.6) * 8))  # choruses sit higher than verses
     centre = max(lo + 3, min(hi - 3, centre))
+    phrase_steps = (4 if ctx.bars >= 4 else ctx.bars) * spb
+    amp = float(ctx.params.get("contour_arc", 0.0 if style == "riff" else 3.0))
+    prev_arc = None
     p_ct = float(ctx.params.get("chord_tone_strong", 0.9))
     tails = {}
     idx = _pitch_to_deg(centre, tonic, scale)
@@ -234,9 +288,21 @@ def gen_lead(ctx: Ctx) -> list[Note]:
             if key not in tails:
                 tails[key] = vary_tail(ctx, m, motif_bars, style)
             m = tails[key]
+        elif style != "riff" and unit["dev"] in ("repeat", "sequence_up", "sequence_down") and (unit["bar"] // 4) % 2 == 1:
+            # the answering phrase repeats the motif with a light rhythmic variation
+            key = ("rhythm", unit["dev"], unit["bar"] % 8)
+            if key not in tails:
+                tails[key] = vary_rhythm(ctx.rng, m, motif_bars * spb)
+            m = tails[key]
         start_idx = _pitch_to_deg(centre, tonic, scale) + shift + (ctx.rng.choice([0, 2]) if unit["dev"] == "original" else 0)
         idx = start_idx
         unit_notes = []
+        # the phrase's contour arc moves whole motif units (as a sequence), so the motif's own intervals
+        # survive; a literal repeat stays where its model was, so the hook is heard verbatim
+        if unit["dev"] != "repeat" or prev_arc is None:
+            u0 = (unit["bar"] * spb) % phrase_steps
+            prev_arc = int(round(arc_offset(min(1.0, (u0 + motif_bars * spb / 2) / phrase_steps), amp)))
+        arc = prev_arc
         for k, mn in enumerate(m):
             if unit["bar"] * spb + mn.step >= ctx.bars * spb:
                 break
@@ -247,6 +313,8 @@ def gen_lead(ctx: Ctx) -> list[Note]:
                 if prev_leap and abs(prev_leap) > 4:
                     iv = -1 if prev_leap > 0 else 1   # resolve a leap by step the other way
                 idx += iv
+            t_step = unit["bar"] * spb + mn.step
+            idx += arc
             p = _deg_to_pitch(idx, tonic, scale)
             if p > hi or p < lo:
                 idx -= 2 * (mn.interval or 1) * (1 if p > hi else -1) if k else 0
@@ -255,7 +323,6 @@ def gen_lead(ctx: Ctx) -> list[Note]:
                     p -= 12; idx -= 7
                 while p < lo:
                     p += 12; idx += 7
-            t_step = unit["bar"] * spb + mn.step
             t = t_step * sb
             span = ctx.chord_at(t)
             pcs = span.chord.pcs
@@ -264,7 +331,7 @@ def gen_lead(ctx: Ctx) -> list[Note]:
                 p = _nearest_chord_tone(p, pcs, lo, hi)
             elif p % 12 not in pcs:
                 p = _fix_chromatic_clash(p, pcs, ctx.scale)
-            idx = _pitch_to_deg(p, tonic, scale)
+            idx = _pitch_to_deg(p, tonic, scale) - arc
             if prev_pitch is not None:
                 prev_leap = p - prev_pitch
             prev_pitch = p
@@ -323,12 +390,47 @@ def gen_lead(ctx: Ctx) -> list[Note]:
             pcs = ctx.chord_at(n.start).chord.pcs
             if n.pitch % 12 not in pcs:
                 n.pitch = _nearest_chord_tone(n.pitch, pcs, lo, hi)
+    if style != "riff":  # a riff's repeated peak is its identity
+        _single_climax(ctx, notes, lo, hi, tonic, scale)
     for a, b in zip(notes, notes[1:]):  # the fixes above may open a leap wider than an octave
         if abs(b.pitch - a.pitch) > 12:
             q = b.pitch + (-12 if b.pitch > a.pitch else 12)
             if lo <= q <= hi:
                 b.pitch = q
     return notes
+
+
+def _single_climax(ctx: Ctx, notes: list[Note], lo: int, hi: int, tonic: int, scale: list[int]) -> None:
+    """One climax per 4-bar phrase: the highest note occurs once, near the arc peak, and is accented.
+    Other notes at the top pitch step down to the next chord / scale tone below."""
+    span = (4 if ctx.bars >= 4 else ctx.bars) * ctx.bar_beats
+    key_pcs = set(ctx.scale)
+    t = 0.0
+    while t < ctx.length - 1e-6:
+        ph = [n for n in notes if t <= n.start < t + span]
+        t += span
+        if len(ph) < 4:
+            continue
+        top = max(n.pitch for n in ph)
+        tops = [n for n in ph if n.pitch == top]
+        if len(tops) > 2:
+            # a peak sounding three or more times is the motif's signature (the hook): keep it
+            continue
+        target = ph[0].start + 0.65 * span
+        keep = min(tops, key=lambda n: (abs(n.start - target), -n.dur))
+        keep.vel = min(127, keep.vel + 6)
+        for n in tops:
+            if n is keep:
+                continue
+            i = notes.index(n)
+            pcs = ctx.chord_at(n.start).chord.pcs
+            strong = abs(n.start - round(n.start)) < 1e-6
+            nb = [notes[j].pitch for j in (i - 1, i + 1) if 0 <= j < len(notes)]
+            for q in range(n.pitch - 1, max(lo, n.pitch - 5) - 1, -1):
+                ok = q % 12 in pcs if strong else (q % 12 in pcs or q % 12 in key_pcs)
+                if ok and all(abs(q - x) <= 12 for x in nb):
+                    n.pitch = q
+                    break
 
 
 def _nearest_chord_tone(p: int, pcs: list[int], lo: int, hi: int) -> int:
@@ -345,14 +447,19 @@ def _fix_chromatic_clash(p: int, pcs: list[int], scale: list[int]) -> int:
     return p
 
 
-def restate(ctx: Ctx, memory: list[Note], mem_bars: int, mem_energy: float, fresh: list[Note]) -> list[Note]:
+def restate(ctx: Ctx, memory: list[Note], mem_bars: int, mem_energy: float, fresh: list[Note],
+            upto: float | None = None) -> list[Note]:
     """Bring back an earlier lead (the first chorus/hook/drop of the song) in a later instance of the same section:
     the remembered bars are reused bar for bar (tiled if this section is longer), the last bar takes the freshly
     generated notes as a varied tail, and every reused note is re-fitted to this section's chords (a non-chord tone
-    on a beat, or an out-of-scale note, moves to the nearest chord tone). Velocity follows the energy difference."""
+    on a beat, or an out-of-scale note, moves to the nearest chord tone). Velocity follows the energy difference.
+    With `upto` (beats) only the opening of the section quotes the memory and the fresh line takes over from there
+    (a post-chorus / outro calling back the hook)."""
     lo, hi = _range(ctx, "lead")
     bb = ctx.bar_beats
     tail_start = (ctx.bars - 1) * bb if ctx.bars >= 4 else ctx.length
+    if upto is not None:
+        tail_start = min(tail_start, upto)
     dv = int(round((ctx.energy - mem_energy) * 20))
     out: list[Note] = []
     for off in range(0, ctx.bars, max(1, mem_bars)):
