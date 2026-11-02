@@ -25,6 +25,8 @@ from .midi_io import export_midi, import_midi, inspect_midi  # noqa: F401
 from .nl import prompt_to_spec, edit_to_ops, NotUnderstood  # noqa: F401
 from .llm import Composer, OpenAICompatProvider, refine, Result  # noqa: F401
 from . import learn  # noqa: F401
+from . import linked  # noqa: F401
+from .linked import suggest_followups  # noqa: F401
 from .learn import rate, feedback, keep, reject, thumbs, learn_midi, train  # noqa: F401
 from .learn import status as learn_status  # noqa: F401
 

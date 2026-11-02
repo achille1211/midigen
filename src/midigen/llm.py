@@ -122,6 +122,7 @@ class Result:
     attempts: int = 0
     log: list = field(default_factory=list)
     song_id: str | None = None  # id in the learning store (midigen.learn), for rate()/feedback()
+    followups: list = field(default_factory=list)  # linked-track follow-ups applied by edit(..., auto_follow=True)
 
 
 def _extract_json(text: str):
@@ -168,7 +169,8 @@ class Composer:
     def generate(self, prompt: str, seed: int = 1) -> Result:
         baseline = nl.prompt_to_spec(prompt, seed=seed)
         if not self.provider:
-            return self._finish(Result(baseline, explanation="built offline from genre profile", source="offline"),
+            return self._finish(Result(baseline, explanation=nl.describe(nl.LAST_INTERPRETATION) if nl.LAST_INTERPRETATION
+                                       else "built offline from genre profile", source="offline"),
                                 prompt=prompt)
         genre = baseline.get("genre")
         task = (f"User request: {prompt!r}\nA theory-built draft for genre {genre!r} is below. Improve it to fit the request: "
@@ -183,14 +185,34 @@ class Composer:
             r = Result(baseline, explanation=f"LLM unavailable ({e}); built offline", source="offline-fallback")
             return self._finish(r, prompt=prompt)
 
-    def edit(self, spec: dict, instruction: str) -> Result:
+    def edit(self, spec: dict, instruction: str, auto_follow: bool = False) -> Result:
+        """Edit `spec`. With auto_follow=True the top validated linked-track follow-ups (midigen.linked) are applied too
+        and listed in result.followups."""
+        r = self._edit(spec, instruction)
+        if auto_follow and r.ops:
+            from . import linked
+            try:
+                sugg = linked.suggest_followups(check(spec), r.ops, limit=2)
+            except (OpError, ValueError, KeyError):
+                sugg = []
+            if sugg:
+                extra = [o for s in sugg for o in s["ops"]]
+                r.spec = apply_ops(r.spec, extra)
+                r.ops = list(r.ops) + extra
+                r.report = critique(r.spec)
+                r.explanation = (r.explanation + "; " if r.explanation else "") + "followed up: " + "; ".join(s["reason"] for s in sugg)
+            r.followups = sugg
+        return r
+
+    def _edit(self, spec: dict, instruction: str) -> Result:
         spec = check(spec)
         offline_err = None
         if not self.provider:
             ops = nl.edit_to_ops(spec, instruction)  # raises NotUnderstood
             return self._finish(Result(apply_ops(spec, ops), ops=ops, explanation="offline parser", source="offline"),
                                 refine_ok=False, parent=spec)
-        task = (f"User instruction: {instruction!r}\nReturn {{\"action\":\"ops\",\"ops\":[...],\"explanation\":\"...\"}} "
+        from .linked import ENSEMBLE_PROMPT
+        task = (f"User instruction: {instruction!r}\n{ENSEMBLE_PROMPT}\nReturn {{\"action\":\"ops\",\"ops\":[...],\"explanation\":\"...\"}} "
                 "with the smallest set of ops that does it (preferred), or a full replacement spec with action \"spec\".")
         genre = spec.get("genre") or detect_genre(instruction)
         try:

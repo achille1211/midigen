@@ -88,6 +88,16 @@ def edit_song(song_id: str, instruction: str = "", ops_json: str = "") -> dict:
     return {"applied_ops": ops, **_summary(song_id)}
 
 
+@server.tool(name="suggest_followups", description="Linked tracks: given a proposed edit (`instruction` or `ops_json`) "
+             "for a song, return ranked, explained, critic-validated follow-up ops for the other tracks (e.g. busier "
+             "drums -> busier bass, sparer lead). Nothing is applied; pass the chosen ops to edit_song.")
+def suggest_followups_tool(song_id: str, instruction: str = "", ops_json: str = "", limit: int = 5) -> dict:
+    from . import linked
+    ed = _SONGS[song_id]
+    edit = json.loads(ops_json) if ops_json else instruction
+    return {"suggestions": linked.suggest_followups(ed.spec, edit, limit=limit)}
+
+
 @server.tool(name="export_midi", description="Write the song to a .mid (and its spec .json). Returns file paths and note counts.")
 def export_midi_tool(song_id: str, path: str = "", png: bool = False) -> dict:
     spec = _SONGS[song_id].spec
