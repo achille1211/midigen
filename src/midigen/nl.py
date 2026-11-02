@@ -187,6 +187,10 @@ def fmt_duration(sec: float) -> str:
     return f"{sec // 60}:{sec % 60:02d}" if sec >= 60 else f"{sec} s"
 
 
+MAX_DEFAULT_SECONDS = 300.0  # longer default arrangements are shortened
+CAPPED_SECONDS = 150.0
+
+
 def bars_for_seconds(seconds: float, tempo: float, beats_per_bar: int = 4) -> int:
     return max(2, min(256, int(round(seconds * tempo / 60.0 / beats_per_bar))))
 
@@ -307,6 +311,11 @@ def interpret(prompt: str, seed: int = 1) -> tuple[dict, dict]:
         nb = bars_for_seconds(seconds, float(spec["tempo"]), spec.get("time_signature", [4, 4])[0])
         spec = build_spec(genre, **{**kw, "bars": nb})
         info["seconds_requested"] = seconds
+    elif not bars and duration_seconds(spec) > MAX_DEFAULT_SECONDS:
+        # slow genres (ambient at 55 BPM) default to 10+ minutes; cap prompt defaults to a usable length
+        nb = bars_for_seconds(CAPPED_SECONDS, float(spec["tempo"]), spec.get("time_signature", [4, 4])[0])
+        spec = build_spec(genre, **{**kw, "bars": nb})
+        info["length_capped"] = True
     if solo_mode:
         spec = _apply_solo(spec, solo)
     lead_inst = next((p["lead"] for _, p in presets if p.get("lead")), None)
@@ -403,6 +412,8 @@ def prompt_to_spec(prompt: str, seed: int = 1) -> dict:
 
 def _title(prompt: str) -> str:
     words = re.findall(r"[A-Za-z0-9][A-Za-z0-9'-]*", prompt)[:6]
+    while len(words) > 1 and words[-1].lower() in ("a", "an", "the", "for", "to", "of", "with", "and", "in", "my", "at"):
+        words.pop()
     return " ".join(w[:1].upper() + w[1:].lower() if not w[0].isdigit() else w.title() for w in words) or "Untitled"
 
 
@@ -477,21 +488,34 @@ def edit_to_ops(spec: dict, instruction: str) -> list[dict]:
     ops: list[dict] = []
     unknown = []
     for clause in _split(instruction.strip().rstrip(".!")):
-        got = None
-        if re.search(r"\band\b", clause, re.I):
-            pieces = [x.strip() for x in re.split(r"\band\b", clause, flags=re.I) if x.strip()]
-            sub = [_clause_ops(spec, x.lower(), x) for x in pieces]
-            if len(pieces) > 1 and all(sub):
-                got = [o for g in sub for o in g]
-        if got is None:
-            got = _clause_ops(spec, clause.lower(), clause)
+        got = _clause_any(spec, clause)
+        if got is None:  # retry once with typos fixed ("fastr" -> "faster")
+            fixed, changes = correct_typos(clause, EDIT_WORDS)
+            if changes:
+                got = _clause_any(spec, fixed)
         if got is None:
             unknown.append(clause)
         else:
             ops += got
     if unknown or not ops:
-        raise NotUnderstood(f"could not understand: {unknown or [instruction]}")
-    return ops
+        raise NotUnderstood(_not_understood(unknown or [instruction]))
+    return _check_adds(spec, ops)
+
+
+def _clause_any(spec: dict, clause: str) -> list[dict] | None:
+    got = None
+    if re.search(r"\band\b", clause, re.I):
+        pieces = [x.strip() for x in re.split(r"\band\b", clause, flags=re.I) if x.strip()]
+        sub = [_clause_ops(spec, x.lower(), x) or _usability_ops(spec, x.lower()) for x in pieces]
+        if len(pieces) > 1 and all(sub):
+            got = [o for g in sub for o in g]
+    if got is None:
+        got = _usability_ops(spec, clause.lower()) if _USABILITY_FIRST.search(clause.lower()) else None
+    if got is None:
+        got = _clause_ops(spec, clause.lower(), clause)
+    if got is None:
+        got = _usability_ops(spec, clause.lower())
+    return got
 
 
 def _clause_ops(spec: dict, c: str, orig: str | None = None) -> list[dict] | None:
@@ -652,3 +676,174 @@ HELP = """Things the offline parser understands (combine with 'and' / commas):
   add strings / add an arp / add a rhodes in the verse · remove the pad · mute the lead · louder bass
   new melody · new idea for the bass · call it Night Drive
 Genres: """ + ", ".join(available_genres())
+
+
+
+# ---------------------------------------------------------------- usability phrases (feedback items 1-5, 7)
+EDIT_EXAMPLES = ["faster", "slower", "tempo 120", "transpose up 2", "make it minor", "sadder", "happier", "make it jazz",
+                 "make it shorter", "make it longer", "make it 30 seconds", "more energy at the end", "loop it", "fade out",
+                 "more intense", "more drums", "fewer drums", "fewer instruments", "add strings", "add violin", "add an arp",
+                 "remove the pad", "busier bass", "simpler chords", "jazzier chords", "add a bridge", "swing it"]
+EDIT_WORDS = {w for e in EDIT_EXAMPLES for w in re.findall(r"[a-z]{4,}", e)} | {
+    "faster", "slower", "louder", "quieter", "softer", "shorter", "longer", "busier", "sparser", "drums", "intense",
+    "energy", "transpose", "reharmonize", "instruments", "violin", "cello", "piano", "guitar", "strings", "remove", "minor",
+    "major", "darker", "brighter", "happier", "sadder", "chorus", "verse", "bridge", "intro", "outro", "melody", "chords"}
+
+# phrases that would otherwise be grabbed by a broader rule in _clause_ops ("make it 30 seconds" is not a genre)
+_USABILITY_FIRST = re.compile(r"\b(seconds?|secs?|minutes?|mins?|shorter|longer|loop|fade|intense|violin|cello|viola)\b"
+                              r"|\b(?:more|fewer|less)\s+(?:drums|percussion|instruments|tracks)\b|^\s*(?:make it\s+)?(?:sad|happy|chill|calm|dark|upbeat|energetic|epic)\s*$")
+
+_CORE_ROLES = ("drums", "bass", "chords", "lead")
+
+
+def _not_understood(clauses: list[str]) -> str:
+    import difflib
+    sugg = []
+    for c in clauses:
+        sugg += difflib.get_close_matches(c.lower(), EDIT_EXAMPLES, n=3, cutoff=0.45)
+    sugg = list(dict.fromkeys(sugg))[:3] or ["faster", "more drums", "make it 30 seconds"]
+    return (f"could not understand: {clauses}. Did you mean: " + ", ".join(repr(x) for x in sugg)
+            + "? (ops reference: README 'Edit phrases'; or configure an LLM provider for free-form edits)")
+
+
+def _sec_names(spec: dict) -> list[str]:
+    return list(dict.fromkeys(spec["arrangement"]))
+
+
+def _resize_to(spec: dict, target_bars: int) -> list[dict]:
+    cur = _total(spec)
+    f = max(0.05, target_bars / max(1, cur))
+    ops = []
+    for sec in spec["sections"]:
+        if sec["name"] not in spec["arrangement"]:
+            continue
+        nb = max(1, min(64, int(round(sec["bars"] * f))))
+        if nb >= 4 and nb % 2:
+            nb += 1 if sec["bars"] * f > nb else -1
+        if nb != sec["bars"]:
+            ops.append({"op": "set_section", "section": sec["name"], "bars": nb})
+    return ops
+
+
+def _end_section(spec: dict) -> str:
+    arr = spec["arrangement"]
+    for name in reversed(arr):
+        if not re.search(r"outro|end|tag", name, re.I) or len(arr) == 1:
+            return name
+    return arr[-1]
+
+
+def _drum_tracks(spec: dict) -> list[dict]:
+    return [t for t in spec["tracks"] if t["role"] in ("drums", "perc", "percussion") or t["generator"]["type"] == "drums"]
+
+
+def _usability_ops(spec: dict, c: str) -> list[dict] | None:
+    c = c.strip()
+    # length: "make it 30 seconds", "2 minutes long", "shorter", "much longer"
+    secs = parse_seconds(c)
+    if secs and re.search(r"\b(make|long|length|last|seconds?|secs?|minutes?|mins?)\b", c):
+        tgt = bars_for_seconds(secs, float(spec["tempo"]), spec.get("time_signature", [4, 4])[0])
+        return _resize_to(spec, tgt) or None
+    m = re.search(r"\b(a lot |much |a bit |slightly |a little )?(shorter|longer)\b", c)
+    if m and not re.search(r"\b(notes?|chords?)\b", c):
+        f = {"a lot ": .5, "much ": .5, "a bit ": .8, "slightly ": .85, "a little ": .8}.get(m.group(1) or "", .65)
+        f = f if m.group(2) == "shorter" else 1 / f
+        sec = _section_ref(spec, c.split(m.group(2))[0].split()[-1]) if c.split(m.group(2))[0].split() else None
+        if sec:
+            b = next(x["bars"] for x in spec["sections"] if x["name"] == sec)
+            return [{"op": "set_section", "section": sec, "bars": max(1, min(64, int(round(b * f))))}]
+        return _resize_to(spec, max(2, int(round(_total(spec) * f)))) or None
+    # build at the end
+    if re.search(r"\b(more energy|louder|bigger|build|climax|lift|stronger)\b.*\b(end|ending|finish|last)\b", c):
+        sec = _end_section(spec)
+        e = next(x.get("energy", .5) for x in spec["sections"] if x["name"] == sec)
+        return [{"op": "set_section", "section": sec, "energy": round(min(1.0, e + .25), 2)},
+                {"op": "set_density", "section": sec, "delta": 0.15}]
+    # loopable: drop intro/outro so the body repeats seamlessly
+    if re.search(r"\b(loop(?:able)?|seamless(?:ly)?|repeat forever)\b", c):
+        keep = [a for a in spec["arrangement"] if not re.search(r"intro|outro|ending|tag", a, re.I)]
+        if keep and keep != spec["arrangement"]:
+            return [{"op": "set_arrangement", "order": keep}]
+        return [{"op": "set_title", "title": spec.get("title", "Loop")}] if keep else None
+    # fade out: last section quiet and sparse (MIDI has no master fader in the spec; this lowers energy/density)
+    if re.search(r"\bfade(?:s|d)?\s*(?:it\s*)?out\b|\bfade at the end\b", c):
+        sec = spec["arrangement"][-1]
+        return [{"op": "set_section", "section": sec, "energy": 0.15}, {"op": "set_density", "section": sec, "delta": -0.3}]
+    if re.search(r"\b(more intense|intense|harder|heavier|punchier|more aggressive|more epic|epic)\b", c):
+        return [{"op": "set_section", "section": n,
+                 "energy": round(min(1.0, next(x.get("energy", .5) for x in spec["sections"] if x["name"] == n) + .15), 2)}
+                for n in _sec_names(spec)] + [{"op": "set_density", "delta": 0.1}]
+    m = re.search(r"\b(more|busier|fewer|less|sparser|quieter|softer|louder)\s+(drums|percussion|beat)\b", c)
+    if m:
+        dr = _drum_tracks(spec)
+        up = m.group(1) in ("more", "busier", "louder")
+        if not dr:
+            return [{"op": "add_instrument", "role": "drums"}] if up else None
+        if m.group(1) in ("quieter", "softer", "louder"):
+            return [{"op": "set_track", "track": t["name"], "volume": max(0, min(127, t.get("volume", 100) + (15 if up else -20)))}
+                    for t in dr]
+        return [{"op": "set_density", "track": t["name"], "delta": 0.2 if up else -0.2} for t in dr]
+    if re.search(r"\b(fewer|less) (instruments|tracks|parts)\b|\bstrip (?:it )?(?:back|down)\b|\b(sparser|more minimal|thinner)\b$", c):
+        extra = [t for t in spec["tracks"] if t["role"] not in _CORE_ROLES]
+        n = max(1, len(extra) // 2)
+        if extra:
+            return [{"op": "remove_track", "track": t["name"]} for t in extra[-n:]]
+        return [{"op": "set_density", "delta": -0.15}]
+    if re.search(r"\b(more instruments|fuller|thicker)\b", c):
+        roles = {t["role"] for t in spec["tracks"]}
+        for r, inst in (("pad", "warm_pad"), ("arp", "pluck"), ("counter", "strings")):
+            if r not in roles:
+                return [{"op": "add_instrument", "role": r, "instrument": inst}]
+        return [{"op": "set_density", "delta": 0.1}]
+    m = re.search(r"\b(?:add|with|bring in)\s+(?:a |an |some )?(violin|viola|cello)s?\b", c)
+    if m:
+        name, prog, role = {"violin": ("Violin", 40, "lead"), "viola": ("Viola", 41, "other"),
+                            "cello": ("Cello", 42, "other")}[m.group(1)]
+        if any(t["name"].lower() == name.lower() for t in spec["tracks"]):
+            raise NotUnderstood(f"there is already a {name} track — try 'louder {name.lower()}' or 'busier {name.lower()}'")
+        if role == "lead" and any(t["role"] == "lead" for t in spec["tracks"]):
+            role = "other"
+        rng = {"Violin": [62, 86], "Viola": [53, 74], "Cello": [36, 62]}[name]
+        return [{"op": "add_instrument", "role": role, "instrument": "strings", "name": name},
+                {"op": "set_track", "track": name, "program": prog},
+                {"op": "set_generator", "track": name, "params": {"range": rng}}]
+    # bare mood / genre words: "sad", "make it chill", "jazz"
+    m = re.fullmatch(r"(?:make it|more|a bit|go|now)?\s*(?:more\s+)?([a-z][a-z &'-]*?)\s*(?:please)?", c)
+    if m:
+        w = m.group(1).strip()
+        if re.fullmatch(r"sad|melancholic|dark|moody|gloomy|spooky|tense|mysterious", w):
+            return [{"op": "set_key", "key": spec["key"], "mode": "minor"}] if spec["mode"] in ("major", "lydian", "mixolydian") \
+                else [{"op": "reharmonize", "technique": "borrowed"}]
+        if re.fullmatch(r"happy|uplifting|bright|cheerful|hopeful|sunny", w):
+            return [{"op": "set_key", "key": spec["key"], "mode": "major"}] if spec["mode"] != "major" \
+                else [{"op": "change_tempo", "delta": 6}]
+        if re.fullmatch(r"chill|calm|relaxed|mellow|laid.?back|gentle|soft|peaceful", w):
+            return [{"op": "change_tempo", "delta": -10}, {"op": "set_density", "delta": -0.15}]
+        if re.fullmatch(r"upbeat|energetic|driving|hype|exciting|lively", w):
+            return [{"op": "change_tempo", "delta": 10}, {"op": "set_density", "delta": 0.1}]
+        if len(w.split()) <= 3:
+            g = detect_genre(w)
+            if g:
+                return [{"op": "apply_genre", "genre": g, "keep_harmony": False}]
+    return None
+
+
+def _check_adds(spec: dict, ops: list[dict]) -> list[dict]:
+    """'add drums' when there are drums already -> helpful message; new tracks are named after their instrument."""
+    from .spec import INSTRUMENTS
+    out = []
+    for op in ops:
+        if op.get("op") == "add_instrument":
+            op = dict(op)
+            same = [t for t in spec["tracks"] if t["role"] == op["role"]]
+            inst = (op.get("instrument") or "").lower().replace(" ", "_")
+            if same and (not inst or any(t.get("program") == INSTRUMENTS.get(inst) for t in same)):
+                t = same[0]
+                hint = {"drums": "busier drums", "bass": "busier bass", "lead": "reseed the melody",
+                        "chords": "jazzier chords"}.get(op["role"], f"busier {op['role']}")
+                raise NotUnderstood(f"there is already a {op['role']} track ({t['name']}) — try '{hint}', "
+                                    f"'louder {t['name'].lower()}', or 'replace the {op['role']} with <instrument>'")
+            if inst and not op.get("name"):
+                op["name"] = inst.replace("_", " ").title()
+        out.append(op)
+    return out

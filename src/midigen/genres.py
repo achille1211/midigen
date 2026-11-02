@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import os
 import json
 import random
 import re
@@ -391,11 +392,20 @@ MAX_BARS = 256
 def build_spec(genre: str = "pop", key: str | None = None, mode: str | None = None, tempo: float | None = None,
                bars: int | None = None, seed: int = 1, roles: list[str] | None = None,
                title: str | None = None, exclude_roles: list[str] | None = None,
-               learn: bool | None = None) -> dict:
+               learn: bool | None = None, ml=None) -> dict:
     """Build a complete song spec from a genre profile using the theory engine.
 
     learn: apply the genre's learned policy (see midigen.learn). None = on unless MIDIGEN_LEARN=0;
-    with no learned data the output is identical to learn=False."""
+    with no learned data the output is identical to learn=False.
+
+    ml (opt-in): True, an options string such as "reward,progression,n=8" or a dict enables trained artifacts
+    from midigen.ml (best-of-N reranking, learned progressions). None reads MIDIGEN_ML (off when unset);
+    without trained artifacts the plain spec is returned."""
+    if ml or (ml is None and os.environ.get("MIDIGEN_ML", "").strip().lower() not in ("", "0", "false", "no", "off")):
+        from .ml.hooks import apply_ml
+        return apply_ml(dict(genre=genre, key=key, mode=mode, tempo=tempo, bars=bars, seed=seed, roles=roles,
+                             title=title, exclude_roles=exclude_roles, learn=learn),
+                        ml if ml is not None else os.environ.get("MIDIGEN_ML"))
     g = get_genre(genre)
     if bars is not None and not 1 <= int(bars) <= MAX_BARS:
         raise ValueError(f"bars must be between 1 and {MAX_BARS} (got {bars})")

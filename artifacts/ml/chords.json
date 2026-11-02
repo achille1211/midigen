@@ -1,0 +1,121 @@
+{
+  "kind": "chords",
+  "model": "Witten-Bell interpolated n-gram",
+  "chain": [
+    [
+      "g",
+      "m",
+      "s",
+      "p2",
+      "p1"
+    ],
+    [
+      "g",
+      "m",
+      "p2",
+      "p1"
+    ],
+    [
+      "g",
+      "m",
+      "p1"
+    ],
+    [
+      "m",
+      "p2",
+      "p1"
+    ],
+    [
+      "m",
+      "p1"
+    ],
+    [
+      "g",
+      "m"
+    ],
+    [
+      "m"
+    ],
+    []
+  ],
+  "vocab": 136,
+  "train_sequences": {
+    "synthetic": 18561,
+    "knowledge": 992
+  },
+  "knowledge_weight": 5.0,
+  "train_tokens": 102040,
+  "eval": {
+    "synthetic_val": {
+      "model": {
+        "tokens": 12960,
+        "nll": 0.4905,
+        "perplexity": 1.633,
+        "top1_acc": 0.8222
+      },
+      "baseline_unigram": {
+        "tokens": 12960,
+        "nll": 3.6731,
+        "perplexity": 39.374,
+        "top1_acc": 0.1806
+      },
+      "baseline_mode_bigram": {
+        "tokens": 12960,
+        "nll": 1.2259,
+        "perplexity": 3.407,
+        "top1_acc": 0.5607
+      },
+      "baseline_uniform_perplexity": 137
+    },
+    "synthetic_test": {
+      "model": {
+        "tokens": 11730,
+        "nll": 0.4362,
+        "perplexity": 1.547,
+        "top1_acc": 0.842
+      },
+      "baseline_unigram": {
+        "tokens": 11730,
+        "nll": 3.5774,
+        "perplexity": 35.779,
+        "top1_acc": 0.1877
+      },
+      "baseline_mode_bigram": {
+        "tokens": 11730,
+        "nll": 1.2086,
+        "perplexity": 3.349,
+        "top1_acc": 0.5419
+      },
+      "baseline_uniform_perplexity": 137
+    },
+    "knowledge_test": {
+      "model": {
+        "tokens": 583,
+        "nll": 4.9295,
+        "perplexity": 138.311,
+        "top1_acc": 0.4151
+      },
+      "baseline_unigram": {
+        "tokens": 583,
+        "nll": 3.5618,
+        "perplexity": 35.227,
+        "top1_acc": 0.2093
+      },
+      "baseline_mode_bigram": {
+        "tokens": 583,
+        "nll": 3.1268,
+        "perplexity": 22.8,
+        "top1_acc": 0.3533
+      },
+      "baseline_uniform_perplexity": 137
+    }
+  },
+  "sample_validity": {
+    "n": 300,
+    "valid": 300
+  },
+  "artifact": "/workspace/work-data/artifacts/ml/chords.json.gz",
+  "bytes": 103683,
+  "wall_seconds": 37.84,
+  "knowledge_provenance": "midigen-songwriting harmony.json/genres.json/song_analyses.json (songwriting coach agent, own-words analysis)"
+}

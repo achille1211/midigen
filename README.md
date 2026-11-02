@@ -16,13 +16,32 @@ prompt / instruction ──► LLM or offline parser ──► spec JSON or edit
                                                      .mid (one track per instrument, drums on ch 10) · .png piano roll
 ```
 
-## Install
+## Quick start (no setup needed)
+
+1. Download midigen (on GitHub: green **Code** button, then **Download ZIP**) and unzip it.
+2. You need Python 3.10 or newer. Check with `python3 --version` (Windows: `py --version`); if it's missing or older,
+   get it from [python.org/downloads](https://www.python.org/downloads/) (Windows: tick "Add python.exe to PATH").
+3. Run the installer from the unzipped folder:
+   - **Windows:** double-click `install.bat`
+   - **macOS / Linux:** open a terminal in the folder and run `./install.sh` (or `python3 install.py`)
+
+   It creates a private `.venv` folder (nothing system-wide changes), installs midigen, writes a test song
+   `demo.mid` and checks the setup. Add `--audio` for WAV rendering or `--stream` for live MIDI out.
+4. Use it (the installer prints the exact paths):
+   - `.venv/bin/midigen ui` (Windows: `.venv\Scripts\midigen ui`) opens the bundled web UI (`ui/`) at http://localhost:8766/
+     (the REST service, if installed, uses 8765)
+   - `.venv/bin/midigen new "chill lofi beat in D minor" -o mysong` writes `mysong.mid`, which any DAW opens
+   - `.venv/bin/midigen doctor` explains, in plain English, anything that isn't working
+
+The installer has been tested on Linux only so far; macOS and Windows should work but are untested.
+
+## Install (developers)
 
 ```bash
 cd midigen
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e ".[preview,mcp,dev]"      # core needs only mido + jsonschema
-pytest -q                                # 210 tests incl. integrations (pack tests skip if the pack folders are absent)
+pytest -q                                # 330 tests incl. integrations (audio tests need numpy, scipy and soundfile; ML tests need scikit-learn, see docs/ML.md) (pack tests skip if the pack folders are absent)
 python demo/make_demo.py                 # offline demo songs in demo/
 ```
 
@@ -56,6 +75,28 @@ Offline phrases the parser understands include: *faster/slower, 120 bpm, in E mi
 bass, remove/mute/solo the X, louder/quieter, busier/sparser (in the chorus), more/less swing, humanize, jazzier/richer chords,
 secondary dominants, borrowed chords, simpler chords, chords to Am F C G in the chorus, end the chorus with a plagal cadence,
 extend the chorus by 4 bars, repeat the chorus, new melody, make it house*, and others (see `midigen chat` then `/help`).
+**Plain-language extras.** Prompts print how they were read, for example
+`Interpreted as: calm ambient · E major · 55 BPM · 34 bars ≈ 2:28 · solo piano, no drums`, along with any typo fixes ("chil → chill")
+and words that weren't understood. Moods and use-cases (sad, tense, boss fight, meditation, 80s driving, jingle, study…) pick a genre,
+mode and tempo. Solo instruments (piano, violin, cello, guitar, harp, flute…) give a stripped-back arrangement. "30 seconds" or "2 minutes" sets
+the length (also `--seconds N`). With no length given, defaults longer than 5 minutes (slow ambient) are cut to about 2½ minutes.
+Edits also accept *make it shorter/longer, make it 30 seconds, more energy at the end, loop it (drops the intro and outro), fade out
+(lowers the last section's energy and density; this is not a volume fade), more intense, more/fewer drums, fewer instruments, add violin/cello,
+and bare moods or genres (sad, chill, upbeat, jazz)*. A typo gets one retry ("fastr" works). If a phrase still isn't understood,
+the error suggests close matches. "add drums" when the song already has drums explains what to try instead. New tracks are named
+after their instrument.
+`new` without `-o` names the files from the title and never overwrites (`-1`, `-2`…); with `-o` it says when it overwrites. Editing
+in place keeps `<name>.prev.json`. Output is one summary line (critic minor notes behind `-v`). Missing files, non-JSON or binary
+files and broken JSON give a one-line error instead of a traceback.
+
+**Linked tracks.** An edit to one part can suggest matching changes to the parts that depend on it (drums → bass/comping,
+tempo → lead density, chords → bass/pad, swing → everything that grooves). Suggestions are checked with the critic and only kept
+if the score does not drop; each says which track leads, which follows, and the score before and after.
+`midigen edit song.json "busier drums" --suggest` lists them without applying; `--auto-follow` applies the top two.
+In `midigen chat`, `/suggest` lists suggestions for the last edit and `/follow N` (or `/follow all`) applies them.
+From Python: `midigen.suggest_followups(spec, edit)` or `Composer.edit(spec, text, auto_follow=True)` (the result's `.followups`).
+The MCP server has a `suggest_followups` tool. The REST service does not expose this yet.
+
 Words like "chorus", "drop" and "verse" resolve to the matching section, or to the highest/lowest-energy section if the form uses other names.
 
 ## LLM provider (optional)
@@ -164,8 +205,10 @@ record, rate, thumbs, keep, reject, feedback, edit, learn_midi, status, preferen
 - `build_spec` Thompson-samples arms only once a genre has learned data. The sampling is seeded, so the output is
   deterministic for a given weights state. With an empty store the output is unchanged, and recording alone never changes weights.
 - Explicit arguments (tempo, roles) are never overridden.
-- Notes are mapped to dimensions ("busier", "more swing", "darker", "boring bass"). Edits, including hand edits to a song's .json
-  that are detected on the next `rate`, count as preference signals.
+- Notes are mapped to dimensions ("busier", "more swing", "darker", "boring bass"). Hand edits to a song's .json that are detected
+  on the next `rate` count as preference signals. Routine `edit`/chat edits are logged but do **not** move the policy by default
+  (a tester's "faster, faster" was drifting everyone's tempo); set `MIDIGEN_LEARN_EDITS=1` or pass `record_edit(..., learn_policy=True)`
+  to let them. Under pytest (or `MIDIGEN_TEST_MODE=1`) without an explicit `MIDIGEN_DATA_DIR`, a throwaway temp store is used.
 - The LLM Composer gets the user's top-rated songs and stated preferences as few-shot "user memory" in its prompt.
 
 **The critic is a proxy; your ratings are the ground truth.** `train` only optimises the built-in critic's score, so it can

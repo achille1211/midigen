@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>midigen · MIDI sketchpad</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 rx=%224%22 fill=%22%237c5cff%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">♪</span> midigen <span class="sub">multitrack MIDI sketchpad</span></div>
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+</header>
+
+<main class="layout">
+  <aside class="panel controls">
+    <form id="genForm" autocomplete="off">
+      <label class="field prompt-field">
+        <span>Describe the music you want</span>
+        <textarea id="prompt" rows="3" maxlength="300" placeholder="e.g. chill coffee shop music, 30 seconds"></textarea>
+      </label>
+      <p class="hint-line">Mention a mood, a use or a style, and optionally a length ("15 seconds", "2 minutes").</p>
+      <div id="presets" class="presets" role="group" aria-label="Presets"></div>
+      <button type="submit" id="promptBtn" class="btn primary big">Make music</button>
+
+      <details id="advanced" class="advanced">
+      <summary>Advanced: choose genre, key, tempo and length yourself</summary>
+      <label class="field">
+        <span>Genre</span>
+        <select id="genre" required></select>
+      </label>
+      <p id="genreDesc" class="desc"></p>
+
+      <div class="row2">
+        <label class="field">
+          <span>Key</span>
+          <select id="key"></select>
+        </label>
+        <label class="field">
+          <span>Mode</span>
+          <select id="mode"></select>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Tempo <em id="tempoHint" class="hint"></em></span>
+        <div class="slider-row">
+          <input type="range" id="tempoRange" min="60" max="180" step="1">
+          <input type="number" id="tempo" min="20" max="300" step="1" required>
+          <span class="unit">BPM</span>
+        </div>
+      </label>
+
+      <label class="field">
+        <span>Length <em id="barsHint" class="hint">2–32 bars</em></span>
+        <div class="slider-row">
+          <input type="range" id="barsRange" min="2" max="32" step="1">
+          <input type="number" id="bars" min="2" max="32" step="1" required>
+          <span class="unit">bars</span>
+        </div>
+      </label>
+
+      <label class="field">
+        <span>Seed <em class="hint">blank = random</em></span>
+        <div class="slider-row">
+          <input type="number" id="seed" min="0" step="1" placeholder="random">
+          <button type="button" id="randSeed" class="btn ghost" title="Randomize seed">🎲 Random</button>
+        </div>
+      </label>
+
+      <button type="submit" id="genBtn" class="btn primary big">Generate with these settings</button>
+      </details>
+      <p id="usage" class="usage"></p>
+      <p class="tip">Tip: <kbd>Space</kbd> play/pause · <kbd>Enter</kbd> in the box makes music · click the roll to seek</p>
+    </form>
+
+    <section id="critique" class="critique hidden">
+      <h3>Critic <span id="score" class="score"></span></h3>
+      <ul id="findings"></ul>
+    </section>
+  </aside>
+
+  <section class="panel stage">
+    <div class="transport">
+      <button id="playBtn" class="btn tbtn" disabled title="Play / pause (Space)">▶</button>
+      <button id="stopBtn" class="btn tbtn" disabled title="Stop">■</button>
+      <label class="loop"><input type="checkbox" id="loop"> Loop</label>
+      <div class="time"><span id="pos">1.1</span><small id="clock">0:00 / 0:00</small></div>
+      <label class="vol" title="Master volume">🔊 <input type="range" id="master" min="0" max="1" step="0.01" value="0.8"></label>
+      <label class="vol" title="Zoom">🔍 <input type="range" id="zoom" min="0" max="1" step="0.01" value="0"></label>
+      <div class="spacer"></div>
+      <a id="dlBtn" class="btn primary disabled" href="#" download aria-disabled="true">⬇ Download .mid</a>
+    </div>
+    <div id="takesBar" class="takesbar hidden">
+      <span class="tb-label">Takes</span>
+      <div id="takeTabs" class="tabs" role="tablist" aria-label="Takes"></div>
+      <button id="newTakeBtn" class="btn mid" title="Generate the whole song again with a new seed and the same settings">＋ New take</button>
+      <span id="takeCount" class="takecount"></span>
+      <div class="spacer"></div>
+      <span class="edit-hint">🔒 lock sections you like, then</span>
+      <button id="regenBtn" class="btn mid accent" title="Re-roll every unlocked section; locked sections keep their exact notes. Makes a new take.">⟳ Regenerate unlocked</button>
+      <button id="compareBtn" class="btn mid ghost" aria-pressed="false" title="Compare two takes">⇄ Compare</button>
+    </div>
+    <div id="comparePanel" class="compare hidden">
+      <div class="cmp-head">
+        <label>A <select id="cmpA"></select></label>
+        <label>B <select id="cmpB"></select></label>
+        <div class="ab" role="group" aria-label="Listen to">
+          <button id="abA" class="btn mini ab-btn" title="Show and play take A">Hear A</button>
+          <button id="abB" class="btn mini ab-btn" title="Show and play take B (keeps the playhead)">Hear B</button>
+        </div>
+        <span id="cmpScore" class="cmp-score"></span>
+        <div class="spacer"></div>
+        <button id="cmpClose" class="btn mini ghost" title="Close compare">✕</button>
+      </div>
+      <div class="cmp-rolls">
+        <div class="cmp-row"><span class="cmp-tag">A</span><canvas id="cmpCanvasA"></canvas></div>
+        <div class="cmp-row"><span class="cmp-tag">B</span><canvas id="cmpCanvasB"></canvas></div>
+      </div>
+      <div id="cmpSections" class="cmp-sections"></div>
+    </div>
+    <div id="interp" class="interp hidden" aria-live="polite"></div>
+    <div id="songInfo" class="songinfo"></div>
+    <div id="rollWrap" class="rollwrap">
+      <div id="empty" class="empty">
+        <div class="empty-icon">🎹</div>
+        <p>Describe the music you want (or pick a preset) and press <b>Make music</b> to build a multitrack sketch.</p>
+        <ol class="steps"><li>Generate</li><li>▶ Listen</li><li>⬇ Download the .mid</li></ol>
+        <p class="sub2">Then lock the sections you like and regenerate the rest. Each try is saved as a take.</p>
+      </div>
+      <div id="roll" class="roll hidden"></div>
+    </div>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

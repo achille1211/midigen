@@ -1,0 +1,1999 @@
+{
+ "summary": {
+  "plain": {
+   "n": 46,
+   "an_bass_root_on_change_pct": 60.9719,
+   "an_in_key_pct": 98.0812,
+   "an_kick_with_bass_pct": 58.6031,
+   "an_melody_repeated_bar_pct": 26.9812,
+   "an_melody_strong_beat_chord_tone_pct": 79.7406,
+   "an_strong_clash_pct": 0.5781,
+   "critic": 93.3913,
+   "in_key": 0.9721,
+   "notes": 4993.2826,
+   "seed": 10001.5,
+   "midi_valid_pct": 100.0,
+   "sec_per_song": 0.0037
+  },
+  "random": {
+   "n": 46,
+   "critic": 92.8043,
+   "seed": 10001.5
+  },
+  "ml": {
+   "n": 46,
+   "an_bass_root_on_change_pct": 55.5156,
+   "an_in_key_pct": 98.1063,
+   "an_kick_with_bass_pct": 58.7844,
+   "an_melody_repeated_bar_pct": 31.3844,
+   "an_melody_strong_beat_chord_tone_pct": 79.425,
+   "an_strong_clash_pct": 0.4594,
+   "critic": 92.8261,
+   "in_key": 0.971,
+   "notes": 4973.3913,
+   "seed": 10001.5,
+   "midi_valid_pct": 100.0,
+   "sec_per_song": 5.1834
+  },
+  "critic": {
+   "n": 46,
+   "an_bass_root_on_change_pct": 57.1156,
+   "an_in_key_pct": 98.4594,
+   "an_kick_with_bass_pct": 58.6125,
+   "an_melody_repeated_bar_pct": 27.6313,
+   "an_melody_strong_beat_chord_tone_pct": 77.9594,
+   "an_strong_clash_pct": 0.4,
+   "critic": 97.1087,
+   "in_key": 0.979,
+   "notes": 4921.1087,
+   "seed": 10001.5,
+   "midi_valid_pct": 100.0,
+   "sec_per_song": 0.6154
+  },
+  "ml_pick_origin": {
+   "plain": 25,
+   "ngram-progression": 21
+  },
+  "ml_minus_plain_critic": {
+   "mean": -0.565,
+   "wins": 11,
+   "ties": 20,
+   "losses": 15
+  },
+  "setup": {
+   "genres": 23,
+   "seeds": [
+    10001,
+    10002
+   ],
+   "n": 4,
+   "artifacts": "/workspace/work-data/artifacts/ml"
+  },
+  "review_md": {
+   "songs": 28,
+   "spearman_reward_vs_review": -0.3153,
+   "spearman_critic_vs_review": -0.3235,
+   "note": "28 hand-scored songs from midigen-critic/REVIEW.md (older midigen version); sanity check only"
+  }
+ },
+ "rows": {
+  "plain": [
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 894,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.6,
+    "an_kick_with_bass_pct": 57.7,
+    "an_bass_root_on_change_pct": 22.2,
+    "an_melody_strong_beat_chord_tone_pct": 72.5,
+    "an_melody_repeated_bar_pct": 66.7,
+    "genre": "ambient",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 949,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 1.4,
+    "an_kick_with_bass_pct": 50.0,
+    "an_bass_root_on_change_pct": 22.2,
+    "an_melody_strong_beat_chord_tone_pct": 75.0,
+    "an_melody_repeated_bar_pct": 52.1,
+    "genre": "ambient",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.980780263912794,
+    "midi_ok": true,
+    "notes": 12431,
+    "genre": "bigband",
+    "seed": 10001
+   },
+   {
+    "critic": 84.0,
+    "in_key": 0.9543132246020829,
+    "midi_ok": true,
+    "notes": 12142,
+    "genre": "bigband",
+    "seed": 10002
+   },
+   {
+    "critic": 82.0,
+    "in_key": 0.905790838375108,
+    "midi_ok": true,
+    "notes": 4733,
+    "an_in_key_pct": 90.6,
+    "an_strong_clash_pct": 0.5,
+    "an_kick_with_bass_pct": 75.0,
+    "an_bass_root_on_change_pct": 69.6,
+    "an_melody_strong_beat_chord_tone_pct": 60.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "bossa_nova",
+    "seed": 10001
+   },
+   {
+    "critic": 88.0,
+    "in_key": 0.8589920132194988,
+    "midi_ok": true,
+    "notes": 4893,
+    "an_in_key_pct": 85.9,
+    "an_strong_clash_pct": 0.4,
+    "an_kick_with_bass_pct": 75.0,
+    "an_bass_root_on_change_pct": 63.0,
+    "an_melody_strong_beat_chord_tone_pct": 80.4,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "bossa_nova",
+    "seed": 10002
+   },
+   {
+    "critic": 75.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 2505,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 1.2,
+    "an_kick_with_bass_pct": 41.9,
+    "an_bass_root_on_change_pct": 17.5,
+    "an_melody_strong_beat_chord_tone_pct": 53.6,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "cinematic",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 2435,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.1,
+    "an_kick_with_bass_pct": 41.9,
+    "an_bass_root_on_change_pct": 17.5,
+    "an_melody_strong_beat_chord_tone_pct": 59.0,
+    "an_melody_repeated_bar_pct": 16.1,
+    "genre": "cinematic",
+    "seed": 10002
+   },
+   {
+    "critic": 83.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6250,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 39.2,
+    "an_bass_root_on_change_pct": 19.0,
+    "an_melody_strong_beat_chord_tone_pct": 64.0,
+    "an_melody_repeated_bar_pct": 50.0,
+    "genre": "drum_and_bass",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6002,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 39.2,
+    "an_bass_root_on_change_pct": 9.5,
+    "an_melody_strong_beat_chord_tone_pct": 69.6,
+    "an_melody_repeated_bar_pct": 50.0,
+    "genre": "drum_and_bass",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4015,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 66.7,
+    "an_melody_strong_beat_chord_tone_pct": 87.4,
+    "an_melody_repeated_bar_pct": 73.2,
+    "genre": "edm",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4019,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.1,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 66.7,
+    "an_melody_strong_beat_chord_tone_pct": 92.3,
+    "an_melody_repeated_bar_pct": 62.5,
+    "genre": "edm",
+    "seed": 10002
+   },
+   {
+    "critic": 96.0,
+    "in_key": 0.9976580796252927,
+    "midi_ok": true,
+    "notes": 2717,
+    "genre": "emo",
+    "seed": 10001
+   },
+   {
+    "critic": 89.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 2679,
+    "genre": "emo",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.9860174781523097,
+    "midi_ok": true,
+    "notes": 5492,
+    "an_in_key_pct": 98.6,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 53.4,
+    "an_bass_root_on_change_pct": 80.0,
+    "an_melody_strong_beat_chord_tone_pct": 72.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "funk",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.9861283131037899,
+    "midi_ok": true,
+    "notes": 5517,
+    "an_in_key_pct": 98.6,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 53.4,
+    "an_bass_root_on_change_pct": 73.3,
+    "an_melody_strong_beat_chord_tone_pct": 86.4,
+    "an_melody_repeated_bar_pct": 8.3,
+    "genre": "funk",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6007,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 2.6,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 47.1,
+    "an_melody_strong_beat_chord_tone_pct": 84.0,
+    "an_melody_repeated_bar_pct": 10.7,
+    "genre": "house",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6050,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 4.1,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 35.3,
+    "an_melody_strong_beat_chord_tone_pct": 92.3,
+    "an_melody_repeated_bar_pct": 23.2,
+    "genre": "house",
+    "seed": 10002
+   },
+   {
+    "critic": 95.0,
+    "in_key": 0.9328560849173043,
+    "midi_ok": true,
+    "notes": 6151,
+    "an_in_key_pct": 93.3,
+    "an_strong_clash_pct": 0.7,
+    "an_kick_with_bass_pct": 95.2,
+    "an_bass_root_on_change_pct": 46.7,
+    "an_melody_strong_beat_chord_tone_pct": 75.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "jazz",
+    "seed": 10001
+   },
+   {
+    "critic": 96.0,
+    "in_key": 0.9399770904925544,
+    "midi_ok": true,
+    "notes": 6467,
+    "an_in_key_pct": 94.0,
+    "an_strong_clash_pct": 0.9,
+    "an_kick_with_bass_pct": 96.5,
+    "an_bass_root_on_change_pct": 60.5,
+    "an_melody_strong_beat_chord_tone_pct": 77.6,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "jazz",
+    "seed": 10002
+   },
+   {
+    "critic": 95.0,
+    "in_key": 0.9627844195912071,
+    "midi_ok": true,
+    "notes": 7278,
+    "genre": "jazz_combo",
+    "seed": 10001
+   },
+   {
+    "critic": 96.0,
+    "in_key": 0.9071405699647774,
+    "midi_ok": true,
+    "notes": 8336,
+    "genre": "jazz_combo",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.9583333333333334,
+    "midi_ok": true,
+    "notes": 1154,
+    "an_in_key_pct": 95.8,
+    "an_strong_clash_pct": 0.6,
+    "an_kick_with_bass_pct": 70.7,
+    "an_bass_root_on_change_pct": 72.7,
+    "an_melody_strong_beat_chord_tone_pct": 100.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "lofi_hiphop",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.967948717948718,
+    "midi_ok": true,
+    "notes": 1157,
+    "an_in_key_pct": 96.8,
+    "an_strong_clash_pct": 0.7,
+    "an_kick_with_bass_pct": 70.7,
+    "an_bass_root_on_change_pct": 72.7,
+    "an_melody_strong_beat_chord_tone_pct": 100.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "lofi_hiphop",
+    "seed": 10002
+   },
+   {
+    "critic": 91.0,
+    "in_key": 0.8628795298726738,
+    "midi_ok": true,
+    "notes": 8412,
+    "genre": "metal",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.9209447269148762,
+    "midi_ok": true,
+    "notes": 8368,
+    "genre": "metal",
+    "seed": 10002
+   },
+   {
+    "critic": 87.0,
+    "in_key": 0.934119278779473,
+    "midi_ok": true,
+    "notes": 2771,
+    "an_in_key_pct": 93.4,
+    "an_strong_clash_pct": 0.3,
+    "an_kick_with_bass_pct": 52.3,
+    "an_bass_root_on_change_pct": 75.0,
+    "an_melody_strong_beat_chord_tone_pct": 66.0,
+    "an_melody_repeated_bar_pct": 3.6,
+    "genre": "neo_soul",
+    "seed": 10001
+   },
+   {
+    "critic": 86.0,
+    "in_key": 0.9281271596406357,
+    "midi_ok": true,
+    "notes": 2787,
+    "an_in_key_pct": 92.8,
+    "an_strong_clash_pct": 1.6,
+    "an_kick_with_bass_pct": 53.1,
+    "an_bass_root_on_change_pct": 75.0,
+    "an_melody_strong_beat_chord_tone_pct": 90.2,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "neo_soul",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4194,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.9,
+    "an_kick_with_bass_pct": 93.4,
+    "an_bass_root_on_change_pct": 78.9,
+    "an_melody_strong_beat_chord_tone_pct": 85.3,
+    "an_melody_repeated_bar_pct": 8.3,
+    "genre": "pop",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4163,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.2,
+    "an_kick_with_bass_pct": 93.4,
+    "an_bass_root_on_change_pct": 78.9,
+    "an_melody_strong_beat_chord_tone_pct": 96.2,
+    "an_melody_repeated_bar_pct": 8.3,
+    "genre": "pop",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.9634340222575517,
+    "midi_ok": true,
+    "notes": 4298,
+    "genre": "pop_studio",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "in_key": 0.9603078169299312,
+    "midi_ok": true,
+    "notes": 4242,
+    "genre": "pop_studio",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4177,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 100.0,
+    "an_bass_root_on_change_pct": 89.5,
+    "an_melody_strong_beat_chord_tone_pct": 83.1,
+    "an_melody_repeated_bar_pct": 7.1,
+    "genre": "reggae",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4239,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.2,
+    "an_kick_with_bass_pct": 100.0,
+    "an_bass_root_on_change_pct": 89.5,
+    "an_melody_strong_beat_chord_tone_pct": 90.9,
+    "an_melody_repeated_bar_pct": 3.6,
+    "genre": "reggae",
+    "seed": 10002
+   },
+   {
+    "critic": 90.0,
+    "in_key": 0.9938739789964994,
+    "midi_ok": true,
+    "notes": 4840,
+    "an_in_key_pct": 99.4,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 85.5,
+    "an_bass_root_on_change_pct": 100.0,
+    "an_melody_strong_beat_chord_tone_pct": 82.9,
+    "an_melody_repeated_bar_pct": 6.7,
+    "genre": "rock",
+    "seed": 10001
+   },
+   {
+    "critic": 90.0,
+    "in_key": 0.9938953488372093,
+    "midi_ok": true,
+    "notes": 4842,
+    "an_in_key_pct": 99.4,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 85.5,
+    "an_bass_root_on_change_pct": 100.0,
+    "an_melody_strong_beat_chord_tone_pct": 78.8,
+    "an_melody_repeated_bar_pct": 13.3,
+    "genre": "rock",
+    "seed": 10002
+   },
+   {
+    "critic": 84.0,
+    "in_key": 0.997960372960373,
+    "midi_ok": true,
+    "notes": 8566,
+    "genre": "rock_band",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "in_key": 0.9981049562682216,
+    "midi_ok": true,
+    "notes": 8565,
+    "genre": "rock_band",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.8985126859142607,
+    "midi_ok": true,
+    "notes": 3076,
+    "genre": "screamo",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.9244288224956063,
+    "midi_ok": true,
+    "notes": 3069,
+    "genre": "screamo",
+    "seed": 10002
+   },
+   {
+    "critic": 97.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6266,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.3,
+    "an_kick_with_bass_pct": 95.0,
+    "an_bass_root_on_change_pct": 76.6,
+    "an_melody_strong_beat_chord_tone_pct": 92.8,
+    "an_melody_repeated_bar_pct": 82.8,
+    "genre": "synthwave",
+    "seed": 10001
+   },
+   {
+    "critic": 98.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6282,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.1,
+    "an_kick_with_bass_pct": 95.0,
+    "an_bass_root_on_change_pct": 81.2,
+    "an_melody_strong_beat_chord_tone_pct": 78.6,
+    "an_melody_repeated_bar_pct": 84.4,
+    "genre": "synthwave",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4682,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 22.7,
+    "an_bass_root_on_change_pct": 41.2,
+    "an_melody_strong_beat_chord_tone_pct": 84.1,
+    "an_melody_repeated_bar_pct": 53.1,
+    "genre": "techno",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4721,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 24.0,
+    "an_bass_root_on_change_pct": 64.7,
+    "an_melody_strong_beat_chord_tone_pct": 71.2,
+    "an_melody_repeated_bar_pct": 43.8,
+    "genre": "techno",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 3400,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.5,
+    "an_kick_with_bass_pct": 57.8,
+    "an_bass_root_on_change_pct": 76.9,
+    "an_melody_strong_beat_chord_tone_pct": 71.1,
+    "an_melody_repeated_bar_pct": 67.3,
+    "genre": "trap",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 3458,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.5,
+    "an_kick_with_bass_pct": 57.8,
+    "an_bass_root_on_change_pct": 61.5,
+    "an_melody_strong_beat_chord_tone_pct": 79.4,
+    "an_melody_repeated_bar_pct": 68.3,
+    "genre": "trap",
+    "seed": 10002
+   }
+  ],
+  "random": [
+   {
+    "critic": 100.0,
+    "genre": "ambient",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "genre": "ambient",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "genre": "bigband",
+    "seed": 10001
+   },
+   {
+    "critic": 82.0,
+    "genre": "bigband",
+    "seed": 10002
+   },
+   {
+    "critic": 81.0,
+    "genre": "bossa_nova",
+    "seed": 10001
+   },
+   {
+    "critic": 90.0,
+    "genre": "bossa_nova",
+    "seed": 10002
+   },
+   {
+    "critic": 72.0,
+    "genre": "cinematic",
+    "seed": 10001
+   },
+   {
+    "critic": 74.0,
+    "genre": "cinematic",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "genre": "drum_and_bass",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "genre": "drum_and_bass",
+    "seed": 10002
+   },
+   {
+    "critic": 91.0,
+    "genre": "edm",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "genre": "edm",
+    "seed": 10002
+   },
+   {
+    "critic": 97.0,
+    "genre": "emo",
+    "seed": 10001
+   },
+   {
+    "critic": 95.0,
+    "genre": "emo",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "genre": "funk",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "genre": "funk",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "genre": "house",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "genre": "house",
+    "seed": 10002
+   },
+   {
+    "critic": 95.0,
+    "genre": "jazz",
+    "seed": 10001
+   },
+   {
+    "critic": 86.0,
+    "genre": "jazz",
+    "seed": 10002
+   },
+   {
+    "critic": 95.0,
+    "genre": "jazz_combo",
+    "seed": 10001
+   },
+   {
+    "critic": 97.0,
+    "genre": "jazz_combo",
+    "seed": 10002
+   },
+   {
+    "critic": 90.0,
+    "genre": "lofi_hiphop",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "genre": "lofi_hiphop",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "genre": "metal",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "genre": "metal",
+    "seed": 10002
+   },
+   {
+    "critic": 87.0,
+    "genre": "neo_soul",
+    "seed": 10001
+   },
+   {
+    "critic": 85.0,
+    "genre": "neo_soul",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "genre": "pop",
+    "seed": 10001
+   },
+   {
+    "critic": 98.0,
+    "genre": "pop",
+    "seed": 10002
+   },
+   {
+    "critic": 98.0,
+    "genre": "pop_studio",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "genre": "pop_studio",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "genre": "reggae",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "genre": "reggae",
+    "seed": 10002
+   },
+   {
+    "critic": 90.0,
+    "genre": "rock",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "genre": "rock",
+    "seed": 10002
+   },
+   {
+    "critic": 91.0,
+    "genre": "rock_band",
+    "seed": 10001
+   },
+   {
+    "critic": 84.0,
+    "genre": "rock_band",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "genre": "screamo",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "genre": "screamo",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "genre": "synthwave",
+    "seed": 10001
+   },
+   {
+    "critic": 90.0,
+    "genre": "synthwave",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "genre": "techno",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "genre": "techno",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "genre": "trap",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "genre": "trap",
+    "seed": 10002
+   }
+  ],
+  "ml": [
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 894,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.6,
+    "an_kick_with_bass_pct": 57.7,
+    "an_bass_root_on_change_pct": 22.2,
+    "an_melody_strong_beat_chord_tone_pct": 72.5,
+    "an_melody_repeated_bar_pct": 66.7,
+    "genre": "ambient",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 872,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.6,
+    "an_kick_with_bass_pct": 55.6,
+    "an_bass_root_on_change_pct": 33.3,
+    "an_melody_strong_beat_chord_tone_pct": 87.5,
+    "an_melody_repeated_bar_pct": 91.7,
+    "genre": "ambient",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.9731115107913669,
+    "midi_ok": true,
+    "notes": 13111,
+    "genre": "bigband",
+    "seed": 10001
+   },
+   {
+    "critic": 83.0,
+    "in_key": 0.9488677210639828,
+    "midi_ok": true,
+    "notes": 13098,
+    "genre": "bigband",
+    "seed": 10002
+   },
+   {
+    "critic": 79.0,
+    "in_key": 0.9098888238736103,
+    "midi_ok": true,
+    "notes": 4680,
+    "an_in_key_pct": 91.0,
+    "an_strong_clash_pct": 0.1,
+    "an_kick_with_bass_pct": 75.0,
+    "an_bass_root_on_change_pct": 57.6,
+    "an_melody_strong_beat_chord_tone_pct": 69.0,
+    "an_melody_repeated_bar_pct": 4.2,
+    "genre": "bossa_nova",
+    "seed": 10001
+   },
+   {
+    "critic": 90.0,
+    "in_key": 0.9097010372178157,
+    "midi_ok": true,
+    "notes": 4540,
+    "an_in_key_pct": 91.0,
+    "an_strong_clash_pct": 0.8,
+    "an_kick_with_bass_pct": 75.0,
+    "an_bass_root_on_change_pct": 59.8,
+    "an_melody_strong_beat_chord_tone_pct": 51.9,
+    "an_melody_repeated_bar_pct": 4.2,
+    "genre": "bossa_nova",
+    "seed": 10002
+   },
+   {
+    "critic": 91.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 2414,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.4,
+    "an_kick_with_bass_pct": 41.9,
+    "an_bass_root_on_change_pct": 17.5,
+    "an_melody_strong_beat_chord_tone_pct": 59.0,
+    "an_melody_repeated_bar_pct": 7.1,
+    "genre": "cinematic",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 2435,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.1,
+    "an_kick_with_bass_pct": 41.9,
+    "an_bass_root_on_change_pct": 17.5,
+    "an_melody_strong_beat_chord_tone_pct": 59.0,
+    "an_melody_repeated_bar_pct": 16.1,
+    "genre": "cinematic",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 5986,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 39.2,
+    "an_bass_root_on_change_pct": 19.0,
+    "an_melody_strong_beat_chord_tone_pct": 87.8,
+    "an_melody_repeated_bar_pct": 57.5,
+    "genre": "drum_and_bass",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6002,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 39.2,
+    "an_bass_root_on_change_pct": 9.5,
+    "an_melody_strong_beat_chord_tone_pct": 69.6,
+    "an_melody_repeated_bar_pct": 50.0,
+    "genre": "drum_and_bass",
+    "seed": 10002
+   },
+   {
+    "critic": 91.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4002,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 66.7,
+    "an_melody_strong_beat_chord_tone_pct": 85.2,
+    "an_melody_repeated_bar_pct": 69.6,
+    "genre": "edm",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4019,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.1,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 66.7,
+    "an_melody_strong_beat_chord_tone_pct": 92.3,
+    "an_melody_repeated_bar_pct": 62.5,
+    "genre": "edm",
+    "seed": 10002
+   },
+   {
+    "critic": 88.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 2687,
+    "genre": "emo",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "in_key": 0.9977181973759269,
+    "midi_ok": true,
+    "notes": 2756,
+    "genre": "emo",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.986377396569122,
+    "midi_ok": true,
+    "notes": 5443,
+    "an_in_key_pct": 98.6,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 53.4,
+    "an_bass_root_on_change_pct": 60.0,
+    "an_melody_strong_beat_chord_tone_pct": 68.4,
+    "an_melody_repeated_bar_pct": 8.3,
+    "genre": "funk",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "in_key": 0.9676277187658068,
+    "midi_ok": true,
+    "notes": 5429,
+    "an_in_key_pct": 96.8,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 53.4,
+    "an_bass_root_on_change_pct": 73.3,
+    "an_melody_strong_beat_chord_tone_pct": 64.0,
+    "an_melody_repeated_bar_pct": 8.3,
+    "genre": "funk",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 5922,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 1.1,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 47.1,
+    "an_melody_strong_beat_chord_tone_pct": 61.5,
+    "an_melody_repeated_bar_pct": 41.1,
+    "genre": "house",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6050,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 4.1,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 35.3,
+    "an_melody_strong_beat_chord_tone_pct": 92.3,
+    "an_melody_repeated_bar_pct": 23.2,
+    "genre": "house",
+    "seed": 10002
+   },
+   {
+    "critic": 96.0,
+    "in_key": 0.9522771317829457,
+    "midi_ok": true,
+    "notes": 6225,
+    "an_in_key_pct": 95.2,
+    "an_strong_clash_pct": 1.0,
+    "an_kick_with_bass_pct": 95.7,
+    "an_bass_root_on_change_pct": 40.1,
+    "an_melody_strong_beat_chord_tone_pct": 63.3,
+    "an_melody_repeated_bar_pct": 1.7,
+    "genre": "jazz",
+    "seed": 10001
+   },
+   {
+    "critic": 95.0,
+    "in_key": 0.952115530782873,
+    "midi_ok": true,
+    "notes": 6047,
+    "an_in_key_pct": 95.2,
+    "an_strong_clash_pct": 1.3,
+    "an_kick_with_bass_pct": 95.9,
+    "an_bass_root_on_change_pct": 35.5,
+    "an_melody_strong_beat_chord_tone_pct": 60.5,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "jazz",
+    "seed": 10002
+   },
+   {
+    "critic": 95.0,
+    "in_key": 0.9627844195912071,
+    "midi_ok": true,
+    "notes": 7278,
+    "genre": "jazz_combo",
+    "seed": 10001
+   },
+   {
+    "critic": 95.0,
+    "in_key": 0.9643814630409805,
+    "midi_ok": true,
+    "notes": 7295,
+    "genre": "jazz_combo",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.9583333333333334,
+    "midi_ok": true,
+    "notes": 1154,
+    "an_in_key_pct": 95.8,
+    "an_strong_clash_pct": 0.6,
+    "an_kick_with_bass_pct": 70.7,
+    "an_bass_root_on_change_pct": 72.7,
+    "an_melody_strong_beat_chord_tone_pct": 100.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "lofi_hiphop",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.9647435897435898,
+    "midi_ok": true,
+    "notes": 1154,
+    "an_in_key_pct": 96.5,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 70.7,
+    "an_bass_root_on_change_pct": 72.7,
+    "an_melody_strong_beat_chord_tone_pct": 100.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "lofi_hiphop",
+    "seed": 10002
+   },
+   {
+    "critic": 91.0,
+    "in_key": 0.8628795298726738,
+    "midi_ok": true,
+    "notes": 8412,
+    "genre": "metal",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.9870592041410546,
+    "midi_ok": true,
+    "notes": 8458,
+    "genre": "metal",
+    "seed": 10002
+   },
+   {
+    "critic": 86.0,
+    "in_key": 0.9125607217210271,
+    "midi_ok": true,
+    "notes": 2775,
+    "an_in_key_pct": 91.3,
+    "an_strong_clash_pct": 0.9,
+    "an_kick_with_bass_pct": 52.7,
+    "an_bass_root_on_change_pct": 64.5,
+    "an_melody_strong_beat_chord_tone_pct": 90.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "neo_soul",
+    "seed": 10001
+   },
+   {
+    "critic": 80.0,
+    "in_key": 0.9293478260869565,
+    "midi_ok": true,
+    "notes": 2811,
+    "an_in_key_pct": 92.9,
+    "an_strong_clash_pct": 1.4,
+    "an_kick_with_bass_pct": 52.7,
+    "an_bass_root_on_change_pct": 75.0,
+    "an_melody_strong_beat_chord_tone_pct": 86.8,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "neo_soul",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4227,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.2,
+    "an_kick_with_bass_pct": 93.4,
+    "an_bass_root_on_change_pct": 78.9,
+    "an_melody_strong_beat_chord_tone_pct": 93.5,
+    "an_melody_repeated_bar_pct": 12.5,
+    "genre": "pop",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4239,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.2,
+    "an_kick_with_bass_pct": 93.4,
+    "an_bass_root_on_change_pct": 78.9,
+    "an_melody_strong_beat_chord_tone_pct": 96.2,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "pop",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 0.968429684296843,
+    "midi_ok": true,
+    "notes": 4216,
+    "genre": "pop_studio",
+    "seed": 10001
+   },
+   {
+    "critic": 60.0,
+    "in_key": 0.992955135335558,
+    "midi_ok": true,
+    "notes": 4469,
+    "genre": "pop_studio",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4177,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 100.0,
+    "an_bass_root_on_change_pct": 89.5,
+    "an_melody_strong_beat_chord_tone_pct": 83.1,
+    "an_melody_repeated_bar_pct": 7.1,
+    "genre": "reggae",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.9947054930509597,
+    "midi_ok": true,
+    "notes": 4048,
+    "an_in_key_pct": 99.5,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 100.0,
+    "an_bass_root_on_change_pct": 89.5,
+    "an_melody_strong_beat_chord_tone_pct": 87.9,
+    "an_melody_repeated_bar_pct": 7.1,
+    "genre": "reggae",
+    "seed": 10002
+   },
+   {
+    "critic": 91.0,
+    "in_key": 0.9622475856014048,
+    "midi_ok": true,
+    "notes": 4835,
+    "an_in_key_pct": 96.2,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 85.5,
+    "an_bass_root_on_change_pct": 100.0,
+    "an_melody_strong_beat_chord_tone_pct": 87.1,
+    "an_melody_repeated_bar_pct": 15.0,
+    "genre": "rock",
+    "seed": 10001
+   },
+   {
+    "critic": 90.0,
+    "in_key": 0.9938953488372093,
+    "midi_ok": true,
+    "notes": 4842,
+    "an_in_key_pct": 99.4,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 85.5,
+    "an_bass_root_on_change_pct": 100.0,
+    "an_melody_strong_beat_chord_tone_pct": 78.8,
+    "an_melody_repeated_bar_pct": 13.3,
+    "genre": "rock",
+    "seed": 10002
+   },
+   {
+    "critic": 84.0,
+    "in_key": 0.9959016393442623,
+    "midi_ok": true,
+    "notes": 8532,
+    "genre": "rock_band",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "in_key": 0.9981049562682216,
+    "midi_ok": true,
+    "notes": 8565,
+    "genre": "rock_band",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.8985126859142607,
+    "midi_ok": true,
+    "notes": 3076,
+    "genre": "screamo",
+    "seed": 10001
+   },
+   {
+    "critic": 91.0,
+    "in_key": 0.7226117440841368,
+    "midi_ok": true,
+    "notes": 3078,
+    "genre": "screamo",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6197,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.7,
+    "an_kick_with_bass_pct": 95.0,
+    "an_bass_root_on_change_pct": 53.1,
+    "an_melody_strong_beat_chord_tone_pct": 75.2,
+    "an_melody_repeated_bar_pct": 82.8,
+    "genre": "synthwave",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6267,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.2,
+    "an_kick_with_bass_pct": 95.0,
+    "an_bass_root_on_change_pct": 81.2,
+    "an_melody_strong_beat_chord_tone_pct": 80.4,
+    "an_melody_repeated_bar_pct": 81.2,
+    "genre": "synthwave",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4682,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 22.7,
+    "an_bass_root_on_change_pct": 41.2,
+    "an_melody_strong_beat_chord_tone_pct": 84.1,
+    "an_melody_repeated_bar_pct": 53.1,
+    "genre": "techno",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4731,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 24.3,
+    "an_bass_root_on_change_pct": 41.2,
+    "an_melody_strong_beat_chord_tone_pct": 95.7,
+    "an_melody_repeated_bar_pct": 71.9,
+    "genre": "techno",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 3276,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 57.8,
+    "an_bass_root_on_change_pct": 38.5,
+    "an_melody_strong_beat_chord_tone_pct": 84.5,
+    "an_melody_repeated_bar_pct": 73.1,
+    "genre": "trap",
+    "seed": 10001
+   },
+   {
+    "critic": 90.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 3370,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.3,
+    "an_kick_with_bass_pct": 57.8,
+    "an_bass_root_on_change_pct": 38.5,
+    "an_melody_strong_beat_chord_tone_pct": 74.5,
+    "an_melody_repeated_bar_pct": 75.0,
+    "genre": "trap",
+    "seed": 10002
+   }
+  ],
+  "critic": [
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 894,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.6,
+    "an_kick_with_bass_pct": 57.7,
+    "an_bass_root_on_change_pct": 22.2,
+    "an_melody_strong_beat_chord_tone_pct": 72.5,
+    "an_melody_repeated_bar_pct": 66.7,
+    "genre": "ambient",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 949,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 1.4,
+    "an_kick_with_bass_pct": 50.0,
+    "an_bass_root_on_change_pct": 22.2,
+    "an_melody_strong_beat_chord_tone_pct": 75.0,
+    "an_melody_repeated_bar_pct": 52.1,
+    "genre": "ambient",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.980780263912794,
+    "midi_ok": true,
+    "notes": 12431,
+    "genre": "bigband",
+    "seed": 10001
+   },
+   {
+    "critic": 84.0,
+    "in_key": 0.9543132246020829,
+    "midi_ok": true,
+    "notes": 12142,
+    "genre": "bigband",
+    "seed": 10002
+   },
+   {
+    "critic": 90.0,
+    "in_key": 0.9386446886446886,
+    "midi_ok": true,
+    "notes": 4538,
+    "an_in_key_pct": 93.9,
+    "an_strong_clash_pct": 0.1,
+    "an_kick_with_bass_pct": 75.0,
+    "an_bass_root_on_change_pct": 66.3,
+    "an_melody_strong_beat_chord_tone_pct": 80.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "bossa_nova",
+    "seed": 10001
+   },
+   {
+    "critic": 90.0,
+    "in_key": 0.9191826776456237,
+    "midi_ok": true,
+    "notes": 4541,
+    "an_in_key_pct": 91.9,
+    "an_strong_clash_pct": 0.6,
+    "an_kick_with_bass_pct": 75.0,
+    "an_bass_root_on_change_pct": 58.7,
+    "an_melody_strong_beat_chord_tone_pct": 52.8,
+    "an_melody_repeated_bar_pct": 4.2,
+    "genre": "bossa_nova",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 2346,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.5,
+    "an_kick_with_bass_pct": 41.9,
+    "an_bass_root_on_change_pct": 17.5,
+    "an_melody_strong_beat_chord_tone_pct": 52.8,
+    "an_melody_repeated_bar_pct": 26.8,
+    "genre": "cinematic",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 2435,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.1,
+    "an_kick_with_bass_pct": 41.9,
+    "an_bass_root_on_change_pct": 17.5,
+    "an_melody_strong_beat_chord_tone_pct": 59.0,
+    "an_melody_repeated_bar_pct": 16.1,
+    "genre": "cinematic",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6017,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 39.2,
+    "an_bass_root_on_change_pct": 9.5,
+    "an_melody_strong_beat_chord_tone_pct": 52.3,
+    "an_melody_repeated_bar_pct": 35.0,
+    "genre": "drum_and_bass",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6002,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 39.2,
+    "an_bass_root_on_change_pct": 9.5,
+    "an_melody_strong_beat_chord_tone_pct": 69.6,
+    "an_melody_repeated_bar_pct": 50.0,
+    "genre": "drum_and_bass",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 3969,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 66.7,
+    "an_melody_strong_beat_chord_tone_pct": 89.5,
+    "an_melody_repeated_bar_pct": 62.5,
+    "genre": "edm",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4113,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 66.7,
+    "an_melody_strong_beat_chord_tone_pct": 86.6,
+    "an_melody_repeated_bar_pct": 66.1,
+    "genre": "edm",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 2692,
+    "genre": "emo",
+    "seed": 10001
+   },
+   {
+    "critic": 95.0,
+    "in_key": 0.9988235294117647,
+    "midi_ok": true,
+    "notes": 2708,
+    "genre": "emo",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.9860174781523097,
+    "midi_ok": true,
+    "notes": 5492,
+    "an_in_key_pct": 98.6,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 53.4,
+    "an_bass_root_on_change_pct": 80.0,
+    "an_melody_strong_beat_chord_tone_pct": 72.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "funk",
+    "seed": 10001
+   },
+   {
+    "critic": 98.0,
+    "in_key": 0.9871332990221308,
+    "midi_ok": true,
+    "notes": 5361,
+    "an_in_key_pct": 98.7,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 53.4,
+    "an_bass_root_on_change_pct": 73.3,
+    "an_melody_strong_beat_chord_tone_pct": 64.0,
+    "an_melody_repeated_bar_pct": 8.3,
+    "genre": "funk",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 5947,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.5,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 47.1,
+    "an_melody_strong_beat_chord_tone_pct": 78.1,
+    "an_melody_repeated_bar_pct": 14.3,
+    "genre": "house",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6050,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 4.1,
+    "an_kick_with_bass_pct": 0.0,
+    "an_bass_root_on_change_pct": 35.3,
+    "an_melody_strong_beat_chord_tone_pct": 92.3,
+    "an_melody_repeated_bar_pct": 23.2,
+    "genre": "house",
+    "seed": 10002
+   },
+   {
+    "critic": 96.0,
+    "in_key": 0.957543775485728,
+    "midi_ok": true,
+    "notes": 6266,
+    "an_in_key_pct": 95.8,
+    "an_strong_clash_pct": 0.9,
+    "an_kick_with_bass_pct": 95.7,
+    "an_bass_root_on_change_pct": 40.8,
+    "an_melody_strong_beat_chord_tone_pct": 64.4,
+    "an_melody_repeated_bar_pct": 1.7,
+    "genre": "jazz",
+    "seed": 10001
+   },
+   {
+    "critic": 97.0,
+    "in_key": 0.9872999745999492,
+    "midi_ok": true,
+    "notes": 6037,
+    "an_in_key_pct": 98.7,
+    "an_strong_clash_pct": 0.3,
+    "an_kick_with_bass_pct": 95.9,
+    "an_bass_root_on_change_pct": 36.2,
+    "an_melody_strong_beat_chord_tone_pct": 63.6,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "jazz",
+    "seed": 10002
+   },
+   {
+    "critic": 98.0,
+    "in_key": 0.9806465801627446,
+    "midi_ok": true,
+    "notes": 6641,
+    "genre": "jazz_combo",
+    "seed": 10001
+   },
+   {
+    "critic": 98.0,
+    "in_key": 0.9772727272727273,
+    "midi_ok": true,
+    "notes": 6715,
+    "genre": "jazz_combo",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.9583333333333334,
+    "midi_ok": true,
+    "notes": 1154,
+    "an_in_key_pct": 95.8,
+    "an_strong_clash_pct": 0.6,
+    "an_kick_with_bass_pct": 70.7,
+    "an_bass_root_on_change_pct": 72.7,
+    "an_melody_strong_beat_chord_tone_pct": 100.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "lofi_hiphop",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.967948717948718,
+    "midi_ok": true,
+    "notes": 1157,
+    "an_in_key_pct": 96.8,
+    "an_strong_clash_pct": 0.7,
+    "an_kick_with_bass_pct": 70.7,
+    "an_bass_root_on_change_pct": 72.7,
+    "an_melody_strong_beat_chord_tone_pct": 100.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "lofi_hiphop",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.994514359470797,
+    "midi_ok": true,
+    "notes": 8469,
+    "genre": "metal",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.9209447269148762,
+    "midi_ok": true,
+    "notes": 8368,
+    "genre": "metal",
+    "seed": 10002
+   },
+   {
+    "critic": 94.0,
+    "in_key": 0.905940594059406,
+    "midi_ok": true,
+    "notes": 2737,
+    "an_in_key_pct": 90.6,
+    "an_strong_clash_pct": 0.3,
+    "an_kick_with_bass_pct": 53.1,
+    "an_bass_root_on_change_pct": 64.5,
+    "an_melody_strong_beat_chord_tone_pct": 83.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "neo_soul",
+    "seed": 10001
+   },
+   {
+    "critic": 94.0,
+    "in_key": 0.9109255393180237,
+    "midi_ok": true,
+    "notes": 2782,
+    "an_in_key_pct": 91.1,
+    "an_strong_clash_pct": 0.6,
+    "an_kick_with_bass_pct": 52.7,
+    "an_bass_root_on_change_pct": 69.7,
+    "an_melody_strong_beat_chord_tone_pct": 90.0,
+    "an_melody_repeated_bar_pct": 0.0,
+    "genre": "neo_soul",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4381,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.1,
+    "an_kick_with_bass_pct": 93.4,
+    "an_bass_root_on_change_pct": 78.9,
+    "an_melody_strong_beat_chord_tone_pct": 90.6,
+    "an_melody_repeated_bar_pct": 16.7,
+    "genre": "pop",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4163,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.2,
+    "an_kick_with_bass_pct": 93.4,
+    "an_bass_root_on_change_pct": 78.9,
+    "an_melody_strong_beat_chord_tone_pct": 96.2,
+    "an_melody_repeated_bar_pct": 8.3,
+    "genre": "pop",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.9634340222575517,
+    "midi_ok": true,
+    "notes": 4298,
+    "genre": "pop_studio",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 0.9985459832788077,
+    "midi_ok": true,
+    "notes": 4532,
+    "genre": "pop_studio",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4177,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 100.0,
+    "an_bass_root_on_change_pct": 89.5,
+    "an_melody_strong_beat_chord_tone_pct": 83.1,
+    "an_melody_repeated_bar_pct": 7.1,
+    "genre": "reggae",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4226,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 100.0,
+    "an_bass_root_on_change_pct": 89.5,
+    "an_melody_strong_beat_chord_tone_pct": 77.2,
+    "an_melody_repeated_bar_pct": 3.6,
+    "genre": "reggae",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.9938380281690141,
+    "midi_ok": true,
+    "notes": 4818,
+    "an_in_key_pct": 99.4,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 85.5,
+    "an_bass_root_on_change_pct": 100.0,
+    "an_melody_strong_beat_chord_tone_pct": 87.7,
+    "an_melody_repeated_bar_pct": 6.7,
+    "genre": "rock",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.9935803910125475,
+    "midi_ok": true,
+    "notes": 4845,
+    "an_in_key_pct": 99.4,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 85.5,
+    "an_bass_root_on_change_pct": 100.0,
+    "an_melody_strong_beat_chord_tone_pct": 84.9,
+    "an_melody_repeated_bar_pct": 25.0,
+    "genre": "rock",
+    "seed": 10002
+   },
+   {
+    "critic": 92.0,
+    "in_key": 0.9515142690739662,
+    "midi_ok": true,
+    "notes": 8563,
+    "genre": "rock_band",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.9666473317865429,
+    "midi_ok": true,
+    "notes": 8606,
+    "genre": "rock_band",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 0.9158674803836094,
+    "midi_ok": true,
+    "notes": 3089,
+    "genre": "screamo",
+    "seed": 10001
+   },
+   {
+    "critic": 99.0,
+    "in_key": 0.9244288224956063,
+    "midi_ok": true,
+    "notes": 3069,
+    "genre": "screamo",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6216,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.6,
+    "an_kick_with_bass_pct": 95.0,
+    "an_bass_root_on_change_pct": 54.7,
+    "an_melody_strong_beat_chord_tone_pct": 80.0,
+    "an_melody_repeated_bar_pct": 71.9,
+    "genre": "synthwave",
+    "seed": 10001
+   },
+   {
+    "critic": 98.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 6282,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.1,
+    "an_kick_with_bass_pct": 95.0,
+    "an_bass_root_on_change_pct": 81.2,
+    "an_melody_strong_beat_chord_tone_pct": 78.6,
+    "an_melody_repeated_bar_pct": 84.4,
+    "genre": "synthwave",
+    "seed": 10002
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4682,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 22.7,
+    "an_bass_root_on_change_pct": 41.2,
+    "an_melody_strong_beat_chord_tone_pct": 84.1,
+    "an_melody_repeated_bar_pct": 53.1,
+    "genre": "techno",
+    "seed": 10001
+   },
+   {
+    "critic": 100.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 4721,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 24.0,
+    "an_bass_root_on_change_pct": 64.7,
+    "an_melody_strong_beat_chord_tone_pct": 71.2,
+    "an_melody_repeated_bar_pct": 43.8,
+    "genre": "techno",
+    "seed": 10002
+   },
+   {
+    "critic": 99.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 3292,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.0,
+    "an_kick_with_bass_pct": 57.8,
+    "an_bass_root_on_change_pct": 38.5,
+    "an_melody_strong_beat_chord_tone_pct": 84.2,
+    "an_melody_repeated_bar_pct": 68.3,
+    "genre": "trap",
+    "seed": 10001
+   },
+   {
+    "critic": 92.0,
+    "in_key": 1.0,
+    "midi_ok": true,
+    "notes": 3458,
+    "an_in_key_pct": 100.0,
+    "an_strong_clash_pct": 0.5,
+    "an_kick_with_bass_pct": 57.8,
+    "an_bass_root_on_change_pct": 61.5,
+    "an_melody_strong_beat_chord_tone_pct": 79.4,
+    "an_melody_repeated_bar_pct": 68.3,
+    "genre": "trap",
+    "seed": 10002
+   }
+  ]
+ }
+}

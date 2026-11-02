@@ -35,8 +35,31 @@ def _write(spec: dict, out: str, png: bool = False, quiet: bool = False) -> None
         piano_roll(perf, js.with_suffix(".png"))
     if not quiet:
         counts = ", ".join(f"{t.name}:{len(t.notes)}" for t in perf.tracks)
-        print(f"wrote {js} and {mid}{' (+png)' if png else ''} — {specmod.total_bars(spec)} bars @ {spec['tempo']} BPM, "
+        from .nl import duration_seconds, fmt_duration
+        print(f"wrote {js} and {mid}{' (+png)' if png else ''} — {specmod.total_bars(spec)} bars @ {spec['tempo']} BPM "
+              f"(≈ {fmt_duration(duration_seconds(spec))}), "
               f"{spec['key']} {spec['mode']}, tracks [{counts}]")
+
+
+def _summary(rep: dict, verbose: bool = False) -> str:
+    """One plain line by default; problems (warn/error) listed below it; info notes only with -v."""
+    if verbose:
+        return format_report(rep)
+    shown = [f for f in rep["findings"] if f["severity"] in ("warn", "warning", "error")]
+    info = len(rep["findings"]) - len(shown)
+    line = f"critic score: {rep['score']}/100" + (f" ({info} minor note(s); -v to show)" if info else "")
+    return "\n".join([line] + [f"  [{f['severity']}] {f['check']}: {f['message']}"
+                                + (f" -> {f['suggestion']}" if f.get("suggestion") else "") for f in shown])
+
+
+def _auto_out(spec: dict) -> str:
+    """song title -> slug, uniquified (-1, -2, ...) so a new song never silently replaces an old one."""
+    import re
+    slug = re.sub(r"[^a-z0-9]+", "-", (spec.get("title") or spec.get("genre") or "song").lower()).strip("-")[:40] or "song"
+    out, i = slug, 1
+    while any(Path(out + ext).exists() for ext in (".json", ".mid")):
+        out, i = f"{slug}-{i}", i + 1
+    return out
 
 
 def _composer(args) -> Composer:
@@ -50,6 +73,11 @@ def _validate_new(args) -> None:
     """Explicit range checks (0 is a value, not 'unset')."""
     if args.tempo is not None and not 20 <= args.tempo <= 300:
         raise ValueError(f"--tempo must be between 20 and 300 BPM (got {args.tempo:g})")
+    if getattr(args, "seconds", None) is not None:
+        if not 2 <= args.seconds <= 1800:
+            raise ValueError(f"--seconds must be between 2 and 1800 (got {args.seconds:g})")
+        if args.bars is not None:
+            raise ValueError("give --bars or --seconds, not both")
     if args.bars is not None and not 1 <= args.bars <= MAX_BARS:
         raise ValueError(f"--bars must be between 1 and {MAX_BARS} (got {args.bars})")
     if args.mode is not None and args.mode not in MODES:
@@ -75,6 +103,9 @@ def _overrides(spec: dict, args) -> dict:
         ops.append({"op": "set_key", "key": args.key or spec["key"], **({"mode": args.mode} if args.mode else {})})
     if ops:
         spec = apply_ops(spec, ops)
+    if getattr(args, "seconds", None):
+        from .nl import bars_for_seconds
+        args.bars = bars_for_seconds(args.seconds, float(spec["tempo"]), spec.get("time_signature", [4, 4])[0])
     if args.bars is not None and args.bars != specmod.total_bars(spec):
         spec = build_spec(spec.get("genre") or "pop", key=spec["key"], mode=spec["mode"], tempo=spec["tempo"],
                           bars=args.bars, seed=args.seed)
@@ -101,17 +132,27 @@ def cmd_new(args):
         from .llm import refine
         spec, _ = refine(spec)
         src = "offline"
+        if getattr(args, "seconds", None):
+            spec = _overrides(spec, args)
     else:
         if not args.prompt:
             sys.exit("give a prompt or --genre")
-        r = _composer(args).generate(args.prompt, seed=args.seed)
+        prompt = args.prompt
+        if args.seconds:  # let the interpreter size it, so solo/instrument choices survive
+            prompt = f"{prompt}, {args.seconds:g} seconds"
+            args.seconds = None
+        r = _composer(args).generate(prompt, seed=args.seed)
         spec, src, sid = _overrides(r.spec, args), r.source, r.song_id
         kw["prompt"] = args.prompt
         if r.explanation:
             print(f"[{src}] {r.explanation}")
+    if not args.out:
+        args.out = _auto_out(spec)
+    elif any(p.exists() for p in _paths(args.out)):
+        print(f"note: overwriting existing {_paths(args.out)[0]} / {_paths(args.out)[1]}")
     _write(spec, args.out, args.png)
     rep = critique(spec)
-    print(format_report(rep))
+    print(_summary(rep, getattr(args, "verbose", False)))
     _recorded(spec, args.out, sid, source=src, report=rep, **kw)
 
 
@@ -123,17 +164,36 @@ def cmd_edit(args):
             parent = learn.resolve(args.spec)["id"]
         except (KeyError, ValueError, OSError):
             parent = None
+    from . import linked
     if args.ops:
         ops = json.loads(Path(args.ops).read_text() if Path(args.ops).exists() else args.ops)
         new = apply_ops(spec, ops)
+        if args.auto_follow:
+            sugg = linked.suggest_followups(spec, ops, limit=2)
+            ops = (ops if isinstance(ops, list) else [ops]) + [o for x in sugg for o in x["ops"]]
+            new = apply_ops(spec, ops)
+            if sugg:
+                print("followed up:", "; ".join(x["reason"] for x in sugg))
         print(f"applied {len(ops) if isinstance(ops, list) else 1} op(s)")
     else:
-        r = _composer(args).edit(spec, args.instruction)
-        new = r.spec
+        r = _composer(args).edit(spec, args.instruction, auto_follow=args.auto_follow)
+        new, ops = r.spec, r.ops
         print(f"[{r.source}] ops: {json.dumps(r.ops)}")
+        if r.followups:
+            print("followed up:", "; ".join(x["reason"] for x in r.followups))
+    if args.suggest:
+        print("suggested follow-ups (linked tracks; apply with --ops or re-run with --auto-follow):")
+        print(linked.format_suggestions(linked.suggest_followups(spec, ops)))
     out = args.out or args.spec
+    if not args.out:  # editing in place: keep the previous version next to it
+        import shutil
+        js = _paths(out)[0]
+        if js.exists():
+            bak = js.with_suffix(".prev.json")
+            shutil.copyfile(js, bak)
+            print(f"saved previous version as {bak} — to undo, copy it back over {js.name}")
     _write(new, out, args.png)
-    print(format_report(critique(new)))
+    print(_summary(critique(new), getattr(args, "verbose", False)))
     if args.ops:
         sid = learn.record_edit(spec, new, ops=ops, source="ops", path=str(_paths(out)[0]), parent=parent)
     else:
@@ -211,7 +271,8 @@ def cmd_chat(args):
         ed = Editor(specmod.load(path))
     else:
         ed = None
-    print("midigen chat — describe a song, then edit it in plain words. Commands: /undo /redo /show /critic /save "
+    last_edit = None
+    print("midigen chat — describe a song, then edit it in plain words. Commands: /undo /redo /show /critic /suggest /follow N /save "
           "/rate N [note] /help /quit")
     print("LLM provider:", "configured" if comp.provider else "none (offline rules; set MIDIGEN_API_KEY/BASE_URL/MODEL)")
     while True:
@@ -244,6 +305,23 @@ def cmd_chat(args):
             specmod.save(ed.spec, path)
             cmd_inspect(ns)
             continue
+        elif line == "/suggest" or line.startswith("/follow"):
+            from . import linked
+            if not last_edit:
+                print("make an edit first; /suggest lists follow-ups for the other tracks")
+                continue
+            sugg = linked.suggest_followups(*last_edit)
+            if line == "/suggest":
+                print(linked.format_suggestions(sugg) + ("\n  apply with /follow N (or /follow all)" if sugg else ""))
+                continue
+            arg = line[len("/follow"):].strip() or "1"
+            pick = sugg if arg == "all" else [s for s in sugg if str(s["rank"]) in arg.replace(",", " ").split()]
+            if not pick:
+                print("nothing to apply; /suggest lists the options")
+                continue
+            ed.replace(apply_ops(ed.spec, [o for s in pick for o in s["ops"]]), f"follow-up {arg}")
+            last_edit = None
+            print("applied:", "; ".join(s["reason"] for s in pick), f" critic {critique(ed.spec)['score']}/100")
         elif line == "/critic":
             print(format_report(critique(ed.spec)))
             continue
@@ -267,8 +345,9 @@ def cmd_chat(args):
             except OpError as e:
                 print("edit rejected:", e)
                 continue
+            last_edit = (ed.spec, r.ops) if r.ops else None
             ed.replace(r.spec, line)
-            print(f"[{r.source}] {json.dumps(r.ops)}  critic {r.report['score']}/100")
+            print(f"[{r.source}] {json.dumps(r.ops)}  critic {r.report['score']}/100  (/suggest for linked-track follow-ups)")
         _write(ed.spec, str(path), args.png, quiet=True)
         row = learn.store().find(ed.spec) if learn.recording_enabled() else None
         if row:
@@ -370,7 +449,9 @@ def main(argv=None):
 
     p = sub.add_parser("new", aliases=["generate"], help="create a song from a prompt or a genre")
     p.add_argument("prompt", nargs="?")
-    p.add_argument("-o", "--out", default="song")
+    p.add_argument("-o", "--out", help="output name (default: from the song title, never overwriting)")
+    p.add_argument("--seconds", type=float, help="target length in seconds (converted to bars at the song's tempo)")
+    p.add_argument("-v", "--verbose", action="store_true", help="show every critic note")
     p.add_argument("--genre")
     p.add_argument("--key")
     p.add_argument("--mode")
@@ -383,6 +464,9 @@ def main(argv=None):
     p.add_argument("--png", action="store_true", help="also write a piano-roll PNG")
     p.add_argument("--offline", action="store_true", help="never call the LLM")
     p.add_argument("--no-learn", action="store_true", help="ignore learned preferences (plain genre defaults)")
+    p.add_argument("--ml", nargs="?", const="1", metavar="OPTS",
+                   help="opt-in: use trained midigen.ml artifacts (best-of-N reward reranking, learned progressions); "
+                        "optional OPTS like reward,progression,n=8")
     p.set_defaults(fn=cmd_new)
 
     p = sub.add_parser("edit", help="edit a spec with an instruction or JSON ops")
@@ -392,6 +476,9 @@ def main(argv=None):
     p.add_argument("-o", "--out")
     p.add_argument("--png", action="store_true")
     p.add_argument("--offline", action="store_true")
+    p.add_argument("-v", "--verbose", action="store_true", help="show every critic note")
+    p.add_argument("--suggest", action="store_true", help="also list ranked follow-up edits for the other tracks")
+    p.add_argument("--auto-follow", action="store_true", help="apply the top validated linked-track follow-ups too")
     p.set_defaults(fn=cmd_edit)
 
     p = sub.add_parser("render", help="render spec.json to .mid")
@@ -469,6 +556,13 @@ def main(argv=None):
     p.add_argument("--json", help="write the full result as JSON")
     p.set_defaults(fn=cmd_train)
 
+    from . import doctor as _doctor, ui as _ui  # setup helpers: `midigen doctor`, `midigen ui`
+    _doctor.add_parser(sub)
+    _ui.add_parser(sub)
+
+    from .ml.cli import register as _ml_register, route as _ml_route
+    _ml_register(sub)  # dataset | eval | ml-sample; `train reward|progression|...` is routed below
+
     # --genre-path is accepted before or after the subcommand
     argv = list(sys.argv[1:] if argv is None else argv)
     gp, rest, i = [], [], 0
@@ -483,7 +577,7 @@ def main(argv=None):
         else:
             rest.append(a)
         i += 1
-    args = ap.parse_args(rest)
+    args = ap.parse_args(_ml_route(rest))
     args.genre_path = gp
     if gp:
         missing = [x for x in gp if not Path(x).expanduser().exists()]
@@ -492,6 +586,9 @@ def main(argv=None):
         packs.set_paths(gp)
     if getattr(args, "cmd", None) == "edit" and not args.instruction and not args.ops:
         ap.error("edit needs an instruction or --ops")
+    if getattr(args, "ml", None):
+        import os
+        os.environ["MIDIGEN_ML"] = args.ml
     if getattr(args, "no_learn", False):
         import os
         os.environ["MIDIGEN_LEARN"] = "0"
@@ -499,6 +596,15 @@ def main(argv=None):
         args.spec = str(Path(args.spec).with_suffix(".json"))
     try:
         args.fn(args)
+    except FileNotFoundError as e:
+        sys.exit(f"error: file not found: {e.filename or e}")
+    except IsADirectoryError as e:
+        sys.exit(f"error: {e.filename or e} is a folder, not a song file")
+    except UnicodeDecodeError:
+        sys.exit("error: that file is not a text song spec (.json). For a .mid file use: midigen inspect FILE.mid --to-spec song.json")
+    except json.JSONDecodeError as e:
+        sys.exit(f"error: the song file is not valid JSON (line {e.lineno}, column {e.colno}: {e.msg}). "
+                 "If you edited it by hand, check for a missing comma or quote; a .prev.json backup may exist next to it.")
     except UnknownGenre as e:
         sys.exit(f"error: {e}")
     except (specmod.SpecError, OpError, NotUnderstood, ValueError) as e:

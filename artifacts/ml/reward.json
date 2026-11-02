@@ -1,0 +1,101 @@
+{
+  "mode": "critic_surrogate",
+  "model": "sklearn.HistGradientBoostingRegressor",
+  "n_features": 71,
+  "target": "critic score 0..100 (surrogate; critic features excluded)",
+  "rows": {
+    "train": 3342,
+    "val": 399,
+    "test": 399
+  },
+  "feedback": {
+    "records": 0,
+    "skipped": 0,
+    "files": []
+  },
+  "dataset": "/workspace/work-data/data/synthetic",
+  "fit_seconds": 110.21,
+  "wall_seconds": 111.17,
+  "metrics": {
+    "train": {
+      "model": {
+        "n": 3342,
+        "mae": 0.666,
+        "rmse": 1.022,
+        "r2": 0.9725,
+        "spearman": 0.9381
+      },
+      "baseline_mean": {
+        "n": 3342,
+        "mae": 4.857,
+        "rmse": 6.166,
+        "r2": 0.0,
+        "spearman": null
+      },
+      "baseline_genre_mean": {
+        "n": 3342,
+        "mae": 3.339,
+        "rmse": 4.952,
+        "r2": 0.3552,
+        "spearman": 0.5792
+      }
+    },
+    "val": {
+      "model": {
+        "n": 399,
+        "mae": 3.458,
+        "rmse": 5.318,
+        "r2": 0.43,
+        "spearman": 0.6912
+      },
+      "baseline_mean": {
+        "n": 399,
+        "mae": 5.542,
+        "rmse": 7.255,
+        "r2": -0.0608,
+        "spearman": null
+      },
+      "baseline_genre_mean": {
+        "n": 399,
+        "mae": 3.835,
+        "rmse": 5.657,
+        "r2": 0.3552,
+        "spearman": 0.635
+      }
+    },
+    "test": {
+      "model": {
+        "n": 399,
+        "mae": 2.574,
+        "rmse": 3.778,
+        "r2": 0.5151,
+        "spearman": 0.7166
+      },
+      "baseline_mean": {
+        "n": 399,
+        "mae": 4.642,
+        "rmse": 5.449,
+        "r2": -0.0088,
+        "spearman": null
+      },
+      "baseline_genre_mean": {
+        "n": 399,
+        "mae": 3.23,
+        "rmse": 4.344,
+        "r2": 0.3589,
+        "spearman": 0.5758
+      },
+      "best_of_variants": {
+        "groups": 133,
+        "candidates_per_group": 3.0,
+        "label": "target of the chosen variant (critic score or analyze_quality)",
+        "critic_of_reward_pick": 96.23,
+        "critic_of_v0": 96.0,
+        "critic_of_random_pick": 96.02,
+        "critic_of_oracle_pick": 96.62
+      }
+    }
+  },
+  "trained_at": "2026-11-01 23:51:52 EST",
+  "artifact": "/workspace/work-data/artifacts/ml/reward.pkl"
+}

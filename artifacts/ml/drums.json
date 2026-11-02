@@ -1,0 +1,79 @@
+{
+  "kind": "drums",
+  "model": "Witten-Bell interpolated n-gram",
+  "chain": [
+    [
+      "g",
+      "pos",
+      "p2",
+      "p1"
+    ],
+    [
+      "g",
+      "pos",
+      "p1"
+    ],
+    [
+      "g",
+      "pos"
+    ],
+    [
+      "pos",
+      "p1"
+    ],
+    [
+      "pos"
+    ],
+    []
+  ],
+  "vocab": 100,
+  "train_songs": 3342,
+  "max_distinct_bars_per_song": 16,
+  "eval": {
+    "val": {
+      "model": {
+        "tokens": 73904,
+        "nll": 0.4411,
+        "perplexity": 1.554,
+        "top1_acc": 0.8343
+      },
+      "baseline_unigram": {
+        "tokens": 73904,
+        "nll": 2.836,
+        "perplexity": 17.047,
+        "top1_acc": 0.3086
+      },
+      "baseline_position": {
+        "tokens": 73904,
+        "nll": 2.2735,
+        "perplexity": 9.713,
+        "top1_acc": 0.3433
+      },
+      "baseline_uniform_perplexity": 101
+    },
+    "test": {
+      "model": {
+        "tokens": 74528,
+        "nll": 0.4547,
+        "perplexity": 1.576,
+        "top1_acc": 0.8312
+      },
+      "baseline_unigram": {
+        "tokens": 74528,
+        "nll": 2.7618,
+        "perplexity": 15.829,
+        "top1_acc": 0.3568
+      },
+      "baseline_position": {
+        "tokens": 74528,
+        "nll": 2.1787,
+        "perplexity": 8.835,
+        "top1_acc": 0.3872
+      },
+      "baseline_uniform_perplexity": 101
+    }
+  },
+  "artifact": "/workspace/work-data/artifacts/ml/drums.json.gz",
+  "bytes": 56339,
+  "wall_seconds": 119.17
+}
