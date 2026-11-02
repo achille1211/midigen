@@ -1,7 +1,7 @@
 name: iPhone prototype
 on:
   push:
-    branches: [main, codex/iphone-studio]
+    branches: [main]
     paths: ['ios/**', '.github/workflows/iphone.yml']
   pull_request:
     paths: ['ios/**', '.github/workflows/iphone.yml']
@@ -13,15 +13,23 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build-and-test:
-    runs-on: macos-latest
+    runs-on: macos-15-intel
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - name: Test native composition and DSP
         run: swift test --package-path ios
+      - name: Build iPhone app independently of simulator startup
+        run: >-
+          xcodebuild build -project ios/Midigen.xcodeproj -scheme Midigen
+          -destination 'generic/platform=iOS Simulator'
+          CODE_SIGNING_ALLOWED=NO
       - name: Select an installed iPhone simulator
         run: |
-          DEVICE_ID=$(xcrun simctl list devices available --json | python3 -c 'import json,re,sys; d=json.load(sys.stdin)["devices"]; runtimes=sorted(d, key=lambda k: tuple(map(int,re.findall(r"\d+",k))), reverse=True); print(next(x["udid"] for runtime in runtimes for x in d[runtime] if "iPhone" in x["name"]))')
+          SDK_MAJOR=$(xcrun --sdk iphonesimulator --show-sdk-version | cut -d. -f1)
+          DEVICE_ID=$(xcrun simctl list devices available --json | SDK_MAJOR="$SDK_MAJOR" python3 -c 'import json,os,re,sys; d=json.load(sys.stdin)["devices"]; runtimes=sorted((k for k in d if "iOS-" + os.environ["SDK_MAJOR"] + "-" in k), key=lambda k: tuple(map(int,re.findall(r"\d+",k))), reverse=True); print(next(x["udid"] for runtime in runtimes for x in d[runtime] if "iPhone" in x["name"]))')
           echo "DEVICE_ID=$DEVICE_ID" >> "$GITHUB_ENV"
       - name: Boot the iPhone simulator
         timeout-minutes: 6
