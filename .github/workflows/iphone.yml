@@ -21,18 +21,28 @@ jobs:
         run: swift test --package-path ios
       - name: Select an installed iPhone simulator
         run: |
-          DEVICE_ID=$(xcrun simctl list devices available --json | python3 -c 'import json,sys; d=json.load(sys.stdin); print(next(x["udid"] for v in d["devices"].values() for x in v if "iPhone" in x["name"]))')
+          DEVICE_ID=$(xcrun simctl list devices available --json | python3 -c 'import json,re,sys; d=json.load(sys.stdin)["devices"]; runtimes=sorted(d, key=lambda k: tuple(map(int,re.findall(r"\d+",k))), reverse=True); print(next(x["udid"] for runtime in runtimes for x in d[runtime] if "iPhone" in x["name"]))')
           echo "DEVICE_ID=$DEVICE_ID" >> "$GITHUB_ENV"
+      - name: Boot the iPhone simulator
+        timeout-minutes: 6
+        run: xcrun simctl bootstatus "$DEVICE_ID" -b
       - name: Build and smoke test iPhone app
         run: >-
           xcodebuild test -project ios/Midigen.xcodeproj -scheme Midigen
           -destination "platform=iOS Simulator,id=$DEVICE_ID"
+          -parallel-testing-enabled NO
           -resultBundlePath ios/TestResults.xcresult
           CODE_SIGNING_ALLOWED=NO
+      - name: Capture the simulator screen
+        if: always()
+        continue-on-error: true
+        run: xcrun simctl io "$DEVICE_ID" screenshot ios/simulator.png
       - name: Keep simulator test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: iphone-test-results
-          path: ios/TestResults.xcresult
+          path: |
+            ios/TestResults.xcresult
+            ios/simulator.png
           if-no-files-found: ignore
